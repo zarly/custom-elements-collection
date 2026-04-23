@@ -1,0 +1,219 @@
+{
+  "name": "custom-elements-collection",
+  "version": "0.1.0",
+  "description": "A collection of 31 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
+  "license": "MIT",
+  "author": "Alexander Abramov <abramov231@gmail.com>",
+  "homepage": "https://github.com/zarly/custom-elements-collection#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarly/custom-elements-collection.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zarly/custom-elements-collection/issues"
+  },
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "lit",
+    "lit-element",
+    "ui-components",
+    "design-system",
+    "dashboard",
+    "lesson",
+    "education",
+    "html",
+    "framework-agnostic"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./auto": {
+      "types": "./dist/auto.d.ts",
+      "import": "./dist/auto.js"
+    },
+    "./manifest": {
+      "types": "./dist/manifest.d.ts",
+      "import": "./dist/manifest.js"
+    },
+    "./tokens.css": "./dist/tokens/tokens.css",
+    "./dark.css": "./dist/tokens/dark.css",
+    "./light.css": "./dist/tokens/light.css",
+    "./hero": {
+      "types": "./dist/entries/hero.d.ts",
+      "import": "./dist/entries/hero.js"
+    },
+    "./card": {
+      "types": "./dist/entries/card.d.ts",
+      "import": "./dist/entries/card.js"
+    },
+    "./shell": {
+      "types": "./dist/entries/shell.d.ts",
+      "import": "./dist/entries/shell.js"
+    },
+    "./section": {
+      "types": "./dist/entries/section.d.ts",
+      "import": "./dist/entries/section.js"
+    },
+    "./grid": {
+      "types": "./dist/entries/grid.d.ts",
+      "import": "./dist/entries/grid.js"
+    },
+    "./chip": {
+      "types": "./dist/entries/chip.d.ts",
+      "import": "./dist/entries/chip.js"
+    },
+    "./table": {
+      "types": "./dist/entries/table.d.ts",
+      "import": "./dist/entries/table.js"
+    },
+    "./callout": {
+      "types": "./dist/entries/callout.d.ts",
+      "import": "./dist/entries/callout.js"
+    },
+    "./kpi": {
+      "types": "./dist/entries/kpi.d.ts",
+      "import": "./dist/entries/kpi.js"
+    },
+    "./progress": {
+      "types": "./dist/entries/progress.d.ts",
+      "import": "./dist/entries/progress.js"
+    },
+    "./bar-chart": {
+      "types": "./dist/entries/bar-chart.d.ts",
+      "import": "./dist/entries/bar-chart.js"
+    },
+    "./details": {
+      "types": "./dist/entries/details.d.ts",
+      "import": "./dist/entries/details.js"
+    },
+    "./verdict": {
+      "types": "./dist/entries/verdict.d.ts",
+      "import": "./dist/entries/verdict.js"
+    },
+    "./timeline": {
+      "types": "./dist/entries/timeline.d.ts",
+      "import": "./dist/entries/timeline.js"
+    },
+    "./compare": {
+      "types": "./dist/entries/compare.d.ts",
+      "import": "./dist/entries/compare.js"
+    },
+    "./code": {
+      "types": "./dist/entries/code.d.ts",
+      "import": "./dist/entries/code.js"
+    },
+    "./toc": {
+      "types": "./dist/entries/toc.d.ts",
+      "import": "./dist/entries/toc.js"
+    },
+    "./flow": {
+      "types": "./dist/entries/flow.d.ts",
+      "import": "./dist/entries/flow.js"
+    },
+    "./heatmap": {
+      "types": "./dist/entries/heatmap.d.ts",
+      "import": "./dist/entries/heatmap.js"
+    },
+    "./persona": {
+      "types": "./dist/entries/persona.d.ts",
+      "import": "./dist/entries/persona.js"
+    },
+    "./feature-card": {
+      "types": "./dist/entries/feature-card.d.ts",
+      "import": "./dist/entries/feature-card.js"
+    },
+    "./decision-tree": {
+      "types": "./dist/entries/decision-tree.d.ts",
+      "import": "./dist/entries/decision-tree.js"
+    },
+    "./example": {
+      "types": "./dist/entries/example.d.ts",
+      "import": "./dist/entries/example.js"
+    },
+    "./filter-bar": {
+      "types": "./dist/entries/filter-bar.d.ts",
+      "import": "./dist/entries/filter-bar.js"
+    },
+    "./chart": {
+      "types": "./dist/entries/chart.d.ts",
+      "import": "./dist/entries/chart.js"
+    },
+    "./lesson-frame": {
+      "types": "./dist/entries/lesson-frame.d.ts",
+      "import": "./dist/entries/lesson-frame.js"
+    },
+    "./lesson-rule": {
+      "types": "./dist/entries/lesson-rule.d.ts",
+      "import": "./dist/entries/lesson-rule.js"
+    },
+    "./lesson-gap": {
+      "types": "./dist/entries/lesson-gap.d.ts",
+      "import": "./dist/entries/lesson-gap.js"
+    },
+    "./lesson-quiz": {
+      "types": "./dist/entries/lesson-quiz.d.ts",
+      "import": "./dist/entries/lesson-quiz.js"
+    },
+    "./lesson-quickfire": {
+      "types": "./dist/entries/lesson-quickfire.d.ts",
+      "import": "./dist/entries/lesson-quickfire.js"
+    },
+    "./lesson-audio": {
+      "types": "./dist/entries/lesson-audio.d.ts",
+      "import": "./dist/entries/lesson-audio.js"
+    },
+    "./docs-layout": {
+      "types": "./dist/entries/docs-layout.d.ts",
+      "import": "./dist/entries/docs-layout.js"
+    },
+    "./nav-list": {
+      "types": "./dist/entries/nav-list.d.ts",
+      "import": "./dist/entries/nav-list.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "./dist/auto.js",
+    "./dist/entries/*.js",
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "dev": "vite",
+    "demo": "vite --config demo/vite.config.js",
+    "demo:build": "vite build --config demo/vite.config.js",
+    "demo:preview": "vite preview --config demo/vite.config.js",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "echo '(no lint)'",
+    "check": "pnpm typecheck && pnpm test && pnpm build",
+    "pack:inspect": "pnpm pack --pack-destination /tmp && echo '→ tarball at /tmp/custom-elements-collection-<version>.tgz'",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@types/node": "22.8.6",
+    "jsdom": "25.0.1",
+    "lit": "3.2.1",
+    "typescript": "5.6.3",
+    "vite": "5.4.10",
+    "vitest": "2.1.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

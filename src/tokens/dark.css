@@ -1,0 +1,6 @@
+/* Re-export of dark-theme tokens. Prefer ./tokens.css unless you specifically need dark-only. */
+@import "./tokens.css";
+
+:root {
+  color-scheme: dark;
+}

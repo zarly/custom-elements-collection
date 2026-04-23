@@ -1,0 +1,48 @@
+# npm uses the `files` array in package.json as the primary allow-list.
+# This file narrows what slips in if anything ever lands outside that list.
+
+# Source & tests (only the built `dist/` ships)
+src/
+scripts/
+*.test.ts
+*.spec.ts
+
+# Dev / demo / docs
+demo/
+docs/
+internal/
+examples/
+
+# Config
+tsconfig*.json
+vite.config.ts
+vitest.config.ts
+.npmrc
+.gitignore
+.npmignore
+
+# CI / editor / OS
+.github/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Package manager artifacts
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+*.tgz
+
+# Logs / temp
+*.log
+.cache/
+.tmp/
+tmp/
+
+# AI / assistant artifacts
+.claude/
+CLAUDE.md
+.aider*
+.cursor/

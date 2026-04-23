@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-ce-scaffold>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>custom-elements-collection — demo</title>
+    <script>
+      (() => {
+        const stored = localStorage.getItem("cec-demo-theme");
+        const mode = stored === "light" || stored === "dark" || stored === "auto" ? stored : "auto";
+        const effective = mode === "auto"
+          ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
+          : mode;
+        document.documentElement.setAttribute("data-ce-theme", effective);
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/tokens/tokens.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <ce-docs-layout id="app" sidebar-width="280px">
+      <header slot="header" class="bar">
+        <a href="#" class="brand">
+          <span class="logo">▣</span>
+          <span>custom-elements-collection</span>
+          <span class="tag">demo</span>
+        </a>
+        <div class="bar-right">
+          <label class="theme-picker">
+            <span>Theme</span>
+            <select id="theme-select" aria-label="Color scheme">
+              <option value="auto">Auto</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
+          <a
+            class="repo"
+            href="https://github.com/zarly/custom-elements-collection"
+            target="_blank"
+            rel="noopener"
+            >GitHub ↗</a
+          >
+        </div>
+      </header>
+      <ce-nav-list slot="sidebar" id="nav" title="Components"></ce-nav-list>
+      <div id="main"></div>
+    </ce-docs-layout>
+
+    <!-- Registers every tag in the library. -->
+    <script type="module" src="/src/auto.ts"></script>
+    <script type="module" src="./demo.js"></script>
+  </body>
+</html>

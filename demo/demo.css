@@ -1,0 +1,105 @@
+/* Demo chrome only — everything else uses --ce-* tokens. */
+
+body {
+  margin: 0;
+  font-family: var(--ce-font-sans);
+  color: var(--ce-text);
+  background: var(--ce-bg);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: var(--ce-text-sm);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ce-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+.brand .logo {
+  color: var(--ce-color-purple);
+  font-size: 22px;
+}
+.brand .tag {
+  font-size: var(--ce-text-xs);
+  padding: 2px 8px;
+  border-radius: var(--ce-radius-pill);
+  background: var(--ce-color-purple-bg);
+  color: var(--ce-color-purple);
+  border: 1px solid var(--ce-color-purple-border);
+  font-weight: 600;
+}
+.repo {
+  color: var(--ce-muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+.repo:hover {
+  color: var(--ce-text);
+}
+
+.bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.theme-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ce-muted);
+  font-size: var(--ce-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.theme-picker select {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ce-text);
+  background: var(--ce-surface-2);
+  border: 1px solid var(--ce-border);
+  border-radius: var(--ce-radius-sm);
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.theme-picker select:focus {
+  outline: none;
+  box-shadow: var(--ce-focus-ring);
+}
+
+.doc-pane {
+  max-width: 960px;
+}
+.prop-type {
+  font-family: var(--ce-font-mono);
+  color: var(--ce-color-blue);
+  font-size: 0.92em;
+}
+.prop-default {
+  font-family: var(--ce-font-mono);
+  color: var(--ce-muted);
+  font-size: 0.92em;
+}
+.example {
+  margin: 16px 0 20px;
+  padding: 20px;
+  border: 1px solid var(--ce-border);
+  border-radius: var(--ce-radius);
+  background: var(--ce-surface-2);
+}
+.example-title {
+  font-size: var(--ce-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ce-muted);
+  font-weight: 700;
+  margin-bottom: 12px;
+}

@@ -1,0 +1,10 @@
+/* Light-theme convenience wrapper. */
+@import "./tokens.css";
+
+:root {
+  color-scheme: light;
+}
+html {
+  /* Activate the light-theme token block in tokens.css */
+  data-ce-theme: light;
+}

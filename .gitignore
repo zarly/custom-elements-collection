@@ -1,0 +1,67 @@
+# ───── Dependencies ─────
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ───── Build output ─────
+dist/
+build/
+out/
+.vite/
+.turbo/
+.next/
+*.tsbuildinfo
+
+# ───── Tests & coverage ─────
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+*.lcov
+.vitest-cache/
+
+# ───── Editor / OS ─────
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.history/
+.fleet/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ───── Env & secrets ─────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# ───── Package tarballs & temp ─────
+*.tgz
+*.log
+.cache/
+.tmp/
+tmp/
+
+# ───── Internal / operator-only notes ─────
+# Keep BRD, STATUS, PROGRESS, HANDOFF, TODO, NOTES etc. out of the public repo.
+internal/
+
+# ───── AI / assistant tooling artifacts ─────
+.claude/
+.aider*
+.cursor/
+.continue/
+
+# ───── Misc ─────
+*.local
