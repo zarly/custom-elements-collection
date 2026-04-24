@@ -42,7 +42,7 @@ export class CeFilterBar extends CecElement {
       border: 1px solid var(--ce-border-soft);
       color: var(--ce-text);
       border-radius: var(--ce-radius-pill);
-      padding: 4px 12px;
+      padding: var(--ce-space-1) var(--ce-space-3);
       cursor: pointer;
       font: inherit;
       font-size: var(--ce-text-sm);

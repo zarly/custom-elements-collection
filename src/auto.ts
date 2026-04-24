@@ -40,6 +40,7 @@ import { CeFilterBar } from "./components/filter-bar.js";
 // Internal — docs/layout primitives
 import { CeDocsLayout } from "./components/docs-layout.js";
 import { CeNavList } from "./components/nav-list.js";
+import { CeThemeSwitcher } from "./components/theme-switcher.js";
 
 // Lesson
 import { LessonFrame } from "./lesson/lesson-frame.js";
@@ -84,6 +85,7 @@ export function defineAll(): void {
   // Internal — docs/layout primitives
   defineOnce("ce-docs-layout", CeDocsLayout);
   defineOnce("ce-nav-list", CeNavList);
+  defineOnce("ce-theme-switcher", CeThemeSwitcher);
 
   // Lesson
   defineOnce("lesson-frame", LessonFrame);

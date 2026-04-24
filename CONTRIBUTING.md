@@ -130,7 +130,48 @@ When in doubt, read the ADR first.
 - [ADR-003 — Theming via CSS custom properties](docs/adr/adr-003-theming.md): consumers override any `--ce-*` token.
 - [ADR-004 — Distribution modes](docs/adr/adr-004-distribution-modes.md): inline, linked-local, linked-cdn — and why all three matter.
 
-## 10. Release (maintainers only)
+## 10. Keeping the AI skill up to date
+
+The file [`skill/SKILL.md`](skill/SKILL.md) is a machine-readable reference used by AI coding assistants. It contains the full component API surface: props, slots, events, CSS tokens, and composition examples. It **must stay in sync with the source**.
+
+**When to update it:**
+
+| Change | Required update |
+| --- | --- |
+| Add a new component | Add a new `#### <ce-tag>` section with all props, slots, events, and a usage example |
+| Delete a component | Remove its section entirely |
+| Add / remove / rename a prop | Update the prop table in the component's section |
+| Add / remove a slot | Update the Slots table |
+| Add / remove an event | Update the Events table |
+| Change a prop's type or default | Update the table row |
+| Add a new design token (`--ce-*`) | Add it to the relevant token table |
+| Remove or rename a token | Remove / rename in the token tables |
+
+**How to update:**
+
+Edit `skill/SKILL.md` directly. The format is plain Markdown — no build step needed. Keep the structure consistent with existing sections:
+
+```
+#### `<ce-tag-name>`
+
+One-line description.
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `name` | `type` | `default` | … |
+
+**Slots:** …
+
+**Events:** …
+
+Usage example (code block)
+```
+
+Include the `skill/SKILL.md` change in the **same commit** as your component change. A PR that adds/modifies a component but does not update the skill will be flagged in review.
+
+---
+
+## 11. Release (maintainers only)
 
 1. Bump `version` in `package.json`.
 2. Commit (`chore: release vX.Y.Z`) and tag `vX.Y.Z`.

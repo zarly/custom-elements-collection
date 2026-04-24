@@ -1,0 +1,14 @@
+/* Solarized dark theme — Ethan Schoonover 2011
+ *
+ * Precision-engineered palette derived from Lab colorspace.
+ * Warm teal-green base tones; cool, hue-wheel-spaced accents.
+ * Terminal/IDE heritage — designed for code, not marketing.
+ *
+ * color-scheme: dark
+ * data-ce-theme: solarized
+ */
+@import "./tokens.css";
+
+:root {
+  color-scheme: dark;
+}

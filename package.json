@@ -1,6 +1,6 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A collection of 31 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
@@ -45,6 +45,14 @@
     "./tokens.css": "./dist/tokens/tokens.css",
     "./dark.css": "./dist/tokens/dark.css",
     "./light.css": "./dist/tokens/light.css",
+    "./swiss.css": "./dist/tokens/swiss.css",
+    "./bauhaus.css": "./dist/tokens/bauhaus.css",
+    "./muji.css": "./dist/tokens/muji.css",
+    "./neo-brutal.css": "./dist/tokens/neo-brutal.css",
+    "./solarized.css": "./dist/tokens/solarized.css",
+    "./nordic.css": "./dist/tokens/nordic.css",
+    "./memphis.css": "./dist/tokens/memphis.css",
+    "./gruvbox.css": "./dist/tokens/gruvbox.css",
     "./hero": {
       "types": "./dist/entries/hero.d.ts",
       "import": "./dist/entries/hero.js"
@@ -176,6 +184,10 @@
     "./nav-list": {
       "types": "./dist/entries/nav-list.d.ts",
       "import": "./dist/entries/nav-list.js"
+    },
+    "./theme-switcher": {
+      "types": "./dist/entries/theme-switcher.d.ts",
+      "import": "./dist/entries/theme-switcher.js"
     }
   },
   "files": [

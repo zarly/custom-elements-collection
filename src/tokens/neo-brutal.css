@@ -1,0 +1,13 @@
+/* Neo-brutalist theme wrapper.
+ * Import this file to activate the neo-brutal token set.
+ * The actual token overrides live in _patch-neo-brutal.css; this file
+ * pulls in the base token layer first so every --ce-* variable has a
+ * fallback, then declares the color-scheme so the browser paints
+ * native controls correctly.
+ */
+@import "./tokens.css";
+@import "./_patch-neo-brutal.css";
+
+:root {
+  color-scheme: light;
+}

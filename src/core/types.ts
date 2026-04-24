@@ -12,4 +12,14 @@ export type CecColor =
 export type CecSize = "sm" | "md" | "lg";
 
 /** Theme attribute values — matches the token sets shipped in src/tokens/. */
-export type CecTheme = "dark" | "light";
+export type CecTheme =
+  | "dark"
+  | "light"
+  | "swiss"
+  | "bauhaus"
+  | "muji"
+  | "neo-brutal"
+  | "solarized"
+  | "nordic"
+  | "memphis"
+  | "gruvbox";

@@ -49,30 +49,8 @@ body {
   align-items: center;
   gap: 16px;
 }
-.theme-picker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--ce-muted);
-  font-size: var(--ce-text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-}
-.theme-picker select {
-  font: inherit;
-  text-transform: none;
-  letter-spacing: normal;
-  color: var(--ce-text);
-  background: var(--ce-surface-2);
-  border: 1px solid var(--ce-border);
-  border-radius: var(--ce-radius-sm);
-  padding: 4px 8px;
-  cursor: pointer;
-}
-.theme-picker select:focus {
-  outline: none;
-  box-shadow: var(--ce-focus-ring);
+ce-theme-switcher {
+  align-self: center;
 }
 
 .doc-pane {

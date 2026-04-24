@@ -44,8 +44,8 @@ export class CeSection extends CecElement {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
+      width: var(--ce-sz-md);
+      height: var(--ce-sz-md);
       font-size: var(--ce-text-sm);
       font-weight: 700;
       border-radius: 50%;
@@ -56,7 +56,7 @@ export class CeSection extends CecElement {
     .ce-section__count {
       margin-left: auto;
       font-size: var(--ce-text-xs);
-      padding: 3px 10px;
+      padding: var(--ce-inset-xs) var(--ce-inset-lg);
       border-radius: var(--ce-radius-pill);
       background: var(--ce-surface);
       color: var(--ce-muted);

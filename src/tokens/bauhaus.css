@@ -1,0 +1,13 @@
+/* Bauhaus theme wrapper — Weimar/Dessau 1919–1933
+ * Itten's primary triad, Schlemmer's theatrical dark stage,
+ * Bayer's Universal type geometry.
+ * Import this file to activate the Bauhaus dark token set.
+ * Token overrides live in _patch-bauhaus.css; this file pulls in
+ * the base layer first so every --ce-* variable has a fallback.
+ */
+@import "./tokens.css";
+@import "./_patch-bauhaus.css";
+
+:root {
+  color-scheme: dark;
+}

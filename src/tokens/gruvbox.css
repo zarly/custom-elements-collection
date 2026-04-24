@@ -1,0 +1,6 @@
+/* Gruvbox dark theme — Pavel Pertsev 2012, Terminal Artisan aesthetic */
+@import "./tokens.css";
+
+:root {
+  color-scheme: dark;
+}

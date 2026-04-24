@@ -20,7 +20,7 @@ export class CeHeatmap extends CecElement {
     :host { display: block; overflow: auto; }
     table { border-collapse: collapse; font-size: var(--ce-text-sm); width: 100%; }
     th, td {
-      padding: 6px 8px;
+      padding: var(--ce-inset-md) var(--ce-space-2);
       text-align: center;
       border: 1px solid var(--ce-border-soft);
       font-variant-numeric: tabular-nums;

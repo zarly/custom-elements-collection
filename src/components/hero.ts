@@ -21,8 +21,8 @@ export class CeHero extends CecElement {
     :host {
       display: block;
       background:
-        radial-gradient(1200px 400px at 15% -10%, rgba(188, 140, 255, 0.18), transparent 60%),
-        radial-gradient(800px 300px at 90% 0%, rgba(63, 185, 80, 0.12), transparent 60%);
+        radial-gradient(1200px 400px at 15% -10%, var(--ce-color-purple-bg), transparent 60%),
+        radial-gradient(800px 300px at 90% 0%, var(--ce-color-green-bg), transparent 60%);
       border: 1px solid var(--ce-border);
       border-radius: var(--ce-radius-lg);
       padding: var(--ce-space-7) var(--ce-space-6);
@@ -40,7 +40,7 @@ export class CeHero extends CecElement {
       text-transform: uppercase;
       color: var(--ce-color-purple);
       background: var(--ce-color-purple-bg);
-      padding: 5px 12px;
+      padding: var(--ce-inset-sm) var(--ce-space-3);
       border-radius: var(--ce-radius-pill);
       border: 1px solid var(--ce-color-purple-border);
       margin-bottom: var(--ce-space-3);

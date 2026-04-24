@@ -1,0 +1,17 @@
+/* Memphis Group / Y2K Revival theme — Ettore Sottsass 1981, revived 2022
+ *
+ * Import this file to activate the Memphis token set.
+ * The actual token overrides live in _patch-memphis.css; this file
+ * pulls in the base token layer first so every --ce-* variable has a
+ * fallback, then declares the color-scheme so the browser paints
+ * native controls correctly.
+ *
+ * color-scheme: light
+ * data-ce-theme: memphis
+ */
+@import "./tokens.css";
+@import "./_patch-memphis.css";
+
+:root {
+  color-scheme: light;
+}

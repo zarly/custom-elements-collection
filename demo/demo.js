@@ -174,9 +174,25 @@ function route() {
   nav.value = hash || "#";
 }
 
-/** Theme: "auto" follows prefers-color-scheme; "light"/"dark" force the choice. */
+/** Theme: "auto" follows prefers-color-scheme; any other value forces that theme. */
 const THEME_KEY = "cec-demo-theme";
 const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+
+const THEME_OPTIONS = [
+  { value: "auto",       label: "Auto" },
+  { value: "light",      label: "Light",              group: "Built-in" },
+  { value: "dark",       label: "Dark",               group: "Built-in" },
+  { value: "swiss",      label: "Swiss International", group: "Design Schools" },
+  { value: "bauhaus",    label: "Bauhaus",             group: "Design Schools" },
+  { value: "muji",       label: "Muji (Japanese)",     group: "Design Schools" },
+  { value: "neo-brutal", label: "Neo-brutalist",       group: "Design Schools" },
+  { value: "solarized",  label: "Solarized",           group: "Design Schools" },
+  { value: "nordic",     label: "Nordic",              group: "Design Schools" },
+  { value: "memphis",    label: "Memphis",             group: "Design Schools" },
+  { value: "gruvbox",    label: "Gruvbox",             group: "Design Schools" },
+];
+
+const VALID_THEMES = new Set(THEME_OPTIONS.map((o) => o.value));
 
 function applyTheme(mode) {
   const effective = mode === "auto" ? (themeMedia.matches ? "light" : "dark") : mode;
@@ -184,19 +200,22 @@ function applyTheme(mode) {
 }
 
 function initTheme() {
-  const select = document.getElementById("theme-select");
+  const switcher = document.getElementById("theme-switcher");
   const stored = localStorage.getItem(THEME_KEY);
-  const initial = stored === "light" || stored === "dark" || stored === "auto" ? stored : "auto";
-  select.value = initial;
+  const initial = VALID_THEMES.has(stored) ? stored : "auto";
+
+  switcher.options = THEME_OPTIONS;
+  switcher.value = initial;
   applyTheme(initial);
 
-  select.addEventListener("change", () => {
-    localStorage.setItem(THEME_KEY, select.value);
-    applyTheme(select.value);
+  switcher.addEventListener("ce-change", (ev) => {
+    const { value } = ev.detail;
+    localStorage.setItem(THEME_KEY, value);
+    applyTheme(value);
   });
 
   themeMedia.addEventListener("change", () => {
-    if (select.value === "auto") applyTheme("auto");
+    if (switcher.value === "auto") applyTheme("auto");
   });
 }
 

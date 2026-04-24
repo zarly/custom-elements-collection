@@ -1,0 +1,13 @@
+/* Muji / Japanese minimalism theme wrapper
+ *
+ * Design school: Kenya Hara's "Ma" (negative space as potential),
+ * Muji's Ikko Tanaka-era restraint, wabi-sabi warmth.
+ *
+ * color-scheme: light
+ * data-ce-theme: muji
+ */
+@import "./tokens.css";
+
+:root {
+  color-scheme: light;
+}

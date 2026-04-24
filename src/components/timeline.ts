@@ -52,15 +52,15 @@ export class CeTimeline extends CecElement {
       position: absolute;
       left: 4px;
       top: 3px;
-      width: 20px;
-      height: 20px;
+      width: var(--ce-sz-sm);
+      height: var(--ce-sz-sm);
       border-radius: 50%;
       background: var(--ce-surface-2);
       border: 2px solid var(--ce-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: var(--ce-text-xs);
       color: var(--ce-muted);
       z-index: 1;
     }

@@ -7,7 +7,8 @@
     <script>
       (() => {
         const stored = localStorage.getItem("cec-demo-theme");
-        const mode = stored === "light" || stored === "dark" || stored === "auto" ? stored : "auto";
+        const valid = new Set(["auto","dark","light","swiss","bauhaus","muji","neo-brutal","solarized","nordic","memphis","gruvbox"]);
+        const mode = valid.has(stored) ? stored : "auto";
         const effective = mode === "auto"
           ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
           : mode;
@@ -26,14 +27,7 @@
           <span class="tag">demo</span>
         </a>
         <div class="bar-right">
-          <label class="theme-picker">
-            <span>Theme</span>
-            <select id="theme-select" aria-label="Color scheme">
-              <option value="auto">Auto</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-          </label>
+          <ce-theme-switcher id="theme-switcher"></ce-theme-switcher>
           <a
             class="repo"
             href="https://github.com/zarly/custom-elements-collection"

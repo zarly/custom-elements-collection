@@ -89,20 +89,20 @@ export class CeTable extends CecElement {
     style.textContent = `
       ce-table table[data-ce-table-styled] { width:100%; border-collapse:collapse; font-size: var(--ce-text-sm); }
       ce-table table[data-ce-table-styled] th {
-        text-align:left; padding:10px 12px;
+        text-align:left; padding: var(--ce-inset-lg) var(--ce-space-3);
         background: var(--ce-surface-2); color: var(--ce-muted);
         text-transform:uppercase; letter-spacing:.06em;
         font-size: var(--ce-text-xs); font-weight:600;
         border-bottom:1px solid var(--ce-border);
       }
       ce-table table[data-ce-table-styled] td {
-        padding:10px 12px;
+        padding: var(--ce-inset-lg) var(--ce-space-3);
         border-bottom:1px solid var(--ce-border-soft);
         vertical-align:middle; color: var(--ce-text);
       }
-      ce-table table[data-ce-table-styled] tr:hover td { background: rgba(88,166,255,.03); }
+      ce-table table[data-ce-table-styled] tr:hover td { background: var(--ce-state-hover); }
       ce-table[compact] table[data-ce-table-styled] th,
-      ce-table[compact] table[data-ce-table-styled] td { padding:6px 10px; }
+      ce-table[compact] table[data-ce-table-styled] td { padding: var(--ce-inset-md) var(--ce-inset-lg); }
       ce-table[sticky] table[data-ce-table-styled] th { position: sticky; top: 0; z-index: 1; }
       ce-table table[data-ce-table-styled] td.num,
       ce-table table[data-ce-table-styled] td[data-align="num"] { text-align: right; font-variant-numeric: tabular-nums; }

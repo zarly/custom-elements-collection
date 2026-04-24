@@ -37,13 +37,13 @@ export class CeVerdict extends CecElement {
       background: linear-gradient(135deg, var(--ce-color-amber-bg), transparent);
     }
     .ce-verdict__icon {
-      width: 42px;
-      height: 42px;
+      width: var(--ce-sz-lg);
+      height: var(--ce-sz-lg);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: var(--ce-text-xl);
       font-weight: 700;
       flex: 0 0 auto;
       background: var(--ce-color-blue-bg);

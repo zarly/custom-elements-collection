@@ -30,8 +30,8 @@ export class CeFeatureCard extends CecElement {
     :host(:hover) { border-color: var(--ce-border-strong); }
 
     .ce-feature__icon {
-      width: 38px;
-      height: 38px;
+      width: var(--ce-sz-lg);
+      height: var(--ce-sz-lg);
       border-radius: var(--ce-radius-sm);
       background: var(--ce-surface-2);
       display: flex;
@@ -63,7 +63,7 @@ export class CeFeatureCard extends CecElement {
       color: var(--ce-color-blue);
       border: 1px solid var(--ce-color-blue-border);
       border-radius: var(--ce-radius-sm);
-      padding: 6px 12px;
+      padding: var(--ce-inset-md) var(--ce-space-3);
       cursor: pointer;
       font: inherit;
       font-weight: 600;

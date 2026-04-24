@@ -119,6 +119,19 @@ Ready-made dark / light overrides:
 
 The full token catalog lives at [`src/tokens/tokens.css`](../src/tokens/tokens.css) — search for `--ce-` to see all variables.
 
+**Token axes:**
+
+| Prefix | Purpose | Example |
+|---|---|---|
+| `--ce-space-*` | Layout gaps, container padding (4 px grid, 1–8) | `gap: var(--ce-space-3)` |
+| `--ce-inset-*` | Padding inside compact interactive elements (chips, pills, cells) | `padding: var(--ce-inset-xs) var(--ce-space-2)` |
+| `--ce-sz-*` | Fixed geometric sizes for icon containers, avatars, badges | `width: var(--ce-sz-lg)` |
+| `--ce-color-*` | Semantic foreground, background, and border tints | `color: var(--ce-color-green)` |
+| `--ce-state-*` | Hover/active overlays — lighter than `--ce-color-*-bg` | `background: var(--ce-state-hover)` |
+| `--ce-code-*` | Code-block surface; stays dark regardless of ambient theme | `background: var(--ce-code-bg)` |
+| `--ce-radius-*` | Border-radius scale | `border-radius: var(--ce-radius)` |
+| `--ce-text-*` | Font-size scale | `font-size: var(--ce-text-sm)` |
+
 ## Common composition patterns
 
 ```html

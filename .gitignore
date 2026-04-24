@@ -56,6 +56,7 @@ tmp/
 # ───── Internal / operator-only notes ─────
 # Keep BRD, STATUS, PROGRESS, HANDOFF, TODO, NOTES etc. out of the public repo.
 internal/
+vis/
 
 # ───── AI / assistant tooling artifacts ─────
 .claude/

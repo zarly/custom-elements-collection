@@ -55,7 +55,7 @@ export class CeNavList extends CecElement {
       align-items: baseline;
       justify-content: space-between;
       gap: var(--ce-space-2);
-      padding: 5px var(--ce-space-4);
+      padding: var(--ce-inset-sm) var(--ce-space-4);
       color: var(--ce-text);
       text-decoration: none;
       border-left: 2px solid transparent;

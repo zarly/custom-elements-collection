@@ -38,14 +38,14 @@ export class CePersona extends CecElement {
       margin-bottom: var(--ce-space-3);
     }
     .ce-persona__avatar {
-      width: 44px;
-      height: 44px;
+      width: var(--ce-sz-lg);
+      height: var(--ce-sz-lg);
       border-radius: 50%;
       background: var(--ce-surface-2);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: var(--ce-text-xl);
       flex: 0 0 auto;
     }
     :host([color="green"])  .ce-persona__avatar { background: var(--ce-color-green-bg);  color: var(--ce-color-green);  }

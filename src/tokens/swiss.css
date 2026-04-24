@@ -1,0 +1,12 @@
+/* Swiss International Typographic Style — dark theme wrapper
+ *
+ * Müller-Brockmann / Emil Ruder / Armin Hofmann lineage.
+ * Grid above all. Typography as content. One accent (Swiss red). Zero decoration.
+ *
+ * Set data-ce-theme="swiss" on <html> to activate.
+ */
+@import "./tokens.css";
+
+:root {
+  color-scheme: dark;
+}

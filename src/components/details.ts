@@ -50,12 +50,12 @@ export class CeDetails extends CecElement {
       width: 10px;
     }
     details[open] > summary::before { transform: rotate(90deg); }
-    summary:hover { background: rgba(88, 166, 255, 0.04); }
+    summary:hover { background: var(--ce-state-hover); }
 
     .ce-details__count {
       margin-left: auto;
       font-size: var(--ce-text-xs);
-      padding: 2px 9px;
+      padding: var(--ce-inset-xs) var(--ce-space-2);
       border-radius: var(--ce-radius-pill);
       background: var(--ce-surface-2);
       color: var(--ce-muted);

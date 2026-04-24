@@ -68,8 +68,9 @@ export const COMPONENTS: ReadonlyArray<ComponentEntry> = [
   // Internal — layout primitives for docs/demos. No live example in the demo
   // catalog: the demo IS built with these components, so rendering one again
   // inside itself is noise. Description + properties only.
-  { name: "docs-layout", tag: "ce-docs-layout", className: "CeDocsLayout", import: "custom-elements-collection/docs-layout", category: "internal", description: "Two-pane documentation layout (sidebar + main) with optional header." },
-  { name: "nav-list",    tag: "ce-nav-list",    className: "CeNavList",    import: "custom-elements-collection/nav-list",    category: "internal", description: "Grouped anchor list for docs sidebars with active-item highlight." },
+  { name: "docs-layout",      tag: "ce-docs-layout",      className: "CeDocsLayout",      import: "custom-elements-collection/docs-layout",      category: "internal", description: "Two-pane documentation layout (sidebar + main) with optional header." },
+  { name: "nav-list",         tag: "ce-nav-list",         className: "CeNavList",         import: "custom-elements-collection/nav-list",         category: "internal", description: "Grouped anchor list for docs sidebars with active-item highlight." },
+  { name: "theme-switcher",   tag: "ce-theme-switcher",   className: "CeThemeSwitcher",   import: "custom-elements-collection/theme-switcher",   category: "internal", description: "Compact cycler + dropdown for selecting a named value (e.g., theme). Left/right arrows step through options; clicking the label toggles the dropdown list." },
 ];
 
 /**

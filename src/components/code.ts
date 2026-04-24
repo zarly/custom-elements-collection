@@ -20,7 +20,7 @@ export class CeCode extends CecElement {
     :host {
       display: block;
       position: relative;
-      background: #0a0e1c;
+      background: var(--ce-code-bg);
       border: 1px solid var(--ce-border-soft);
       border-radius: var(--ce-radius);
       overflow: hidden;
@@ -30,8 +30,8 @@ export class CeCode extends CecElement {
       display: flex;
       align-items: center;
       gap: var(--ce-space-2);
-      padding: 6px 10px;
-      background: rgba(255, 255, 255, 0.03);
+      padding: var(--ce-inset-md) var(--ce-inset-lg);
+      background: var(--ce-state-hover);
       border-bottom: 1px solid var(--ce-border-soft);
       font-size: var(--ce-text-xs);
       color: var(--ce-muted);
@@ -47,7 +47,7 @@ export class CeCode extends CecElement {
       color: var(--ce-muted);
       border: 1px solid var(--ce-border-soft);
       border-radius: var(--ce-radius-sm);
-      padding: 2px 8px;
+      padding: var(--ce-inset-xs) var(--ce-space-2);
       cursor: pointer;
       font-family: inherit;
       font-size: inherit;
@@ -67,7 +67,7 @@ export class CeCode extends CecElement {
       font-family: var(--ce-font-mono);
       font-size: var(--ce-text-sm);
       line-height: var(--ce-line-normal);
-      color: #d2d4de;
+      color: var(--ce-code-text);
       white-space: pre;
     }
     :host(:not([lang]):not([filename]):not([copy])) .ce-code__header { display: none; }

@@ -21,7 +21,7 @@ export class CeChip extends CecElement {
       gap: var(--ce-space-1);
       font-size: var(--ce-text-xs);
       font-weight: 600;
-      padding: 2px 9px;
+      padding: var(--ce-inset-xs) var(--ce-space-2);
       border-radius: var(--ce-radius-pill);
       border: 1px solid transparent;
       line-height: var(--ce-line-snug);

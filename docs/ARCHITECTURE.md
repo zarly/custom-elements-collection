@@ -86,6 +86,15 @@ All visual values come from `--ce-*` CSS custom properties defined in `src/token
 
 Consumers override any variable on `:root`, on `<html>`, or on a parent element. Per-component accent (`<ce-kpi color="green">`) maps to a token (`var(--ce-color-green)`); component source never inlines a hex value.
 
+The token system is organised into **axes** — semantic categories with distinct purposes:
+
+- **`--ce-space-*`** — layout gaps and container padding (4 px grid).
+- **`--ce-inset-*`** — vertical/horizontal padding *inside* compact interactive leaf elements (chips, pills, nav links, table cells). Distinct from `--ce-space-*` because element-inset sizing doesn't follow the same rhythm as layout gaps.
+- **`--ce-sz-*`** — fixed geometric sizes (width/height) for icon containers, avatars, and badges.
+- **`--ce-state-*`** — hover/active background overlays. Lighter than `--ce-color-*-bg`; white-overlay on dark themes, black-overlay on light themes.
+- **`--ce-code-*`** — code-surface colors, intentionally dark regardless of ambient theme.
+- **`--ce-color-*`**, **`--ce-radius-*`**, **`--ce-text-*`** — semantic colors, radii, font sizes.
+
 ## Light DOM vs Shadow DOM
 
 `CecElement.createRenderRoot()` returns `this` by default — that's **light DOM**.

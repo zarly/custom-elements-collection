@@ -61,7 +61,7 @@ export class CeDecisionTree extends CecElement {
     .ce-tree__label {
       font-size: var(--ce-text-sm);
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: var(--ce-space-1);
     }
     .ce-tree__result {
       color: var(--ce-text);

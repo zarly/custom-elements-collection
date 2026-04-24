@@ -1,0 +1,14 @@
+/* Nordic / Scandinavian design theme — Nord palette by Arctic Ice Studio
+ *
+ * Design lineage: Alvar Aalto (Finland), Arne Jacobsen (Denmark),
+ * Arctic Ice Studio's Nord colorscheme. Functionalism with hygge warmth.
+ *
+ * color-scheme: dark
+ * data-ce-theme: nordic
+ */
+@import "./tokens.css";
+@import "./_patch-nordic.css";
+
+:root {
+  color-scheme: dark;
+}
