@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-kpi",
+  "name": "Kpi",
+  "className": "CeKpi",
+  "goal": "Display a single big-number stat with label, optional trend indicator, and semantic color tint.",
+  "description": "Single-stat KPI block — large value, small uppercase label, and optional inline trend (e.g. '+12%') that auto-colors based on its leading sign (+ green, - red, otherwise neutral). Used inside <ce-hero slot=\"stats\"> or in any grid row.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Primary figure shown large."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Uppercase label below the value."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "Tint for the value text (neutral / green / red / amber / blue / purple / cyan)."
+    },
+    {
+      "name": "trend",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Trend indicator. Color flag derives from leading + / - / other."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-text-2xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Value font size."
+    },
+    {
+      "name": "--ce-line-tight",
+      "kind": "size",
+      "source": "token",
+      "description": "Value line-height."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default value color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green value text."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red value text + down trend."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber value text."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue value text."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple value text."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan value text."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label + flat trend color."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Label top margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Trend left margin."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Trend font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-hero"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Metrics & charts",
+    "kpi",
+    "stat"
+  ]
+}

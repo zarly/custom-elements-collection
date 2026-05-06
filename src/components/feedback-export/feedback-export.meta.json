@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feedback-export",
+  "name": "Feedback export",
+  "className": "CeFeedbackExport",
+  "goal": "Surface page-level action buttons (copy markdown, download json, submit, clear) that delegate work to the ancestor sink via bubbling export-request events.",
+  "description": "Renders one button per requested format and dispatches a bubbling ce-feedback-export-request event the ancestor ce-feedback-sink handles. Listens to ce-feedback-persisted and ce-feedback-failed events from the sink to flash a transient status line (~1500ms) inside its UI. Layout can be row (default), menu (column), or floating (sticky to viewport bottom).",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "subject",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional override; defaults to the ancestor sink's subject."
+    },
+    {
+      "name": "formats",
+      "type": "string",
+      "required": false,
+      "default": "\"markdown json\"",
+      "description": "Space-separated list of buttons to render (markdown | json | submit | clear)."
+    },
+    {
+      "name": "layout",
+      "type": "\"row\" | \"menu\" | \"floating\"",
+      "required": false,
+      "default": "\"row\"",
+      "reflect": true,
+      "description": "Layout: row, vertical menu, or floating sticky to viewport bottom."
+    },
+    {
+      "name": "submitEndpoint",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "submit-endpoint",
+      "description": "Optional override for the sink's endpoint, used only by the submit action."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-feedback-export-request",
+      "detail": "{ format, subject, submitEndpoint? }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every button click; the ancestor ce-feedback-sink performs the actual work."
+    }
+  ],
+  "slots": [
+    {
+      "name": "extra",
+      "description": "Additional buttons (e.g. a custom share-to-Slack action)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-text-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Status text default color; falls back to --ce-muted.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Muted fallback."
+    },
+    {
+      "name": "--ce-bg-elevated",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background; falls back to --ce-surface-2.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border."
+    },
+    {
+      "name": "--ce-accent",
+      "kind": "color",
+      "source": "token",
+      "description": "Submit/primary button background; falls back to --ce-color-purple.",
+      "fallback": "var(--ce-color-purple)"
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent fallback."
+    },
+    {
+      "name": "--ce-ok",
+      "kind": "color",
+      "source": "token",
+      "description": "Status success color; falls back to --ce-color-green.",
+      "fallback": "var(--ce-color-green)"
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "OK fallback."
+    },
+    {
+      "name": "--ce-bad",
+      "kind": "color",
+      "source": "token",
+      "description": "Status error + clear button color; falls back to --ce-color-red.",
+      "fallback": "var(--ce-color-red)"
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Bad fallback."
+    },
+    {
+      "name": "--ce-radius-md",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius; falls back to --ce-radius-sm.",
+      "fallback": "var(--ce-radius-sm)"
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Radius fallback."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Inter-button gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer margin + button padding x."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical padding; falls back to --ce-space-2.",
+      "fallback": "var(--ce-space-2)"
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Status text font size."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "Status text auto-clears after ~1500ms via setTimeout.",
+      "reason": "Transient confirmation without taking up persistent UI space."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [
+    "ce-feedback-sink"
+  ],
+  "related": [
+    "ce-feedback-summary"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "export",
+    "action",
+    "widget"
+  ],
+  "a11y": {
+    "notes": "Each button gets aria-label matching its action. Status line uses role=status + aria-live=polite for screen-reader announcement of recent persistence."
+  }
+}

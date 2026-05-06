@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-status-light",
+  "name": "Status Light",
+  "className": "CeStatusLight",
+  "goal": "Display a small traffic-light style dot with state color, optional pulse, and inline label.",
+  "description": "Compact status indicator for dashboards, lists, and report rows. Five states (ok/warn/bad/neutral/pending) map to semantic color tokens, an optional pulse animation highlights live activity, and the label is provided either via the label attribute or the default slot.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "state",
+      "type": "\"ok\" | \"warn\" | \"bad\" | \"neutral\" | \"pending\"",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "Color state of the dot."
+    },
+    {
+      "name": "pulse",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Animate a pulsing ring around the dot."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Inline label text (overridable via default slot)."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Dot size."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional label content; overrides the label attribute."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between dot and label."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color (active state)."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral dot + label color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "state=ok dot color."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "state=warn dot color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "state=bad dot color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "state=pending dot color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chip",
+    "ce-verdict"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Dashboard",
+    "status",
+    "indicator"
+  ],
+  "a11y": {
+    "role": "status",
+    "notes": "The label region carries role=status so screen readers announce state changes when label or slot content updates."
+  }
+}

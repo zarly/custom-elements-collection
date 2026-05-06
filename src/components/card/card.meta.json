@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-card",
+  "name": "Card",
+  "className": "CeCard",
+  "goal": "Present arbitrary content on a surface with optional left-border accent, hover lift, and clickable activation.",
+  "description": "Generic content card with title, body, and footer slots. Supports a colored left-border accent, hover-elevation, compact padding, and a clickable mode that adds role=button + Enter/Space activation and emits ce-card-activate.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "accent",
+      "type": "CecColor | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Optional left-border accent color (green/red/amber/blue/purple/cyan)."
+    },
+    {
+      "name": "hoverable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Adds hover border-strengthening and elevation."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Tighter padding."
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Adds role=button + tabindex=0 + Enter/Space activation."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-card-activate",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on click or Enter/Space when clickable is set."
+    }
+  ],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Optional title region rendered above the body."
+    },
+    {
+      "name": "",
+      "description": "Body content."
+    },
+    {
+      "name": "footer",
+      "description": "Optional footer region with separator."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Footer separator."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Title bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Compact padding + footer margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Default vertical padding + compact horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Default horizontal padding."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Hover elevation."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring when clickable."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for border/shadow/transform."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=green left border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=red left border."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=amber left border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=blue left border."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=purple left border."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent=cyan left border."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Footer font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Footer text color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-grid"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "surface",
+    "container"
+  ],
+  "a11y": {
+    "role": "button (when clickable)",
+    "notes": "When clickable=true the host gets role=\"button\" and tabindex=\"0\"; Enter and Space both emit ce-card-activate. When toggled off, role/tabindex are removed."
+  }
+}

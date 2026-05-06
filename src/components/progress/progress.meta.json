@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-progress",
+  "name": "Progress",
+  "className": "CeProgress",
+  "goal": "Render a horizontal progress bar with optional inline label, percent overlay, indeterminate shimmer, and semantic color.",
+  "description": "Linear progress bar bound by value/max. Supports an optional left label, a numeric percent value on the right (show-value), an indeterminate shimmer, and five color tokens for the fill. Exposes ARIA progressbar semantics with valuemin / valuemax / valuenow / busy.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Current progress in [0, max]."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "100",
+      "description": "Denominator."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"blue\"",
+      "reflect": true,
+      "description": "Fill color: blue / green / red / amber / purple / cyan."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional inline label."
+    },
+    {
+      "name": "showValue",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "show-value",
+      "description": "Render a right-aligned 'N%' label."
+    },
+    {
+      "name": "indeterminate",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Animated shimmer; sets aria-busy=true."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Row gap."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label + value text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Track background."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Track + fill radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default fill color."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Width transition."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green fill."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red fill."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber fill."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple fill."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan fill."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Percent value font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Metrics & charts",
+    "progress",
+    "indicator"
+  ],
+  "a11y": {
+    "role": "progressbar",
+    "notes": "Sets aria-valuemin/valuemax/valuenow and aria-busy when indeterminate."
+  }
+}

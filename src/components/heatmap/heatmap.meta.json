@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-heatmap",
+  "name": "Heatmap",
+  "className": "CeHeatmap",
+  "goal": "Render a 2D value grid with row + column labels and per-cell color intensity drawn from a 5-color palette.",
+  "description": "2D heatmap. Takes rows / cols / data arrays as JS properties or JSON attributes; colors each cell by interpolating the palette token between min and max (auto-detected when max is 0). Cell hover surfaces a focus outline.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "rows",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Row labels (Y axis)."
+    },
+    {
+      "name": "cols",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Column labels (X axis)."
+    },
+    {
+      "name": "data",
+      "type": "number[][]",
+      "required": false,
+      "default": "[]",
+      "description": "Grid values, rows × cols."
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Lower bound of the color scale."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Upper bound. 0 means auto-detect from data."
+    },
+    {
+      "name": "palette",
+      "type": "\"blue\" | \"green\" | \"amber\" | \"red\" | \"purple\"",
+      "required": false,
+      "default": "\"blue\"",
+      "reflect": true,
+      "description": "Color ramp."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell font size."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell horizontal padding."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell border."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Header background."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Header font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell text color."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Cell hover transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover outline color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-bar-chart",
+    "ce-chart"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Metrics & charts",
+    "heatmap",
+    "matrix",
+    "data-viz"
+  ]
+}

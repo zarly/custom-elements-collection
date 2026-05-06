@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-compare",
+  "name": "Compare",
+  "className": "CeCompare",
+  "goal": "Display two slotted columns side by side as a Before/After (or A/B) panel separated by a configurable arrow.",
+  "description": "Side-by-side comparison panel. Left column gets a red tint (Before), right column a green tint (After), and a center column shows a configurable arrow (default → ). Below 640px the layout collapses to a single column and the arrow hides.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "beforeLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Before\"",
+      "attribute": "before-label",
+      "description": "Label above the left panel."
+    },
+    {
+      "name": "afterLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"After\"",
+      "attribute": "after-label",
+      "description": "Label above the right panel."
+    },
+    {
+      "name": "arrow",
+      "type": "string",
+      "required": false,
+      "default": "\"→\"",
+      "description": "Separator glyph; empty string hides the column."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "before",
+      "description": "Left panel content."
+    },
+    {
+      "name": "after",
+      "description": "Right panel content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Side vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Side horizontal padding."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Side default border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Before background."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Before border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Corner radius."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "After background."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "After border."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow column background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow color."
+    },
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Arrow font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Side label font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Side label bottom margin."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Before label color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "After label color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-example"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "compare",
+    "before-after"
+  ]
+}

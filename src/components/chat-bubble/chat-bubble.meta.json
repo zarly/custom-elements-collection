@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-chat-bubble",
+  "name": "Chat bubble",
+  "className": "CeChatBubble",
+  "goal": "Render one chat message with role-driven coloring, avatar placement, header metadata (author/model/timestamp), and a tokens-aware footer.",
+  "description": "Single LLM-chat message bubble. The role attribute drives color tinting (assistant=blue, user=purple, system=neutral, tool=amber) and avatar placement (user-aligned right; everyone else left). Header surfaces author + model + timestamp; footer surfaces a slotted footer + an optional tokens count. Pure presentation; emits no events.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "role",
+      "type": "\"user\" | \"assistant\" | \"system\" | \"tool\"",
+      "required": false,
+      "default": "\"assistant\"",
+      "reflect": true,
+      "description": "Chat role; drives color, alignment, and avatar placement."
+    },
+    {
+      "name": "author",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Display name shown in the header."
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "ISO-8601 or pre-formatted timestamp string; rendered verbatim."
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional model identifier shown next to the author."
+    },
+    {
+      "name": "tokens",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Optional token count; renders as a footer chip when set."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Message body content."
+    },
+    {
+      "name": "avatar",
+      "description": "Small avatar element placed beside the content (opposite the role's alignment)."
+    },
+    {
+      "name": "footer",
+      "description": "Extra footer content; rendered before the auto-generated tokens chip."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default body and author color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header secondary + footer color."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Default content background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Avatar fallback + system role background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default content border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Footer separator."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Assistant role background."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Assistant role border."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "User role background."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "User role border."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Tool role background."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Tool role border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Content radius."
+    },
+    {
+      "name": "--ce-sz-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Avatar diameter."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Author font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Avatar fallback font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Header + footer font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Header bottom margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Header gap + footer padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer margin + content padding y + grid gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Content padding x."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets aria-roledescription=message on the host so the role attribute (which carries the chat role) doesn't shadow conventional ARIA semantics.",
+      "reason": "Reconciles the role= chat-role API with screen-reader expectations."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-cursor",
+    "ce-thinking",
+    "ce-tool-call",
+    "ce-rating",
+    "ce-citation",
+    "ce-copy-button",
+    "ce-retry-button"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "message",
+    "conversation",
+    "component"
+  ],
+  "a11y": {
+    "notes": "aria-label is set from the author attribute when present; aria-roledescription=message identifies the bubble to assistive tech without requiring a literal ARIA role (the role attribute is taken by the chat-role API)."
+  }
+}

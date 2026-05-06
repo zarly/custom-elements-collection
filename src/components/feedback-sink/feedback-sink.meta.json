@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feedback-sink",
+  "name": "Feedback sink",
+  "className": "CeFeedbackSink",
+  "goal": "Own the feedback subject + transport scope, normalize bubbling descendant events into FeedbackEvent records, and persist them via the configured transport.",
+  "description": "Invisible (display: contents) wrapper that listens for ce-rating-change, ce-bookmark-change, ce-dismiss-change, ce-comment-change, ce-feedback-clear, and ce-feedback-export-request events bubbling through the subtree. Every change is normalized to a FeedbackEvent (schema, subject, item, label, action, value, ts) and pushed into a pending batch flushed per batch-ms. Five transports are supported: localstorage (default), http (with optional localstorage offline-fallback), file (showSaveFilePicker with anchor-download fallback), console, and custom (via the .transportImpl JS-only property). Dispatches ce-feedback-persisted and ce-feedback-failed after each flush, and ce-feedback-state with the freshly aggregated SubjectState. Hydrates from localStorage on connect when the local-storage transport is selected. Implements export-request actions for markdown (clipboard), json (anchor-download), submit (HTTP POST), and clear.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "subject",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "Subject grouping id (key into localStorage / wire payloads)."
+    },
+    {
+      "name": "transport",
+      "type": "\"localstorage\" | \"http\" | \"file\" | \"console\" | \"custom\"",
+      "required": false,
+      "default": "\"localstorage\"",
+      "reflect": true,
+      "description": "Persistence target."
+    },
+    {
+      "name": "endpoint",
+      "type": "string",
+      "required": false,
+      "default": "\"http://localhost:3600/feedback\"",
+      "description": "URL POSTed when transport=http."
+    },
+    {
+      "name": "offlineFallback",
+      "type": "\"localstorage\" | \"none\"",
+      "required": false,
+      "default": "\"localstorage\"",
+      "attribute": "offline-fallback",
+      "description": "Fallback when http transport throws."
+    },
+    {
+      "name": "batchMs",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "attribute": "batch-ms",
+      "description": "Debounce window for batching events; 0 = flush immediately."
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "required": false,
+      "default": "\"1\"",
+      "attribute": "schema-version",
+      "description": "Wire-protocol version stamped on every FeedbackEvent."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-feedback-persisted",
+      "detail": "{ events, transport }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after every successful flush; events may be empty for export operations."
+    },
+    {
+      "name": "ce-feedback-failed",
+      "detail": "{ events, transport, error }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when a transport throws or returns a non-2xx response."
+    },
+    {
+      "name": "ce-feedback-state",
+      "detail": "{ state: SubjectState }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after every state change with the freshly aggregated per-item state."
+    }
+  ],
+  "methods": [
+    {
+      "name": "getState",
+      "signature": "(): SubjectState",
+      "description": "Returns a snapshot of the current per-item aggregated state (deep-cloned)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "The dashboard subtree whose feedback events the sink intercepts."
+    }
+  ],
+  "cssVariables": [],
+  "globalDependencies": [
+    {
+      "api": "localStorage.getItem/setItem",
+      "purpose": "persist + hydrate per-subject state under ce-feedback:<subject>",
+      "writes": true
+    },
+    {
+      "api": "fetch",
+      "purpose": "transport=http POSTs feedback events to endpoint",
+      "writes": true
+    },
+    {
+      "api": "window.showSaveFilePicker",
+      "purpose": "transport=file picks a target file once and writes JSON exports",
+      "writes": true
+    },
+    {
+      "api": "console.log",
+      "purpose": "transport=console logs each event",
+      "writes": false
+    },
+    {
+      "api": "navigator.clipboard.writeText",
+      "purpose": "ce-feedback-export-request format=markdown copies the rendered markdown",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "storage",
+      "description": "writes ce-feedback:<subject> in localStorage",
+      "reason": "default privacy-first transport — no network traffic by default"
+    },
+    {
+      "kind": "network",
+      "description": "POSTs FeedbackEvent batches to endpoint when transport=http or on submit export-request",
+      "reason": "explicitly opted in by attribute or export action",
+      "guarded": true
+    },
+    {
+      "kind": "timer",
+      "description": "debounces flushes by batch-ms milliseconds",
+      "reason": "cap event volume from rapid clicks"
+    },
+    {
+      "kind": "dom",
+      "description": "transient anchor and Blob URL creation for file/json downloads",
+      "reason": "no third-party dependency for export downloads",
+      "guarded": true
+    },
+    {
+      "kind": "log",
+      "description": "console.log each event when transport=console",
+      "reason": "developer debugging aid",
+      "guarded": true
+    }
+  ],
+  "dependents": [
+    "ce-feedback-summary",
+    "ce-feedback-export",
+    "ce-feedback-heatmap"
+  ],
+  "dependencies": [
+    "ce-feedback-bar"
+  ],
+  "related": [
+    "ce-feedback-summary",
+    "ce-feedback-export",
+    "ce-feedback-heatmap"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "sink",
+    "wrapper",
+    "widget"
+  ],
+  "a11y": {
+    "notes": "Invisible host (display: contents) — contributes no layout and no ARIA. Accessibility responsibility lives with descendants."
+  },
+  "additional": {
+    "schemaVersion": "1"
+  }
+}

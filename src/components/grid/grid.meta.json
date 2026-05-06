@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-grid",
+  "name": "Grid",
+  "className": "CeGrid",
+  "goal": "Lay out child elements in a responsive grid with either a fixed column count or auto-fit minmax sizing.",
+  "description": "Responsive grid container. Either uses a fixed column count (cols=2/3/4) or repeat(auto-fit, minmax(min, 1fr)) when auto is set. Below 640px the grid collapses to a single column.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "cols",
+      "type": "\"2\" | \"3\" | \"4\"",
+      "required": false,
+      "default": "\"3\"",
+      "reflect": true,
+      "description": "Fixed column count when auto is unset."
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "required": false,
+      "default": "240",
+      "description": "Minimum column width in pixels when auto is set."
+    },
+    {
+      "name": "auto",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Use repeat(auto-fit, minmax(min, 1fr)) instead of fixed cols."
+    },
+    {
+      "name": "gap",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Gap scale: sm=space-2, md=space-4, lg=space-5."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Grid items."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Default gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Small gap."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Large gap."
+    },
+    {
+      "name": "--ce-grid-min",
+      "kind": "size",
+      "source": "local",
+      "description": "Min column width when auto-fit; set inline from the min property.",
+      "fallback": "240px"
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-card"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "grid",
+    "responsive"
+  ]
+}

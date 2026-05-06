@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-thinking",
+  "name": "Thinking",
+  "className": "CeThinking",
+  "goal": "Show that an LLM is reasoning before the first token arrives, with an animated indicator and a screen-reader-friendly label.",
+  "description": "Compact typing indicator with three animation variants (dots, wave, spinner) and a configurable label. The host element is role=status with aria-live=polite so assistive tech announces appearance and disappearance.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Thinking…\"",
+      "description": "Visible + spoken label. Slotted content overrides this."
+    },
+    {
+      "name": "variant",
+      "type": "\"dots\" | \"wave\" | \"spinner\"",
+      "required": false,
+      "default": "\"dots\"",
+      "reflect": true,
+      "description": "Which animated indicator to render."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional override for the label text."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default indicator color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between indicator and label."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets role=status and aria-live=polite on the host element when missing.",
+      "reason": "Standard live-region semantics so SR users hear the state change."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-cursor",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "streaming",
+    "loading",
+    "brick"
+  ],
+  "a11y": {
+    "role": "status",
+    "notes": "aria-live=polite so screen readers announce state changes; provide a meaningful label."
+  }
+}

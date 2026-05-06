@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-bookmark",
+  "name": "Bookmark",
+  "className": "CeBookmark",
+  "goal": "Capture intent-to-revisit on a per-item basis with a switch-semantic toggle distinct from rating-based quality judgment.",
+  "description": "Single boolean switch for save/shortlist/pin semantics. Reflects active to the host attribute and surfaces ARIA role=switch with aria-checked. Clicking the host or pressing Enter/Space toggles state and dispatches a bubbling ce-bookmark-change event. Slotted icon and label slots let consumers override the emoji defaults.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Toggle state."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Shortlist\"",
+      "description": "Text shown next to the icon and used as aria-label."
+    },
+    {
+      "name": "iconActive",
+      "type": "string",
+      "required": false,
+      "default": "\"📌\"",
+      "attribute": "icon-active",
+      "description": "Emoji or text shown when active."
+    },
+    {
+      "name": "iconInactive",
+      "type": "string",
+      "required": false,
+      "default": "\"📍\"",
+      "attribute": "icon-inactive",
+      "description": "Emoji or text shown when inactive."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Visual scale."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-bookmark-change",
+      "detail": "{ active: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every toggle (click or Enter/Space)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Override both default emoji icons with custom SVG/text."
+    },
+    {
+      "name": "",
+      "description": "Override the label content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-bg-elevated",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background; falls back to --ce-surface-2.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border."
+    },
+    {
+      "name": "--ce-accent",
+      "kind": "color",
+      "source": "token",
+      "description": "Active state color; falls back to --ce-color-purple.",
+      "fallback": "var(--ce-color-purple)"
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent fallback."
+    },
+    {
+      "name": "--ce-radius-md",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius; falls back to --ce-radius-sm.",
+      "fallback": "var(--ce-radius-sm)"
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Radius fallback."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at sm."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at md."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at lg."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    },
+    {
+      "name": "--ce-bookmark-size",
+      "kind": "size",
+      "source": "local",
+      "description": "Per-instance icon size; size attribute drives default values."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [
+    "ce-feedback-bar"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-dismiss"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "toggle",
+    "brick"
+  ],
+  "a11y": {
+    "role": "switch",
+    "notes": "aria-checked mirrors the active attribute; aria-label comes from the label attribute. Enter/Space toggle."
+  }
+}

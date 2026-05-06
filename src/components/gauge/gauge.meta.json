@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-gauge",
+  "name": "Gauge",
+  "className": "CeGauge",
+  "goal": "Render a semicircle dial showing a single value within min..max with optional target tick.",
+  "description": "Half-circle meter that visualises one numeric value relative to a range, with a fill arc, the value displayed inside, and an optional target tick mark to indicate a goal threshold. Pure inline SVG; clamps values outside the range so it stays within the dial.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Current value."
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Lower bound."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "100",
+      "description": "Upper bound."
+    },
+    {
+      "name": "target",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Optional target value rendered as a tick mark."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"blue\"",
+      "reflect": true,
+      "description": "Fill color token."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Small label rendered under the value."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "140",
+      "description": "SVG square size in CSS px."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Center value font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Center value text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Track stroke color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default fill color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green fill."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red fill."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber fill."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple fill."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan fill."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-progress",
+    "ce-donut"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Dashboard",
+    "metrics",
+    "chart"
+  ],
+  "a11y": {
+    "role": "meter",
+    "notes": "SVG carries role=meter with aria-valuemin / aria-valuemax / aria-valuenow."
+  }
+}

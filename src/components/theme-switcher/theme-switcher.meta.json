@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-theme-switcher",
+  "name": "ThemeSwitcher",
+  "className": "CeThemeSwitcher",
+  "goal": "Cycle / select from a named list of values via an arrow-button + dropdown control, emitting ce-change on selection.",
+  "description": "Compact cycler + dropdown. Layout: ‹ [ Current Label ▾ ] ›. Left/right arrows step through options; the label toggles a grouped dropdown; ArrowLeft/Right and Escape are handled inside the widget. The component is generic — it does not itself touch document themes; consumers wire the ce-change event to whatever they want updated.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Currently selected option value."
+    },
+    {
+      "name": "options",
+      "type": "ThemeSwitcherOption[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { value, label, group? }; can also be supplied as a JSON attribute."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user picks (or cycles to) a different option."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Outer font family."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer + group label font size."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow + chevron + dim labels."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow + label background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow + label border + dropdown border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Arrow corner radius."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow + label hover background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Arrow hover + label + option text color."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible shadow."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Label hover border."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Dropdown background."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Dropdown corner radius."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Dropdown elevation."
+    },
+    {
+      "name": "--ce-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Group label color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Option font size."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Active option text + check color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Active option background."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "document.addEventListener(\"click\")",
+      "purpose": "Detect outside clicks to close the dropdown.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Adds and removes a capture-phase document click listener while the component is connected.",
+      "reason": "Closes the dropdown when the user clicks outside the widget."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "internal",
+  "tier": "widget",
+  "tags": [
+    "Docs",
+    "control",
+    "internal",
+    "theme"
+  ],
+  "a11y": {
+    "notes": "Label button has aria-haspopup=listbox + aria-expanded; arrow buttons have aria-label; dropdown is role=listbox; options are role=option with aria-selected."
+  }
+}

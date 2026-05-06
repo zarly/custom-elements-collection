@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-toggle",
+  "name": "Toggle",
+  "className": "CeToggle",
+  "goal": "Provide an on/off switch with role=switch, keyboard support, and emitted ce-change events.",
+  "description": "Switch-style boolean control. Click, Enter, or Space toggles state. The host carries role=switch and aria-checked, so screen readers announce changes correctly. Pairs nicely as the right edge of a labelled row.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Toggle state."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Block interaction."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Inline label rendered next to the switch."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Reserved for future form-control support."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ checked: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when the toggle state changes."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional inline content to the right of the switch."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between switch and label."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Off-state knob color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Off-state track background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Off-state track border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "On-state track background + border."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Toggle transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-checkbox",
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ],
+  "a11y": {
+    "role": "switch",
+    "notes": "Host carries role=switch + aria-checked; both Space and Enter activate."
+  }
+}

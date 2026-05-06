@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-table",
+  "name": "Table",
+  "className": "CeTable",
+  "goal": "Wrap a native <table> in a styled scroll container with consistent header, row, and hover treatments.",
+  "description": "Light-DOM-aware wrapper around a slotted <table>. Adds surface border, radius, horizontal scroll container, and ambient styles for headers, cells, hover, and special td classes (.num, .center, .mono). Sticky and compact attributes are honored via the ambient stylesheet.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "sticky",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Header row sticks to top of scroll container."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Reduced cell padding."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Slotted <table> element."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border + th underline."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer border-radius."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Table font size."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell horizontal padding (default density)."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell vertical padding (default density)."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Header background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header text color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Header font size."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell underline."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell text color."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Row hover background."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Compact cell vertical padding."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Monospace cell font (.mono)."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "document.head",
+      "purpose": "Inserts a single shared <style id=\"ce-table-ambient-css\"> for header/cell/hover styles because ::slotted cannot reach descendants of the slotted table.",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Tags the slotted <table> with data-ce-table-styled and data-ce-id; injects a single ambient stylesheet into <head> the first time any ce-table renders.",
+      "reason": "::slotted only matches the root assigned node, so deep table styles are unreachable from the shadow root."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "table",
+    "data"
+  ]
+}

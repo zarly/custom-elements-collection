@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-rating",
+  "name": "Rating",
+  "className": "CeRating",
+  "goal": "Capture human feedback on chat responses or content via thumbs up/down or 1..N stars, in one form-associated control.",
+  "description": "Two-mode feedback control. In thumbs mode, two side-by-side buttons toggle between up/down/null with aria-pressed. In stars mode, max buttons form a radiogroup with optional half-star precision via pointermove offset, click-to-clear, and arrow-key navigation. Form-associated via ElementInternals so the resolved value participates in surrounding <form> submissions when name is set. Always emits ce-rating-change with a uniform detail shape.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "mode",
+      "type": "\"thumbs\" | \"stars\"",
+      "required": false,
+      "default": "\"thumbs\"",
+      "reflect": true,
+      "description": "Which interaction model to render."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "5",
+      "reflect": true,
+      "description": "Number of stars (stars mode only)."
+    },
+    {
+      "name": "allowHalf",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "attribute": "allow-half",
+      "description": "Stars mode only — half-star precision via pointer offset."
+    },
+    {
+      "name": "readonly",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables interaction; surfaces aria-disabled on the host."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Form-association name; when set, the value participates in form submissions."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Visual scale; drives --ce-rating-size."
+    },
+    {
+      "name": "value",
+      "type": "string | number | null",
+      "required": false,
+      "description": "JS-typed value: 'up'|'down'|null in thumbs mode, number 0..max in stars mode. Attribute is parsed mode-aware."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-rating-change",
+      "detail": "{ mode, value, max }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires whenever the user commits a new value (click, keyboard, or programmatic .value setter when emit=true)."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default fg."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Inactive thumb / empty star color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Active thumbs-up color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Active thumbs-down color."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Filled-star color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between buttons."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    },
+    {
+      "name": "--ce-rating-size",
+      "kind": "size",
+      "source": "local",
+      "description": "Per-instance icon size; size attribute drives default values."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "ElementInternals.setFormValue when name is set, so the rating participates in surrounding form submissions.",
+      "reason": "Form-association support per the spec.",
+      "guarded": true
+    }
+  ],
+  "dependents": [
+    "ce-feedback-bar"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-retry-button",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "feedback",
+    "input",
+    "component"
+  ],
+  "a11y": {
+    "role": "radiogroup (stars) | group (thumbs)",
+    "notes": "Thumbs are aria-pressed buttons; stars are role=radio with aria-checked. Arrow keys cycle values; Escape clears. readonly is announced via aria-disabled."
+  },
+  "additional": {
+    "formAssociated": true
+  }
+}

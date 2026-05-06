@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-hero",
+  "name": "Hero",
+  "className": "CeHero",
+  "goal": "Render a page-opening header block with a kicker, title, lede, and an optional inline stats row.",
+  "description": "Page header with eyebrow kicker, gradient-clipped title, lede paragraph, and a stats slot for inline KPIs. Provides a radial-gradient background by default; flat attribute suppresses it.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "kicker",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Eyebrow text shown above the title."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Main heading text. Use the title slot to override with custom markup."
+    },
+    {
+      "name": "lede",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Supporting paragraph below the title."
+    },
+    {
+      "name": "flat",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Suppresses the radial-gradient background; uses the flat surface token instead."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Custom title markup; overrides the title attribute."
+    },
+    {
+      "name": "",
+      "description": "Body content rendered between the lede and the stats row."
+    },
+    {
+      "name": "stats",
+      "description": "Inline stats row, typically <ce-kpi> elements."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Top-left radial gradient tint."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Top-right radial gradient tint."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border color."
+    },
+    {
+      "name": "--ce-radius-lg",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer border radius."
+    },
+    {
+      "name": "--ce-space-7",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Kicker font size."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Kicker text + gradient mid-stop."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Kicker pill border."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Kicker pill vertical inset."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Spacing inside kicker and around title."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Kicker pill radius."
+    },
+    {
+      "name": "--ce-text-3xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-line-tight",
+      "kind": "size",
+      "source": "token",
+      "description": "Title line-height."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title gradient start color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Title gradient end color."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Lede font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Lede color."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Stats grid top margin."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Background when flat=true."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-shell",
+    "ce-kpi"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "hero",
+    "header",
+    "page"
+  ]
+}

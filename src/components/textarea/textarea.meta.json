@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-textarea",
+  "name": "Textarea",
+  "className": "CeTextarea",
+  "goal": "Provide a labelled multi-line text input with auto-grow, help, and error regions.",
+  "description": "Themed multi-line input. Auto-grows up to max-rows on input, then becomes scrollable. Renders an optional label, help text, or error message; aria-invalid and aria-describedby stay in sync. ce-input fires per keystroke; ce-change fires on blur/commit.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Current text value."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form-field name."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "required": false,
+      "default": "3",
+      "description": "Initial visible row count."
+    },
+    {
+      "name": "maxRows",
+      "type": "number",
+      "required": false,
+      "default": "10",
+      "attribute": "max-rows",
+      "description": "Max rows before scrolling kicks in."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Placeholder text."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Label."
+    },
+    {
+      "name": "help",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Help text (hidden when error is set)."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Error message; sets aria-invalid."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable input."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Mark as required."
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Manual invalid state."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-input",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on each keystroke."
+    },
+    {
+      "name": "ce-change",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on blur/commit."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between label, field, help/error."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Textarea + label text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Placeholder + help color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label + textarea font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Help/error font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Textarea line height."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Field background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Field border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Invalid border + error text."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Field radius."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Textarea padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border/shadow transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-comment"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ]
+}

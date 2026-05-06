@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-checklist",
+  "name": "Checklist",
+  "className": "CeChecklist",
+  "goal": "Render an interactive task list with optional add-row and localStorage persistence.",
+  "description": "Markdown-style task list rendered as native checkboxes. Items may be supplied as a JSON attribute or via the JS property; toggling an item emits ce-check-change. Setting `persist-key` mirrors state to localStorage so progress survives reloads. With `allow-edit`, a small input appears so users can append new items inline.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "items",
+      "type": "CeChecklistItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of {id, text, checked?} items."
+    },
+    {
+      "name": "allowEdit",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "allow-edit",
+      "description": "Show an inline input to add new items."
+    },
+    {
+      "name": "persistKey",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "persist-key",
+      "description": "When set, mirror state to localStorage at key `ce-checklist:<persistKey>`."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-check-change",
+      "detail": "{ id: string, checked: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when an item is toggled."
+    },
+    {
+      "name": "ce-checklist-add",
+      "detail": "{ id: string, text: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when a new item is added via the inline input."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between rows."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Margin above add row."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Item text size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Add-input font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Item line-height."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Item text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Done item text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Add-input background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Add-input border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Add-input + button radius."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Add-input padding."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Checkbox accent + add-button background."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "localStorage",
+      "purpose": "Persist state when persist-key is set.",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "storage",
+      "description": "Reads/writes localStorage when persist-key is set.",
+      "reason": "Stateful checklists across reloads.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-toc"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "task",
+    "form"
+  ]
+}

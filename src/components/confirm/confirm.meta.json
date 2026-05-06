@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-confirm",
+  "name": "Confirm",
+  "className": "CeConfirm",
+  "goal": "Render an inline yes/no confirmation prompt with explicit confirm and cancel buttons.",
+  "description": "Lightweight confirmation row used in place of an OS-level confirm dialog. Two buttons with semantic primary/secondary styling; danger variant tints the surface and primary button. Emits ce-confirm or ce-cancel; the host has role=alertdialog with the prompt as aria-label.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "prompt",
+      "type": "string",
+      "required": false,
+      "default": "\"Are you sure?\"",
+      "description": "Question presented to the user (overridable via the `prompt` slot)."
+    },
+    {
+      "name": "confirmLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Confirm\"",
+      "attribute": "confirm-label",
+      "description": "Primary button label."
+    },
+    {
+      "name": "cancelLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Cancel\"",
+      "attribute": "cancel-label",
+      "description": "Secondary button label."
+    },
+    {
+      "name": "variant",
+      "type": "\"default\" | \"danger\"",
+      "required": false,
+      "default": "\"default\"",
+      "reflect": true,
+      "description": "Visual variant; danger tints surface + primary button."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-confirm",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "User confirmed."
+    },
+    {
+      "name": "ce-cancel",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "User cancelled."
+    }
+  ],
+  "slots": [
+    {
+      "name": "prompt",
+      "description": "Override the prompt attribute with arbitrary HTML."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Action button gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner padding + row gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Prompt + button font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Prompt text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default surface background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border + secondary button border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Container radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Danger background."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Danger border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Danger primary button."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default primary button."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary button hover overlay."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "interactive",
+    "decision"
+  ],
+  "a11y": {
+    "role": "alertdialog",
+    "notes": "The container element carries role=alertdialog with the prompt text as aria-label so assistive tech treats it as a focused decision."
+  }
+}

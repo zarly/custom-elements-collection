@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-sparkline",
+  "name": "Sparkline",
+  "className": "CeSparkline",
+  "goal": "Render a small inline trend chart (line, area, or bar) for a numeric series.",
+  "description": "Compact inline SVG chart for trend visualisation in a row, table cell, or KPI tile. Supports line (default), filled area, and bar shapes; auto-scales to the value range. Values can be supplied either as a JSON-encoded `values` attribute or via the JS property.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "values",
+      "type": "number[]",
+      "required": true,
+      "default": "[]",
+      "description": "Numeric series. Can be supplied via JSON attribute or JS property."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"blue\"",
+      "reflect": true,
+      "description": "Color token."
+    },
+    {
+      "name": "shape",
+      "type": "\"line\" | \"area\" | \"bar\"",
+      "required": false,
+      "default": "\"line\"",
+      "reflect": true,
+      "description": "Chart shape."
+    },
+    {
+      "name": "width",
+      "type": "number",
+      "required": false,
+      "default": "80",
+      "description": "SVG width in CSS px."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "required": false,
+      "default": "24",
+      "description": "SVG height in CSS px."
+    },
+    {
+      "name": "stroke",
+      "type": "number",
+      "required": false,
+      "default": "1.5",
+      "description": "Stroke width for line/area shapes."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default chart color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green chart color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red chart color."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber chart color."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple chart color."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan chart color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-bar-chart",
+    "ce-chart"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Dashboard",
+    "chart",
+    "metrics"
+  ],
+  "a11y": {
+    "role": "img",
+    "notes": "The SVG carries role=img and an aria-label that summarises the value range and count."
+  }
+}

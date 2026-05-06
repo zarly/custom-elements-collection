@@ -81,3 +81,72 @@ ce-theme-switcher {
   font-weight: 700;
   margin-bottom: 12px;
 }
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 14px;
+}
+.tag-chips ce-chip code {
+  font-family: var(--ce-font-mono);
+  font-size: 0.92em;
+}
+.goal-block {
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--ce-color-purple);
+  background: var(--ce-surface-2);
+  color: var(--ce-text);
+  font-size: var(--ce-text-md);
+  border-radius: 0 var(--ce-radius) var(--ce-radius) 0;
+}
+.goal-label {
+  display: block;
+  font-size: var(--ce-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ce-color-purple);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.prop-attr {
+  font-size: var(--ce-text-xs);
+  color: var(--ce-muted);
+  margin-top: 2px;
+}
+.env-subhead {
+  font-size: var(--ce-text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ce-muted);
+  font-weight: 700;
+  margin: 14px 0 8px;
+}
+.dep-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dep-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dep-label {
+  font-size: var(--ce-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ce-muted);
+  font-weight: 700;
+  min-width: 110px;
+}
+.dep-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dep-chips a {
+  text-decoration: none;
+}

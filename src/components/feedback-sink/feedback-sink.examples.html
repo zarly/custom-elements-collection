@@ -1,0 +1,17 @@
+<!-- @example Syntax -->
+<ce-feedback-sink subject="…" transport="localstorage">…subtree…</ce-feedback-sink>
+
+<!-- @example Two items + summary + export -->
+<ce-feedback-sink subject="demo-sink" transport="localstorage">
+  <ce-feedback-bar item="alpha" label="Alpha">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-bookmark></ce-bookmark>
+  </ce-feedback-bar>
+  <ce-feedback-bar item="beta" label="Beta">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-bookmark></ce-bookmark>
+  </ce-feedback-bar>
+  <ce-feedback-summary show="counts"></ce-feedback-summary>
+  <ce-feedback-export formats="markdown clear"></ce-feedback-export>
+</ce-feedback-sink>
+

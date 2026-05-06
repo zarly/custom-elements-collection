@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-persona",
+  "name": "Persona",
+  "className": "CePersona",
+  "goal": "Display a user-research persona card with avatar, name, role, and slotted attribute list.",
+  "description": "Persona / role card. Top row shows an emoji-or-character avatar plus name + role; below sits a tags slot for chips and a default slot for an attribute list (typically a <dl>). Six color tints set the top border and avatar tint.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Persona name."
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Role / title subtitle."
+    },
+    {
+      "name": "avatar",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Emoji or single character used as the avatar."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "Top-border + avatar tint."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "tags",
+      "description": "Optional chip row below the role."
+    },
+    {
+      "name": "",
+      "description": "Body content (typically a <dl> of attributes)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green top border + avatar text."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red top border + avatar text."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber top border + avatar text."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue top border + avatar text."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple top border + avatar text."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan top border + avatar text."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Head row gap + bottom margin."
+    },
+    {
+      "name": "--ce-sz-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Avatar dimensions."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default avatar background."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green avatar background."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red avatar background."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber avatar background."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue avatar background."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple avatar background."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan avatar background."
+    },
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Avatar font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Name font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Name text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Role font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Role text color."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Tags inner gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Tags top + bottom margin."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "persona",
+    "user-research"
+  ]
+}

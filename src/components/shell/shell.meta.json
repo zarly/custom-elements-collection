@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-shell",
+  "name": "Shell",
+  "className": "CeShell",
+  "goal": "Wrap a documentation or app page so it has consistent max-width, padding, and a single theme-root attribute on <html>.",
+  "description": "Page-level wrapper. Clamps content width (narrow / default / wide / full), applies the project's outer padding, and propagates the active theme to the document root via data-ce-theme so token CSS resolves correctly. Should be used at most once per page.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "theme",
+      "type": "\"dark\" | \"light\"",
+      "required": false,
+      "default": "\"dark\"",
+      "description": "Active token bundle; written to <html data-ce-theme> on connect (and again on prop change)."
+    },
+    {
+      "name": "width",
+      "type": "\"narrow\" | \"default\" | \"wide\" | \"full\"",
+      "required": false,
+      "default": "\"default\"",
+      "reflect": true,
+      "description": "Max container width: narrow=720px, default=1200px, wide=1440px, full=100%."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Page content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "document.documentElement",
+      "purpose": "Seeds data-ce-scaffold and data-ce-theme attributes that drive global token CSS.",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets data-ce-scaffold and data-ce-theme on <html> at connect; updates data-ce-theme on theme prop change.",
+      "reason": "Single point of theme propagation; lets tokens.css resolve without consumers configuring <html> themselves."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-hero",
+    "ce-section"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "shell",
+    "wrapper",
+    "theme"
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-citation",
+  "name": "Citation",
+  "className": "CeCitation",
+  "goal": "Render an inline footnote-style source reference with an optional hover/focus popover preview.",
+  "description": "Inline citation marker that renders as [index] superscript by default and reveals a popover with expanded source context on hover or keyboard focus. Becomes an anchor when href is set; remains a focusable span otherwise. Uses ARIA role=doc-noteref + a tooltip popover wired via aria-describedby.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "URL the citation links to. When set the label becomes an anchor."
+    },
+    {
+      "name": "index",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Footnote index shown in the default [index] label."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Overrides the default [index] label."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional visible label override."
+    },
+    {
+      "name": "popover",
+      "description": "Expanded preview shown on hover/focus-within."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Reference link color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background tint."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Reference hover radius."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Popover radius."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Popover background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Popover border."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Popover elevation."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Popover text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Popover font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Popover line height."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Popover vertical padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Popover horizontal padding."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Popover fade-in transition."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring for the reference."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "reference",
+    "footnote",
+    "brick"
+  ],
+  "a11y": {
+    "role": "doc-noteref",
+    "notes": "Anchor or focusable span carries role=doc-noteref; the popover is role=tooltip and linked via aria-describedby. Popover reveals on :hover and :focus-within."
+  }
+}

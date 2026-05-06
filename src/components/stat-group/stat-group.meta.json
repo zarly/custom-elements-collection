@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-stat-group",
+  "name": "Stat Group",
+  "className": "CeStatGroup",
+  "goal": "Lay out clustered KPI cells in a uniform responsive grid.",
+  "description": "Grid wrapper that arranges KPI tiles (or any cells) with a consistent gutter. Choose a fixed column count (2-6) or 'auto' for a fit-content layout that breaks into rows on narrow viewports. Pairs with <ce-kpi>, but tolerates any child element.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "columns",
+      "type": "string",
+      "required": false,
+      "default": "\"auto\"",
+      "reflect": true,
+      "description": "Column count (\"2\"-\"6\") or \"auto\" for fit-content."
+    },
+    {
+      "name": "gap",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Cell gap size."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Cells (typically <ce-kpi>)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "gap=sm gutter."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default gutter."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "gap=lg gutter."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-kpi",
+    "ce-grid"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Dashboard",
+    "layout",
+    "metrics"
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-file-card",
+  "name": "File Card",
+  "className": "CeFileCard",
+  "goal": "Render a downloadable attachment card with name, size, type icon, and optional thumbnail.",
+  "description": "Compact attachment card for use in chat surfaces or message bodies. When `href` is set the whole card becomes an anchor (target=_blank); otherwise it renders a non-interactive group. Type icon is derived from the `type` attribute or, failing that, the file extension; a `thumbnail` URL replaces the icon with an actual preview.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "File name."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "File size in bytes (formatted to KB/MB/GB)."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Type identifier (extension or mime). Drives the icon and meta text."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "URL to open. When set, the card becomes a link."
+    },
+    {
+      "name": "thumbnail",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Image URL used in place of the icon."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-file-open",
+      "detail": "{ name: string, href: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when the card is activated (click on the link form)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "meta",
+      "description": "Extra metadata rendered under the type/size line."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner padding + icon gap."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Name font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Meta font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Name color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Meta color."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Card border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Icon/thumbnail radius."
+    },
+    {
+      "name": "--ce-sz-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon/thumbnail size."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Hover elevation."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-image",
+    "ce-card"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "media",
+    "attachment"
+  ]
+}

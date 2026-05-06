@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feedback-heatmap",
+  "name": "Feedback Heatmap",
+  "className": "CeFeedbackHeatmap",
+  "goal": "Visualise the distribution of verdicts across an aggregated feedback subject as a small color-coded bar.",
+  "description": "Companion to <ce-feedback-sink>. Listens for ce-feedback-state events on document and renders a horizontal cell bar per item — green (thumbs up), red (thumbs down), blue (bookmarked), amber (dismissed), purple (commented), muted (no signal). Hydrates from any ancestor sink's getState() at connect, then updates incrementally on every state event. Optional inline legend.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "subject",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Subject id; if set, only events matching this subject update the heatmap."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "60",
+      "description": "Maximum visible cells."
+    },
+    {
+      "name": "cell",
+      "type": "number",
+      "required": false,
+      "default": "12",
+      "description": "Cell width in CSS px."
+    },
+    {
+      "name": "gap",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "description": "Gap between cells in CSS px."
+    },
+    {
+      "name": "showLegend",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "show-legend",
+      "description": "Render the verdict legend below the bar."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend chip gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend top margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend chip horizontal gap."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend font size."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Legend font."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Legend text color."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "no-signal cell color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Up-vote cell."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Down-vote cell."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Bookmarked cell."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Dismissed cell."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Commented cell."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "document.addEventListener",
+      "purpose": "Subscribe to ce-feedback-state events from any feedback sink in the document.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Listens for ce-feedback-state on document while connected.",
+      "reason": "Live update without explicit wiring per heatmap.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [
+    "ce-feedback-sink"
+  ],
+  "related": [
+    "ce-feedback-summary"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback",
+    "dashboard",
+    "chart"
+  ],
+  "a11y": {
+    "role": "img",
+    "notes": "SVG carries role=img and an aria-label that describes the cell count. Each cell has a <title> tooltip with item id + verdict."
+  }
+}

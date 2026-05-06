@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feedback-bar",
+  "name": "Feedback bar",
+  "className": "CeFeedbackBar",
+  "goal": "Bind a row of feedback controls to a single item id within a subject and emit one aggregated state event per change.",
+  "description": "Per-item row container that walks its descendants on connect and on every slotchange to set data-ce-subject + data-ce-item on every ce-rating, ce-bookmark, ce-dismiss, and ce-comment that doesn't already declare them. Listens to bubbling change events from those descendants and re-emits a single aggregated ce-feedback-item-state event after every change. Does not stop propagation — the original events still bubble to an ancestor ce-feedback-sink.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "item",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "Stable item id within the subject. Required at runtime; a missing value triggers a console warning."
+    },
+    {
+      "name": "subject",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Subject id; falls back to ancestor ce-feedback-sink."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Human-readable item label; surfaces in export output and as aria-label."
+    },
+    {
+      "name": "layout",
+      "type": "\"inline\" | \"stacked\" | \"compact\"",
+      "required": false,
+      "default": "\"inline\"",
+      "reflect": true,
+      "description": "Visual layout — inline (default), stacked (column), or compact (tighter gap)."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-feedback-item-state",
+      "detail": "{ subject, item, label, state: ItemState }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after any descendant feedback control changes; carries the aggregated per-item state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Feedback controls (ce-rating, ce-bookmark, ce-dismiss, ce-comment, etc.)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Compact-layout gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Default flex gap."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets data-ce-subject and data-ce-item on feedback descendants that lack them.",
+      "reason": "Single-source-of-truth wiring for sink event normalization."
+    }
+  ],
+  "dependents": [
+    "ce-feedback-sink"
+  ],
+  "dependencies": [
+    "ce-rating",
+    "ce-bookmark",
+    "ce-dismiss",
+    "ce-comment"
+  ],
+  "related": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "container",
+    "widget"
+  ],
+  "a11y": {
+    "role": "group",
+    "notes": "aria-label comes from the label attribute (or slotted label content). Descendants keep their own ARIA roles."
+  }
+}

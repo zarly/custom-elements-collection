@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-comment",
+  "name": "Comment",
+  "className": "CeComment",
+  "goal": "Surface a compact comment trigger that expands to an auto-growing textarea with debounced change events and configurable submit semantics.",
+  "description": "Compact-by-default comment input. Collapsed: a small button. Clicking expands to a textarea that auto-grows between min-rows and max-rows by computed scrollHeight. Typing emits debounced ce-comment-change events; explicit submission (per submit-on) emits ce-comment-commit. Supports submit-on blur, enter, cmd-enter, or manual. Auto-collapses on submit unless submit-on=manual; Cancel and Escape collapse without committing.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Current committed comment text."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"Why?\"",
+      "description": "Textarea placeholder; also used as aria-label."
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "required": false,
+      "default": "2000",
+      "attribute": "max-length",
+      "description": "Maximum character count; input is truncated to fit."
+    },
+    {
+      "name": "minRows",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "attribute": "min-rows",
+      "description": "Minimum auto-grow rows."
+    },
+    {
+      "name": "maxRows",
+      "type": "number",
+      "required": false,
+      "default": "8",
+      "attribute": "max-rows",
+      "description": "Maximum auto-grow rows; beyond this the textarea scrolls."
+    },
+    {
+      "name": "debounceMs",
+      "type": "number",
+      "required": false,
+      "default": "400",
+      "attribute": "debounce-ms",
+      "description": "Debounce window for ce-comment-change after a keystroke."
+    },
+    {
+      "name": "submitOn",
+      "type": "\"blur\" | \"enter\" | \"cmd-enter\" | \"manual\"",
+      "required": false,
+      "default": "\"blur\"",
+      "attribute": "submit-on",
+      "description": "When ce-comment-commit fires."
+    },
+    {
+      "name": "expanded",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the textarea is visible."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-comment-change",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once per debounce window after the user types."
+    },
+    {
+      "name": "ce-comment-commit",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on explicit submit per submit-on rule."
+    },
+    {
+      "name": "ce-comment-expand",
+      "detail": "{ expanded: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the panel expands or collapses."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "Override the collapsed-state icon/label."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-bg-elevated",
+      "kind": "color",
+      "source": "token",
+      "description": "Trigger and textarea background; falls back to --ce-surface-2 / --ce-surface.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Textarea background fallback."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Trigger background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border color."
+    },
+    {
+      "name": "--ce-accent",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover + focus accent; falls back to --ce-color-purple.",
+      "fallback": "var(--ce-color-purple)"
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Accent fallback."
+    },
+    {
+      "name": "--ce-text-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Placeholder color; falls back to --ce-muted.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Placeholder fallback."
+    },
+    {
+      "name": "--ce-radius-md",
+      "kind": "radius",
+      "source": "token",
+      "description": "Trigger and textarea radius; falls back to --ce-radius-sm.",
+      "fallback": "var(--ce-radius-sm)"
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Radius fallback."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Padding x + actions gap."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Trigger vertical padding."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Textarea vertical padding; falls back to --ce-space-2.",
+      "fallback": "var(--ce-space-2)"
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "setTimeout-based debounce of ce-comment-change events.",
+      "reason": "Cap event volume during fast typing without missing the final value."
+    }
+  ],
+  "dependents": [
+    "ce-feedback-bar"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-bookmark",
+    "ce-dismiss"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "input",
+    "component"
+  ],
+  "a11y": {
+    "notes": "Trigger button has aria-expanded + aria-controls referencing the textarea id. Textarea has aria-label set from the placeholder and aria-live=off. Escape collapses; Enter or Cmd/Ctrl+Enter commit per submit-on rule."
+  }
+}

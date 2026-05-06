@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-chart",
+  "name": "Chart",
+  "className": "CeChart",
+  "goal": "Render a Chart.js-backed line / bar / radar / pie / doughnut chart from JSON data + options attributes.",
+  "description": "Lazy-loaded Chart.js wrapper. On first update injects a <script src=…> for Chart.js if window.Chart is not already present, then mounts a chart on a managed canvas. Honors live updates to type / data / options by destroying and re-mounting. Renders an inline error block if the script fails to load.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"line\" | \"bar\" | \"radar\" | \"doughnut\" | \"pie\"",
+      "required": false,
+      "default": "\"line\"",
+      "description": "Chart.js chart kind."
+    },
+    {
+      "name": "src",
+      "type": "string",
+      "required": false,
+      "default": "\"https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js\"",
+      "description": "URL for the Chart.js UMD bundle. Override to bundle locally."
+    },
+    {
+      "name": "data",
+      "type": "unknown",
+      "required": false,
+      "default": "{ labels: [], datasets: [] }",
+      "description": "Chart.js data object (JS prop or JSON attribute)."
+    },
+    {
+      "name": "options",
+      "type": "unknown",
+      "required": false,
+      "default": "{}",
+      "description": "Chart.js options object (JS prop or JSON attribute)."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Error block padding."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Error text color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Error block background."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Error block radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Error text size."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "window.Chart",
+      "purpose": "Reads Chart.js global to mount the chart instance.",
+      "writes": false
+    },
+    {
+      "api": "document.head",
+      "purpose": "Appends a <script> tag to load Chart.js when window.Chart is undefined.",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "network",
+      "description": "Fetches Chart.js UMD bundle from the configured src URL the first time any ce-chart upgrades.",
+      "reason": "Keeps the core bundle small; consumers who self-host can override src or pre-load Chart.js."
+    },
+    {
+      "kind": "dom",
+      "description": "Mounts a Chart.js instance on an internal <canvas>; destroys and re-creates it when data/type/options change.",
+      "reason": "Chart.js is canvas-backed and requires explicit destroy() to free resources."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-bar-chart"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Metrics & charts",
+    "chart",
+    "chart.js",
+    "data-viz"
+  ]
+}

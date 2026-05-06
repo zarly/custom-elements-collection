@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-counter",
+  "name": "Counter",
+  "className": "CeCounter",
+  "goal": "Animate a numeric value from a start to a target with optional prefix, suffix, decimals, and trend indicator.",
+  "description": "Display a number that smoothly animates to a target value when set, with optional prefix/suffix decorations and a trend caret. Uses requestAnimationFrame with ease-out-cubic; setting duration-ms to 0 disables animation. Distinct from <ce-kpi>: counter focuses on motion + numeric updates, while kpi focuses on labelled metric layout.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Target number."
+    },
+    {
+      "name": "from",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Initial number to animate from on mount (defaults to value)."
+    },
+    {
+      "name": "prefix",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "String prepended to the number (e.g. '$')."
+    },
+    {
+      "name": "suffix",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "String appended after the number (e.g. '%')."
+    },
+    {
+      "name": "durationMs",
+      "type": "number",
+      "required": false,
+      "default": "700",
+      "attribute": "duration-ms",
+      "description": "Animation duration in milliseconds (0 disables animation)."
+    },
+    {
+      "name": "decimals",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Fixed decimal places."
+    },
+    {
+      "name": "trend",
+      "type": "\"up\" | \"down\" | \"flat\" | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Trend caret indicator."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between number and decorations."
+    },
+    {
+      "name": "--ce-text-2xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Number font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Prefix/suffix font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Trend font size."
+    },
+    {
+      "name": "--ce-line-tight",
+      "kind": "size",
+      "source": "token",
+      "description": "Number line-height."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Number color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Prefix/suffix and flat-trend color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Up trend color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Down trend color."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "requestAnimationFrame",
+      "purpose": "Drive the value animation tick.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "rAF loop while value is animating.",
+      "reason": "Smooth interpolation from previous to target value.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-kpi",
+    "ce-progress"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Dashboard",
+    "metrics",
+    "animation"
+  ]
+}

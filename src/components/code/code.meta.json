@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-code",
+  "name": "Code",
+  "className": "CeCode",
+  "goal": "Render a code block with optional language label, filename, and copy-to-clipboard button.",
+  "description": "Code block component. Header row shows an optional filename (left) and language label (right) plus a copy button when copy=true. Body is a <pre><code> with the slotted code text. The copy button uses navigator.clipboard with a hidden-textarea fallback and emits ce-code-copy on success.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "lang",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Language label shown top-right (e.g. 'ts', 'html', 'bash')."
+    },
+    {
+      "name": "filename",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Filename label shown top-left."
+    },
+    {
+      "name": "copy",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Show a copy-to-clipboard button."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-code-copy",
+      "detail": "{ text: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the code text is successfully copied to the clipboard."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "The code content (plain text or pre-highlighted spans)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-code-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Block background."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer + header + copy-button border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Header inner gap + copy padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + body vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Body horizontal padding."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Header vertical padding."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Header horizontal padding."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Header background."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Header font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header + copy text color."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Monospace font."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Copy-button radius."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Copy-button vertical inset."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Copy-button hover transition."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Copy hover text color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Copy hover border color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Copy 'copied' state color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "size",
+      "source": "token",
+      "description": "Body line-height."
+    },
+    {
+      "name": "--ce-code-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text color."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "navigator.clipboard.writeText",
+      "purpose": "Primary copy path on the copy button.",
+      "writes": true
+    },
+    {
+      "api": "document.execCommand(\"copy\")",
+      "purpose": "Fallback copy path when navigator.clipboard is unavailable; uses a transient hidden textarea.",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "When the clipboard API is unavailable, creates and immediately removes a hidden textarea on document.body to invoke the legacy copy command.",
+      "reason": "Maintains copy support in non-secure contexts where navigator.clipboard is absent."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "code",
+    "snippet"
+  ]
+}

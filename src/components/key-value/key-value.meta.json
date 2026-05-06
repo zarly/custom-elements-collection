@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-key-value",
+  "name": "Key Value",
+  "className": "CeKeyValue",
+  "goal": "Render a definition list as an aligned grid with optional multi-column packing and tight typography.",
+  "description": "Wraps the slotted <dt>/<dd> pairs in a CSS-grid <dl> so keys align in a column. Supports 1-3 column-pairs side-by-side for compact specifications and metadata blocks. Keys render uppercase + muted; values use the default text color.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "columns",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "reflect": true,
+      "description": "Number of column pairs (1-3)."
+    },
+    {
+      "name": "wrap",
+      "type": "\"true\" | \"false\"",
+      "required": false,
+      "default": "\"true\"",
+      "reflect": true,
+      "description": "Allow value text to wrap; set to \"false\" for ellipsised single-line values."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Alternating <dt>/<dd> pairs."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Row gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Column gap."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Value font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Key font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Value text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Key text color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-table"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Content",
+    "metadata",
+    "layout"
+  ]
+}

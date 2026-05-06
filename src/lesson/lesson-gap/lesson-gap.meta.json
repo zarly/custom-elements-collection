@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-gap",
+  "name": "LessonGap",
+  "className": "LessonGap",
+  "goal": "Run a fill-in-the-blank exercise with multiple-choice options, instant feedback, and a public reset() method.",
+  "description": "Fill-in-the-blank exercise. Splits the prompt at the first '___' marker and renders the gap as a colored span; below sit the options as buttons. After the user picks, the chosen button colors green or red, the gap fills with the correct answer when correct, and a feedback strip shows the explanation. lesson-gap-answer fires once per exercise.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "prompt",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Sentence containing one '___' placeholder. If empty, renders the default slot instead."
+    },
+    {
+      "name": "options",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Answer choices."
+    },
+    {
+      "name": "correct",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "The correct option (must match a member of options)."
+    },
+    {
+      "name": "explanation",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Shown after the user picks."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-gap-answer",
+      "detail": "{ value: string; correct: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once when the user picks an option; detail.correct indicates whether the pick matched."
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Clears the picked state and re-enables the buttons."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Used as the prompt fallback when the prompt attribute is empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer + option border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer border radius."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + prompt bottom margin + feedback top margin."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Prompt font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Prompt + filled blank + option text."
+    },
+    {
+      "name": "--ce-line-relaxed",
+      "kind": "size",
+      "source": "token",
+      "description": "Prompt line height."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Empty-blank underline + text color."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Options gap + feedback inner padding."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Option default background."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Option + feedback radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Option + feedback font size."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Option transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Option hover border."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct option fill + correct feedback."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct/wrong option text."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Wrong option fill + wrong feedback."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct feedback background."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Wrong feedback background."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "Tracks the user's picked option and correctness in component state.",
+      "reason": "Required to render the post-answer UI and avoid double answers."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "lesson-frame",
+    "lesson-quiz"
+  ],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": [
+    "Education",
+    "exercise",
+    "fill-in-the-blank"
+  ]
+}

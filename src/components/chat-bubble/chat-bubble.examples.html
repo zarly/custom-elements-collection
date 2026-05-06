@@ -1,0 +1,19 @@
+<!-- @example Syntax -->
+<ce-chat-bubble role="assistant" author="Claude" model="opus-4.7" tokens="234">…body…</ce-chat-bubble>
+
+<!-- @example Assistant + user exchange -->
+<ce-chat-bubble role="user" author="Alex" timestamp="12:34">
+  <p style="margin:0;">Can you summarise the spec?</p>
+</ce-chat-bubble>
+<ce-chat-bubble role="assistant" author="Claude" model="opus-4.7" timestamp="12:34" tokens="234">
+  <p style="margin:0;">Sure — three sections, eight Tier-1 components, all chat-surface essentials.</p>
+</ce-chat-bubble>
+
+<!-- @example System + tool roles -->
+<ce-chat-bubble role="system" author="System">
+  <p style="margin:0;">Assistant policy loaded.</p>
+</ce-chat-bubble>
+<ce-chat-bubble role="tool" author="search">
+  <p style="margin:0;">Returned 3 results in 612 ms.</p>
+</ce-chat-bubble>
+

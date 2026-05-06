@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-decision-tree",
+  "name": "DecisionTree",
+  "className": "CeDecisionTree",
+  "goal": "Render a one-level decision diagram: a question followed by yes / no / neutral branches each labelled with a result.",
+  "description": "Single-level decision tree component for if/then teaching diagrams. Renders a centered question and a responsive grid of branches; each branch declares yes / no / neutral kind, gets a tinted border + arrow label (↓ YES / ↓ NO / ↓), and shows label and result text.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "question",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Top-level question."
+    },
+    {
+      "name": "branches",
+      "type": "DecisionBranch[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { label, kind?, result } items."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer + branch border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer + branch radius."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Branch vertical padding + grid gap + margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Question bottom margin + branch horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer padding."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Question font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Question + result text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default branch background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "yes branch border + arrow."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "yes branch background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "no branch border + arrow."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "no branch background."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Arrow font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Arrow + label bottom margin."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default arrow color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label + result font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-flow"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "decision",
+    "branching"
+  ]
+}

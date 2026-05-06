@@ -8,17 +8,27 @@ How the pieces fit together.
 custom-elements-collection/
 ├── src/
 │   ├── core/           Lit base class (CecElement) + registration helper (defineOnce)
-│   ├── tokens/         Design tokens as plain CSS (tokens.css, dark.css, light.css)
-│   ├── components/     25 ce-* UI components
-│   ├── lesson/          6 lesson-* educational widgets
-│   ├── entries/        31 per-tag side-effect wrappers (one file per tag)
-│   ├── index.ts        Named exports of every component class
-│   ├── auto.ts         Side-effect module that registers every tag
-│   └── manifest.ts     Machine-readable catalog (COMPONENTS) + loadOnDemand()
-├── scripts/copy-tokens.mjs    Build helper — copies CSS tokens into dist/
-├── dist/                      Build output (JS + .d.ts + CSS)
-├── docs/                      Public documentation (this folder)
-├── demo/                      Internal Vue 3 catalog + playground (not published)
+│   ├── meta/           Zod schema + TS interfaces for *.meta.json (ADR-005)
+│   ├── tokens/         Design tokens as plain CSS (tokens.css + 10 theme bundles)
+│   ├── components/     66 ce-* UI components — one subfolder per tag with
+│   │                   <stem>.{ts, test.ts, meta.json}
+│   ├── lesson/         6 lesson-* widgets — same per-tag subfolder layout
+│   ├── entries/        GENERATED — 72 per-tag side-effect wrappers
+│   ├── index.ts        GENERATED — named exports of every component class
+│   ├── auto.ts         GENERATED — registers every tag at once
+│   ├── manifest.ts     GENERATED — machine-readable catalog (COMPONENTS) + loadOnDemand()
+│   └── manifest.publish.ts  GENERATED — internal-component-filtered manifest for npm
+├── scripts/
+│   ├── validate-meta.ts            Zod-validate every *.meta.json
+│   ├── generate-exports.ts         Regenerates index/auto/entries/manifest + package.json exports
+│   ├── generate-skill.ts           Regenerates skill catalog + references/index.md
+│   ├── build-publish-manifest.ts   Apply-and-restore swap for `prepublishOnly`
+│   └── bundle-stats.ts             Per-tag gzip size record (writes to internal/)
+├── dist/                      Build output (JS + .d.ts + CSS + meta JSON)
+│   └── meta/                  Per-component <tag>.json + index.json bundle
+├── docs/                      Public documentation (this folder, including ADRs)
+├── demo/                      Demo site — vanilla JS catalog + feedback showcase
+├── skill/                     Agent-facing reference (SKILL.md + references/ + scripts/)
 └── package.json               Single-package npm manifest
 ```
 
@@ -69,20 +79,13 @@ export class CeExample extends CecElement {
 }
 ```
 
-Then export it from [`src/index.ts`](../src/index.ts) and register it in [`src/auto.ts`](../src/auto.ts):
+Drop the source into its subfolder along with a sibling test and meta JSON, then run `pnpm gen-exports` — `src/index.ts`, `src/auto.ts`, `src/entries/<name>.ts`, `src/manifest.ts`, and the `exports` map in `package.json` regenerate from the meta files. **Do not hand-edit those generated outputs.** See [ADR-005](./adr/adr-005-component-meta.md) and `CONTRIBUTING.md` §4 for the full authoring checklist.
 
-```ts
-defineOnce("ce-example", CeExample);
-```
-
-A unit test file `<name>.test.ts` next to the source covers props, attributes, slots, and events. A per-tag entry `src/entries/<name>.ts` exposes the subpath import `custom-elements-collection/<name>` for tree-shakable registration.
+A unit test file `<name>.test.ts` next to the source covers props, attributes, slots, and events. The per-tag entry `src/entries/<name>.ts` exposes the subpath import `custom-elements-collection/<name>` for tree-shakable registration.
 
 ## Theming model
 
-All visual values come from `--ce-*` CSS custom properties defined in `src/tokens/tokens.css`. Two theme overrides ship by default:
-
-- `html[data-ce-theme="dark"]` (default)
-- `html[data-ce-theme="light"]`
+All visual values come from `--ce-*` CSS custom properties defined in `src/tokens/tokens.css`. Eleven theme bundles ship: `dark` (default), `light`, `swiss`, `bauhaus`, `muji`, `neo-brutal`, `solarized`, `nordic`, `memphis`, `gruvbox`, plus `auto` (follows `prefers-color-scheme`). Each is a focused override layer on top of `tokens.css`; consumers link the bundle and set `<html data-ce-theme="<name>">`.
 
 Consumers override any variable on `:root`, on `<html>`, or on a parent element. Per-component accent (`<ce-kpi color="green">`) maps to a token (`var(--ce-color-green)`); component source never inlines a hex value.
 
@@ -125,27 +128,30 @@ Do not introduce new prefixes without an ADR. Two prefixes is enough; more would
 
 ## Build pipeline
 
-- **Vite (lib mode)** compiles each entry in `src/entries/*`, plus `src/index.ts`, `src/auto.ts`, and `src/manifest.ts`, into `dist/`. Lit is bundled into the output so a single `<script type="module">` works in plain HTML with no import map. Tradeoff: +15 KB over peer-dep'd Lit; full bundle is ~21 KB gzipped.
+- **`prebuild`** runs `pnpm gen-exports` — regenerates the four generated source files plus the `exports` map in `package.json` from the meta files.
+- **Vite (lib mode)** compiles each entry in `src/entries/*`, plus `src/index.ts`, `src/auto.ts`, and `src/manifest.ts`, into `dist/`. Lit is bundled into the output so a single `<script type="module">` works in plain HTML with no import map. Tradeoff: +~15 KB over peer-dep'd Lit; the shared register chunk is ~7.5 KB gzipped, per-component chunks 1–4 KB.
+- **Vite plugins** copy `src/tokens/*.css` → `dist/tokens/` and `src/**/*.meta.json` → `dist/meta/<tag>.json` (plus a combined `dist/meta/index.json`).
 - **TypeScript** emits declaration files via `tsconfig.build.json` (`emitDeclarationOnly: true`).
-- **Token copy** — `scripts/copy-tokens.mjs` copies `src/tokens/*.css` into `dist/tokens/` so the export-map entries `./tokens.css`, `./dark.css`, `./light.css` resolve.
 
 ```
-pnpm build   →   vite build
+pnpm build   →   pnpm gen-exports          (prebuild hook)
+                 vite build                 (compiles + copies tokens + copies meta)
                  tsc -p tsconfig.build.json
-                 node scripts/copy-tokens.mjs
 ```
+
+`pnpm prepublishOnly` invokes `gen-exports` then `build-publish-manifest --apply`, which temporarily swaps `src/manifest.ts` for the internal-filtered version, runs the build, and restores via `try/finally` + signal handlers. Result: published `dist/manifest.js` lists only `category: "ui" | "lesson"`; internal layout primitives still ship as JS modules under `dist/entries/` so consumers can import them by tag.
 
 ## Test pipeline
 
-- **Vitest** with the `jsdom` environment runs unit tests co-located with each component (`<name>.test.ts`).
+- **Vitest** with the `jsdom` environment runs unit tests co-located with each component (`<stem>/<stem>.test.ts`). 508 tests across 75 files at the time of writing.
 - Tests use `defineOnce` to register a tag once per process, then `await el.updateComplete` to synchronise with Lit's render cycle.
-- `pnpm check` runs typecheck + tests + build in sequence.
+- `pnpm check` runs typecheck + `validate-meta` (Zod) + `gen-skill:check` (drift gate for the agent skill) + tests + build, in sequence. Any of those failing blocks the PR.
 
 ## Distribution
 
 Three entry styles supported simultaneously:
 
-1. **Auto-register everything.** One side-effect import registers all 31 tags:
+1. **Auto-register everything.** One side-effect import registers every shipped tag (72 at the time of writing):
    ```ts
    import "custom-elements-collection/auto";
    ```
@@ -177,5 +183,7 @@ If only one place uses it, leave it as inline HTML in that place. Don't pollute 
 - **No CDN dependencies at runtime.** Components self-register; tokens are CSS variables, not JSON or JS.
 - **Light DOM by default** — see [ADR-002](./adr/adr-002-light-dom.md).
 - **All theming via CSS variables** — component source never inlines a hex.
+- **Self-describing components** — every tag ships with a validated `*.meta.json`. See [ADR-005](./adr/adr-005-component-meta.md).
 - **Prefer `ce-chip` over inventing badge/pill/tag.** Same for `ce-callout` over admonition/alert/note.
 - **Tests are required.** No new component without ≥6 unit tests.
+- **Generated files are not hand-edited.** Touch the meta + the source; let `pnpm gen-exports` and `pnpm gen-skill` rebuild the rest.

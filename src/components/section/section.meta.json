@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-section",
+  "name": "Section",
+  "className": "CeSection",
+  "goal": "Group page content under a titled header with optional number badge, lede, and right-aligned count chip.",
+  "description": "Titled content section. Renders a header row containing an optional circular number badge, a heading, and an optional count chip on the right; underneath the row sits an optional lede paragraph and the default body slot. Used to break long pages into numbered chapters.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Section heading. Use the title slot for custom markup."
+    },
+    {
+      "name": "lede",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional subtitle below the heading."
+    },
+    {
+      "name": "number",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional number / glyph for the badge to the left of the heading."
+    },
+    {
+      "name": "countLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "count-label",
+      "description": "Right-aligned count chip text (e.g. '28 files · 7 locations')."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Custom heading markup; overrides the title attribute."
+    },
+    {
+      "name": "",
+      "description": "Section body."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-7",
+      "kind": "size",
+      "source": "token",
+      "description": "Top margin between sections."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Header inner gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Header bottom margin."
+    },
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title color."
+    },
+    {
+      "name": "--ce-sz-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Number badge dimensions."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Number badge font size."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Number badge background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Number badge text."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Number badge border."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip font size."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip vertical inset."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip horizontal inset."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Count chip border-radius."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip + lede text color."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip border."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Lede bottom margin."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-shell",
+    "ce-hero"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "section",
+    "heading"
+  ]
+}

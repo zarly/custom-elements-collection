@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-badge",
+  "name": "Badge",
+  "className": "CeBadge",
+  "goal": "Decorate an icon or label with a small count or status pip.",
+  "description": "Notification-style count badge that anchors to slotted content. Clamps to a configurable max with a '+' suffix, supports a dot variant for unread state, and uses semantic color variants.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "count",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Numeric count to display."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "99",
+      "description": "Clamp value; counts above this render as '{max}+'."
+    },
+    {
+      "name": "variant",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"red\"",
+      "reflect": true,
+      "description": "Color variant."
+    },
+    {
+      "name": "dot",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Render a small dot instead of count text."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Decorated content (icon, button, label)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between content and pip."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Pip radius."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Pip font size."
+    },
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pip ring color (matches page background)."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Default + variant=red pip background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=neutral pip background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=green pip background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=amber pip background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=blue pip background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=purple pip background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "variant=cyan pip background."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chip"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "indicator",
+    "notification"
+  ]
+}

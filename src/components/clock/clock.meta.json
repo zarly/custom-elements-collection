@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-clock",
+  "name": "Clock",
+  "className": "CeClock",
+  "goal": "Show a live time-of-day clock or relative-time display, optionally for a specific IANA time zone.",
+  "description": "Live clock with absolute, relative ('5 minutes ago'), or combined display. Time-zone aware via the IANA `tz` attribute and Intl.DateTimeFormat; relative-time uses Intl.RelativeTimeFormat seeded from the `since` ISO timestamp. The internal interval can be disabled by setting tick-ms to 0 for snapshot-style use.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "tz",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "IANA time-zone identifier (e.g. 'Europe/London'). Empty = local zone."
+    },
+    {
+      "name": "format",
+      "type": "\"absolute\" | \"relative\" | \"both\"",
+      "required": false,
+      "default": "\"absolute\"",
+      "reflect": true,
+      "description": "What to render."
+    },
+    {
+      "name": "since",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "ISO timestamp; required for relative output."
+    },
+    {
+      "name": "tickMs",
+      "type": "number",
+      "required": false,
+      "default": "1000",
+      "attribute": "tick-ms",
+      "description": "Interval refresh in ms (0 disables tick)."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "BCP-47 locale tag for formatting; empty = browser default."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between absolute and relative parts."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Absolute font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Relative font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Absolute text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Relative text color."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "Intl.DateTimeFormat",
+      "purpose": "Format absolute time-of-day with optional IANA time zone.",
+      "writes": false
+    },
+    {
+      "api": "Intl.RelativeTimeFormat",
+      "purpose": "Format relative time strings like 'a minute ago'.",
+      "writes": false
+    },
+    {
+      "api": "setInterval",
+      "purpose": "Periodic re-render to keep clock fresh.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "Polls Date.now() at tick-ms cadence while connected.",
+      "reason": "Continuous clock display.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Dashboard",
+    "dashboard",
+    "live"
+  ]
+}

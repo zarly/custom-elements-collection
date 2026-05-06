@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-docs-layout",
+  "name": "DocsLayout",
+  "className": "CeDocsLayout",
+  "goal": "Provide a two-pane documentation page layout with sticky header, sticky sidebar, and scrollable main column.",
+  "description": "Internal composition primitive for documentation pages. Three slots: header (full-width sticky bar), sidebar (left sticky column, typically <ce-nav-list>), and default (main scrollable area). The sidebar collapses below 760px. sidebar-width attribute sets the column width.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "sidebarWidth",
+      "type": "string",
+      "required": false,
+      "default": "\"260px\"",
+      "attribute": "sidebar-width",
+      "reflect": true,
+      "description": "CSS length for the left column."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Optional top bar (spans both columns)."
+    },
+    {
+      "name": "sidebar",
+      "description": "Left column content."
+    },
+    {
+      "name": "",
+      "description": "Main content area."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer text color."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Header + sidebar background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Header bottom + sidebar right border."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Main column vertical padding."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Main column horizontal padding."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-nav-list"
+  ],
+  "category": "internal",
+  "tier": "layout",
+  "tags": [
+    "Docs",
+    "layout",
+    "internal"
+  ]
+}

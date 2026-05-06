@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-donut",
+  "name": "Donut",
+  "className": "CeDonut",
+  "goal": "Render a donut or pie chart for a small set of categorical segments with an optional center label.",
+  "description": "Inline SVG donut/pie. Provide a JSON array of segment values, optional colors and labels, and an optional center label or `center` slot to fill the hole. Setting thickness=0 turns it into a pie. Best for 3-6 segments; for ranked breakdowns prefer ce-bar-chart.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "values",
+      "type": "number[]",
+      "required": true,
+      "default": "[]",
+      "description": "Segment sizes."
+    },
+    {
+      "name": "colors",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "CSS color strings; cycles through when shorter than values. Defaults to a built-in palette."
+    },
+    {
+      "name": "labels",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Segment labels (used for aria-label)."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "140",
+      "description": "Square SVG size in CSS px."
+    },
+    {
+      "name": "thickness",
+      "type": "number",
+      "required": false,
+      "default": "18",
+      "description": "Ring thickness in px (0 = pie)."
+    },
+    {
+      "name": "centerLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "center-label",
+      "description": "Small text rendered inside the donut hole."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "center",
+      "description": "Override center-label with arbitrary HTML."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Center label color."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Center label size."
+    },
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Hole color (matches page background)."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 1."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 2."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 3."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 4."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 5."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Default palette color 6."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-bar-chart",
+    "ce-gauge"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Metrics & charts",
+    "dashboard"
+  ],
+  "a11y": {
+    "role": "img",
+    "notes": "SVG carries role=img and an aria-label that lists each segment with its label and percentage."
+  }
+}

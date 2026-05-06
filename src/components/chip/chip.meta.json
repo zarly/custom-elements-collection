@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-chip",
+  "name": "Chip",
+  "className": "CeChip",
+  "goal": "Display a compact inline status pill with semantic color variants and optional dot or outlined treatment.",
+  "description": "Small inline status indicator. Replaces ad-hoc badge / pill / tag / label markup with one canonical element. Seven color types (neutral / green / red / amber / blue / purple / cyan), optional leading dot, and an outlined treatment for low-emphasis use.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "type",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "Color tone."
+    },
+    {
+      "name": "dot",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Prepend a colored dot indicator."
+    },
+    {
+      "name": "outlined",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "No fill — only border + colored text."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Chip label."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between dot and label."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Font size."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Pill radius."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Line height."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral text."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral border."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=green background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "type=green text + dot."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=green border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=red background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "type=red text."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=red border."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=amber background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "type=amber text."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=amber border."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=blue background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "type=blue text."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=blue border."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=purple background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "type=purple text."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=purple border."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=cyan background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "type=cyan text."
+    },
+    {
+      "name": "--ce-color-cyan-border",
+      "kind": "color",
+      "source": "token",
+      "description": "type=cyan border."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "status",
+    "label"
+  ]
+}

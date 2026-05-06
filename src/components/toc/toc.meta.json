@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-toc",
+  "name": "Toc",
+  "className": "CeToc",
+  "goal": "Render a flat or numbered table of contents from a JSON entries array (or slotted anchors) with optional sticky positioning.",
+  "description": "Table of contents component. Accepts an entries array of { href, label } via property or JSON attribute; optionally numbers each entry and sticks to the top of its scroll parent. When entries is empty, falls back to the default slot so consumers can supply <a> children directly.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "entries",
+      "type": "TocEntry[]",
+      "required": false,
+      "default": "[]",
+      "description": "List of { href, label } items. Settable as a JS property or via JSON-encoded attribute."
+    },
+    {
+      "name": "sticky",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Use position: sticky at the top of the scroll container."
+    },
+    {
+      "name": "numbered",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Render as an <ol> with monospace tabular counters."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Fallback when entries is empty — consumer-supplied list/anchor markup."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding + entry gap."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Entry font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Counter color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Anchor color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover anchor color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-nav-list"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "navigation",
+    "toc"
+  ],
+  "a11y": {
+    "notes": "Wrapped in <nav aria-label=\"Table of contents\">."
+  }
+}

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" data-ce-scaffold>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Feedback components — demo</title>
+    <script>
+      (() => {
+        const stored = localStorage.getItem("cec-demo-theme");
+        const valid = new Set(["auto","dark","light","swiss","bauhaus","muji","neo-brutal","solarized","nordic","memphis","gruvbox"]);
+        const mode = valid.has(stored) ? stored : "auto";
+        const effective = mode === "auto"
+          ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
+          : mode;
+        document.documentElement.setAttribute("data-ce-theme", effective);
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/tokens/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: var(--ce-font-sans);
+        color: var(--ce-text);
+        background: var(--ce-bg);
+        padding: 24px clamp(16px, 4vw, 48px);
+      }
+      header.page-header {
+        max-width: 880px;
+        margin: 0 auto 24px;
+      }
+      header.page-header h1 {
+        font-size: clamp(22px, 3vw, 32px);
+        margin: 0 0 8px;
+      }
+      header.page-header p {
+        margin: 0;
+        color: var(--ce-text-dim, var(--ce-muted));
+        max-width: 60ch;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--ce-space-3);
+      }
+      .candidate {
+        display: grid;
+        grid-template-columns: minmax(180px, 240px) 1fr;
+        gap: var(--ce-space-3);
+        align-items: start;
+        padding: var(--ce-space-3);
+        background: var(--ce-bg-elevated, var(--ce-surface-2));
+        border: 1px solid var(--ce-border);
+        border-radius: var(--ce-radius-md, 8px);
+      }
+      .candidate__title {
+        font-weight: 600;
+        font-size: var(--ce-text-md);
+      }
+      .candidate__title small {
+        display: block;
+        color: var(--ce-text-dim, var(--ce-muted));
+        font-weight: 400;
+        margin-top: 2px;
+        font-family: var(--ce-font-mono);
+        font-size: var(--ce-text-xs);
+      }
+      .footer {
+        margin-top: var(--ce-space-3);
+        display: flex;
+        flex-direction: column;
+        gap: var(--ce-space-3);
+      }
+      ce-feedback-bar[data-ce-dismissed] {
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Feedback components — Tier-1 + Tier-2 demo</h1>
+      <p>
+        Eight candidate names for a hypothetical product. Use the per-row
+        controls to thumbs-up, star-rate, shortlist, drop, or comment on
+        each. State is persisted to <code>localStorage</code>; the bottom
+        actions copy a markdown summary, download a JSON snapshot, or
+        clear the lot.
+      </p>
+    </header>
+
+    <main>
+      <ce-feedback-sink subject="naming-2026-04-29" transport="localstorage">
+        <div class="candidate">
+          <div class="candidate__title">
+            Generative render
+            <small>genrender</small>
+          </div>
+          <ce-feedback-bar item="genrender" label="Generative render">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="candidate">
+          <div class="candidate__title">
+            Chat glow
+            <small>chatglow</small>
+          </div>
+          <ce-feedback-bar item="chatglow" label="Chat glow">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="candidate">
+          <div class="candidate__title">
+            Markdown tide
+            <small>mdtide</small>
+          </div>
+          <ce-feedback-bar item="mdtide" label="Markdown tide">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="candidate">
+          <div class="candidate__title">
+            Prose wave
+            <small>prosewave</small>
+          </div>
+          <ce-feedback-bar item="prosewave" label="Prose wave">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="candidate">
+          <div class="candidate__title">
+            Generative live
+            <small>genlive</small>
+          </div>
+          <ce-feedback-bar item="genlive" label="Generative live">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="candidate">
+          <div class="candidate__title">
+            Token tide
+            <small>tokentide</small>
+          </div>
+          <ce-feedback-bar item="tokentide" label="Token tide">
+            <ce-rating mode="thumbs"></ce-rating>
+            <ce-rating mode="stars" max="5"></ce-rating>
+            <ce-bookmark></ce-bookmark>
+            <ce-dismiss></ce-dismiss>
+            <ce-comment placeholder="Why?"></ce-comment>
+          </ce-feedback-bar>
+        </div>
+
+        <div class="footer">
+          <ce-feedback-summary show="counts avg top-liked"></ce-feedback-summary>
+          <ce-feedback-export formats="markdown json clear"></ce-feedback-export>
+        </div>
+      </ce-feedback-sink>
+    </main>
+
+    <script type="module" src="/src/auto.ts"></script>
+  </body>
+</html>

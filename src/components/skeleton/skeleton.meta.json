@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-skeleton",
+  "name": "Skeleton",
+  "className": "CeSkeleton",
+  "goal": "Reserve layout with an animated shimmer placeholder while content loads.",
+  "description": "Loading placeholder with text-line, rectangle, and circle shapes. The text variant supports multiple lines with the last line shortened to mimic real prose. Decoration is hidden from assistive technology via aria-hidden.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "shape",
+      "type": "\"text\" | \"rect\" | \"circle\"",
+      "required": false,
+      "default": "\"text\"",
+      "reflect": true,
+      "description": "Skeleton shape."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "CSS length (defaults: 100% for text/rect, 32px for circle)."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "CSS length (defaults: line-height for text, 80px for rect, 32px for circle)."
+    },
+    {
+      "name": "lines",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Number of text lines (only used when shape=text)."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Shimmer base color."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Shimmer highlight color."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Text-line radius."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Rect radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between text lines."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-progress"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "placeholder",
+    "shell"
+  ],
+  "a11y": {
+    "notes": "All decorative elements carry aria-hidden so screen readers ignore the placeholder."
+  }
+}

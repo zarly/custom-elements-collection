@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-frame",
+  "name": "LessonFrame",
+  "className": "LessonFrame",
+  "goal": "Wrap a lesson page with a fixed top progress bar and a centered, padded content column.",
+  "description": "Top-level lesson shell. Renders a fixed 4px progress bar at the top of the viewport (driven by the progress prop), a centered title + meta row, and a content column with a max-width of 880px. Used as the outermost element on a lesson page.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Completion percent in [0, 100]."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Lesson title shown in the centered header."
+    },
+    {
+      "name": "meta",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short meta line (difficulty · time · impact) under the title."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Extra header content (chips, tags) below the meta line."
+    },
+    {
+      "name": "",
+      "description": "Lesson body."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Progress track background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Progress fill gradient start."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Progress fill gradient end."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Progress fill transition."
+    },
+    {
+      "name": "--ce-space-7",
+      "kind": "size",
+      "source": "token",
+      "description": "Shell vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Shell horizontal padding."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Header bottom margin."
+    },
+    {
+      "name": "--ce-text-2xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title color."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Title bottom margin."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Meta line color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Meta line font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "lesson-rule",
+    "lesson-gap",
+    "lesson-quiz",
+    "lesson-quickfire",
+    "lesson-audio"
+  ],
+  "category": "lesson",
+  "tier": "layout",
+  "tags": [
+    "Education",
+    "lesson",
+    "frame"
+  ],
+  "a11y": {
+    "role": "progressbar (progress bar element)",
+    "notes": "Top progress bar exposes role=progressbar with aria-valuemin=0 / aria-valuemax=100 / aria-valuenow."
+  }
+}

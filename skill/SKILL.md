@@ -1,1077 +1,428 @@
 ---
 name: custom-elements-collection
-description: Complete reference for the custom-elements-collection library — 31 framework-agnostic Lit 3 web components (ce-* UI building blocks + lesson-* educational widgets). Load when building pages or documents that use these components, or when the user asks how to set up, use, or compose them.
+description: Reference for the custom-elements-collection library — 72 framework-agnostic Lit 3 web components (ce-* UI building blocks + lesson-* education + chat-surface + feedback-UI + form controls + dashboard primitives). USE WHENEVER the user is rendering an HTML dashboard, copilot/chat surface, lesson page, KPI report, release-readiness viz, or any LLM-generated HTML report; mentions "ce-card", "ce-kpi", "ce-chat-bubble", "ce-feedback-sink", "ce-button", "ce-input", "ce-gauge", "ce-counter", "lesson-quiz", `data-ce-theme`, `--ce-*` tokens, the `<ce-*>` prefix, or @mdflow/plugin-companion; or asks how to set up, theme, compose, pick, or troubleshoot any of these tags. SKIP for CSS-only UI questions, generic Lit/Vue/React component authoring, or shadow-DOM tutorials.
 ---
 
 # custom-elements-collection
 
-Framework-agnostic Web Components built on Lit 3. Drop into any HTML page, any framework, or any static-site generator. No build step needed on the consumer side.
+Framework-agnostic Web Components on Lit 3. 72 tags grouped into UI building blocks, chat surfaces, feedback controls, form controls, dashboard primitives, rich-content viewers, and education widgets. Drop into any HTML page, any framework, any static-site generator. No build step on the consumer side.
+
+> Each component carries a validated `*.meta.json` describing every prop, event, slot, CSS variable, side effect, and dependency. **The meta files are the API surface** — this skill is the navigator. For exact prop/event signatures, open `src/<area>/<stem>/<stem>.meta.json` (also published to `dist/meta/<tag>.json`).
 
 ---
 
-## Setup
-
-### CDN (zero install)
+## Quick start
 
 ```html
 <!doctype html>
 <html data-ce-theme="dark">
-<head>
-  <link rel="stylesheet"
-        href="https://unpkg.com/custom-elements-collection/dist/tokens/tokens.css">
-  <script type="module"
-          src="https://unpkg.com/custom-elements-collection/dist/auto.js"></script>
-</head>
-<body>
-  <!-- all 31 tags are now available -->
-</body>
+  <head>
+    <link rel="stylesheet"
+          href="https://unpkg.com/custom-elements-collection/dist/tokens/tokens.css">
+    <script type="module"
+            src="https://unpkg.com/custom-elements-collection/dist/auto.js"></script>
+  </head>
+  <body>
+    <ce-shell>
+      <ce-hero kicker="Status" title="Release readiness">
+        <ce-kpi slot="stats" value="96%" label="Pass" color="green"></ce-kpi>
+        <ce-kpi slot="stats" value="0"   label="Bugs" color="red"></ce-kpi>
+      </ce-hero>
+      <ce-callout type="success" title="Ready to ship">
+        All quality gates green.
+      </ce-callout>
+    </ce-shell>
+  </body>
 </html>
-```
-
-### npm + bundler
-
-```bash
-pnpm add custom-elements-collection
 ```
 
 Three registration modes:
 
 ```ts
-// A) Register every tag at once (simplest)
+// A) Register every tag at once
 import "custom-elements-collection/auto";
 
-// B) Tree-shake — import only what you use
+// B) Tree-shake to specific tags (smallest bundle)
 import "custom-elements-collection/hero";
-import "custom-elements-collection/kpi";
+import "custom-elements-collection/feedback-sink";
 import "custom-elements-collection/lesson-quiz";
 
-// C) Dynamic / on-demand
+// C) Register dynamically at runtime
 import { loadOnDemand } from "custom-elements-collection";
-await loadOnDemand(["ce-hero", "ce-kpi", "lesson-rule"]);
+await loadOnDemand(["ce-hero", "ce-kpi"]);
 ```
 
 Lit is bundled — **no peer dependencies**.
 
+For bundler config (Vue / React / Svelte), SSR caveats, optional meta-JSON imports, and bundle-size math, see [`references/setup.md`](references/setup.md).
+
 ---
 
-## Theming
+## Themes
 
-All colors, spacing, radius, and typography come from `--ce-*` CSS custom properties defined in `tokens.css`. Dark theme is the default.
+11 theme bundles ship: `dark` (default), `light`, `swiss`, `bauhaus`, `muji`, `neo-brutal`, `solarized`, `nordic`, `memphis`, `gruvbox`, plus `auto` (follows `prefers-color-scheme`).
 
 ```html
-<!-- default dark theme -->
-<link rel="stylesheet" href=".../tokens.css">
-
-<!-- force dark -->
-<link rel="stylesheet" href=".../dark.css">
-
-<!-- force light -->
-<link rel="stylesheet" href=".../light.css">
+<link rel="stylesheet" href=".../tokens/tokens.css">
+<link rel="stylesheet" href=".../tokens/solarized.css">
+<html data-ce-theme="solarized">
 ```
 
-Toggle theme on the root element:
+Pick by use case:
+
+| Need | Theme |
+| --- | --- |
+| Default chrome for any dashboard | `dark` |
+| Print / photo-heavy / daytime | `light` |
+| Editorial / minimalist | `swiss` or `muji` |
+| Marketing / conference talks | `bauhaus`, `memphis`, `neo-brutal` |
+| Code-heavy reading | `solarized`, `gruvbox` |
+| Long analytics dashboards | `nordic` |
+
+Full token catalog and per-theme overrides: [`references/tokens.md`](references/tokens.md).
+
+To override a single token without a theme bundle: `:root { --ce-color-blue: oklch(60% 0.2 240); }`.
+
+---
+
+## Picking a component
+
+Common decisions:
+
+| If you need… | Use |
+| --- | --- |
+| Big number on a card | `ce-kpi` |
+| Generic content surface | `ce-card` |
+| Highlighted feature (icon + title + body) | `ce-feature-card` |
+| Persona / profile card | `ce-persona` |
+| Inline status pill / badge | `ce-chip` |
+| Final verdict pill (good/bad/neutral) | `ce-verdict` |
+| Note / warn / error / success block | `ce-callout` (set `type`) |
+| Collapsible disclosure | `ce-details` |
+| Table of contents (scroll-spy) | `ce-toc` |
+| Bar chart (single series) | `ce-bar-chart` |
+| Multi-series chart (line/bar/pie/radar) | `ce-chart` (Chart.js) |
+| 2-D heatmap | `ce-heatmap` |
+| Side-by-side comparison | `ce-compare` |
+| Step flow diagram | `ce-flow` |
+| Branching decision tree | `ce-decision-tree` |
+| Vertical timeline | `ce-timeline` |
+| Code block with copy + lang | `ce-code` |
+| Filter / chip multi-select | `ce-filter-bar` |
+| Chat message bubble | `ce-chat-bubble` |
+| Streaming caret | `ce-cursor` |
+| "Assistant is thinking" indicator | `ce-thinking` |
+| LLM tool-call panel | `ce-tool-call` |
+| Inline citation footnote | `ce-citation` |
+| Thumbs up/down or star rating | `ce-rating` (one component, two modes) |
+| Copy-to-clipboard button | `ce-copy-button` |
+| "Try again" / regenerate | `ce-retry-button` |
+| Per-item feedback row container | `ce-feedback-bar` |
+| Subject + transport scope for feedback | `ce-feedback-sink` |
+| Save / shortlist toggle | `ce-bookmark` |
+| Hide / drop toggle | `ce-dismiss` |
+| Inline comment textarea | `ce-comment` |
+| Aggregated feedback stats | `ce-feedback-summary` |
+| Page-level export buttons | `ce-feedback-export` |
+| Verdict distribution sparkbar | `ce-feedback-heatmap` |
+| Themable action button | `ce-button` (4 variants + loading) |
+| On/off switch | `ce-toggle` (role=switch) |
+| Checkbox with mixed state | `ce-checkbox` (aria-checked=mixed) |
+| Labelled text input + help/error | `ce-input` |
+| Multi-line input that auto-grows | `ce-textarea` |
+| Inline yes/no confirmation | `ce-confirm` (role=alertdialog) |
+| Big animated number | `ce-counter` |
+| Live clock / "5 min ago" | `ce-clock` |
+| Inline trend chart | `ce-sparkline` |
+| Semicircle dial / meter | `ce-gauge` (role=meter) |
+| Donut / pie chart | `ce-donut` |
+| Traffic-light status dot | `ce-status-light` |
+| Notification count badge | `ce-badge` |
+| Loading shimmer placeholder | `ce-skeleton` |
+| KPI grid wrapper | `ce-stat-group` |
+| Interactive task list (with persist) | `ce-checklist` |
+| Lazy image with caption + fallback | `ce-image` |
+| Downloadable attachment card | `ce-file-card` |
+| Definition-list grid | `ce-key-value` |
+| Pretty-printed JSON | `ce-json` |
+| Line-level diff (unified/split) | `ce-diff` |
+| Inline abbreviation with tooltip | `ce-abbr` |
+| Lesson wrapper with progress | `lesson-frame` |
+| Rule with examples | `lesson-rule` |
+| Fill-in-the-blank | `lesson-gap` |
+| Multiple choice | `lesson-quiz` |
+| Timed rapid-fire | `lesson-quickfire` |
+| Audio + transcript | `lesson-audio` |
+
+When two candidates seem equally fit: read both meta files. Goal + description + scale resolve almost every ambiguity.
+
+---
+
+## Component catalog
+
+<!-- BEGIN AUTO-GENERATED CATALOG -->
+
+_Auto-generated by `pnpm gen-skill` from `src/**/*.meta.json`. Do not hand-edit this block._
+
+**Total components: 72**
+
+### UI (63)
+
+**Chat surfaces**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-chat-bubble` | brick | Render one chat message with role-driven coloring, avatar placement, header metadata (author/model/timestamp), and a tokens-aware footer. |
+| `ce-citation` | brick | Render an inline footnote-style source reference with an optional hover/focus popover preview. |
+| `ce-copy-button` | widget | Provide a one-click copy-to-clipboard trigger that targets any element by id or CSS selector and reports success via a CustomEvent. |
+| `ce-cursor` | brick | Render a blinking caret indicator beside streaming LLM-generated text. |
+| `ce-rating` | widget | Capture human feedback on chat responses or content via thumbs up/down or 1..N stars, in one form-associated control. |
+| `ce-retry-button` | brick | Provide a small "regenerate" affordance for chat surfaces that emits a single ce-retry intent on click. |
+| `ce-thinking` | brick | Show that an LLM is reasoning before the first token arrives, with an animated indicator and a screen-reader-friendly label. |
+| `ce-tool-call` | widget | Render an LLM/agent tool invocation as a collapsible row with a status indicator, name, duration, and slotted args/result/error panels. |
+
+**Comparison & narrative**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-code` | brick | Render a code block with optional language label, filename, and copy-to-clipboard button. |
+| `ce-compare` | widget | Display two slotted columns side by side as a Before/After (or A/B) panel separated by a configurable arrow. |
+| `ce-decision-tree` | widget | Render a one-level decision diagram: a question followed by yes / no / neutral branches each labelled with a result. |
+| `ce-example` | brick | Mark a snippet as a Good / Wrong / neutral example with a colored left-border accent and label. |
+| `ce-feature-card` | brick | Present a feature with an icon, title, body, and optional CTA button or link. |
+| `ce-filter-bar` | widget | Render a chip-toggle filter row with single- or multi-select semantics and a comma-joined value. |
+| `ce-flow` | widget | Render a horizontal or vertical step flow diagram from a JSON array of { title, caption?, color? } steps. |
+| `ce-persona` | brick | Display a user-research persona card with avatar, name, role, and slotted attribute list. |
+| `ce-timeline` | widget | Render a vertical or horizontal timeline of titled events from a JSON items array. |
+| `ce-verdict` | brick | Show a final-decision banner — go / no-go / mixed / info — with an icon, title, and detail line. |
+
+**Content**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-diff` | brick | Render a line-level diff between two text blobs in unified or split layout. |
+| `ce-file-card` | brick | Render a downloadable attachment card with name, size, type icon, and optional thumbnail. |
+| `ce-image` | brick | Render a lazily-loaded image with optional caption and graceful fallback when the source fails. |
+| `ce-json` | brick | Render a JSON value pretty-printed with collapse, error reporting, and optional truncation. |
+| `ce-key-value` | layout | Render a definition list as an aligned grid with optional multi-column packing and tight typography. |
+
+**Dashboard**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-clock` | brick | Show a live time-of-day clock or relative-time display, optionally for a specific IANA time zone. |
+| `ce-counter` | brick | Animate a numeric value from a start to a target with optional prefix, suffix, decimals, and trend indicator. |
+| `ce-gauge` | brick | Render a semicircle dial showing a single value within min..max with optional target tick. |
+| `ce-sparkline` | brick | Render a small inline trend chart (line, area, or bar) for a numeric series. |
+| `ce-stat-group` | layout | Lay out clustered KPI cells in a uniform responsive grid. |
+| `ce-status-light` | brick | Display a small traffic-light style dot with state color, optional pulse, and inline label. |
+
+**Feedback**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-bookmark` | brick | Capture intent-to-revisit on a per-item basis with a switch-semantic toggle distinct from rating-based quality judgment. |
+| `ce-comment` | brick | Surface a compact comment trigger that expands to an auto-growing textarea with debounced change events and configurable submit semantics. |
+| `ce-dismiss` | brick | Mark an item as not-interested / hide-from-view, with reduced-opacity styling propagated to the surrounding feedback-bar via a data attribute. |
+| `ce-feedback-bar` | widget | Bind a row of feedback controls to a single item id within a subject and emit one aggregated state event per change. |
+| `ce-feedback-export` | widget | Surface page-level action buttons (copy markdown, download json, submit, clear) that delegate work to the ancestor sink via bubbling export-request events. |
+| `ce-feedback-heatmap` | widget | Visualise the distribution of verdicts across an aggregated feedback subject as a small color-coded bar. |
+| `ce-feedback-sink` | widget | Own the feedback subject + transport scope, normalize bubbling descendant events into FeedbackEvent records, and persist them via the configured transport. |
+| `ce-feedback-summary` | widget | Render aggregated feedback statistics from an ancestor ce-feedback-sink as plain HTML stat cells with no internal-component dependency. |
+
+**Forms**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-button` | brick | Provide a token-driven button with primary/secondary/ghost/destructive variants and a loading state. |
+| `ce-checkbox` | brick | Provide a themable checkbox control with checked/indeterminate states and full keyboard support. |
+| `ce-checklist` | widget | Render an interactive task list with optional add-row and localStorage persistence. |
+| `ce-confirm` | widget | Render an inline yes/no confirmation prompt with explicit confirm and cancel buttons. |
+| `ce-input` | widget | Provide a labelled text input with help, error, prefix, and suffix slots and consistent themed styling. |
+| `ce-textarea` | widget | Provide a labelled multi-line text input with auto-grow, help, and error regions. |
+| `ce-toggle` | brick | Provide an on/off switch with role=switch, keyboard support, and emitted ce-change events. |
+
+**Layout & primitives**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-abbr` | brick | Render an inline abbreviation with a focusable, accessible tooltip-style expansion. |
+| `ce-badge` | brick | Decorate an icon or label with a small count or status pip. |
+| `ce-callout` | brick | Highlight short admonition text (info / success / warn / danger / neutral) with a left-border accent and tinted background. |
+| `ce-card` | brick | Present arbitrary content on a surface with optional left-border accent, hover lift, and clickable activation. |
+| `ce-chip` | brick | Display a compact inline status pill with semantic color variants and optional dot or outlined treatment. |
+| `ce-details` | widget | Provide a styled, animated collapsible disclosure with a summary row and optional count chip. |
+| `ce-grid` | layout | Lay out child elements in a responsive grid with either a fixed column count or auto-fit minmax sizing. |
+| `ce-hero` | layout | Render a page-opening header block with a kicker, title, lede, and an optional inline stats row. |
+| `ce-section` | layout | Group page content under a titled header with optional number badge, lede, and right-aligned count chip. |
+| `ce-shell` | layout | Wrap a documentation or app page so it has consistent max-width, padding, and a single theme-root attribute on <html>. |
+| `ce-skeleton` | brick | Reserve layout with an animated shimmer placeholder while content loads. |
+| `ce-table` | layout | Wrap a native <table> in a styled scroll container with consistent header, row, and hover treatments. |
+| `ce-toc` | widget | Render a flat or numbered table of contents from a JSON entries array (or slotted anchors) with optional sticky positioning. |
+
+**Metrics & charts**
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-bar-chart` | widget | Render a minimal horizontal bar chart from a JSON array of { label, value, meta?, color? } rows. |
+| `ce-chart` | widget | Render a Chart.js-backed line / bar / radar / pie / doughnut chart from JSON data + options attributes. |
+| `ce-donut` | brick | Render a donut or pie chart for a small set of categorical segments with an optional center label. |
+| `ce-heatmap` | widget | Render a 2D value grid with row + column labels and per-cell color intensity drawn from a 5-color palette. |
+| `ce-kpi` | brick | Display a single big-number stat with label, optional trend indicator, and semantic color tint. |
+| `ce-progress` | brick | Render a horizontal progress bar with optional inline label, percent overlay, indeterminate shimmer, and semantic color. |
+
+### Lesson (6)
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `lesson-audio` | widget | Play a short audio clip via a button with optional phonetic transcription and an inline error state. |
+| `lesson-frame` | layout | Wrap a lesson page with a fixed top progress bar and a centered, padded content column. |
+| `lesson-gap` | widget | Run a fill-in-the-blank exercise with multiple-choice options, instant feedback, and a public reset() method. |
+| `lesson-quickfire` | widget | Run a timed sequence of short multiple-choice rounds with score tracking, per-round timer, and a final summary. |
+| `lesson-quiz` | widget | Run a single-question multiple-choice quiz with instant feedback, an explanation reveal, and a reset() method. |
+| `lesson-rule` | brick | Display a numbered or 'golden' rule card with a circular badge, title, and explanatory body. |
+
+### Internal (3)
+
+| Tag | Tier | Goal |
+| --- | --- | --- |
+| `ce-docs-layout` | layout | Provide a two-pane documentation page layout with sticky header, sticky sidebar, and scrollable main column. |
+| `ce-nav-list` | layout | Render a grouped anchor list for documentation sidebars with active-item highlighting and a select event. |
+| `ce-theme-switcher` | widget | Cycle / select from a named list of values via an arrow-button + dropdown control, emitting ce-change on selection. |
+
+Full per-component descriptors live in `src/**/*.meta.json` (also published to `dist/meta/<tag>.json` and `dist/meta/index.json`). Filter via `node skill/scripts/components.mjs --help`.
+
+<!-- END AUTO-GENERATED CATALOG -->
+
+> Don't see what you need? The catalog above is auto-regenerated from `src/**/*.meta.json` whenever `pnpm gen-skill` runs. If a tag isn't listed, it isn't shipped.
+
+---
+
+## How to read more
+
+The catalog is intentionally minimal — tag, scale, and the single-sentence goal. For everything else, **the meta JSON is canonical**.
+
+### Direct read
+
+```bash
+# Repo-local
+cat src/components/card/card.meta.json | jq
+
+# From an installed package
+cat node_modules/custom-elements-collection/dist/meta/ce-card.json | jq
+```
+
+The meta file holds: identity (tag/name/className), `goal`, full `description`, `limitations`, `stability`, `props[]` (name/type/required/default/attribute/reflect/description), `events[]` (name/detail/bubbles/composed/description), `slots[]`, `cssVariables[]`, `globalDependencies[]`, `sideEffects[]`, dependency graph (`dependents`/`dependencies`/`related`), `category`, `scale`, `tags[]`, optional `a11y`, optional `methods[]`, optional `additional`.
+
+### Filtered programmatic read
+
+A zero-deps CLI ships with the repo at `skill/scripts/components.mjs`:
+
+```bash
+# All tags, full meta, markdown
+node skill/scripts/components.mjs
+
+# One tag, full meta
+node skill/scripts/components.mjs --tag ce-rating
+
+# All chat-surface tags, just goal + event names
+node skill/scripts/components.mjs --group "Chat surfaces" --fields tag,goal,events.name
+
+# All bricks that don't bubble events
+node skill/scripts/components.mjs --scale brick --fields tag,events.name --format json
+
+# Help
+node skill/scripts/components.mjs --help
+```
+
+Filters: `--tag` (repeatable), `--group` (repeatable, matches `meta.tags[0]`), `--category` (`ui|lesson|internal`), `--scale` (`brick|component|widget|layout`). Projection: `--fields a,b,c.sub` (a single dot pulls a sub-field from each row inside an array, e.g. `props.name`). Output: `--format markdown|json` (markdown default).
+
+For deeper queries (joins, multi-level filters), pipe `dist/meta/index.json` through `jq` — the meta files are plain JSON.
+
+---
+
+## Importing meta in production
+
+The runtime bundle is unaffected by ADR-005. Components import from `custom-elements-collection/<tag>` exactly as before; meta JSON ships in a separate `dist/meta/` folder behind opt-in subpaths:
+
+```ts
+// Just the component (no meta)
+import "custom-elements-collection/card";
+
+// Component + its meta (separate import)
+import "custom-elements-collection/card";
+import meta from "custom-elements-collection/meta/ce-card.json"
+  with { type: "json" };
+
+// All meta in one fetch
+import bundle from "custom-elements-collection/meta"
+  with { type: "json" };
+```
+
+If you don't import meta, you don't pay for it. Keep production bundles minimal by only importing the tags you actually render.
+
+---
+
+## Composition recipes
+
+Three short examples below; full versions plus a chat-surface and feedback-UI recipe live in [`references/recipes.md`](references/recipes.md).
+
+### Release dashboard
 
 ```html
-<html data-ce-theme="dark">   <!-- dark (default) -->
-<html data-ce-theme="light">  <!-- light -->
-```
-
-Add `data-ce-scaffold` to `<html>` to apply body reset (background, font, box-sizing). `<ce-shell>` sets this automatically.
-
-Override any token on `:root` or a parent element:
-
-```css
-:root {
-  --ce-font-sans: "Inter", system-ui, sans-serif;
-  --ce-radius: 12px;
-  --ce-color-blue: oklch(60% 0.2 240);
-}
-```
-
-### Color palette values
-
-**Semantic colors (solid)**
-
-| Token | Dark | Light |
-|---|---|---|
-| `--ce-color-green` | `#3fb950` | `#1f883d` |
-| `--ce-color-red` | `#f85149` | `#cf222e` |
-| `--ce-color-amber` | `#d29922` | `#9a6700` |
-| `--ce-color-blue` | `#58a6ff` | `#0969da` |
-| `--ce-color-purple` | `#bc8cff` | `#8250df` |
-| `--ce-color-cyan` | `#39d2c0` | `#1b7c83` |
-
-Each color also has `-bg` (tinted background) and `-border` (tinted border) variants, e.g. `--ce-color-green-bg`, `--ce-color-green-border`.
-
-### Surface & text tokens
-
-```
---ce-bg            page background
---ce-surface       card/panel surface
---ce-surface-2     nested surface
---ce-surface-3     deep-nested surface
---ce-border        default border
---ce-border-soft   subtle border
---ce-border-strong prominent border
-
---ce-text          primary text
---ce-muted         secondary / label text
---ce-dim           very muted (nav tags, counts)
---ce-text-inverse  text on solid color fills
-```
-
-### Spacing (4 px grid)
-
-`--ce-space-1` (4px) → `--ce-space-2` (8px) → `--ce-space-3` (12px) → `--ce-space-4` (16px) → `--ce-space-5` (24px) → `--ce-space-6` (32px) → `--ce-space-7` (40px) → `--ce-space-8` (56px)
-
-### Radius
-
-`--ce-radius-sm` (6px) · `--ce-radius` (10px) · `--ce-radius-lg` (14px) · `--ce-radius-pill` (999px)
-
-### Typography
-
-Font stacks: `--ce-font-sans` · `--ce-font-mono`
-
-Size scale: `--ce-text-xs` (11px) · `--ce-text-sm` (12.5px) · `--ce-text-base` (14px) · `--ce-text-md` (15px) · `--ce-text-lg` (17px) · `--ce-text-xl` (22px) · `--ce-text-2xl` (28px) · `--ce-text-3xl` (40px)
-
-Line heights: `--ce-line-tight` (1.15) · `--ce-line-snug` (1.35) · `--ce-line-normal` (1.55) · `--ce-line-relaxed` (1.7)
-
-### Motion & elevation
-
-Transitions: `--ce-transition-fast` (0.12s) · `--ce-transition` (0.2s) · `--ce-transition-slow` (0.35s)
-
-Shadows: `--ce-shadow-sm` · `--ce-shadow` · `--ce-shadow-lg`
-
-Focus ring: `--ce-focus-ring` (2px blue ring)
-
-### Color type
-
-Throughout the component API, `color` props accept: `"neutral" | "green" | "red" | "amber" | "blue" | "purple" | "cyan"`.
-
----
-
-## Component reference
-
-### Layout & primitives
-
----
-
-#### `<ce-shell>`
-
-Page wrapper. Sets max-width layout, injects `data-ce-scaffold` + `data-ce-theme` on `<html>`, propagates theme changes.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `theme` | `"dark" \| "light"` | `"dark"` | Propagated to `<html data-ce-theme>` |
-| `width` | `"narrow" \| "default" \| "wide" \| "full"` | `"default"` | `narrow`=720px, `default`=1200px, `wide`=1440px, `full`=100% |
-
-**Slot:** default
-
-```html
-<ce-shell theme="dark" width="default">
-  <!-- page content -->
-</ce-shell>
-```
-
----
-
-#### `<ce-hero>`
-
-Page header with kicker badge, gradient title, lede paragraph, and a stats row slot.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `kicker` | `string` | `""` | Small eyebrow text in a pill above the title |
-| `title` | `string` | `""` | Main heading (gradient text) |
-| `lede` | `string` | `""` | Supporting paragraph |
-| `flat` | `boolean` | `false` | Suppresses the radial gradient background |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `title` | Custom heading markup (overrides `title` attr) |
-| `stats` | Inline stat row — typically `<ce-kpi>` elements |
-| (default) | Additional body content below lede |
-
-```html
-<ce-hero kicker="Q4 2025" title="Release readiness" lede="All signals green.">
-  <ce-kpi slot="stats" value="96%" label="Pass rate" color="green"></ce-kpi>
-  <ce-kpi slot="stats" value="0"   label="Open bugs" color="red"></ce-kpi>
-</ce-hero>
-```
-
----
-
-#### `<ce-section>`
-
-Section block with optional number badge, heading, count chip, lede, and body slot.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `title` | `string` | `""` | Section heading |
-| `lede` | `string` | `""` | Subtitle / description |
-| `number` | `string` | `""` | Leading number badge (e.g. `"1"`) |
-| `count-label` | `string` | `""` | Right-aligned count chip (e.g. `"28 files · 7 locations"`) |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `title` | Custom heading markup |
-| (default) | Section body |
-
-```html
-<ce-section title="Coverage" number="1" count-label="12 modules" lede="Branch coverage by area.">
-  <!-- cards, tables, etc. -->
-</ce-section>
-```
-
----
-
-#### `<ce-grid>`
-
-Responsive CSS Grid layout. Collapses to single column at ≤ 640 px.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `cols` | `"2" \| "3" \| "4"` | `"3"` | Fixed column count |
-| `min` | `number` | `240` | Minimum column width in px (used when `auto` is set) |
-| `auto` | `boolean` | `false` | Use `repeat(auto-fit, minmax(min, 1fr))` |
-| `gap` | `"sm" \| "md" \| "lg"` | `"md"` | `sm`=8px, `md`=16px, `lg`=24px |
-
-**Slot:** default
-
-```html
-<ce-grid cols="3" gap="md">
-  <ce-card>…</ce-card>
-  <ce-card>…</ce-card>
-  <ce-card>…</ce-card>
-</ce-grid>
-```
-
----
-
-#### `<ce-card>`
-
-Surface card with optional left-border accent, hover effects, and click activation.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `accent` | `CecColor \| null` | `null` | Left-border accent color |
-| `hoverable` | `boolean` | `false` | Hover border + shadow lift |
-| `compact` | `boolean` | `false` | Tighter padding |
-| `clickable` | `boolean` | `false` | Adds `role=button`, `tabindex=0`, keyboard activation |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `title` | Optional title region (above default slot) |
-| (default) | Body content |
-| `footer` | Optional footer (dimmed, border-top) |
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-card-activate` | — | Clicked or Enter/Space when `clickable` |
-
-```html
-<ce-card accent="green" hoverable>
-  <h3 slot="title">Passed</h3>
-  <p>All 148 tests green.</p>
-  <span slot="footer">2 min ago</span>
-</ce-card>
-```
-
----
-
-#### `<ce-chip>`
-
-Compact status indicator / badge / label.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `type` | `"neutral" \| CecColor` | `"neutral"` | Color variant |
-| `dot` | `boolean` | `false` | Prepend a colored dot |
-| `outlined` | `boolean` | `false` | No fill, border + colored text only |
-
-**Slot:** default (label text)
-
-```html
-<ce-chip type="green" dot>Passing</ce-chip>
-<ce-chip type="red" outlined>Failed</ce-chip>
-```
-
----
-
-#### `<ce-table>`
-
-Styled wrapper around a native `<table>`. Provides consistent header / row / hover styles and an optional sticky header.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `sticky` | `boolean` | `false` | Header row sticks to top of scroll container |
-| `compact` | `boolean` | `false` | Reduced padding |
-
-**Slot:** default — pass a raw `<table>` element
-
-Cell alignment helpers (apply to `<td>`):
-- `.num` or `data-align="num"` → right-aligned tabular numbers
-- `.center` or `data-align="center"` → centered
-- `.mono` → monospace font
-
-```html
-<ce-table sticky>
-  <table>
-    <thead><tr><th>File</th><th>Coverage</th></tr></thead>
-    <tbody>
-      <tr><td>auth.ts</td><td class="num">94%</td></tr>
-    </tbody>
-  </table>
-</ce-table>
-```
-
----
-
-#### `<ce-callout>`
-
-Left-border-accented tinted box for notes, warnings, success messages, and errors.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `type` | `"info" \| "success" \| "warn" \| "danger" \| "neutral"` | `"info"` | Semantic color variant |
-| `title` | `string` | `""` | Optional bold header line |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `title` | Custom title markup |
-| (default) | Body content |
-
-```html
-<ce-callout type="success" title="Ready to ship">All quality gates green.</ce-callout>
-<ce-callout type="warn">One flaky test detected.</ce-callout>
-<ce-callout type="danger" title="Build broken">CI failed on main.</ce-callout>
-```
-
----
-
-#### `<ce-details>`
-
-Styled collapsible panel (wraps native `<details>`).
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `summary` | `string` | `""` | Summary text |
-| `open` | `boolean` | `false` | Expand state (reflected) |
-| `count` | `string` | `""` | Right-aligned count chip on header |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `summary` | Custom summary markup |
-| (default) | Body content when open |
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-details-toggle` | `{ open: boolean }` | Toggle state changes |
-
-```html
-<ce-details summary="Test failures" count="3">
-  <p>Details about failures…</p>
-</ce-details>
-```
-
----
-
-#### `<ce-toc>`
-
-Table of contents, optionally sticky and numbered.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `entries` | `TocEntry[]` | `[]` | Array of `{ href: string, label: string }` |
-| `sticky` | `boolean` | `false` | `position: sticky` at top |
-| `numbered` | `boolean` | `false` | Auto-number entries |
-
-`entries` accepts JSON attribute: `entries='[{"href":"intro","label":"Intro"}]'`
-
-**Slot:** default — used as fallback when `entries` is empty
-
-```html
-<ce-toc sticky numbered
-  entries='[{"href":"setup","label":"Setup"},{"href":"api","label":"API"}]'>
-</ce-toc>
-```
-
----
-
-### Metrics & charts
-
----
-
-#### `<ce-kpi>`
-
-Big-number KPI card. Commonly placed in `<ce-hero slot="stats">` or `<ce-grid>`.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `value` | `string` | `""` | Large display value (e.g. `"96%"`, `"1.2k"`) |
-| `label` | `string` | `""` | Uppercase small label below value |
-| `color` | `CecColor` | `"neutral"` | Value text color |
-| `trend` | `string` | `""` | Trend indicator starting with `+` or `-` (e.g. `"+12%"`) |
-
-```html
-<ce-kpi value="96%" label="Pass rate" color="green" trend="+4%"></ce-kpi>
-```
-
----
-
-#### `<ce-progress>`
-
-Linear progress bar with optional label and value display.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `value` | `number` | `0` | Current value |
-| `max` | `number` | `100` | Maximum value |
-| `color` | `CecColor` | `"blue"` | Fill color |
-| `label` | `string` | `""` | Inline label on the left |
-| `show-value` | `boolean` | `false` | Overlays percentage text |
-| `indeterminate` | `boolean` | `false` | Animated shimmer (ignores `value`) |
-
-```html
-<ce-progress value="72" label="Coverage" show-value color="green"></ce-progress>
-<ce-progress indeterminate label="Loading…"></ce-progress>
-```
-
----
-
-#### `<ce-bar-chart>`
-
-Horizontal bar chart. Data-driven via the `data` property.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `data` | `BarRow[]` | `[]` | `{ label, value, meta?, color? }[]` |
-| `max` | `number` | `0` | Forces chart max; auto-scales if `0` |
-| `color` | `CecColor` | `"blue"` | Default bar color |
-| `label-width` | `string` | `"180px"` | CSS width for the label column |
-| `compact` | `boolean` | `false` | Tighter row height |
-
-`data` accepts JSON attribute: `data='[{"label":"Auth","value":94,"meta":"94%"}]'`
-
-```html
-<ce-bar-chart
-  data='[{"label":"auth.ts","value":94,"meta":"94%","color":"green"},
-         {"label":"legacy.ts","value":41,"meta":"41%","color":"red"}]'>
-</ce-bar-chart>
-```
-
----
-
-#### `<ce-chart>`
-
-Thin wrapper around Chart.js for radar / line / donut / bar charts. Lazy-loads Chart.js from a CDN.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `type` | `"line" \| "bar" \| "radar" \| "doughnut" \| "pie"` | `"line"` | Chart.js chart type |
-| `src` | `string` | unpkg Chart.js 4.4.0 | CDN URL for Chart.js |
-| `data` | Chart.js Data object | `{ labels: [], datasets: [] }` | Chart data |
-| `options` | Chart.js options object | `{}` | Chart options |
-
-`data` and `options` accept JSON attributes.
-
-```html
-<ce-chart type="radar"
-  data='{"labels":["Speed","Quality","Coverage"],"datasets":[{"label":"Score","data":[80,95,72]}]}'>
-</ce-chart>
-```
-
----
-
-#### `<ce-heatmap>`
-
-Colored grid of cells — value-to-alpha-scaled background.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `rows` | `string[]` | `[]` | Row labels |
-| `cols` | `string[]` | `[]` | Column labels |
-| `data` | `number[][]` | `[]` | 2-D array (rows × cols) of numbers |
-| `min` | `number` | `0` | Value range minimum |
-| `max` | `number` | `0` | Value range maximum; auto-detected if `0` |
-| `palette` | `"blue" \| "green" \| "amber" \| "red" \| "purple"` | `"blue"` | Color for high values |
-
-All array props accept JSON attributes.
-
-```html
-<ce-heatmap
-  rows='["Mon","Tue","Wed"]'
-  cols='["AM","PM"]'
-  data='[[3,1],[5,4],[2,6]]'
-  palette="green">
-</ce-heatmap>
-```
-
----
-
-### Comparison & narrative
-
----
-
-#### `<ce-verdict>`
-
-Decision banner with icon, title, and detail text.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `type` | `"go" \| "no-go" \| "mixed" \| "info"` | `"info"` | Semantic color + default icon |
-| `title` | `string` | `""` | Short verdict line |
-| `detail` | `string` | `""` | Supporting text |
-| `icon` | `string` | auto | Override icon char; defaults: go=✓, no-go=✗, mixed=⚠, info=ℹ |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `title` | Custom title markup |
-| (default) | Detail text (overrides `detail` attr) |
-
-```html
-<ce-verdict type="go" title="Ship it" detail="All quality gates passed."></ce-verdict>
-<ce-verdict type="no-go" title="Hold">P0 bug in auth flow — see issue #42.</ce-verdict>
-```
-
----
-
-#### `<ce-timeline>`
-
-Vertical (or horizontal) timeline of steps.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `items` | `TimelineItem[]` | `[]` | `{ title, meta?, description?, color?, icon? }[]` |
-| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Layout direction |
-
-`items` accepts JSON attribute.
-
-```html
-<ce-timeline items='[
-  {"title":"Discovery","meta":"Week 1","color":"blue","icon":"🔍"},
-  {"title":"Build","meta":"Week 2-4","color":"purple"},
-  {"title":"Ship","meta":"Week 5","color":"green","icon":"🚀"}
-]'></ce-timeline>
-```
-
----
-
-#### `<ce-compare>`
-
-Before/after (or A/B) side-by-side panel.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `before-label` | `string` | `"Before"` | Label above the left panel |
-| `after-label` | `string` | `"After"` | Label above the right panel |
-| `arrow` | `string` | `"→"` | Separator: `"→"`, `"vs"`, custom, or `""` to hide |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `before` | Left panel body |
-| `after` | Right panel body |
-
-```html
-<ce-compare before-label="v1" after-label="v2">
-  <code slot="before">O(n²)</code>
-  <code slot="after">O(n log n)</code>
-</ce-compare>
-```
-
----
-
-#### `<ce-flow>`
-
-Horizontal (or vertical) flow diagram: boxes separated by arrows.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `steps` | `FlowStep[]` | `[]` | `{ title, caption?, color? }[]` |
-| `arrow` | `string` | `"→"` | Arrow character (auto-flipped to `↓` in vertical mode) |
-| `vertical` | `boolean` | `false` | Stack boxes vertically |
-
-`steps` accepts JSON attribute.
-
-```html
-<ce-flow steps='[
-  {"title":"Input","color":"blue"},
-  {"title":"Process","caption":"async","color":"purple"},
-  {"title":"Output","color":"green"}
-]'></ce-flow>
-```
-
----
-
-#### `<ce-decision-tree>`
-
-Question + branches (yes/no/neutral) for if/then educational diagrams.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `question` | `string` | `""` | Top-level question text |
-| `branches` | `DecisionBranch[]` | `[]` | `{ label, kind?: "yes"\|"no"\|"neutral", result }[]` |
-
-`branches` accepts JSON attribute.
-
-```html
-<ce-decision-tree question="Is the data public?"
-  branches='[
-    {"label":"Yes","kind":"yes","result":"No auth needed"},
-    {"label":"No","kind":"no","result":"Require OAuth 2.0"}
-  ]'>
-</ce-decision-tree>
-```
-
----
-
-#### `<ce-example>`
-
-Good/bad/neutral example box with a colored left border.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `type` | `"good" \| "bad" \| "neutral"` | `"neutral"` | `good`=green, `bad`=red |
-| `label` | `string` | `""` | Label override (defaults: "Good" / "Wrong" / "Example") |
-
-**Slot:** default (example content)
-
-```html
-<ce-example type="good">Use const for immutable values.</ce-example>
-<ce-example type="bad">var x = 1;</ce-example>
-```
-
----
-
-#### `<ce-feature-card>`
-
-Icon + title + body + optional CTA card.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `icon` | `string` | `""` | Emoji/character icon |
-| `title` | `string` | `""` | Card title |
-| `color` | `CecColor` | `"neutral"` | Icon background accent |
-| `cta` | `string` | `""` | CTA button label; renders as button (or link when `href` set) |
-| `href` | `string` | `""` | When set with `cta`, renders CTA as `<a>` |
-
-**Slot:** default (body content)
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-feature-cta` | — | CTA button clicked (when `href` not set) |
-
-```html
-<ce-feature-card icon="🔒" title="Auth" color="blue" cta="Learn more">
-  OAuth 2.0 + PKCE out of the box.
-</ce-feature-card>
-```
-
----
-
-#### `<ce-persona>`
-
-User-research persona / role card with avatar, role line, tags slot, and body.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `name` | `string` | `""` | Person/role name |
-| `role` | `string` | `""` | Short role subtitle |
-| `avatar` | `string` | `""` | Emoji or character for the avatar circle |
-| `color` | `CecColor` | `"neutral"` | Top-border accent color |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `tags` | `<ce-chip>` elements below the role line |
-| (default) | Body / details list |
-
-```html
-<ce-persona name="Dev Lead" role="Engineering" avatar="👩‍💻" color="purple">
-  <ce-chip slot="tags" type="purple">Backend</ce-chip>
-  <p>Owns platform reliability…</p>
-</ce-persona>
-```
-
----
-
-#### `<ce-code>`
-
-Code block with optional filename, language label, and copy button.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `lang` | `string` | `""` | Language label shown top-right (e.g. `"ts"`, `"bash"`) |
-| `filename` | `string` | `""` | Filename shown top-left |
-| `copy` | `boolean` | `true` | Show copy button |
-
-**Slot:** default — code text (plain text or pre-highlighted spans)
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-code-copy` | `{ text: string }` | Copy button clicked |
-
-The header bar is hidden when `lang`, `filename`, and `copy` are all absent/false.
-
-```html
-<ce-code lang="ts" filename="auth.ts">
-const token = await getToken();
-</ce-code>
-```
-
----
-
-#### `<ce-filter-bar>`
-
-Chip-toggle filter row. Single-select by default; multi-select with `multiple`.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `label` | `string` | `""` | Optional left-side label |
-| `value` | `string` | `""` | Current selected value(s); comma-joined when `multiple` |
-| `multiple` | `boolean` | `false` | Allow multiple selection |
-| `options` | `FilterOption[]` | `[]` | `{ value, label, count? }[]` |
-
-`options` accepts JSON attribute.
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-filter-change` | `{ value: string, values: string[] }` | Selection changes |
-
-```html
-<ce-filter-bar label="Status"
-  options='[
-    {"value":"all","label":"All","count":148},
-    {"value":"pass","label":"Pass","count":142},
-    {"value":"fail","label":"Fail","count":6}
-  ]'
-  value="all">
-</ce-filter-bar>
-```
-
----
-
-### Docs & navigation
-
----
-
-#### `<ce-docs-layout>`
-
-Two-pane documentation layout: sticky sidebar + scrollable main area, with an optional full-width header slot.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `sidebar-width` | `string` | `"260px"` | CSS length for the sidebar column |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `header` | Optional top bar spanning both columns |
-| `sidebar` | Left column (e.g. `<ce-nav-list>`) |
-| (default) | Main content area |
-
-```html
-<ce-docs-layout sidebar-width="280px">
-  <header slot="header">My Docs</header>
-  <ce-nav-list slot="sidebar" title="Components" items='[…]'></ce-nav-list>
-  <ce-section title="Overview">…</ce-section>
-</ce-docs-layout>
-```
-
----
-
-#### `<ce-nav-list>`
-
-Grouped anchor list for docs sidebars. Highlights the active item by `href`.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `items` | `NavItem[]` | `[]` | `{ label, href, group?, tag? }[]` |
-| `value` | `string` | `""` | Currently active href (controlled) |
-| `title` | `string` | `""` | Optional sidebar heading |
-
-`items` accepts JSON attribute. `group` field groups consecutive items under a heading. `tag` shows a small monospace label after the link text.
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `ce-nav-select` | `{ href: string }` | Link clicked (before navigation) |
-
-```html
-<ce-nav-list title="UI Components" value="#ce-hero"
-  items='[
-    {"group":"Layout","label":"Shell","href":"#ce-shell","tag":"ce-shell"},
-    {"group":"Layout","label":"Hero","href":"#ce-hero","tag":"ce-hero"},
-    {"group":"Metrics","label":"KPI","href":"#ce-kpi","tag":"ce-kpi"}
-  ]'>
-</ce-nav-list>
-```
-
----
-
-### Lesson widgets
-
----
-
-#### `<lesson-frame>`
-
-Top-level shell for a lesson page. Fixed top progress bar + centered content column.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `progress` | `number` | `0` | Completion percentage `[0, 100]` |
-| `title` | `string` | `""` | Lesson title |
-| `meta` | `string` | `""` | Short meta line (difficulty · time · impact) |
-
-**Slots:**
-
-| Slot | Purpose |
-|---|---|
-| `header` | Extra chips/tags below the title |
-| (default) | Lesson body |
-
-```html
-<lesson-frame title="Async Patterns" meta="Intermediate · 12 min" progress="35">
-  <ce-chip slot="header" type="blue">JavaScript</ce-chip>
-  <lesson-rule number="1" title="Always handle rejection">…</lesson-rule>
-</lesson-frame>
-```
-
----
-
-#### `<lesson-rule>`
-
-Numbered rule card. Use for "Rule 1", "Golden Rule", etc.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `number` | `string` | `""` | Rule number badge (any string; `"1"` or `"★"`) |
-| `title` | `string` | `""` | Rule title |
-| `golden` | `boolean` | `false` | Amber "golden rule" emphasis styling |
-
-**Slot:** default (rule body)
-
-```html
-<lesson-rule number="1" title="Fail fast">
-  Validate inputs at the boundary, not deep inside.
-</lesson-rule>
-<lesson-rule golden title="The Golden Rule">
-  Treat others' code as you want yours treated.
-</lesson-rule>
-```
-
----
-
-#### `<lesson-gap>`
-
-Fill-in-the-blank interactive exercise.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `prompt` | `string` | `""` | Sentence with `___` as placeholder |
-| `options` | `string[]` | `[]` | Choice list |
-| `correct` | `string` | `""` | Correct answer (must be in `options`) |
-| `explanation` | `string` | `""` | Shown after user answers |
-
-`options` accepts JSON attribute.
-
-**Methods:** `reset()` — clears the user's pick.
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `lesson-gap-answer` | `{ value: string, correct: boolean }` | User picks an option |
-
-```html
-<lesson-gap
-  prompt="A Promise that never resolves or rejects is called ___."
-  options='["settled","pending","fulfilled","rejected"]'
-  correct="pending"
-  explanation="Pending means the async work is still in progress.">
-</lesson-gap>
-```
-
----
-
-#### `<lesson-quiz>`
-
-Multiple-choice question with instant feedback and explanation.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `question` | `string` | `""` | Question text |
-| `options` | `string[]` | `[]` | Answer choices |
-| `correct` | `number` | `0` | Index of the correct option |
-| `explanation` | `string` | `""` | Shown after user picks |
-
-`options` accepts JSON attribute.
-
-**Methods:** `reset()` — clears the user's selection.
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `lesson-quiz-answer` | `{ index: number, correct: boolean }` | User picks an option |
-
-```html
-<lesson-quiz
-  question="Which operator checks both value and type?"
-  options='["==","===","=","!="]'
-  correct="1"
-  explanation="Triple equals (===) is the strict equality operator.">
-</lesson-quiz>
-```
-
----
-
-#### `<lesson-quickfire>`
-
-Timed practice session — rounds in sequence, score tracked, per-round timer.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `rounds` | `QuickfireRound[]` | `[]` | `{ prompt, options: string[], correct: string }[]` |
-| `timer` | `number` | `8` | Seconds per round |
-
-`rounds` accepts JSON attribute. `prompt` may contain `___` for blank-style display.
-
-**Methods:** `reset()` — restarts from round 1.
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `lesson-quickfire-done` | `{ score: number, total: number }` | All rounds complete |
-
-```html
-<lesson-quickfire timer="10" rounds='[
-  {"prompt":"typeof null === ___","options":["object","null","undefined","string"],"correct":"object"},
-  {"prompt":"[] + [] equals ___","options":["0","\"\"","[]","NaN"],"correct":"\"\""}
-]'></lesson-quickfire>
-```
-
----
-
-#### `<lesson-audio>`
-
-Pronunciation / audio clip with optional phonetic transcription.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `src` | `string` | `""` | Audio file URL |
-| `phonetic` | `string` | `""` | IPA or pronunciation guide |
-| `label` | `string` | `"🔊 Play"` | Play button label |
-
-**Events:**
-
-| Event | Detail | Fired when |
-|---|---|---|
-| `lesson-audio-play` | `{ src: string }` | Play button clicked |
-
-```html
-<lesson-audio src="/audio/async.mp3" phonetic="/əˈsɪŋk/"></lesson-audio>
-```
-
----
-
-## Common composition patterns
-
-### Dashboard page
-
-```html
-<ce-shell theme="dark">
-  <ce-hero kicker="Q4 2025" title="Release Dashboard">
-    <ce-kpi slot="stats" value="148" label="Total tests" color="blue"></ce-kpi>
-    <ce-kpi slot="stats" value="142" label="Passing" color="green" trend="+3"></ce-kpi>
-    <ce-kpi slot="stats" value="6"   label="Failing"  color="red"></ce-kpi>
+<ce-shell>
+  <ce-hero kicker="Q4" title="Release readiness">
+    <ce-kpi slot="stats" value="96%" label="Pass" color="green"></ce-kpi>
   </ce-hero>
-
-  <ce-section title="Coverage by module" number="1">
-    <ce-bar-chart data='[
-      {"label":"auth","value":96,"meta":"96%","color":"green"},
-      {"label":"api","value":78,"meta":"78%","color":"blue"},
-      {"label":"legacy","value":41,"meta":"41%","color":"red"}
-    ]'></ce-bar-chart>
+  <ce-section title="Coverage" number="1">
+    <ce-bar-chart data='[{"label":"auth","value":96,"color":"green"}]'></ce-bar-chart>
   </ce-section>
-
-  <ce-section title="Details" number="2">
-    <ce-grid cols="2" gap="md">
-      <ce-card accent="green">
-        <h3 slot="title">Auth module</h3>
-        <ce-progress value="96" show-value color="green"></ce-progress>
-      </ce-card>
-      <ce-card accent="red">
-        <h3 slot="title">Legacy module</h3>
-        <ce-progress value="41" show-value color="red"></ce-progress>
-      </ce-card>
-    </ce-grid>
-  </ce-section>
+  <ce-callout type="success" title="Ready to ship">All gates green.</ce-callout>
 </ce-shell>
 ```
 
-### Lesson page
+### Chat surface
 
 ```html
-<lesson-frame title="Promises in JavaScript" meta="Intermediate · 10 min" progress="0">
-  <lesson-rule number="1" title="Always handle rejection">
-    Every `.then()` chain needs a `.catch()`.
-  </lesson-rule>
-  <lesson-quiz
-    question="What state is a Promise in before it resolves?"
-    options='["fulfilled","rejected","pending","settled"]'
-    correct="2">
-  </lesson-quiz>
-  <lesson-quickfire timer="8" rounds='[
-    {"prompt":"Promise.all fails if ___ promise rejects","options":["any","all","no","the last"],"correct":"any"}
-  ]'></lesson-quickfire>
-</lesson-frame>
+<ce-chat-bubble role="assistant" author="Claude">
+  Here is a draft.
+  <ce-tool-call slot="footer" name="search" status="ok"></ce-tool-call>
+  <ce-rating slot="footer" mode="thumbs"></ce-rating>
+</ce-chat-bubble>
 ```
 
-### Docs site
+### Feedback dashboard
 
 ```html
-<ce-docs-layout>
-  <header slot="header" style="padding: 0 24px; line-height: 48px; font-weight: 700;">
-    My Docs
-  </header>
-  <ce-nav-list slot="sidebar" title="Components"
-    value="#ce-hero"
-    items='[
-      {"group":"Layout","label":"Shell","href":"#ce-shell","tag":"ce-shell"},
-      {"group":"Layout","label":"Hero","href":"#ce-hero","tag":"ce-hero"}
-    ]'>
-  </ce-nav-list>
-  <ce-section title="ce-hero">
-    <ce-hero title="Page title" kicker="Section"></ce-hero>
-  </ce-section>
-</ce-docs-layout>
+<ce-feedback-sink subject="naming-2026-04-29">
+  <ce-feedback-bar item="genrender" label="Generative render">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-bookmark></ce-bookmark>
+    <ce-comment></ce-comment>
+  </ce-feedback-bar>
+  <ce-feedback-summary></ce-feedback-summary>
+  <ce-feedback-export></ce-feedback-export>
+</ce-feedback-sink>
 ```
+
+---
+
+## Library principles
+
+- **Light DOM by default** (ADR-002) — slots project light children, so streamed markdown / Mermaid / Chart.js content keeps working. Components opt into Shadow DOM (`createShadowRootWithStyles()`) only for style isolation.
+- **`--ce-*` tokens** (ADR-003) — never hardcode a color or radius; consumers retheme by overriding tokens.
+- **Three distribution modes** (ADR-004) — inline / linked-local / linked-CDN. The build helper picks per-output.
+- **Self-describing via meta JSON** (ADR-005) — every component ships with a validated `*.meta.json`. The schema is enforced as part of `pnpm check`.
+
+To add or modify a component, see `CONTRIBUTING.md` §4 (the ADR-005 authoring flow). The full ADRs are in `docs/adr/`.
+
+---
+
+## Where to look next
+
+- [`references/setup.md`](references/setup.md) — bundlers, SSR, framework integrations, bundle math.
+- [`references/tokens.md`](references/tokens.md) — full token catalog and the 11 themes with picking guidance.
+- [`references/recipes.md`](references/recipes.md) — extended composition examples (lesson page, chat surface, feedback dashboard, docs site).
+- [`references/index.md`](references/index.md) — auto-generated index of every component with a link to its meta JSON.
+- `src/<area>/<stem>/<stem>.meta.json` — canonical per-component API.
+- `node skill/scripts/components.mjs --help` — filtered queries over the meta corpus.

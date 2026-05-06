@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-diff",
+  "name": "Diff",
+  "className": "CeDiff",
+  "goal": "Render a line-level diff between two text blobs in unified or split layout.",
+  "description": "Compact LCS-based diff viewer for code review surfaces and PR comments. Choose unified (single column with +/−/ space markers) or split (two columns side-by-side). Header surfaces the language label and the add/delete summary. The LCS algorithm runs in O(n × m) so it's intended for short-to-medium diffs (a few hundred lines).",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "beforeText",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "before",
+      "description": "Original text (attribute: before). Falls back to slot=before."
+    },
+    {
+      "name": "afterText",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "after",
+      "description": "Changed text (attribute: after). Falls back to slot=after."
+    },
+    {
+      "name": "layout",
+      "type": "\"unified\" | \"split\"",
+      "required": false,
+      "default": "\"unified\"",
+      "reflect": true,
+      "description": "Diff layout."
+    },
+    {
+      "name": "language",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Informational language tag."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "before",
+      "description": "Original text source (alt to before attribute)."
+    },
+    {
+      "name": "after",
+      "description": "Changed text source (alt to after attribute)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Header padding + cell horizontal padding."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Header vertical padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Diff + header font size."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Code font."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Header font."
+    },
+    {
+      "name": "--ce-code-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Body background."
+    },
+    {
+      "name": "--ce-code-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Code text color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header text + context marker."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Header background."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Add marker color."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Add row background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Delete marker color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Delete row background."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Language pill radius."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border + header rule."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-code",
+    "ce-compare"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "code",
+    "review"
+  ]
+}

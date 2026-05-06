@@ -1,7 +1,7 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.2.0",
-  "description": "A collection of 31 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
+  "version": "0.3.0",
+  "description": "A collection of 72 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface and feedback-UI primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
   "homepage": "https://github.com/zarly/custom-elements-collection#readme",
@@ -42,152 +42,308 @@
       "types": "./dist/manifest.d.ts",
       "import": "./dist/manifest.js"
     },
-    "./tokens.css": "./dist/tokens/tokens.css",
-    "./dark.css": "./dist/tokens/dark.css",
-    "./light.css": "./dist/tokens/light.css",
-    "./swiss.css": "./dist/tokens/swiss.css",
     "./bauhaus.css": "./dist/tokens/bauhaus.css",
+    "./dark.css": "./dist/tokens/dark.css",
+    "./gruvbox.css": "./dist/tokens/gruvbox.css",
+    "./light.css": "./dist/tokens/light.css",
+    "./memphis.css": "./dist/tokens/memphis.css",
     "./muji.css": "./dist/tokens/muji.css",
     "./neo-brutal.css": "./dist/tokens/neo-brutal.css",
-    "./solarized.css": "./dist/tokens/solarized.css",
     "./nordic.css": "./dist/tokens/nordic.css",
-    "./memphis.css": "./dist/tokens/memphis.css",
-    "./gruvbox.css": "./dist/tokens/gruvbox.css",
-    "./hero": {
-      "types": "./dist/entries/hero.d.ts",
-      "import": "./dist/entries/hero.js"
+    "./solarized.css": "./dist/tokens/solarized.css",
+    "./swiss.css": "./dist/tokens/swiss.css",
+    "./tokens.css": "./dist/tokens/tokens.css",
+    "./meta": "./dist/meta/index.json",
+    "./meta/*.json": "./dist/meta/*.json",
+    "./registry": "./dist/registry.json",
+    "./registry/*.json": "./dist/registry/*.json",
+    "./abbr": {
+      "types": "./dist/entries/abbr.d.ts",
+      "import": "./dist/entries/abbr.js"
     },
-    "./card": {
-      "types": "./dist/entries/card.d.ts",
-      "import": "./dist/entries/card.js"
-    },
-    "./shell": {
-      "types": "./dist/entries/shell.d.ts",
-      "import": "./dist/entries/shell.js"
-    },
-    "./section": {
-      "types": "./dist/entries/section.d.ts",
-      "import": "./dist/entries/section.js"
-    },
-    "./grid": {
-      "types": "./dist/entries/grid.d.ts",
-      "import": "./dist/entries/grid.js"
-    },
-    "./chip": {
-      "types": "./dist/entries/chip.d.ts",
-      "import": "./dist/entries/chip.js"
-    },
-    "./table": {
-      "types": "./dist/entries/table.d.ts",
-      "import": "./dist/entries/table.js"
-    },
-    "./callout": {
-      "types": "./dist/entries/callout.d.ts",
-      "import": "./dist/entries/callout.js"
-    },
-    "./kpi": {
-      "types": "./dist/entries/kpi.d.ts",
-      "import": "./dist/entries/kpi.js"
-    },
-    "./progress": {
-      "types": "./dist/entries/progress.d.ts",
-      "import": "./dist/entries/progress.js"
+    "./badge": {
+      "types": "./dist/entries/badge.d.ts",
+      "import": "./dist/entries/badge.js"
     },
     "./bar-chart": {
       "types": "./dist/entries/bar-chart.d.ts",
       "import": "./dist/entries/bar-chart.js"
     },
-    "./details": {
-      "types": "./dist/entries/details.d.ts",
-      "import": "./dist/entries/details.js"
+    "./bookmark": {
+      "types": "./dist/entries/bookmark.d.ts",
+      "import": "./dist/entries/bookmark.js"
     },
-    "./verdict": {
-      "types": "./dist/entries/verdict.d.ts",
-      "import": "./dist/entries/verdict.js"
+    "./button": {
+      "types": "./dist/entries/button.d.ts",
+      "import": "./dist/entries/button.js"
     },
-    "./timeline": {
-      "types": "./dist/entries/timeline.d.ts",
-      "import": "./dist/entries/timeline.js"
+    "./callout": {
+      "types": "./dist/entries/callout.d.ts",
+      "import": "./dist/entries/callout.js"
     },
-    "./compare": {
-      "types": "./dist/entries/compare.d.ts",
-      "import": "./dist/entries/compare.js"
-    },
-    "./code": {
-      "types": "./dist/entries/code.d.ts",
-      "import": "./dist/entries/code.js"
-    },
-    "./toc": {
-      "types": "./dist/entries/toc.d.ts",
-      "import": "./dist/entries/toc.js"
-    },
-    "./flow": {
-      "types": "./dist/entries/flow.d.ts",
-      "import": "./dist/entries/flow.js"
-    },
-    "./heatmap": {
-      "types": "./dist/entries/heatmap.d.ts",
-      "import": "./dist/entries/heatmap.js"
-    },
-    "./persona": {
-      "types": "./dist/entries/persona.d.ts",
-      "import": "./dist/entries/persona.js"
-    },
-    "./feature-card": {
-      "types": "./dist/entries/feature-card.d.ts",
-      "import": "./dist/entries/feature-card.js"
-    },
-    "./decision-tree": {
-      "types": "./dist/entries/decision-tree.d.ts",
-      "import": "./dist/entries/decision-tree.js"
-    },
-    "./example": {
-      "types": "./dist/entries/example.d.ts",
-      "import": "./dist/entries/example.js"
-    },
-    "./filter-bar": {
-      "types": "./dist/entries/filter-bar.d.ts",
-      "import": "./dist/entries/filter-bar.js"
+    "./card": {
+      "types": "./dist/entries/card.d.ts",
+      "import": "./dist/entries/card.js"
     },
     "./chart": {
       "types": "./dist/entries/chart.d.ts",
       "import": "./dist/entries/chart.js"
     },
-    "./lesson-frame": {
-      "types": "./dist/entries/lesson-frame.d.ts",
-      "import": "./dist/entries/lesson-frame.js"
+    "./chat-bubble": {
+      "types": "./dist/entries/chat-bubble.d.ts",
+      "import": "./dist/entries/chat-bubble.js"
     },
-    "./lesson-rule": {
-      "types": "./dist/entries/lesson-rule.d.ts",
-      "import": "./dist/entries/lesson-rule.js"
+    "./checkbox": {
+      "types": "./dist/entries/checkbox.d.ts",
+      "import": "./dist/entries/checkbox.js"
     },
-    "./lesson-gap": {
-      "types": "./dist/entries/lesson-gap.d.ts",
-      "import": "./dist/entries/lesson-gap.js"
+    "./checklist": {
+      "types": "./dist/entries/checklist.d.ts",
+      "import": "./dist/entries/checklist.js"
     },
-    "./lesson-quiz": {
-      "types": "./dist/entries/lesson-quiz.d.ts",
-      "import": "./dist/entries/lesson-quiz.js"
+    "./chip": {
+      "types": "./dist/entries/chip.d.ts",
+      "import": "./dist/entries/chip.js"
     },
-    "./lesson-quickfire": {
-      "types": "./dist/entries/lesson-quickfire.d.ts",
-      "import": "./dist/entries/lesson-quickfire.js"
+    "./citation": {
+      "types": "./dist/entries/citation.d.ts",
+      "import": "./dist/entries/citation.js"
     },
-    "./lesson-audio": {
-      "types": "./dist/entries/lesson-audio.d.ts",
-      "import": "./dist/entries/lesson-audio.js"
+    "./clock": {
+      "types": "./dist/entries/clock.d.ts",
+      "import": "./dist/entries/clock.js"
+    },
+    "./code": {
+      "types": "./dist/entries/code.d.ts",
+      "import": "./dist/entries/code.js"
+    },
+    "./comment": {
+      "types": "./dist/entries/comment.d.ts",
+      "import": "./dist/entries/comment.js"
+    },
+    "./compare": {
+      "types": "./dist/entries/compare.d.ts",
+      "import": "./dist/entries/compare.js"
+    },
+    "./confirm": {
+      "types": "./dist/entries/confirm.d.ts",
+      "import": "./dist/entries/confirm.js"
+    },
+    "./copy-button": {
+      "types": "./dist/entries/copy-button.d.ts",
+      "import": "./dist/entries/copy-button.js"
+    },
+    "./counter": {
+      "types": "./dist/entries/counter.d.ts",
+      "import": "./dist/entries/counter.js"
+    },
+    "./cursor": {
+      "types": "./dist/entries/cursor.d.ts",
+      "import": "./dist/entries/cursor.js"
+    },
+    "./decision-tree": {
+      "types": "./dist/entries/decision-tree.d.ts",
+      "import": "./dist/entries/decision-tree.js"
+    },
+    "./details": {
+      "types": "./dist/entries/details.d.ts",
+      "import": "./dist/entries/details.js"
+    },
+    "./diff": {
+      "types": "./dist/entries/diff.d.ts",
+      "import": "./dist/entries/diff.js"
+    },
+    "./dismiss": {
+      "types": "./dist/entries/dismiss.d.ts",
+      "import": "./dist/entries/dismiss.js"
     },
     "./docs-layout": {
       "types": "./dist/entries/docs-layout.d.ts",
       "import": "./dist/entries/docs-layout.js"
     },
+    "./donut": {
+      "types": "./dist/entries/donut.d.ts",
+      "import": "./dist/entries/donut.js"
+    },
+    "./example": {
+      "types": "./dist/entries/example.d.ts",
+      "import": "./dist/entries/example.js"
+    },
+    "./feature-card": {
+      "types": "./dist/entries/feature-card.d.ts",
+      "import": "./dist/entries/feature-card.js"
+    },
+    "./feedback-bar": {
+      "types": "./dist/entries/feedback-bar.d.ts",
+      "import": "./dist/entries/feedback-bar.js"
+    },
+    "./feedback-export": {
+      "types": "./dist/entries/feedback-export.d.ts",
+      "import": "./dist/entries/feedback-export.js"
+    },
+    "./feedback-heatmap": {
+      "types": "./dist/entries/feedback-heatmap.d.ts",
+      "import": "./dist/entries/feedback-heatmap.js"
+    },
+    "./feedback-sink": {
+      "types": "./dist/entries/feedback-sink.d.ts",
+      "import": "./dist/entries/feedback-sink.js"
+    },
+    "./feedback-summary": {
+      "types": "./dist/entries/feedback-summary.d.ts",
+      "import": "./dist/entries/feedback-summary.js"
+    },
+    "./file-card": {
+      "types": "./dist/entries/file-card.d.ts",
+      "import": "./dist/entries/file-card.js"
+    },
+    "./filter-bar": {
+      "types": "./dist/entries/filter-bar.d.ts",
+      "import": "./dist/entries/filter-bar.js"
+    },
+    "./flow": {
+      "types": "./dist/entries/flow.d.ts",
+      "import": "./dist/entries/flow.js"
+    },
+    "./gauge": {
+      "types": "./dist/entries/gauge.d.ts",
+      "import": "./dist/entries/gauge.js"
+    },
+    "./grid": {
+      "types": "./dist/entries/grid.d.ts",
+      "import": "./dist/entries/grid.js"
+    },
+    "./heatmap": {
+      "types": "./dist/entries/heatmap.d.ts",
+      "import": "./dist/entries/heatmap.js"
+    },
+    "./hero": {
+      "types": "./dist/entries/hero.d.ts",
+      "import": "./dist/entries/hero.js"
+    },
+    "./image": {
+      "types": "./dist/entries/image.d.ts",
+      "import": "./dist/entries/image.js"
+    },
+    "./input": {
+      "types": "./dist/entries/input.d.ts",
+      "import": "./dist/entries/input.js"
+    },
+    "./json": {
+      "types": "./dist/entries/json.d.ts",
+      "import": "./dist/entries/json.js"
+    },
+    "./key-value": {
+      "types": "./dist/entries/key-value.d.ts",
+      "import": "./dist/entries/key-value.js"
+    },
+    "./kpi": {
+      "types": "./dist/entries/kpi.d.ts",
+      "import": "./dist/entries/kpi.js"
+    },
+    "./lesson-audio": {
+      "types": "./dist/entries/lesson-audio.d.ts",
+      "import": "./dist/entries/lesson-audio.js"
+    },
+    "./lesson-frame": {
+      "types": "./dist/entries/lesson-frame.d.ts",
+      "import": "./dist/entries/lesson-frame.js"
+    },
+    "./lesson-gap": {
+      "types": "./dist/entries/lesson-gap.d.ts",
+      "import": "./dist/entries/lesson-gap.js"
+    },
+    "./lesson-quickfire": {
+      "types": "./dist/entries/lesson-quickfire.d.ts",
+      "import": "./dist/entries/lesson-quickfire.js"
+    },
+    "./lesson-quiz": {
+      "types": "./dist/entries/lesson-quiz.d.ts",
+      "import": "./dist/entries/lesson-quiz.js"
+    },
+    "./lesson-rule": {
+      "types": "./dist/entries/lesson-rule.d.ts",
+      "import": "./dist/entries/lesson-rule.js"
+    },
     "./nav-list": {
       "types": "./dist/entries/nav-list.d.ts",
       "import": "./dist/entries/nav-list.js"
     },
+    "./persona": {
+      "types": "./dist/entries/persona.d.ts",
+      "import": "./dist/entries/persona.js"
+    },
+    "./progress": {
+      "types": "./dist/entries/progress.d.ts",
+      "import": "./dist/entries/progress.js"
+    },
+    "./rating": {
+      "types": "./dist/entries/rating.d.ts",
+      "import": "./dist/entries/rating.js"
+    },
+    "./retry-button": {
+      "types": "./dist/entries/retry-button.d.ts",
+      "import": "./dist/entries/retry-button.js"
+    },
+    "./section": {
+      "types": "./dist/entries/section.d.ts",
+      "import": "./dist/entries/section.js"
+    },
+    "./shell": {
+      "types": "./dist/entries/shell.d.ts",
+      "import": "./dist/entries/shell.js"
+    },
+    "./skeleton": {
+      "types": "./dist/entries/skeleton.d.ts",
+      "import": "./dist/entries/skeleton.js"
+    },
+    "./sparkline": {
+      "types": "./dist/entries/sparkline.d.ts",
+      "import": "./dist/entries/sparkline.js"
+    },
+    "./stat-group": {
+      "types": "./dist/entries/stat-group.d.ts",
+      "import": "./dist/entries/stat-group.js"
+    },
+    "./status-light": {
+      "types": "./dist/entries/status-light.d.ts",
+      "import": "./dist/entries/status-light.js"
+    },
+    "./table": {
+      "types": "./dist/entries/table.d.ts",
+      "import": "./dist/entries/table.js"
+    },
+    "./textarea": {
+      "types": "./dist/entries/textarea.d.ts",
+      "import": "./dist/entries/textarea.js"
+    },
     "./theme-switcher": {
       "types": "./dist/entries/theme-switcher.d.ts",
       "import": "./dist/entries/theme-switcher.js"
+    },
+    "./thinking": {
+      "types": "./dist/entries/thinking.d.ts",
+      "import": "./dist/entries/thinking.js"
+    },
+    "./timeline": {
+      "types": "./dist/entries/timeline.d.ts",
+      "import": "./dist/entries/timeline.js"
+    },
+    "./toc": {
+      "types": "./dist/entries/toc.d.ts",
+      "import": "./dist/entries/toc.js"
+    },
+    "./toggle": {
+      "types": "./dist/entries/toggle.d.ts",
+      "import": "./dist/entries/toggle.js"
+    },
+    "./tool-call": {
+      "types": "./dist/entries/tool-call.d.ts",
+      "import": "./dist/entries/tool-call.js"
+    },
+    "./verdict": {
+      "types": "./dist/entries/verdict.d.ts",
+      "import": "./dist/entries/verdict.js"
     }
   },
   "files": [
@@ -201,6 +357,7 @@
     "**/*.css"
   ],
   "scripts": {
+    "prebuild": "pnpm gen-exports",
     "build": "vite build && tsc -p tsconfig.build.json",
     "dev": "vite",
     "demo": "vite --config demo/vite.config.js",
@@ -208,22 +365,37 @@
     "demo:preview": "vite preview --config demo/vite.config.js",
     "test": "vitest run --config vitest.config.ts",
     "test:watch": "vitest --config vitest.config.ts",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "playwright install chromium",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "echo '(no lint)'",
-    "check": "pnpm typecheck && pnpm test && pnpm build",
+    "validate-meta": "tsx scripts/validate-meta.ts",
+    "gen-exports": "tsx scripts/generate-exports.ts",
+    "gen-registry": "tsx scripts/generate-registry.ts",
+    "gen-skill": "tsx scripts/generate-skill.ts",
+    "gen-skill:check": "tsx scripts/generate-skill.ts --check",
+    "build-publish-manifest": "tsx scripts/build-publish-manifest.ts",
+    "bundle-stats": "tsx scripts/bundle-stats.ts",
+    "analyze": "ANALYZE=1 vite build && tsc -p tsconfig.build.json && pnpm bundle-stats",
+    "check": "pnpm typecheck && pnpm validate-meta && pnpm gen-skill:check && pnpm test && pnpm build",
     "pack:inspect": "pnpm pack --pack-destination /tmp && echo '→ tarball at /tmp/custom-elements-collection-<version>.tgz'",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm gen-exports && pnpm build-publish-manifest --apply"
   },
   "devDependencies": {
+    "@playwright/test": "1.59.1",
     "@types/node": "22.8.6",
     "jsdom": "25.0.1",
     "lit": "3.2.1",
-    "typescript": "5.6.3",
+    "rollup-plugin-visualizer": "7.0.1",
+    "tsx": "4.19.2",
+    "typescript": "5.9.3",
     "vite": "5.4.10",
-    "vitest": "2.1.4"
+    "vitest": "2.1.4",
+    "zod": "3.23.8"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "publishConfig": {
     "access": "public"

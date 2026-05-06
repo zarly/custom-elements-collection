@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-callout",
+  "name": "Callout",
+  "className": "CeCallout",
+  "goal": "Highlight short admonition text (info / success / warn / danger / neutral) with a left-border accent and tinted background.",
+  "description": "Tinted left-border admonition box. Replaces drift between callout / admonition / alert / note / risk markup. Five semantic types color-code the border and background; an optional title overrides via attribute or named slot.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "type",
+      "type": "CalloutType",
+      "required": false,
+      "default": "\"info\"",
+      "reflect": true,
+      "description": "Color tone: info / success / warn / danger / neutral."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional bold title row. Use the title slot for custom markup."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Custom title markup; overrides the title attribute."
+    },
+    {
+      "name": "",
+      "description": "Body content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + inner vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner horizontal padding."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "info border + title color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "info background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text + neutral title color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "success border + title."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "success background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "warn border + title."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "warn background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "danger border + title."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "danger background."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "neutral border."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "neutral background."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Title bottom margin."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-verdict"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "callout",
+    "admonition"
+  ]
+}

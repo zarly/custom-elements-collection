@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-abbr",
+  "name": "Abbreviation",
+  "className": "CeAbbr",
+  "goal": "Render an inline abbreviation with a focusable, accessible tooltip-style expansion.",
+  "description": "Inline abbreviation glyph (e.g. 'API', 'WWW') with the full text exposed via the native title tooltip and aria-label. The host carries tabindex=0 so the expansion is reachable via keyboard. Shadow DOM only because the dotted underline uses the standardised :host styling.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "Full text the abbreviation expands to."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The abbreviation glyph."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Dotted underline color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "inline"
+  ],
+  "a11y": {
+    "notes": "tabindex=0 + aria-label make the expansion reachable by both screen readers and keyboard users."
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-button",
+  "name": "Button",
+  "className": "CeButton",
+  "goal": "Provide a token-driven button with primary/secondary/ghost/destructive variants and a loading state.",
+  "description": "Themable action button. Wraps a native <button> so keyboard, focus, and form-submit behavior come for free; emits ce-click in addition. Loading state replaces the label with a spinner and blocks activation. Accepts an icon attribute or a named `icon` slot for arbitrary glyphs/SVG.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "variant",
+      "type": "\"primary\" | \"secondary\" | \"ghost\" | \"destructive\"",
+      "required": false,
+      "default": "\"primary\"",
+      "reflect": true,
+      "description": "Visual variant."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Button size."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable the button."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Show a spinner and block activation."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Glyph rendered before the label."
+    },
+    {
+      "name": "type",
+      "type": "\"button\" | \"submit\" | \"reset\"",
+      "required": false,
+      "default": "\"button\"",
+      "description": "Forwarded to the inner native <button> element."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-click",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on a non-disabled, non-loading activation (click, Enter, Space)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Button label."
+    },
+    {
+      "name": "icon",
+      "description": "Optional icon override (HTML/SVG). Falls back to the icon attribute."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between icon and label."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "size=sm font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "size=lg font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Line height."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Destructive background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary background."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary hover background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary hover border."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary/ghost text color."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Ghost hover overlay."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/focus transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-toggle",
+    "ce-confirm"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ]
+}

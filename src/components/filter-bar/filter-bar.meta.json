@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-filter-bar",
+  "name": "FilterBar",
+  "className": "CeFilterBar",
+  "goal": "Render a chip-toggle filter row with single- or multi-select semantics and a comma-joined value.",
+  "description": "Chip-style filter bar. Each option becomes a pressable pill; aria-pressed reflects selection state. Single-select by default; multiple=true allows multi-select with the value attribute holding a comma-joined string.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional label shown left of the chips."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Currently selected value(s); comma-joined when multiple."
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Allow multiple selection."
+    },
+    {
+      "name": "options",
+      "type": "FilterOption[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { value, label, count? }."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-filter-change",
+      "detail": "{ value: string; values: string[] }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when an option is toggled. value is the comma-joined string; values is the parsed array."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer gap."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label + chip font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Label margin + chip vertical padding."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Chip default background."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Chip default border."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Chip default text."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Chip radius."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Chip horizontal padding."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Chip transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected + hover-border color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected chip text."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count label font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "filter",
+    "chips"
+  ],
+  "a11y": {
+    "notes": "Each chip is a <button> with aria-pressed reflecting selection state."
+  }
+}

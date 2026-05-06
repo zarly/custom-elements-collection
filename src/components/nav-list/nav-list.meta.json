@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-nav-list",
+  "name": "NavList",
+  "className": "CeNavList",
+  "goal": "Render a grouped anchor list for documentation sidebars with active-item highlighting and a select event.",
+  "description": "Grouped sidebar nav. Items group themselves by their group field; the entry whose href matches value is marked aria-current=page and tinted blue. Each click dispatches ce-nav-select with the href before native navigation runs.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "items",
+      "type": "NavItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { label, href, group?, tag? }."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Currently active href (for highlighting)."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional sidebar title."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-nav-select",
+      "detail": "{ href: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when an item is clicked, before native anchor navigation runs."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding + group label top padding."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Title vertical padding + link inner gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Title + group + link horizontal padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Title + group + tag font size."
+    },
+    {
+      "name": "--ce-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Title color + tag default color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Group label color."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Group label bottom padding."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Link vertical padding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Link default color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Link hover background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Active link color + tag accent."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Active link background."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Tag font family."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-docs-layout",
+    "ce-toc"
+  ],
+  "category": "internal",
+  "tier": "layout",
+  "tags": [
+    "Docs",
+    "navigation",
+    "internal"
+  ],
+  "a11y": {
+    "notes": "Active link sets aria-current=page; non-active links set aria-current=false."
+  }
+}

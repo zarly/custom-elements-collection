@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feature-card",
+  "name": "FeatureCard",
+  "className": "CeFeatureCard",
+  "goal": "Present a feature with an icon, title, body, and optional CTA button or link.",
+  "description": "Marketing-style feature card. Top: tinted icon disk. Middle: title + slotted body. Bottom: optional CTA — rendered as an <a> when href is set, otherwise a <button> that emits ce-feature-cta. Six color tints adjust the icon disk.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Emoji or short text glyph used as the icon."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Card heading."
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Call-to-action label. Empty = no CTA rendered."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "If set together with cta, renders as a link instead of a button."
+    },
+    {
+      "name": "color",
+      "type": "CecColor",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "Icon disk color tint."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-feature-cta",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the button-form CTA is clicked (only when href is empty)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Body content between title and CTA."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner vertical gap + CTA top margin."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card radius."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border transition."
+    },
+    {
+      "name": "--ce-sz-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon disk dimensions."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Icon disk + CTA radius."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default icon disk background."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green icon background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green icon text."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red icon background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red icon text."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber icon background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber icon text."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue icon background + CTA hover."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue icon text + CTA color."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "CTA border."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple icon background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple icon text."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan icon background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan icon text."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body + CTA font size."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "CTA vertical inset."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "CTA horizontal padding."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "CTA hover transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-card"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "feature",
+    "marketing"
+  ]
+}

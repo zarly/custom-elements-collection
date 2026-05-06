@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-cursor",
+  "name": "Cursor",
+  "className": "CeCursor",
+  "goal": "Render a blinking caret indicator beside streaming LLM-generated text.",
+  "description": "A purely visual blinking caret used by chat surfaces while assistant tokens are arriving. Three shapes (bar, block, underline) and a configurable blink interval; no slots, no events, no state.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "shape",
+      "type": "\"bar\" | \"block\" | \"underline\"",
+      "required": false,
+      "default": "\"bar\"",
+      "reflect": true,
+      "description": "Caret geometry: bar (thin vertical), block (full character cell), underline (baseline tick)."
+    },
+    {
+      "name": "blinkMs",
+      "type": "number",
+      "required": false,
+      "default": "1000",
+      "attribute": "blink-ms",
+      "description": "Total blink cycle duration in milliseconds."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default caret color."
+    },
+    {
+      "name": "--ce-cursor-color",
+      "kind": "color",
+      "source": "local",
+      "description": "Per-instance caret color override.",
+      "fallback": "var(--ce-text)"
+    },
+    {
+      "name": "--ce-cursor-blink-ms",
+      "kind": "other",
+      "source": "local",
+      "description": "Inline-set blink interval; consumes the blink-ms attribute."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Renders an aria-hidden span with a CSS keyframe blink animation.",
+      "reason": "Purely visual streaming-caret indicator."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-thinking",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "streaming",
+    "caret",
+    "brick"
+  ],
+  "a11y": {
+    "notes": "The caret is decorative; the rendered span is aria-hidden so screen readers don't announce a blinking artifact. Respects prefers-reduced-motion."
+  }
+}

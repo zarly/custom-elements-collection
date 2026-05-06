@@ -1,0 +1,23 @@
+<!-- @example Syntax -->
+<ce-tool-call name="search" status="ok" duration-ms="234" open><pre slot="args">…</pre><pre slot="result">…</pre></ce-tool-call>
+
+<!-- @example Successful tool call -->
+<ce-tool-call name="web_search" status="ok" duration-ms="612" open>
+  <pre slot="args" style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">{ "query": "lit element shadow dom", "count": 3 }</pre>
+  <pre slot="result" style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">[
+  { "title": "Lit · Shadow DOM", "url": "https://lit.dev/docs/components/shadow-dom/" },
+  { "title": "MDN: Using shadow DOM", "url": "https://developer.mozilla.org/…" }
+]</pre>
+</ce-tool-call>
+
+<!-- @example Running tool -->
+<ce-tool-call name="run_python" status="running" open>
+  <pre slot="args" style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">print(2 ** 16)</pre>
+</ce-tool-call>
+
+<!-- @example Failed tool -->
+<ce-tool-call name="fetch_url" status="error" duration-ms="3024" open>
+  <pre slot="args" style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">{ "url": "https://example.invalid" }</pre>
+  <pre slot="error" style="margin:0;font-family:var(--ce-font-mono);font-size:12px;color:var(--ce-color-red);">DNS resolution failed: ENOTFOUND example.invalid</pre>
+</ce-tool-call>
+

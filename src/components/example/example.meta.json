@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-example",
+  "name": "Example",
+  "className": "CeExample",
+  "goal": "Mark a snippet as a Good / Wrong / neutral example with a colored left-border accent and label.",
+  "description": "Color-coded example block. type=good tints green and labels 'Good'; type=bad tints red and labels 'Wrong'; type=neutral uses a neutral border and labels 'Example'. Consumers can override the label text via the label attribute.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "type",
+      "type": "ExampleType",
+      "required": false,
+      "default": "\"neutral\"",
+      "reflect": true,
+      "description": "good (green) / bad (red) / neutral."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Override the default label ('Good' / 'Wrong' / 'Example')."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Example body content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Default background."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Default left border."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "type=good border + label."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=good background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "type=bad border + label."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "type=bad background."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Label bottom margin."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-compare"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "example",
+    "good-bad"
+  ]
+}

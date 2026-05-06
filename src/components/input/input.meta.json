@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-input",
+  "name": "Input",
+  "className": "CeInput",
+  "goal": "Provide a labelled text input with help, error, prefix, and suffix slots and consistent themed styling.",
+  "description": "Token-driven labelled input. Wraps a native <input> so type, required, pattern, and other validation attributes work natively. Renders a label, optional help text, and an error region; aria-invalid + aria-describedby are kept in sync. ce-input fires per keystroke; ce-change fires on blur/Enter.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Current value."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name."
+    },
+    {
+      "name": "type",
+      "type": "\"text\" | \"email\" | \"number\" | \"password\"",
+      "required": false,
+      "default": "\"text\"",
+      "description": "HTML input type."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Placeholder text."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Mark as required (also adds asterisk to label)."
+    },
+    {
+      "name": "pattern",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Regex pattern (forwarded to native input)."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Label text."
+    },
+    {
+      "name": "help",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Help text shown when no error."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Error text; takes precedence over help and sets aria-invalid."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable input."
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Manual invalid state without error text."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-input",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on every keystroke."
+    },
+    {
+      "name": "ce-change",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on commit (blur, Enter)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "prefix",
+      "description": "Inline prefix (e.g. icon, currency symbol)."
+    },
+    {
+      "name": "suffix",
+      "description": "Inline suffix (e.g. unit, validation icon)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between label, field, help/error."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Prefix/suffix horizontal padding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Input + label text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Placeholder + help text."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label + input font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Help/error font size."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Field background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Field border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focused field border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Invalid border + error text."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Field radius."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Input inner padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border/shadow transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-textarea",
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ]
+}

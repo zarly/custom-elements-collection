@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-image",
+  "name": "Image",
+  "className": "CeImage",
+  "goal": "Render a lazily-loaded image with optional caption and graceful fallback when the source fails.",
+  "description": "Themable <figure> wrapping a native <img>. Defaults to lazy loading; on a load error, swaps to a fallback URL when provided or shows a styled error placeholder otherwise. Caption can be set as an attribute or via the named slot. Emits ce-image-error so consumers can log or substitute.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "Image URL."
+    },
+    {
+      "name": "alt",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Alt text."
+    },
+    {
+      "name": "caption",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Caption rendered below the image."
+    },
+    {
+      "name": "width",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Width hint (CSS px)."
+    },
+    {
+      "name": "height",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Height hint (CSS px)."
+    },
+    {
+      "name": "fallback",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Fallback URL on load error."
+    },
+    {
+      "name": "loading",
+      "type": "\"eager\" | \"lazy\"",
+      "required": false,
+      "default": "\"lazy\"",
+      "description": "Image loading strategy."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-image-error",
+      "detail": "{ src: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired once when the image fails to load."
+    }
+  ],
+  "slots": [
+    {
+      "name": "caption",
+      "description": "Override the caption attribute with arbitrary HTML."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between image and caption."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Error-placeholder padding."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Caption font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Caption line height."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Caption + error text color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Image radius."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Image background while loading + error placeholder background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Error placeholder border."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-file-card"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "content"
+  ]
+}

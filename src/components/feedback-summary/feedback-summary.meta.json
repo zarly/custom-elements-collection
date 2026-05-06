@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-feedback-summary",
+  "name": "Feedback summary",
+  "className": "CeFeedbackSummary",
+  "goal": "Render aggregated feedback statistics from an ancestor ce-feedback-sink as plain HTML stat cells with no internal-component dependency.",
+  "description": "Read-only dashboard panel. On connect, walks up to find the nearest ce-feedback-sink, pulls its current state, and (when live) listens to ce-feedback-state events to re-render. Sections are selected via the show attribute (any of: counts, avg, top-liked, top-disliked, distribution). top-n caps the top-N lists; live=false freezes after the initial render. Plain HTML output keyed off --ce-* tokens — does not depend on ce-kpi or any other internal component, keeping the feedback set zero-internal-dep.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "subject",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional override; defaults to the ancestor sink's subject."
+    },
+    {
+      "name": "show",
+      "type": "string",
+      "required": false,
+      "default": "\"counts avg\"",
+      "description": "Space-separated list of sections to render (counts | avg | top-liked | top-disliked | distribution)."
+    },
+    {
+      "name": "topN",
+      "type": "number",
+      "required": false,
+      "default": "3",
+      "attribute": "top-n",
+      "description": "Cap for top-liked / top-disliked lists."
+    },
+    {
+      "name": "live",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "When true, listens to ce-feedback-state events and re-renders."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-text-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Section title and label color; falls back to --ce-muted.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label fallback."
+    },
+    {
+      "name": "--ce-bg-elevated",
+      "kind": "color",
+      "source": "token",
+      "description": "Section card background; falls back to --ce-surface-2.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Section card background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Section card border."
+    },
+    {
+      "name": "--ce-radius-md",
+      "kind": "radius",
+      "source": "token",
+      "description": "Section card radius; falls back to --ce-radius-sm.",
+      "fallback": "var(--ce-radius-sm)"
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Radius fallback."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Internal small gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding y + internal gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding x + outer margin + section gap."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Top-list font size."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Count number font size; falls back to 18px.",
+      "fallback": "18px"
+    },
+    {
+      "name": "--ce-gold",
+      "kind": "color",
+      "source": "token",
+      "description": "Average rating + distribution bar color; falls back to --ce-color-amber.",
+      "fallback": "var(--ce-color-amber)"
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Gold fallback."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Monospace font for item ids."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [
+    "ce-feedback-sink"
+  ],
+  "related": [
+    "ce-feedback-bar",
+    "ce-feedback-export"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "aggregation",
+    "widget"
+  ],
+  "a11y": {
+    "notes": "Read-only stat panel; titles + labels carry semantic text. No interactive controls."
+  }
+}

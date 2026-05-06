@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-checkbox",
+  "name": "Checkbox",
+  "className": "CeCheckbox",
+  "goal": "Provide a themable checkbox control with checked/indeterminate states and full keyboard support.",
+  "description": "Three-state checkbox (unchecked / checked / indeterminate). Indeterminate is a visual middle state used for parent rows of partially-selected groups; toggling clears it and selects the box. Carries role=checkbox + aria-checked (true/false/mixed) and supports Space and Enter to toggle.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Checked state."
+    },
+    {
+      "name": "indeterminate",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Visual mixed state; cleared on user toggle."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable interaction."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Inline label."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form-control name (reserved)."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form-control value (reserved)."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ checked: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when state changes."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional content rendered to the right of the box."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between box and label."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Unchecked box background."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Unchecked box border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Checked box fill."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Box radius."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on box."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-toggle",
+    "ce-checklist"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ],
+  "a11y": {
+    "role": "checkbox",
+    "notes": "aria-checked reflects true/false/mixed depending on state. Activation works on click, Space, and Enter."
+  }
+}

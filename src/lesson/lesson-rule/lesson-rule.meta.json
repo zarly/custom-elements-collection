@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-rule",
+  "name": "LessonRule",
+  "className": "LessonRule",
+  "goal": "Display a numbered or 'golden' rule card with a circular badge, title, and explanatory body.",
+  "description": "Rule card for educational content. Top row shows a circular blue badge (number / glyph / ★) plus a title; below sits a slotted body. golden=true switches to amber styling for emphasized, top-of-lesson rules.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "number",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Rule number / glyph shown in the badge."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Rule title."
+    },
+    {
+      "name": "golden",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Emphasized amber styling for golden-rule cards."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Rule explanation / body content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Default background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + head row gap."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "golden border + badge background + title color."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "golden background."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Head bottom margin."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default badge background."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Badge text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title + body text color."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "lesson-frame"
+  ],
+  "category": "lesson",
+  "tier": "brick",
+  "tags": [
+    "Education",
+    "rule",
+    "lesson"
+  ]
+}

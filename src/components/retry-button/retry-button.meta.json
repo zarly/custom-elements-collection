@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-retry-button",
+  "name": "Retry button",
+  "className": "CeRetryButton",
+  "goal": "Provide a small \"regenerate\" affordance for chat surfaces that emits a single ce-retry intent on click.",
+  "description": "Compact button rendered in three styled variants (primary/secondary/ghost). Default content is a circular-arrow SVG plus the label, both replaceable via the default slot. Emits a bubbling, composed ce-retry CustomEvent on click — no detail payload.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Retry\"",
+      "description": "Visible label when no slotted content is provided."
+    },
+    {
+      "name": "variant",
+      "type": "\"primary\" | \"secondary\" | \"ghost\"",
+      "required": false,
+      "default": "\"secondary\"",
+      "reflect": true,
+      "description": "Visual variant; styling is driven via :host([variant=…]) selectors."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-retry",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on click. Hosts use this as the regenerate-this-message signal."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional override for the icon + label content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary variant background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary variant border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant text + hover color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant background tint."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant border tint."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Ghost variant hover overlay."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical inset."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between icon and label."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chat-bubble",
+    "ce-rating"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "action",
+    "feedback",
+    "brick"
+  ],
+  "a11y": {
+    "role": "button",
+    "notes": "Native <button>; the SVG is aria-hidden so the label drives the accessible name."
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-details",
+  "name": "Details",
+  "className": "CeDetails",
+  "goal": "Provide a styled, animated collapsible disclosure with a summary row and optional count chip.",
+  "description": "Thin wrapper over native <details> with chevron rotation, hover state, an optional right-aligned count chip, and a custom toggle event. Reflects open to the host attribute so consumers can style or query collapsed state.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "summary",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Summary row text. Use the summary slot for custom markup."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the panel is expanded."
+    },
+    {
+      "name": "count",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional right-aligned count chip in the summary row."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-details-toggle",
+      "detail": "{ open: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the consumer toggles the disclosure; detail mirrors the new open state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "summary",
+      "description": "Custom summary markup; overrides the summary attribute."
+    },
+    {
+      "name": "",
+      "description": "Body content shown when open."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + summary inner gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Summary vertical padding + body bottom padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Summary horizontal padding + body horizontal padding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Summary text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Chevron + count chip text."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Chevron rotation transition."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Chevron font size."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Summary hover background."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip font size."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip vertical inset."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Count chip radius."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip background."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip border."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "disclosure",
+    "collapsible"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-quiz",
+  "name": "LessonQuiz",
+  "className": "LessonQuiz",
+  "goal": "Run a single-question multiple-choice quiz with instant feedback, an explanation reveal, and a reset() method.",
+  "description": "Single-question multiple-choice quiz. Renders a question and a vertical list of options; clicking an option marks it green if correct or red if wrong (and outlines the correct one), shows the explanation below, and disables the rest. lesson-quiz-answer fires once per question.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "question",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Question text."
+    },
+    {
+      "name": "options",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Answer choices."
+    },
+    {
+      "name": "correct",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Index of the correct option in options."
+    },
+    {
+      "name": "explanation",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Shown after the user picks."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-quiz-answer",
+      "detail": "{ index: number; correct: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once when the user picks; detail.correct indicates whether the pick matched correct."
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Clears the picked state so the quiz can be retaken."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer + option border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Explanation top border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer border radius."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding + option horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + question bottom margin + explanation top spacing."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Question font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Question + option text color."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Options gap + option vertical padding."
+    },
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Option default background."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Option border radius."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Option border transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Option hover border."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct option border + outline."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct option background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Wrong option border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Wrong option background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Explanation text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Explanation font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "Tracks the picked option index in component state.",
+      "reason": "Required to render the post-answer UI and prevent re-answering."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "lesson-frame",
+    "lesson-gap"
+  ],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": [
+    "Education",
+    "quiz",
+    "multiple-choice"
+  ]
+}

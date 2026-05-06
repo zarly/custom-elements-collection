@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-audio",
+  "name": "LessonAudio",
+  "className": "LessonAudio",
+  "goal": "Play a short audio clip via a button with optional phonetic transcription and an inline error state.",
+  "description": "Pronunciation / audio-clip button. Renders a play button (label is configurable, default '🔊 Play') plus an optional monospace phonetic string. First click instantiates a single HTMLAudioElement and plays it; subsequent plays reuse the same element. Error states show inline.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Audio URL."
+    },
+    {
+      "name": "phonetic",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Phonetic transcription shown next to the button."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"🔊 Play\"",
+      "description": "Button label."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-audio-play",
+      "detail": "{ src: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires each time the user starts playback."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer + button radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Button text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button + phonetic font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Phonetic color."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Phonetic monospace family."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Error message color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Error message font size."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLAudioElement",
+      "purpose": "Plays the configured audio clip via new Audio(src).play().",
+      "writes": true
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Lazily constructs a single HTMLAudioElement on first play and binds its 'ended' / 'error' events.",
+      "reason": "Avoids preloading audio for every component instance and lets one button drive multiple plays."
+    },
+    {
+      "kind": "state",
+      "description": "Tracks playing and error state in component state.",
+      "reason": "Disables the button while playing and shows inline errors."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "lesson-frame"
+  ],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": [
+    "Education",
+    "audio",
+    "pronunciation"
+  ]
+}

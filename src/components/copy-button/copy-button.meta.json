@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-copy-button",
+  "name": "Copy button",
+  "className": "CeCopyButton",
+  "goal": "Provide a one-click copy-to-clipboard trigger that targets any element by id or CSS selector and reports success via a CustomEvent.",
+  "description": "A button paired with another element by `for=<id>` (or selector). Reads the target's textContent (or input/textarea value), writes it to the system clipboard via the Clipboard API, and falls back to a hidden textarea + execCommand path when the modern API is unavailable. The button briefly switches to the copied-label and dispatches ce-copy { text, ok }.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "for",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Element id (preferred) or CSS selector identifying what to copy."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Copy\"",
+      "description": "Default visible label."
+    },
+    {
+      "name": "copiedLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Copied\"",
+      "attribute": "copied-label",
+      "description": "Label shown for ~1.5s after a successful copy."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-copy",
+      "detail": "{ text: string; ok: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after every click attempt; ok=false when the target was missing or both clipboard paths failed."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Button label color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Copied-state color."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical inset."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "navigator.clipboard.writeText",
+      "purpose": "Primary path to copy resolved text to the system clipboard.",
+      "writes": true
+    },
+    {
+      "api": "document.execCommand('copy')",
+      "purpose": "Legacy fallback when the Clipboard API is unavailable or rejects.",
+      "writes": true
+    },
+    {
+      "api": "document.getElementById",
+      "purpose": "Resolve the `for` attribute as a bare id.",
+      "writes": false
+    },
+    {
+      "api": "document.querySelector",
+      "purpose": "Resolve the `for` attribute as a CSS selector when it doesn't match a bare id.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Transient hidden <textarea> injected during the execCommand fallback path.",
+      "reason": "Required for the legacy copy implementation when Clipboard API is unavailable.",
+      "guarded": true
+    },
+    {
+      "kind": "timer",
+      "description": "1500 ms setTimeout reverts the copied label.",
+      "reason": "Show momentary success affordance.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-code",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "clipboard",
+    "action",
+    "component"
+  ],
+  "a11y": {
+    "role": "button",
+    "notes": "Native <button>; aria-label mirrors the visible text and switches to the copied label briefly after success."
+  }
+}

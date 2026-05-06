@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-json",
+  "name": "JSON Viewer",
+  "className": "CeJson",
+  "goal": "Render a JSON value pretty-printed with collapse, error reporting, and optional truncation.",
+  "description": "Lightweight inline JSON viewer for chat surfaces and dashboards. Accepts a JSON string via the `src` attribute or the default slot, formats it with configurable indent, supports max-length truncation, and shows a summary toggle (Object{n} / Array(n)). Malformed input renders a styled error and emits ce-json-parse-error.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Inline JSON string. Falls back to default slot if empty."
+    },
+    {
+      "name": "indent",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "description": "Spaces per indent level."
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "attribute": "max-length",
+      "description": "Max output length (0 = unlimited)."
+    },
+    {
+      "name": "collapsed",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Render collapsed by default."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-json-parse-error",
+      "detail": "{ error: string, raw: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when input cannot be parsed as JSON."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Fallback JSON source when src is empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Toggle gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Toggle bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Mono font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Toggle/error font size."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Mono code font."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Toggle font."
+    },
+    {
+      "name": "--ce-code-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Surface background."
+    },
+    {
+      "name": "--ce-code-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Code text color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Toggle hover color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Toggle base color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Parse-error text."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Surface border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Surface radius."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "JSON.parse",
+      "purpose": "Parse and pretty-print input.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-code"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "code",
+    "data"
+  ]
+}

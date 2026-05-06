@@ -20,6 +20,7 @@ out/
 coverage/
 .nyc_output/
 playwright-report/
+playwright/.cache/
 test-results/
 *.lcov
 .vitest-cache/
@@ -56,6 +57,12 @@ tmp/
 # ───── Internal / operator-only notes ─────
 # Keep BRD, STATUS, PROGRESS, HANDOFF, TODO, NOTES etc. out of the public repo.
 internal/
+# Bundle analyzer artifacts — emitted by `pnpm analyze` into internal/, but
+# listed explicitly so contributors can grep this file and know what they are.
+internal/bundle-stats.jsonl
+internal/bundle-visualizer-treemap.html
+internal/bundle-visualizer-sunburst.html
+internal/bundle-visualizer-network.html
 vis/
 
 # ───── AI / assistant tooling artifacts ─────
@@ -63,6 +70,11 @@ vis/
 .aider*
 .cursor/
 .continue/
+
+# Project-local Claude memory + project-instructions files. Operator-only;
+# track via internal/ if a public mirror is needed.
+/CLAUDE.md
+/MEMORY.md
 
 # ───── Misc ─────
 *.local

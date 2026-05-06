@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-timeline",
+  "name": "Timeline",
+  "className": "CeTimeline",
+  "goal": "Render a vertical or horizontal timeline of titled events from a JSON items array.",
+  "description": "Timeline of TimelineItem entries. Each item has a title, optional meta line (date/duration/owner), optional description, optional color for the dot, and optional icon character. Vertical (default) renders a connecting rail; horizontal renders a row of equally-sized columns.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "items",
+      "type": "TimelineItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { title, meta?, description?, color?, icon? }."
+    },
+    {
+      "name": "orientation",
+      "type": "\"vertical\" | \"horizontal\"",
+      "required": false,
+      "default": "\"vertical\"",
+      "reflect": true,
+      "description": "Layout axis."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Vertical rail color + default dot border."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Item bottom padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal gap."
+    },
+    {
+      "name": "--ce-sz-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Dot diameter."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default dot background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default dot border."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Dot icon + meta font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default dot icon + meta + description text."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item green dot."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item green dot background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item red dot."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item red dot background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item amber dot."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item amber dot background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item blue dot."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item blue dot background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item purple dot."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item purple dot background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item cyan dot."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Per-item cyan dot background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title color."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Description font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Description top margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal-mode dot bottom margin."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-flow"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "timeline",
+    "events"
+  ]
+}

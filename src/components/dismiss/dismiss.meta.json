@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-dismiss",
+  "name": "Dismiss",
+  "className": "CeDismiss",
+  "goal": "Mark an item as not-interested / hide-from-view, with reduced-opacity styling propagated to the surrounding feedback-bar via a data attribute.",
+  "description": "Switch-semantic toggle for hide/drop semantics — the visual sibling to ce-bookmark with reversed defaults. When active, also sets data-ce-dismissed=true on the nearest ce-feedback-bar ancestor so consumers can dim the entire row via a CSS rule. Tolerates absence of an ancestor bar.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "active",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Toggle state."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Drop\"",
+      "description": "Text shown next to the icon and used as aria-label."
+    },
+    {
+      "name": "iconActive",
+      "type": "string",
+      "required": false,
+      "default": "\"🗑\"",
+      "attribute": "icon-active",
+      "description": "Emoji or text shown when active (item dismissed)."
+    },
+    {
+      "name": "iconInactive",
+      "type": "string",
+      "required": false,
+      "default": "\"👁\"",
+      "attribute": "icon-inactive",
+      "description": "Emoji or text shown when inactive (item visible)."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Visual scale."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-dismiss-change",
+      "detail": "{ active: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every toggle (click or Enter/Space)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Override both default emoji icons."
+    },
+    {
+      "name": "",
+      "description": "Override the label content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-bg-elevated",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background; falls back to --ce-surface-2.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border."
+    },
+    {
+      "name": "--ce-warn",
+      "kind": "color",
+      "source": "token",
+      "description": "Active state color; falls back to --ce-color-amber.",
+      "fallback": "var(--ce-color-amber)"
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Warn fallback."
+    },
+    {
+      "name": "--ce-radius-md",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button radius; falls back to --ce-radius-sm.",
+      "fallback": "var(--ce-radius-sm)"
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Radius fallback."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at sm."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at md."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Text size at lg."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/state transition."
+    },
+    {
+      "name": "--ce-dismiss-size",
+      "kind": "size",
+      "source": "local",
+      "description": "Per-instance icon size; size attribute drives default values."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets data-ce-dismissed=true on the nearest ce-feedback-bar ancestor when active.",
+      "reason": "Lets consumers apply a single CSS rule to dim the entire row.",
+      "guarded": true
+    }
+  ],
+  "dependents": [
+    "ce-feedback-bar"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-bookmark"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Feedback",
+    "feedback",
+    "toggle",
+    "brick"
+  ],
+  "a11y": {
+    "role": "switch",
+    "notes": "aria-checked mirrors active; aria-label comes from the label attribute. Enter/Space toggle."
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-tool-call",
+  "name": "Tool call",
+  "className": "CeToolCall",
+  "goal": "Render an LLM/agent tool invocation as a collapsible row with a status indicator, name, duration, and slotted args/result/error panels.",
+  "description": "Disclosure widget purpose-built for function-calling and MCP-call visibility. The header shows a status dot (running pulses; ok/error are static), the tool name in monospace, and a humanized duration. Clicking toggles a body panel that always renders args, plus result (status=ok) or error (status=error). Implements the disclosure semantics manually (header has aria-expanded + aria-controls) rather than wrapping native <details>, so styling is consistent across browsers.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Tool/function name shown in the header."
+    },
+    {
+      "name": "status",
+      "type": "\"running\" | \"ok\" | \"error\"",
+      "required": false,
+      "default": "\"running\"",
+      "reflect": true,
+      "description": "Current execution state; drives the dot color and which body slot renders."
+    },
+    {
+      "name": "durationMs",
+      "type": "number",
+      "required": false,
+      "default": "NaN",
+      "attribute": "duration-ms",
+      "description": "Wall-clock duration in milliseconds; omitted when not finite."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disclosure state. Reflected so consumers can style or query collapsed state."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-toolcall-toggle",
+      "detail": "{ open: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the user toggles the disclosure; detail carries the new open state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "args",
+      "description": "Input arguments payload — always rendered when the panel is open."
+    },
+    {
+      "name": "result",
+      "description": "Return value — rendered when status=ok."
+    },
+    {
+      "name": "error",
+      "description": "Error details — rendered when status=error."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Header/body separator."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Header text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Chevron and duration."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Header hover overlay."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Running dot color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "OK dot color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Error dot color."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "OK outer border tint."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Error outer border tint."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Tool-name font."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Header font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Duration + section-label size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer margin + header padding y + body inner gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Header padding x + body padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Header focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Body max-height animation."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Chevron rotation transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-details",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "tool-use",
+    "agentic",
+    "widget"
+  ],
+  "a11y": {
+    "notes": "Header is a button with aria-expanded reflecting open state and aria-controls pointing at the body panel id."
+  }
+}
