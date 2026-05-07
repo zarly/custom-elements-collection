@@ -1,0 +1,43 @@
+<!-- @example Labelled textarea with help -->
+<ce-textarea
+  label="Bio"
+  name="bio"
+  placeholder="A line or two about yourself…"
+  help="Shown on your public profile."
+></ce-textarea>
+
+<!-- @example Auto-grow up to 8 rows, then scroll -->
+<ce-textarea
+  label="Release notes"
+  name="notes"
+  rows="3"
+  max-rows="8"
+  placeholder="What changed in this release?"
+></ce-textarea>
+
+<!-- @example Required + error state -->
+<ce-textarea
+  label="Reason for refund"
+  name="reason"
+  required
+  value="Too short"
+  error="Please give us at least one full sentence."
+></ce-textarea>
+
+<!-- @example Disabled — read-only display -->
+<ce-textarea
+  label="Audit log"
+  value="2026-05-07 08:14 — Plan changed to Team
+2026-05-07 08:15 — 3 seats added
+2026-05-07 08:17 — Billing email updated"
+  rows="4"
+  disabled
+></ce-textarea>
+
+<!-- @example Pre-filled draft -->
+<ce-textarea
+  label="Reply"
+  name="reply"
+  rows="4"
+  value="Thanks for the report — we'll dig into this and circle back by Monday."
+></ce-textarea>

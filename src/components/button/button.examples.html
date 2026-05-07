@@ -1,0 +1,36 @@
+<!-- @example Four variants -->
+<div style="display:flex;gap:var(--ce-space-3);flex-wrap:wrap">
+  <ce-button>Save changes</ce-button>
+  <ce-button variant="secondary">Cancel</ce-button>
+  <ce-button variant="ghost">Skip</ce-button>
+  <ce-button variant="destructive">Delete project</ce-button>
+</div>
+
+<!-- @example Three sizes -->
+<div style="display:flex;align-items:center;gap:var(--ce-space-3)">
+  <ce-button size="sm">Small</ce-button>
+  <ce-button size="md">Medium</ce-button>
+  <ce-button size="lg">Large</ce-button>
+</div>
+
+<!-- @example Icon attribute + icon slot -->
+<div style="display:flex;gap:var(--ce-space-3);flex-wrap:wrap">
+  <ce-button icon="↗">Open in new tab</ce-button>
+  <ce-button variant="secondary">
+    <span slot="icon">⬇</span>
+    Download CSV
+  </ce-button>
+</div>
+
+<!-- @example Disabled and loading states -->
+<div style="display:flex;gap:var(--ce-space-3)">
+  <ce-button disabled>Disabled</ce-button>
+  <ce-button loading>Submitting…</ce-button>
+  <ce-button variant="destructive" loading>Deleting…</ce-button>
+</div>
+
+<!-- @example Submit type inside a form -->
+<form>
+  <ce-button type="submit">Submit form</ce-button>
+  <ce-button type="reset" variant="ghost">Reset</ce-button>
+</form>

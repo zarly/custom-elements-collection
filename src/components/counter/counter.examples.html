@@ -1,0 +1,23 @@
+<!-- @example Animated value with currency prefix -->
+<ce-counter value="48250" prefix="$" from="0"></ce-counter>
+
+<!-- @example Percentage with one decimal and an up trend -->
+<ce-counter value="92.4" suffix="%" decimals="1" trend="up"></ce-counter>
+
+<!-- @example Count down with red trend -->
+<ce-counter value="3" from="48" suffix=" left" trend="down"></ce-counter>
+
+<!-- @example Snapshot — animation disabled -->
+<ce-counter value="1284" duration-ms="0" suffix=" users"></ce-counter>
+
+<!-- @example Slow, dramatic count-up from 0 -->
+<ce-counter
+  value="1000000"
+  from="0"
+  duration-ms="2400"
+  prefix="$"
+  trend="up"
+></ce-counter>
+
+<!-- @example Flat trend (neutral) -->
+<ce-counter value="42" suffix="ms" trend="flat"></ce-counter>

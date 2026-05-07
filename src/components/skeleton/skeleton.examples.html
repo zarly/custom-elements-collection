@@ -1,0 +1,21 @@
+<!-- @example Three text lines — last line is auto-shortened -->
+<ce-skeleton lines="3"></ce-skeleton>
+
+<!-- @example Avatar + name + meta loading row -->
+<div style="display:flex;align-items:center;gap:var(--ce-space-3)">
+  <ce-skeleton shape="circle" width="40px" height="40px"></ce-skeleton>
+  <div style="flex:1;display:flex;flex-direction:column;gap:var(--ce-space-1)">
+    <ce-skeleton width="40%"></ce-skeleton>
+    <ce-skeleton width="65%"></ce-skeleton>
+  </div>
+</div>
+
+<!-- @example Article card skeleton — image + title + body -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-3);max-width:320px">
+  <ce-skeleton shape="rect" height="160px"></ce-skeleton>
+  <ce-skeleton width="80%" height="20px"></ce-skeleton>
+  <ce-skeleton lines="3"></ce-skeleton>
+</div>
+
+<!-- @example Custom width, single line -->
+<ce-skeleton width="240px"></ce-skeleton>

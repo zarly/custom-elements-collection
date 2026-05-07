@@ -1,6 +1,17 @@
-<!-- @example Quickfire -->
+<!-- @example Quickfire — scored quiz -->
 <lesson-quickfire
   timer="6"
-  rounds='[{"prompt":"2 + 2","options":["3","4","5"]},{"prompt":"5 * 3","options":["10","15","20"]}]'
+  rounds='[{"prompt":"2 + 2","options":["3","4","5"],"correct":"4"},{"prompt":"5 * 3","options":["10","15","20"],"correct":"15"}]'
 ></lesson-quickfire>
 
+<!-- @example Quickfire — poll / opinion (no correct answer) -->
+<lesson-quickfire
+  timer="8"
+  rounds='[{"prompt":"What is your favorite color?","options":["Red","Blue","Green","Yellow"]},{"prompt":"Pick a vibe","options":["Cozy","Adventurous","Focused"]}]'
+></lesson-quickfire>
+
+<!-- @example Quickfire — mixed: scored + multi-correct + unscored -->
+<lesson-quickfire
+  timer="6"
+  rounds='[{"prompt":"Name a primary color","options":["Red","Orange","Blue","Pink"],"correct":["Red","Blue"]},{"prompt":"What did you have for breakfast?","options":["Eggs","Toast","Fruit","Skipped it"]},{"prompt":"Capital of France","options":["Paris","Madrid","Rome"],"correct":"Paris"}]'
+></lesson-quickfire>

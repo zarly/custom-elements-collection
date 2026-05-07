@@ -1,0 +1,26 @@
+<!-- @example Notification count on an icon button -->
+<ce-badge count="7">
+  <ce-button variant="ghost" icon="🔔">Inbox</ce-button>
+</ce-badge>
+
+<!-- @example Counts above max — clamps to '99+' -->
+<div style="display:flex;gap:var(--ce-space-4)">
+  <ce-badge count="3"><span>Mentions</span></ce-badge>
+  <ce-badge count="42"><span>Tasks</span></ce-badge>
+  <ce-badge count="248" max="99"><span>Logs</span></ce-badge>
+</div>
+
+<!-- @example Dot variant — unread indicator without a number -->
+<ce-badge dot variant="green">
+  <span>Live</span>
+</ce-badge>
+
+<!-- @example Semantic variants -->
+<div style="display:flex;gap:var(--ce-space-4);flex-wrap:wrap">
+  <ce-badge count="2" variant="red"><span>Errors</span></ce-badge>
+  <ce-badge count="5" variant="amber"><span>Warnings</span></ce-badge>
+  <ce-badge count="12" variant="blue"><span>Drafts</span></ce-badge>
+  <ce-badge count="3" variant="purple"><span>New</span></ce-badge>
+  <ce-badge count="8" variant="cyan"><span>Comments</span></ce-badge>
+  <ce-badge count="1" variant="neutral"><span>Pinned</span></ce-badge>
+</div>

@@ -1,0 +1,33 @@
+<!-- @example Local wall clock — ticks every second -->
+<ce-clock></ce-clock>
+
+<!-- @example Time in three offices side by side -->
+<div style="display:flex;gap:var(--ce-space-5);flex-wrap:wrap">
+  <div>
+    <div style="color:var(--ce-muted);font-size:var(--ce-text-xs)">SF</div>
+    <ce-clock tz="America/Los_Angeles" locale="en-US"></ce-clock>
+  </div>
+  <div>
+    <div style="color:var(--ce-muted);font-size:var(--ce-text-xs)">London</div>
+    <ce-clock tz="Europe/London" locale="en-GB"></ce-clock>
+  </div>
+  <div>
+    <div style="color:var(--ce-muted);font-size:var(--ce-text-xs)">Tokyo</div>
+    <ce-clock tz="Asia/Tokyo" locale="ja-JP"></ce-clock>
+  </div>
+</div>
+
+<!-- @example Relative time — "5 minutes ago" since a timestamp -->
+<p>
+  Last sync:
+  <ce-clock format="relative" since="2026-05-07T08:14:00Z"></ce-clock>
+</p>
+
+<!-- @example Combined absolute + relative for an audit row -->
+<p>
+  Deployed at
+  <ce-clock format="both" since="2026-05-06T22:01:00Z"></ce-clock>
+</p>
+
+<!-- @example Static snapshot — interval disabled -->
+<ce-clock tick-ms="0"></ce-clock>

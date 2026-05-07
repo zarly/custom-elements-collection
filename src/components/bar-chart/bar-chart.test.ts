@@ -5,8 +5,20 @@ import { CeBarChart } from "./bar-chart.js";
 beforeAll(() => defineOnce("ce-bar-chart", CeBarChart));
 
 function widths(el: CeBarChart): number[] {
-  return Array.from(el.shadowRoot!.querySelectorAll(".ce-bar-fill")).map((f) =>
+  return Array.from(el.shadowRoot!.querySelectorAll(".ce-fill")).map((f) =>
     Number((f as HTMLElement).style.width.replace("%", ""))
+  );
+}
+
+function fills(el: CeBarChart): HTMLElement[] {
+  return Array.from(
+    el.shadowRoot!.querySelectorAll<HTMLElement>(".ce-fill")
+  );
+}
+
+function rows(el: CeBarChart): HTMLElement[] {
+  return Array.from(
+    el.shadowRoot!.querySelectorAll<HTMLElement>(".ce-row")
   );
 }
 
@@ -20,11 +32,11 @@ describe("<ce-bar-chart>", () => {
     ];
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelectorAll(".ce-bar-row").length).toBe(3);
+    expect(rows(el).length).toBe(3);
     el.remove();
   });
 
-  it("auto-scales so the max row is 100%", async () => {
+  it("auto-scales so the largest row is 100%", async () => {
     const el = document.createElement("ce-bar-chart") as CeBarChart;
     el.data = [
       { label: "A", value: 10 },
@@ -40,83 +52,196 @@ describe("<ce-bar-chart>", () => {
     el.remove();
   });
 
-  it("honors explicit max", async () => {
+  it("honors explicit max and clamps overshoot to 100%", async () => {
     const el = document.createElement("ce-bar-chart") as CeBarChart;
     el.max = 100;
-    el.data = [{ label: "A", value: 50 }];
-    document.body.appendChild(el);
-    await el.updateComplete;
-    expect(widths(el)[0]).toBe(50);
-    el.remove();
-  });
-
-  it("clamps values to 100% when they exceed max", async () => {
-    const el = document.createElement("ce-bar-chart") as CeBarChart;
-    el.max = 100;
-    el.data = [{ label: "A", value: 150 }];
-    document.body.appendChild(el);
-    await el.updateComplete;
-    expect(widths(el)[0]).toBe(100);
-    el.remove();
-  });
-
-  it("applies per-row color override when provided", async () => {
-    const el = document.createElement("ce-bar-chart") as CeBarChart;
     el.data = [
-      { label: "A", value: 10, color: "green" },
-      { label: "B", value: 10, color: "red" },
+      { label: "A", value: 50 },
+      { label: "B", value: 150 },
     ];
     document.body.appendChild(el);
     await el.updateComplete;
-    const fills = el.shadowRoot!.querySelectorAll(".ce-bar-fill");
-    expect(fills[0].classList.contains("c-green")).toBe(true);
-    expect(fills[1].classList.contains("c-red")).toBe(true);
+    const w = widths(el);
+    expect(w[0]).toBe(50);
+    expect(w[1]).toBe(100);
     el.remove();
   });
 
-  it("renders meta label when provided", async () => {
+  it("renders the empty-state slot when data is empty", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.emptyText = "Nothing here";
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(rows(el).length).toBe(0);
+    expect(el.shadowRoot!.querySelector(".ce-empty")?.textContent).toBe(
+      "Nothing here"
+    );
+    el.remove();
+  });
+
+  it("routes named-token color through resolveColor() to a CSS var", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.data = [
+      { label: "A", value: 10, color: "green" },
+      { label: "B", value: 10 },
+    ];
+    el.color = "amber";
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const f = fills(el);
+    expect(f[0].style.background).toContain("var(--ce-color-green)");
+    expect(f[1].style.background).toContain("var(--ce-color-amber)");
+    el.remove();
+  });
+
+  it("passes through arbitrary CSS color strings unchanged", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    // Use a `var(...)` token so jsdom doesn't normalise the literal — the
+    // assertion is that resolveColor() does NOT wrap it as `var(--ce-color-…)`.
+    el.data = [{ label: "A", value: 10, color: "var(--brand)" }];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const fill = fills(el)[0];
+    expect(fill.style.background).toContain("var(--brand)");
+    expect(fill.style.background).not.toContain("--ce-color-");
+    el.remove();
+  });
+
+  it("renders meta text and exposes ARIA progressbar on each row", async () => {
     const el = document.createElement("ce-bar-chart") as CeBarChart;
     el.data = [{ label: "A", value: 10, meta: "$8.2B" }];
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector(".ce-bar-meta")?.textContent).toBe("$8.2B");
-    el.remove();
-  });
-
-  it("sets ARIA progressbar role per row", async () => {
-    const el = document.createElement("ce-bar-chart") as CeBarChart;
-    el.data = [{ label: "A", value: 10 }];
-    document.body.appendChild(el);
-    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector(".ce-meta")?.textContent).toBe("$8.2B");
     const role = el.shadowRoot!.querySelector('[role="progressbar"]');
     expect(role?.getAttribute("aria-valuenow")).toBe("10");
     expect(role?.getAttribute("aria-label")).toBe("A");
     el.remove();
   });
 
-  it("parses `data` from a JSON attribute set before connect", async () => {
+  it("parses `data` from a JSON attribute and falls back on invalid JSON", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const ok = document.createElement("ce-bar-chart") as CeBarChart;
+    ok.setAttribute(
+      "data",
+      JSON.stringify([
+        { label: "A", value: 10 },
+        { label: "B", value: 20 },
+      ])
+    );
+    document.body.appendChild(ok);
+    await ok.updateComplete;
+    expect(rows(ok).length).toBe(2);
+    ok.remove();
+
+    const bad = document.createElement("ce-bar-chart") as CeBarChart;
+    bad.setAttribute("data", "not json");
+    document.body.appendChild(bad);
+    await bad.updateComplete;
+    expect(bad.data).toEqual([]);
+    expect(warn).toHaveBeenCalled();
+    warn.mockRestore();
+    bad.remove();
+  });
+
+  it("dispatches ce-chart-hover with the row payload on pointerenter", async () => {
     const el = document.createElement("ce-bar-chart") as CeBarChart;
-    const rows = [
+    el.data = [
       { label: "A", value: 10 },
       { label: "B", value: 20 },
     ];
-    el.setAttribute("data", JSON.stringify(rows));
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.data).toEqual(rows);
-    expect(el.shadowRoot!.querySelectorAll(".ce-bar-row").length).toBe(2);
+    const detail = await new Promise<{ kind: string; index: number }>(
+      (resolve) => {
+        el.addEventListener(
+          "ce-chart-hover",
+          (e) => resolve((e as CustomEvent).detail),
+          { once: true }
+        );
+        rows(el)[1].dispatchEvent(
+          new Event("pointerenter", { bubbles: true })
+        );
+      }
+    );
+    expect(detail.kind).toBe("row");
+    expect(detail.index).toBe(1);
     el.remove();
   });
 
-  it("falls back to [] and warns when `data` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("dispatches ce-chart-select on click and on Enter key", async () => {
     const el = document.createElement("ce-bar-chart") as CeBarChart;
-    el.setAttribute("data", "not json");
+    el.data = [{ label: "A", value: 10 }];
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.data).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
+
+    const seen: number[] = [];
+    el.addEventListener("ce-chart-select", (e) => {
+      seen.push((e as CustomEvent).detail.index);
+    });
+    rows(el)[0].click();
+    rows(el)[0].dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Enter", bubbles: true })
+    );
+    rows(el)[0].dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Tab", bubbles: true })
+    );
+    expect(seen).toEqual([0, 0]);
+    el.remove();
+  });
+
+  it("renders gridline ticks at 0/25/50/75/100% when gridlines is enabled", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.gridlines = true;
+    el.max = 200;
+    el.data = [{ label: "A", value: 100 }];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const ticks = Array.from(
+      el.shadowRoot!.querySelectorAll<HTMLElement>(".ce-grid-tick")
+    );
+    expect(ticks.length).toBe(5);
+    expect(ticks[0].style.left).toBe("0%");
+    expect(ticks[ticks.length - 1].style.left).toBe("100%");
+    el.remove();
+  });
+
+  it("collapses to a sparkline strip with no labels, axis, or tooltip", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.sparkline = true;
+    el.gridlines = true;
+    el.data = [
+      { label: "A", value: 1 },
+      { label: "B", value: 4 },
+      { label: "C", value: 2 },
+    ];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(rows(el).length).toBe(3);
+    expect(el.shadowRoot!.querySelector(".ce-label")).toBeNull();
+    expect(el.shadowRoot!.querySelector(".ce-meta")).toBeNull();
+    expect(el.shadowRoot!.querySelector(".ce-tooltip")).toBeNull();
+    expect(el.shadowRoot!.querySelector(".ce-grid")).toBeNull();
+    expect(
+      el.shadowRoot!.querySelector(".ce-rows")?.getAttribute("role")
+    ).toBe("img");
+    el.remove();
+  });
+
+  it("uses the format() prop for inline values and tick labels", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.gridlines = true;
+    el.max = 100;
+    el.data = [{ label: "A", value: 42 }];
+    el.format = (v) => `${v}%`;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const fill = fills(el)[0];
+    expect(fill.textContent?.trim()).toBe("42%");
+    const tickTexts = Array.from(
+      el.shadowRoot!.querySelectorAll(".ce-grid-tick")
+    ).map((t) => t.textContent?.trim());
+    expect(tickTexts).toEqual(["0%", "25%", "50%", "75%", "100%"]);
     el.remove();
   });
 });

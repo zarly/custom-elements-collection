@@ -1,0 +1,40 @@
+<!-- @example Downloadable PDF attachment -->
+<ce-file-card
+  name="Quarterly-report-Q1-2026.pdf"
+  size="2480000"
+  type="pdf"
+  href="/files/q1-2026.pdf"
+></ce-file-card>
+
+<!-- @example Image attachment with thumbnail preview -->
+<ce-file-card
+  name="hero-banner.png"
+  size="184320"
+  type="image/png"
+  thumbnail="https://picsum.photos/seed/ce-file-card/96"
+  href="/files/hero-banner.png"
+></ce-file-card>
+
+<!-- @example Non-interactive (no href) — displays only -->
+<ce-file-card
+  name="package.json"
+  size="1240"
+  type="json"
+></ce-file-card>
+
+<!-- @example Mime type drives the icon — extra meta via slot -->
+<ce-file-card
+  name="design-spec.docx"
+  size="412000"
+  type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  href="/files/design-spec.docx"
+>
+  <span slot="meta">Updated 2026-05-04 · Ada L.</span>
+</ce-file-card>
+
+<!-- @example Cluster of attachments inside a chat message -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-2);max-width:380px">
+  <ce-file-card name="logs.zip" size="8456320" type="zip" href="/f/logs.zip"></ce-file-card>
+  <ce-file-card name="trace.json" size="246180" type="json" href="/f/trace.json"></ce-file-card>
+  <ce-file-card name="screenshot.png" size="92340" type="image/png" thumbnail="https://picsum.photos/seed/trace/96" href="/f/screenshot.png"></ce-file-card>
+</div>

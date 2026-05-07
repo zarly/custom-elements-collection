@@ -1,0 +1,24 @@
+<!-- @example Five semantic states inline -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-2)">
+  <ce-status-light state="ok" label="API healthy"></ce-status-light>
+  <ce-status-light state="warn" label="Degraded throughput"></ce-status-light>
+  <ce-status-light state="bad" label="Database unreachable"></ce-status-light>
+  <ce-status-light state="pending" label="Deploying…"></ce-status-light>
+  <ce-status-light state="neutral" label="Not configured"></ce-status-light>
+</div>
+
+<!-- @example Pulsing dot for live activity -->
+<ce-status-light state="ok" pulse label="Live — accepting traffic"></ce-status-light>
+
+<!-- @example Sizes -->
+<div style="display:flex;align-items:center;gap:var(--ce-space-4)">
+  <ce-status-light state="ok" size="sm" label="Small"></ce-status-light>
+  <ce-status-light state="ok" size="md" label="Medium"></ce-status-light>
+  <ce-status-light state="ok" size="lg" label="Large"></ce-status-light>
+</div>
+
+<!-- @example Slot overrides label — embed rich content -->
+<ce-status-light state="warn" pulse>
+  <strong>Queue backed up</strong> &nbsp;
+  <span style="color:var(--ce-muted)">312 jobs pending</span>
+</ce-status-light>

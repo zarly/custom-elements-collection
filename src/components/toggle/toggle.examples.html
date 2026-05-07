@@ -1,0 +1,23 @@
+<!-- @example Basic on/off switch with label -->
+<ce-toggle label="Email notifications" checked></ce-toggle>
+
+<!-- @example Settings panel — five toggles in a stack -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-3);max-width:360px">
+  <ce-toggle label="Dark theme" checked></ce-toggle>
+  <ce-toggle label="Auto-update on launch" checked></ce-toggle>
+  <ce-toggle label="Send anonymous diagnostics"></ce-toggle>
+  <ce-toggle label="Beta features"></ce-toggle>
+  <ce-toggle label="Read-only mode" disabled></ce-toggle>
+</div>
+
+<!-- @example Slot replaces label — secondary line -->
+<ce-toggle checked>
+  <strong>Sync across devices</strong>
+  <div style="color:var(--ce-muted);font-size:var(--ce-text-xs)">Updates within 60 seconds</div>
+</ce-toggle>
+
+<!-- @example Disabled — both states -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-2)">
+  <ce-toggle label="Disabled (off)" disabled></ce-toggle>
+  <ce-toggle label="Disabled (on)" disabled checked></ce-toggle>
+</div>

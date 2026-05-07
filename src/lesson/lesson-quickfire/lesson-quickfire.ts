@@ -6,7 +6,17 @@ export interface QuickfireRound {
   /** Prompt text. Use ___ for blank-style. */
   prompt: string;
   options: string[];
-  correct: string;
+  /** Optional. Omit for poll/opinion rounds — they won't be scored. Accepts a single answer or an array of accepted answers. */
+  correct?: string | string[];
+}
+
+function normalizeCorrect(value: unknown): string[] | null {
+  if (value === null || value === undefined) return null;
+  const list = Array.isArray(value) ? value : [value];
+  const out = list
+    .filter((v) => v !== null && v !== undefined && v !== "")
+    .map((v) => String(v));
+  return out.length > 0 ? out : null;
 }
 
 /**
@@ -61,6 +71,7 @@ export class LessonQuickfire extends CecElement {
     .qf-btn:hover { border-color: var(--ce-color-blue); }
     .qf-btn.flash-correct { background: var(--ce-color-green); color: var(--ce-text-inverse); border-color: var(--ce-color-green); }
     .qf-btn.flash-wrong { background: var(--ce-color-red); color: var(--ce-text-inverse); border-color: var(--ce-color-red); }
+    .qf-btn.flash-neutral { border-color: var(--ce-color-blue); }
     .qf-timer {
       height: 4px;
       background: var(--ce-border-soft);
@@ -104,9 +115,15 @@ export class LessonQuickfire extends CecElement {
 
   @state() private _idx = 0;
   @state() private _score = 0;
-  @state() private _flash: { value: string; correct: boolean } | null = null;
+  @state() private _flash: { value: string; correct: boolean | null } | null = null;
   @state() private _timeLeft = 0;
   @state() private _done = false;
+
+  private get _scoredTotal(): number {
+    let n = 0;
+    for (const r of this.rounds) if (normalizeCorrect(r.correct) !== null) n++;
+    return n;
+  }
 
   #intervalId: ReturnType<typeof setInterval> | null = null;
 
@@ -153,9 +170,16 @@ export class LessonQuickfire extends CecElement {
   #pick(opt: string): void {
     const round = this.rounds[this._idx];
     if (!round) return;
-    const isCorrect = opt === round.correct;
-    if (isCorrect) this._score++;
-    this._flash = { value: opt, correct: isCorrect };
+    const correctList = normalizeCorrect(round.correct);
+    let flashCorrect: boolean | null;
+    if (correctList === null) {
+      flashCorrect = null;
+    } else {
+      const isCorrect = correctList.includes(String(opt));
+      if (isCorrect) this._score++;
+      flashCorrect = isCorrect;
+    }
+    this._flash = { value: opt, correct: flashCorrect };
     this.#stopTimer();
     setTimeout(() => this.#advance(), 600);
   }
@@ -169,7 +193,7 @@ export class LessonQuickfire extends CecElement {
         new CustomEvent("lesson-quickfire-done", {
           bubbles: true,
           composed: true,
-          detail: { score: this._score, total: this.rounds.length },
+          detail: { score: this._score, total: this._scoredTotal },
         })
       );
       return;
@@ -180,10 +204,13 @@ export class LessonQuickfire extends CecElement {
 
   override render() {
     if (this._done) {
+      const scoredTotal = this._scoredTotal;
       return html`
         <div class="qf-done">
           <div class="qf-meta">Quickfire complete</div>
-          <div class="qf-score">${this._score} / ${this.rounds.length}</div>
+          ${scoredTotal > 0
+            ? html`<div class="qf-score">${this._score} / ${scoredTotal}</div>`
+            : html`<div class="qf-score">Done!</div>`}
           <button class="qf-restart" type="button" @click=${() => this.reset()}>
             Try again
           </button>
@@ -193,19 +220,20 @@ export class LessonQuickfire extends CecElement {
     const round = this.rounds[this._idx];
     if (!round) return html``;
     const timerPct = Math.max(0, (this._timeLeft / this.timer) * 100);
+    const scoredTotal = this._scoredTotal;
     return html`
       <div class="qf-meta">
         <span>Round ${this._idx + 1} / ${this.rounds.length}</span>
-        <span>Score ${this._score}</span>
+        ${scoredTotal > 0 ? html`<span>Score ${this._score}</span>` : null}
       </div>
       <div class="qf-prompt">${round.prompt}</div>
       <div class="qf-opts">
         ${round.options.map((opt) => {
           let cls = "qf-btn";
-          if (this._flash) {
-            if (this._flash.value === opt) {
-              cls += this._flash.correct ? " flash-correct" : " flash-wrong";
-            }
+          if (this._flash && this._flash.value === opt) {
+            if (this._flash.correct === true) cls += " flash-correct";
+            else if (this._flash.correct === false) cls += " flash-wrong";
+            else cls += " flash-neutral";
           }
           return html`<button
             type="button"

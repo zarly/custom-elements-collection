@@ -56,6 +56,7 @@ export { CeJson } from "./components/json/json.js";
 export { CeKeyValue } from "./components/key-value/key-value.js";
 export { CeKpi } from "./components/kpi/kpi.js";
 export { CePersona } from "./components/persona/persona.js";
+export { CePlot, type PlotPoint, type PlotSeries, type PlotFormat } from "./components/plot/plot.js";
 export { CeProgress } from "./components/progress/progress.js";
 export { CeRating, type CeRatingMode, type CeRatingSize, type CeRatingValue } from "./components/rating/rating.js";
 export { CeRetryButton, type CeRetryVariant } from "./components/retry-button/retry-button.js";

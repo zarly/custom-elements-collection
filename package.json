@@ -1,6 +1,6 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A collection of 72 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface and feedback-UI primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
@@ -272,6 +272,10 @@
     "./persona": {
       "types": "./dist/entries/persona.d.ts",
       "import": "./dist/entries/persona.js"
+    },
+    "./plot": {
+      "types": "./dist/entries/plot.d.ts",
+      "import": "./dist/entries/plot.js"
     },
     "./progress": {
       "types": "./dist/entries/progress.d.ts",

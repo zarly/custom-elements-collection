@@ -1,0 +1,91 @@
+<!-- @example Animated multi-series line chart with hover crosshair + tooltip -->
+<ce-plot
+  type="line"
+  x-label="Day"
+  y-label="Sessions"
+  height="280px"
+  data='[
+    {"name":"Desktop","points":[
+      {"x":1,"y":126},{"x":2,"y":133},{"x":3,"y":146},{"x":4,"y":153},{"x":5,"y":156},
+      {"x":6,"y":154},{"x":7,"y":154},{"x":8,"y":156},{"x":9,"y":162},{"x":10,"y":171},
+      {"x":11,"y":182},{"x":12,"y":193},{"x":13,"y":201},{"x":14,"y":206}
+    ]},
+    {"name":"Mobile","color":"green","points":[
+      {"x":1,"y":86},{"x":2,"y":93},{"x":3,"y":99},{"x":4,"y":106},{"x":5,"y":113},
+      {"x":6,"y":118},{"x":7,"y":124},{"x":8,"y":131},{"x":9,"y":138},{"x":10,"y":143},
+      {"x":11,"y":146},{"x":12,"y":150},{"x":13,"y":156},{"x":14,"y":163}
+    ]},
+    {"name":"Tablet","color":"amber","points":[
+      {"x":1,"y":31},{"x":2,"y":33},{"x":3,"y":36},{"x":4,"y":39},{"x":5,"y":40},
+      {"x":6,"y":40},{"x":7,"y":40},{"x":8,"y":41},{"x":9,"y":42},{"x":10,"y":44},
+      {"x":11,"y":46},{"x":12,"y":47},{"x":13,"y":47},{"x":14,"y":48}
+    ]}
+  ]'
+></ce-plot>
+
+<!-- @example Stacked bar chart by quarter — click legend chips to toggle -->
+<ce-plot
+  type="bar"
+  stacked
+  x-label="Quarter"
+  y-label="Revenue (M$)"
+  height="280px"
+  data='[
+    {"name":"EMEA","color":"blue","points":[
+      {"x":"Q1","y":30},{"x":"Q2","y":42},{"x":"Q3","y":38},{"x":"Q4","y":51}
+    ]},
+    {"name":"Americas","color":"green","points":[
+      {"x":"Q1","y":55},{"x":"Q2","y":60},{"x":"Q3","y":72},{"x":"Q4","y":80}
+    ]},
+    {"name":"APAC","color":"purple","points":[
+      {"x":"Q1","y":22},{"x":"Q2","y":28},{"x":"Q3","y":33},{"x":"Q4","y":41}
+    ]}
+  ]'
+></ce-plot>
+
+<!-- @example Area chart — daily active users trend with arbitrary CSS color -->
+<ce-plot
+  type="area"
+  x-label="Week"
+  y-label="DAU"
+  height="240px"
+  data='[
+    {"name":"Active users","color":"oklch(72% 0.15 230)","points":[
+      {"x":1,"y":4000},{"x":2,"y":4750},{"x":3,"y":5500},{"x":4,"y":5700},
+      {"x":5,"y":5600},{"x":6,"y":5450},{"x":7,"y":5750},{"x":8,"y":6300},
+      {"x":9,"y":6850},{"x":10,"y":7100},{"x":11,"y":6950},{"x":12,"y":6800}
+    ]}
+  ]'
+></ce-plot>
+
+<!-- @example Grouped bar chart — Q-by-Q product launches: planned vs shipped -->
+<ce-plot
+  type="bar"
+  height="260px"
+  data='[
+    {"name":"Planned","color":"cyan","points":[
+      {"x":"Q1","y":4},{"x":"Q2","y":6},{"x":"Q3","y":5},{"x":"Q4","y":7}
+    ]},
+    {"name":"Shipped","color":"green","points":[
+      {"x":"Q1","y":3},{"x":"Q2","y":5},{"x":"Q3","y":4},{"x":"Q4","y":6}
+    ]}
+  ]'
+></ce-plot>
+
+<!-- @example Horizontal bar chart — ranked teams -->
+<ce-plot
+  type="bar"
+  orientation="horizontal"
+  x-label="Score"
+  height="280px"
+  data='[
+    {"name":"Score","color":"amber","points":[
+      {"x":"Engineering","y":87},
+      {"x":"Design","y":74},
+      {"x":"Product","y":68},
+      {"x":"Sales","y":55},
+      {"x":"Support","y":48},
+      {"x":"Marketing","y":41}
+    ]}
+  ]'
+></ce-plot>

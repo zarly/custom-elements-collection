@@ -1,0 +1,24 @@
+<!-- @example Auto-fit grid of KPI tiles -->
+<ce-stat-group>
+  <ce-kpi value="1,284" label="Active users" trend="+12%"></ce-kpi>
+  <ce-kpi value="$48k" label="MRR" trend="+4%" color="green"></ce-kpi>
+  <ce-kpi value="2.3%" label="Churn" trend="-0.4%" color="red"></ce-kpi>
+  <ce-kpi value="4.8" label="CSAT" trend="+0.1" color="blue"></ce-kpi>
+</ce-stat-group>
+
+<!-- @example Fixed 3-column grid with large gap -->
+<ce-stat-group columns="3" gap="lg">
+  <ce-kpi value="99.98%" label="Uptime" color="green"></ce-kpi>
+  <ce-kpi value="142ms" label="P95 latency" color="amber"></ce-kpi>
+  <ce-kpi value="0" label="Incidents (7d)" color="green"></ce-kpi>
+</ce-stat-group>
+
+<!-- @example Dense 6-column metrics row with small gap -->
+<ce-stat-group columns="6" gap="sm">
+  <ce-kpi value="312" label="Open"></ce-kpi>
+  <ce-kpi value="48" label="In review"></ce-kpi>
+  <ce-kpi value="174" label="Merged" color="green"></ce-kpi>
+  <ce-kpi value="6" label="Stale" color="amber"></ce-kpi>
+  <ce-kpi value="2" label="Failing" color="red"></ce-kpi>
+  <ce-kpi value="1.4d" label="Avg age"></ce-kpi>
+</ce-stat-group>

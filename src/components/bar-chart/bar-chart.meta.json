@@ -3,8 +3,9 @@
   "tag": "ce-bar-chart",
   "name": "BarChart",
   "className": "CeBarChart",
-  "goal": "Render a minimal horizontal bar chart from a JSON array of { label, value, meta?, color? } rows.",
-  "description": "Data-driven horizontal bar chart. Takes a data array as a JS property or JSON attribute, auto-scales to the largest value when max is unset, and supports per-row color overrides. Each row exposes ARIA progressbar semantics for accessibility.",
+  "goal": "Animated horizontal bar chart with hover affordance + tooltip, optional gridlines, and an opt-in inline sparkline mode — sub-4KB, no JS deps.",
+  "description": "Horizontal bar chart accepting a JSON-attribute or property-bound array of { label, value, meta?, color? } rows. Auto-scales when max is unset, renders ARIA progressbars per row, and routes color through the shared resolveColor() helper so per-row color accepts both named tokens (\"blue\", \"green\", …) and arbitrary CSS values (\"#5a8\", \"var(--brand)\"). Each row is keyboard-focusable and emits ce-chart-hover / ce-chart-leave / ce-chart-select with a shared family payload. CSS-only tooltip pinned to each row reveals the formatted value (and meta, when present) on hover or focus. Optional `gridlines` overlays 4 evenly-spaced ticks (0/25/50/75/100% of max) plus a labeled axis strip. Optional `sparkline` mode collapses the chart into an inline mini-strip (no labels, no axis). Width transitions honour prefers-reduced-motion and the `animated` prop.",
+  "limitations": "Single-series only. For multi-series trends or line/area charts, use ce-plot (planned in phases 7–9). Tooltip is positioned above the bar and may clip in tight overflow:hidden parents — render the chart in a container with adequate top padding when needed.",
   "stability": "stable",
   "props": [
     {
@@ -12,7 +13,7 @@
       "type": "BarRow[]",
       "required": false,
       "default": "[]",
-      "description": "Array of { label, value, meta?, color? }."
+      "description": "Array of { label, value, meta?, color? }. color is a named token or arbitrary CSS color."
     },
     {
       "name": "max",
@@ -23,19 +24,19 @@
     },
     {
       "name": "color",
-      "type": "CecColor",
+      "type": "string",
       "required": false,
       "default": "\"blue\"",
       "reflect": true,
-      "description": "Default bar color when a row has no color override."
+      "description": "Default bar color when a row has no color override. Named token or arbitrary CSS color."
     },
     {
       "name": "labelWidth",
       "type": "string",
       "required": false,
-      "default": "\"180px\"",
+      "default": "\"auto\"",
       "attribute": "label-width",
-      "description": "CSS width for the left label column."
+      "description": "CSS width for the left label column. \"auto\" sizes to content."
     },
     {
       "name": "compact",
@@ -44,16 +45,163 @@
       "default": "false",
       "reflect": true,
       "description": "Tighter rows + thinner bars."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "attribute": "animated",
+      "description": "Animate width transitions when data changes. Property is `animated` (not `animate`) to avoid colliding with HTMLElement.animate(); attribute is also `animated`. prefers-reduced-motion always disables motion regardless of this flag."
+    },
+    {
+      "name": "showValues",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "attribute": "show-values",
+      "description": "Render the inline numeric value inside each bar fill."
+    },
+    {
+      "name": "gridlines",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Overlay 4 evenly-spaced vertical gridlines on every track and render a labeled axis strip below the chart at 0/25/50/75/100% of the resolved max."
+    },
+    {
+      "name": "sparkline",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Inline-flow mini strip mode: strips labels, axis, meta, and tooltip. Width controlled by --ce-bar-spark-width (default 120px)."
+    },
+    {
+      "name": "format",
+      "type": "(v: number) => string",
+      "required": false,
+      "default": "format.number",
+      "description": "Number formatter for the inline value, tooltip, and gridline tick labels; defaults to the shared locale-aware number() helper."
+    },
+    {
+      "name": "emptyText",
+      "type": "string",
+      "required": false,
+      "default": "\"No data\"",
+      "attribute": "empty-text",
+      "description": "Text rendered when data.length === 0."
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "name": "ce-chart-hover",
+      "detail": "{ kind: \"row\", row: BarRow, index: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when a row is hovered or focused. Shared family event — same name as ce-plot — so consumers can listen on a parent."
+    },
+    {
+      "name": "ce-chart-leave",
+      "detail": "{}",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the pointer leaves a row or focus blurs."
+    },
+    {
+      "name": "ce-chart-select",
+      "detail": "{ row: BarRow, index: number, originalEvent: Event }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on row click or Enter/Space keypress while focused."
+    }
+  ],
   "slots": [],
   "cssVariables": [
     {
-      "name": "--ce-space-3",
+      "name": "--ce-bar-label-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Width of the left label column; set inline from labelWidth.",
+      "fallback": "auto"
+    },
+    {
+      "name": "--ce-bar-track-h",
+      "kind": "size",
+      "source": "local",
+      "description": "Bar track height; switches to 12px when compact, 10px when sparkline.",
+      "fallback": "18px"
+    },
+    {
+      "name": "--ce-bar-radius",
+      "kind": "radius",
+      "source": "local",
+      "description": "Corner radius for track and fill.",
+      "fallback": "4px"
+    },
+    {
+      "name": "--ce-bar-fade",
+      "kind": "other",
+      "source": "local",
+      "description": "Width / hover / tooltip transition; replaced with 0s under prefers-reduced-motion.",
+      "fallback": "var(--ce-transition)"
+    },
+    {
+      "name": "--ce-bar-hover-tint",
+      "kind": "color",
+      "source": "local",
+      "description": "Track background tint applied on row hover or focus.",
+      "fallback": "color-mix(in srgb, var(--ce-text) 8%, transparent)"
+    },
+    {
+      "name": "--ce-bar-tooltip-bg",
+      "kind": "color",
+      "source": "local",
+      "description": "Background of the per-row value tooltip.",
+      "fallback": "var(--ce-surface)"
+    },
+    {
+      "name": "--ce-bar-tooltip-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Foreground (text) color of the per-row value tooltip.",
+      "fallback": "var(--ce-text)"
+    },
+    {
+      "name": "--ce-bar-tooltip-border",
+      "kind": "color",
+      "source": "local",
+      "description": "Border color of the per-row value tooltip.",
+      "fallback": "var(--ce-border)"
+    },
+    {
+      "name": "--ce-bar-grid",
+      "kind": "color",
+      "source": "local",
+      "description": "Vertical gridline color when `gridlines` is enabled.",
+      "fallback": "color-mix(in srgb, var(--ce-text) 12%, transparent)"
+    },
+    {
+      "name": "--ce-bar-grid-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Tick-label color in the axis strip when `gridlines` is enabled.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-bar-spark-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Total width of the sparkline strip when `sparkline` is enabled.",
+      "fallback": "120px"
+    },
+    {
+      "name": "--ce-space-1",
       "kind": "size",
       "source": "token",
-      "description": "Row inner gap."
+      "description": "Tooltip inner vertical padding + grid strip top margin."
     },
     {
       "name": "--ce-space-2",
@@ -62,23 +210,46 @@
       "description": "Row vertical margin + bar inner padding."
     },
     {
-      "name": "--ce-bar-label-width",
+      "name": "--ce-space-3",
       "kind": "size",
-      "source": "local",
-      "description": "Width of the left label column; set inline from labelWidth.",
-      "fallback": "180px"
+      "source": "token",
+      "description": "Row inner gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Empty-state vertical padding."
     },
     {
       "name": "--ce-muted",
       "kind": "color",
       "source": "token",
-      "description": "Label + meta text color."
+      "description": "Label, meta, empty-state, and gridline-label text color."
     },
     {
       "name": "--ce-text-sm",
       "kind": "size",
       "source": "token",
-      "description": "Label font size."
+      "description": "Label and empty-state font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline value, meta, tooltip, and tick-label font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Bar inline value text color and tooltip foreground default."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Tooltip background default."
     },
     {
       "name": "--ce-surface-2",
@@ -87,65 +258,47 @@
       "description": "Track background."
     },
     {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Tooltip border default."
+    },
+    {
       "name": "--ce-color-blue",
       "kind": "color",
       "source": "token",
-      "description": "Default fill."
+      "description": "Default fill (resolved via shared color helper) and focus-ring color."
     },
     {
-      "name": "--ce-text",
-      "kind": "color",
+      "name": "--ce-shadow",
+      "kind": "shadow",
       "source": "token",
-      "description": "Bar inline value color."
-    },
-    {
-      "name": "--ce-text-xs",
-      "kind": "size",
-      "source": "token",
-      "description": "Bar inline value + meta font size."
+      "description": "Tooltip box-shadow default."
     },
     {
       "name": "--ce-transition",
       "kind": "other",
       "source": "token",
-      "description": "Width transition."
-    },
-    {
-      "name": "--ce-color-green",
-      "kind": "color",
-      "source": "token",
-      "description": "Per-row green fill."
-    },
-    {
-      "name": "--ce-color-red",
-      "kind": "color",
-      "source": "token",
-      "description": "Per-row red fill."
-    },
-    {
-      "name": "--ce-color-amber",
-      "kind": "color",
-      "source": "token",
-      "description": "Per-row amber fill."
-    },
-    {
-      "name": "--ce-color-purple",
-      "kind": "color",
-      "source": "token",
-      "description": "Per-row purple fill."
-    },
-    {
-      "name": "--ce-color-cyan",
-      "kind": "color",
-      "source": "token",
-      "description": "Per-row cyan fill."
+      "description": "Default transition timing function used for width, background, and tooltip fades."
     }
   ],
-  "globalDependencies": [],
+  "globalDependencies": [
+    {
+      "api": "Intl.NumberFormat",
+      "purpose": "Locale-aware default number formatter (via shared internal/charts/format.ts).",
+      "writes": false
+    },
+    {
+      "api": "matchMedia",
+      "purpose": "Detect prefers-reduced-motion to gate width and tooltip transitions (via shared internal/charts/easing.ts).",
+      "writes": false
+    }
+  ],
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
   "related": [
+    "ce-bar-chart",
     "ce-chart"
   ],
   "category": "ui",
@@ -158,6 +311,6 @@
   ],
   "a11y": {
     "role": "progressbar (per row)",
-    "notes": "Each bar exposes role=progressbar with aria-valuemin/max/now and an aria-label of the row label."
+    "notes": "Each row is focusable (tabindex=0) with a visible focus ring; the track exposes role=progressbar with aria-valuemin/max/now and an aria-label of the row label. Hover, focus, click, and Enter/Space all dispatch the shared ce-chart-* family events. The CSS tooltip uses role=tooltip and is hidden via opacity (so screen readers still see the underlying aria-label). prefers-reduced-motion disables every transition."
   }
 }

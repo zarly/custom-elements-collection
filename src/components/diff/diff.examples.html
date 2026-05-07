@@ -1,0 +1,41 @@
+<!-- @example Unified diff with a language pill -->
+<ce-diff
+  language="typescript"
+  before="export function add(a: number, b: number) {
+  return a + b;
+}"
+  after="export function add(a: number, b: number): number {
+  if (Number.isNaN(a) || Number.isNaN(b)) return 0;
+  return a + b;
+}"
+></ce-diff>
+
+<!-- @example Split layout — side-by-side -->
+<ce-diff
+  layout="split"
+  language="json"
+  before='{
+  "version": "1.0.0",
+  "name": "demo"
+}'
+  after='{
+  "version": "1.1.0",
+  "name": "demo",
+  "private": true
+}'
+></ce-diff>
+
+<!-- @example Sources via slots instead of attributes -->
+<ce-diff language="markdown">
+  <template slot="before">## Roadmap
+
+- [ ] Auth
+- [ ] Billing
+</template>
+  <template slot="after">## Roadmap
+
+- [x] Auth
+- [ ] Billing
+- [ ] Onboarding
+</template>
+</ce-diff>

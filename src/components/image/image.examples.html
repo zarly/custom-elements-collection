@@ -1,0 +1,47 @@
+<!-- @example Lazy-loaded image with caption -->
+<ce-image
+  src="https://picsum.photos/seed/ce-image-1/640/360"
+  alt="Mountain landscape at dawn"
+  caption="Figure 1 — Cascade Range, photographed at sunrise"
+  width="640"
+  height="360"
+></ce-image>
+
+<!-- @example Eager loading for above-the-fold hero art -->
+<ce-image
+  src="https://picsum.photos/seed/ce-image-hero/960/320"
+  alt="Hero banner"
+  loading="eager"
+  width="960"
+  height="320"
+></ce-image>
+
+<!-- @example Graceful fallback when the primary URL fails -->
+<ce-image
+  src="https://example.invalid/missing.jpg"
+  alt="Avatar"
+  fallback="https://picsum.photos/seed/ce-image-fallback/120/120"
+  width="120"
+  height="120"
+></ce-image>
+
+<!-- @example No fallback — renders the styled error placeholder -->
+<ce-image
+  src="https://example.invalid/also-missing.jpg"
+  alt="Broken thumbnail"
+  width="240"
+  height="160"
+></ce-image>
+
+<!-- @example Rich caption via slot -->
+<ce-image
+  src="https://picsum.photos/seed/ce-image-rich/480/270"
+  alt="Conference photo"
+  width="480"
+  height="270"
+>
+  <span slot="caption">
+    <strong>Photo:</strong> launch event ·
+    <a href="#credits">credits</a>
+  </span>
+</ce-image>

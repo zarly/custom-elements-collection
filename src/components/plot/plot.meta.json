@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-plot",
+  "name": "Plot",
+  "className": "CePlot",
+  "goal": "Standard-tier multi-series chart covering line, area, and bar geometries in a single component — pure SVG, no external dependencies, sub-8KB target. Hover crosshair + tooltip + legend click-to-toggle + data-layer fade animation.",
+  "description": "Single SVG chart selectable via the `type` attribute (line / area / bar). Accepts a JSON-attribute or property-bound array of `{ name, color?, points: [{ x, y, label? }], hidden? }` series. The x axis auto-detects scale kind from the first point: Date → time, number → linear, string → category. Y axis is linear and uses the shared niceTicks helper for human-readable ticks. Series colors cycle through the shared default palette unless a series declares `color`, which routes through resolveColor() so both named tokens (\"blue\", \"green\", …) and arbitrary CSS colors (\"#5a8\", \"var(--brand)\") are accepted. Vertical bars (the default) support grouped layout and `stacked` mode against a category x scale; horizontal bars swap the axes for category-y / value-x. Hover the chart for a vertical crosshair plus a tooltip card listing every visible series at the snapped x; click a per-series marker to dispatch `ce-chart-select`. Click a legend chip to toggle that series' visibility (`ce-chart-toggle`); the component owns the local hidden state separately from `series.hidden`. The data layer fades in on each render when `animated`; `prefers-reduced-motion` always disables motion regardless of the flag.",
+  "limitations": "Bar charts require a category x scale: `type=bar` with linear or time x renders an in-svg fallback notice rather than misleading geometry. Stacked mode is supported for `type=bar` only (vertical orientation, category x). Stacked area is deferred. Negative-value stacking treats positives and negatives independently from the zero baseline. Hover crosshair + click-to-select are wired for `type=line | area` only; bars rely on their own geometry for hit-testing and emit no marker events in this version. The fade-in animation is a single keyframe on the data layer rather than a per-attribute path tween — sufficient for a noticeable transition without a virtual-DOM tween engine.",
+  "stability": "experimental",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"line\" | \"area\" | \"bar\"",
+      "required": false,
+      "default": "\"line\"",
+      "reflect": true,
+      "description": "Chart geometry. Reflected to attribute so :host([type=…]) styling is available."
+    },
+    {
+      "name": "data",
+      "type": "PlotSeries[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { name, color?, points, hidden? }. points are { x, y, label? }; x can be a string (category), number (linear), or Date (time)."
+    },
+    {
+      "name": "xLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "x-label",
+      "description": "Optional label rendered below the x axis."
+    },
+    {
+      "name": "yLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "y-label",
+      "description": "Optional label rendered rotated 90° to the left of the y axis."
+    },
+    {
+      "name": "legend",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "Renders a horizontal legend strip above the SVG with one chip per series. Click-to-toggle lands in phase 8."
+    },
+    {
+      "name": "gridlines",
+      "type": "\"both\" | \"x\" | \"y\" | \"none\"",
+      "required": false,
+      "default": "\"y\"",
+      "reflect": true,
+      "description": "Which axis (or both) carries gridlines behind the data."
+    },
+    {
+      "name": "tooltip",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Reserved for the phase-8 hover crosshair + tooltip card. Currently unused."
+    },
+    {
+      "name": "orientation",
+      "type": "\"vertical\" | \"horizontal\"",
+      "required": false,
+      "default": "\"vertical\"",
+      "reflect": true,
+      "description": "Only meaningful for `type=bar`. Horizontal orientation swaps the axes (category on y, value on x)."
+    },
+    {
+      "name": "stacked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Stack multi-series bars against a category x scale instead of grouping them side-by-side."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "attribute": "animated",
+      "description": "Reserved for the phase-8 path / bar tween on data change. Property is `animated` (not `animate`) to avoid colliding with HTMLElement.animate(); attribute is also `animated`. prefers-reduced-motion always disables motion regardless of this flag."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "\"100%\"",
+      "description": "CSS width applied to the host via --ce-plot-width."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": false,
+      "default": "\"320px\"",
+      "description": "CSS height applied to the host via --ce-plot-height."
+    },
+    {
+      "name": "format",
+      "type": "(v: number, axis: \"x\" | \"y\") => string",
+      "required": false,
+      "default": "format.number",
+      "description": "Number formatter for axis tick labels; defaults to the shared locale-aware number() helper."
+    },
+    {
+      "name": "emptyText",
+      "type": "string",
+      "required": false,
+      "default": "\"No data\"",
+      "attribute": "empty-text",
+      "description": "Text rendered when the data array is empty or every series is hidden / pointless."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-chart-hover",
+      "detail": "PointHoverDetail<PlotPoint, PlotSeries>: { kind: \"point\", x, points: [{ series, point }] }",
+      "description": "Pointer moved over the chart area; payload carries the snapped raw x and the per-series points that line up with that x.",
+      "bubbles": true,
+      "composed": true
+    },
+    {
+      "name": "ce-chart-leave",
+      "detail": "{}",
+      "description": "Pointer left the chart area or the snapped position became invalid. Empty payload.",
+      "bubbles": true,
+      "composed": true
+    },
+    {
+      "name": "ce-chart-select",
+      "detail": "PointSelectDetail<PlotPoint, PlotSeries>: { series, point, type, originalEvent }",
+      "description": "User clicked a per-series marker. Line / area only — bars do not currently emit select.",
+      "bubbles": true,
+      "composed": true
+    },
+    {
+      "name": "ce-chart-toggle",
+      "detail": "ToggleDetail: { name, hidden }",
+      "description": "User clicked a legend chip. Payload reports the desired hidden state for that series. Series visibility is owned locally; consumers can listen to mirror state.",
+      "bubbles": true,
+      "composed": true
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-plot-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Host width; set inline from the width prop.",
+      "fallback": "100%"
+    },
+    {
+      "name": "--ce-plot-height",
+      "kind": "size",
+      "source": "local",
+      "description": "Host height; set inline from the height prop.",
+      "fallback": "320px"
+    },
+    {
+      "name": "--ce-plot-line-w",
+      "kind": "size",
+      "source": "local",
+      "description": "Stroke width for line / area outlines (SVG units).",
+      "fallback": "2"
+    },
+    {
+      "name": "--ce-plot-bar-radius",
+      "kind": "radius",
+      "source": "local",
+      "description": "(Reserved.) Bar corner radius. Currently the SVG `rx` attribute is hardcoded to 2 because SVG geometric attributes do not accept CSS custom properties. Future work: route through a Lit @property bound at render time so consumers can override.",
+      "fallback": "2"
+    },
+    {
+      "name": "--ce-plot-grid",
+      "kind": "color",
+      "source": "local",
+      "description": "Gridline stroke color.",
+      "fallback": "color-mix(in srgb, var(--ce-text) 10%, transparent)"
+    },
+    {
+      "name": "--ce-plot-axis",
+      "kind": "color",
+      "source": "local",
+      "description": "Axis line stroke color.",
+      "fallback": "color-mix(in srgb, var(--ce-text) 30%, transparent)"
+    },
+    {
+      "name": "--ce-plot-tick-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Tick-label and (default) axis-label fill color.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-plot-area-opacity",
+      "kind": "other",
+      "source": "local",
+      "description": "Opacity multiplier for the filled area path beneath area-chart strokes.",
+      "fallback": "0.18"
+    },
+    {
+      "name": "--ce-plot-fade",
+      "kind": "other",
+      "source": "local",
+      "description": "Transition timing for the data-layer fade-in, marker radius, tooltip opacity, and legend chip background; replaced with 0s under prefers-reduced-motion.",
+      "fallback": "var(--ce-transition)"
+    },
+    {
+      "name": "--ce-plot-tooltip-bg",
+      "kind": "color",
+      "source": "local",
+      "description": "Background color of the hover tooltip card. Defaults to --ce-surface so theming the host theme also themes the tooltip.",
+      "fallback": "var(--ce-surface)"
+    },
+    {
+      "name": "--ce-plot-tooltip-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Foreground (text) color of the hover tooltip card.",
+      "fallback": "var(--ce-text)"
+    },
+    {
+      "name": "--ce-plot-tooltip-border",
+      "kind": "color",
+      "source": "local",
+      "description": "Border color of the hover tooltip card.",
+      "fallback": "var(--ce-border)"
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend chip swatch gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend chip horizontal padding + bottom margin under the legend strip."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend chip-to-chip gap."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Legend chip text color and y-axis-label color when set."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Empty-state and default tick-label color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Tick-label and legend-chip font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Empty-state and axis-label font size."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Legend chip background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Legend chip border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default series color (resolved via paletteColor → resolveColor)."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing function used for the phase-8 fade."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "Intl.NumberFormat",
+      "purpose": "Locale-aware default number formatter (via shared internal/charts/format.ts).",
+      "writes": false
+    },
+    {
+      "api": "matchMedia",
+      "purpose": "Detect prefers-reduced-motion to gate the phase-8 fade transition (via shared internal/charts/easing.ts).",
+      "writes": false
+    },
+    {
+      "api": "Date",
+      "purpose": "Time-scale x ticks via Date.toISOString() when a series uses Date-typed x values.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chart",
+    "ce-bar-chart",
+    "ce-sparkline"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Metrics & charts",
+    "chart",
+    "svg",
+    "line",
+    "area",
+    "bar",
+    "data-viz"
+  ],
+  "a11y": {
+    "role": "img (svg)",
+    "notes": "The SVG carries role=img and a generated aria-label summarising series count, names, and y-range. The legend is a role=list ul of role=listitem li > <button aria-pressed> chips with visible focus rings — keyboard users can tab to a chip and toggle via Enter/Space (native button behavior). The hover crosshair + tooltip card are aria-hidden; the chart's overall semantics are conveyed through the role=img label rather than through live updates. prefers-reduced-motion disables both the data-layer fade-in animation and the crosshair / tooltip transitions via @media inside the component styles."
+  }
+}

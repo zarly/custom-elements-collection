@@ -1,0 +1,25 @@
+<!-- @example Default — half-dial with value and label -->
+<ce-gauge value="68" label="CPU load"></ce-gauge>
+
+<!-- @example Target tick marks a goal or threshold (here: 80%) -->
+<ce-gauge value="68" target="80" label="CPU load"></ce-gauge>
+
+<!-- @example Semantic colors for ok / warn / bad ranges -->
+<div style="display:flex;gap:var(--ce-space-4);flex-wrap:wrap">
+  <ce-gauge value="92" color="green" label="Uptime %" target="99"></ce-gauge>
+  <ce-gauge value="64" color="amber" label="Memory %" target="75"></ce-gauge>
+  <ce-gauge value="28" color="red" label="Free disk %" target="50"></ce-gauge>
+</div>
+
+<!-- @example Edge cases — empty (0%), nearly full (97%), and full (100%) -->
+<div style="display:flex;gap:var(--ce-space-4);flex-wrap:wrap">
+  <ce-gauge value="0" label="Idle"></ce-gauge>
+  <ce-gauge value="97" color="green" label="Coverage"></ce-gauge>
+  <ce-gauge value="100" color="green" label="Done"></ce-gauge>
+</div>
+
+<!-- @example Custom range — temperature dial 0–40°C with target -->
+<ce-gauge value="22" min="0" max="40" target="20" color="cyan" label="Room °C"></ce-gauge>
+
+<!-- @example Compact size for KPI rows -->
+<ce-gauge value="74" size="96" color="purple" label="Score"></ce-gauge>

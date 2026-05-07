@@ -58,6 +58,7 @@ import { CeJson } from "./components/json/json.js";
 import { CeKeyValue } from "./components/key-value/key-value.js";
 import { CeKpi } from "./components/kpi/kpi.js";
 import { CePersona } from "./components/persona/persona.js";
+import { CePlot } from "./components/plot/plot.js";
 import { CeProgress } from "./components/progress/progress.js";
 import { CeRating } from "./components/rating/rating.js";
 import { CeRetryButton } from "./components/retry-button/retry-button.js";
@@ -132,6 +133,7 @@ export function defineAll(): void {
   defineOnce("ce-key-value", CeKeyValue);
   defineOnce("ce-kpi", CeKpi);
   defineOnce("ce-persona", CePersona);
+  defineOnce("ce-plot", CePlot);
   defineOnce("ce-progress", CeProgress);
   defineOnce("ce-rating", CeRating);
   defineOnce("ce-retry-button", CeRetryButton);

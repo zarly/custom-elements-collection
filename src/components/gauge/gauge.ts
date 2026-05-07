@@ -48,7 +48,7 @@ export class CeGauge extends CecElement {
       letter-spacing: 0.06em;
       font-weight: 600;
     }
-    .track { stroke: var(--ce-surface-2); }
+    .track { stroke: var(--ce-surface-3); }
     .fill  { stroke: var(--ce-color-blue); }
     .tick  { stroke: var(--ce-text); }
 
@@ -99,8 +99,7 @@ export class CeGauge extends CecElement {
     const pct = this.#pct();
     const a = this.#angle(pct);
     const [px, py] = this.#point(cx, cy, r, a);
-    const sweep = pct > 0.5 ? 1 : 0; // large-arc flag for arcs > 180° (never here)
-    const fillD = `M ${cx - r} ${cy} A ${r} ${r} 0 ${sweep} 1 ${px} ${py}`;
+    const fillD = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${px} ${py}`;
 
     let tick = null;
     if (this.target != null) {
@@ -109,10 +108,14 @@ export class CeGauge extends CecElement {
       const ta = this.#angle(tp);
       const [x1, y1] = this.#point(cx, cy, r - stroke / 2 - 2, ta);
       const [x2, y2] = this.#point(cx, cy, r + stroke / 2 + 2, ta);
-      tick = svg`<line class="tick" x1=${x1} y1=${y1} x2=${x2} y2=${y2} stroke-width="2" />`;
+      tick = svg`<line class="tick" x1=${x1} y1=${y1} x2=${x2} y2=${y2} stroke-width="3" stroke-linecap="round"><title>Target: ${this.target}</title></line>`;
     }
 
-    const aria = `${this.value} of ${this.max}`;
+    const subject = this.label || "Value";
+    const tooltip =
+      this.target != null
+        ? `${subject}: ${this.value} of ${this.max} (target ${this.target})`
+        : `${subject}: ${this.value} of ${this.max}`;
 
     return html`
       <div class="wrap" style="width:${s}px;height:${cy + stroke}px;">
@@ -124,8 +127,9 @@ export class CeGauge extends CecElement {
           aria-valuemin=${this.min}
           aria-valuemax=${this.max}
           aria-valuenow=${this.value}
-          aria-label=${aria}
+          aria-label=${tooltip}
         >
+          ${svg`<title>${tooltip}</title>`}
           ${svg`<path class="track" d=${trackD} fill="none" stroke-width=${stroke} stroke-linecap="round" />`}
           ${pct > 0
             ? svg`<path class="fill" d=${fillD} fill="none" stroke-width=${stroke} stroke-linecap="round" />`

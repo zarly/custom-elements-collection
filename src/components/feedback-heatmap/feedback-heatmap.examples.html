@@ -1,0 +1,24 @@
+<!-- @example Heatmap inside a sink — auto-hydrates and updates live -->
+<ce-feedback-sink subject="post-launch" transport="localstorage">
+  <ce-feedback-bar item="hero" label="Hero">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-bookmark></ce-bookmark>
+    <ce-dismiss></ce-dismiss>
+  </ce-feedback-bar>
+  <ce-feedback-bar item="kpis" label="KPIs">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-bookmark></ce-bookmark>
+  </ce-feedback-bar>
+  <ce-feedback-bar item="cta" label="CTA">
+    <ce-rating mode="thumbs"></ce-rating>
+    <ce-comment placeholder="Why?"></ce-comment>
+  </ce-feedback-bar>
+
+  <ce-feedback-heatmap show-legend></ce-feedback-heatmap>
+</ce-feedback-sink>
+
+<!-- @example Heatmap targeted at a specific subject (lives outside the sink) -->
+<ce-feedback-heatmap subject="post-launch" cell="14" gap="3"></ce-feedback-heatmap>
+
+<!-- @example Compact strip with custom cell size -->
+<ce-feedback-heatmap subject="post-launch" cell="8" gap="1" max="40"></ce-feedback-heatmap>

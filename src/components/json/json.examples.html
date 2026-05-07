@@ -1,0 +1,23 @@
+<!-- @example JSON via src attribute -->
+<ce-json src='{"name":"ce-json","version":"1.0.0","tags":["content","code","data"],"stable":true}'></ce-json>
+
+<!-- @example Custom indent + collapsed by default -->
+<ce-json indent="4" collapsed src='{"user":{"id":42,"email":"a@b.com","roles":["admin","editor"]},"session":{"createdAt":"2026-05-07T08:14:00Z","ip":"203.0.113.10"}}'></ce-json>
+
+<!-- @example Truncate long output to 200 chars -->
+<ce-json
+  max-length="200"
+  src='{"items":[{"id":1,"label":"alpha"},{"id":2,"label":"beta"},{"id":3,"label":"gamma"},{"id":4,"label":"delta"},{"id":5,"label":"epsilon"},{"id":6,"label":"zeta"},{"id":7,"label":"eta"}],"total":7,"hasMore":false}'
+></ce-json>
+
+<!-- @example Source via default slot — renders as JSON if parseable -->
+<ce-json>
+{
+  "tool": "ce-json",
+  "source": "slot",
+  "nested": { "ok": true, "values": [1, 2, 3] }
+}
+</ce-json>
+
+<!-- @example Malformed input renders styled error + emits ce-json-parse-error -->
+<ce-json src='{"oops": missing-quotes }'></ce-json>

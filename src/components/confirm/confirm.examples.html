@@ -1,0 +1,25 @@
+<!-- @example Default — neutral primary/secondary buttons -->
+<ce-confirm prompt="Publish this draft to the live site?"></ce-confirm>
+
+<!-- @example Custom labels -->
+<ce-confirm
+  prompt="Save changes before leaving?"
+  confirm-label="Save & exit"
+  cancel-label="Discard"
+></ce-confirm>
+
+<!-- @example Danger variant — destructive primary action -->
+<ce-confirm
+  variant="danger"
+  prompt="Permanently delete this project? This cannot be undone."
+  confirm-label="Delete project"
+></ce-confirm>
+
+<!-- @example Rich prompt via slot -->
+<ce-confirm variant="danger" confirm-label="Revoke">
+  <span slot="prompt">
+    Revoke API key
+    <code>sk_live_4eC3…dp7d</code>
+    ? Apps using it will stop working immediately.
+  </span>
+</ce-confirm>

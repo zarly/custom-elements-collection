@@ -1,5 +1,40 @@
-<!-- @example Three bars from a JSON attribute -->
+<!-- @example Animated bars with hover tooltips, gridlines, and meta values -->
 <ce-bar-chart
-  data='[{"label":"Hero","value":42,"color":"green"},{"label":"Kpi","value":27,"color":"blue"},{"label":"Card","value":14,"color":"amber"}]'
+  gridlines
+  data='[
+    {"label":"Hero","value":42,"meta":"+12%"},
+    {"label":"Kpi","value":27,"color":"green","meta":"+3%"},
+    {"label":"Card","value":18,"color":"amber","meta":"-2%"},
+    {"label":"Plot","value":9,"color":"purple","meta":"+0%"}
+  ]'
 ></ce-bar-chart>
 
+<!-- @example Sparkline mode — inline mini-strip, no labels or axis -->
+<p style="display:flex;align-items:center;gap:var(--ce-space-3)">
+  Last 7 days
+  <ce-bar-chart
+    sparkline
+    color="green"
+    data='[
+      {"label":"Mon","value":3},
+      {"label":"Tue","value":7},
+      {"label":"Wed","value":5},
+      {"label":"Thu","value":12},
+      {"label":"Fri","value":9},
+      {"label":"Sat","value":15},
+      {"label":"Sun","value":18}
+    ]'
+  ></ce-bar-chart>
+  <strong>+18</strong>
+</p>
+
+<!-- @example Per-row arbitrary CSS color + custom max -->
+<ce-bar-chart
+  max="100"
+  label-width="6rem"
+  data='[
+    {"label":"Brand A","value":78,"color":"#5a8"},
+    {"label":"Brand B","value":54,"color":"oklch(75% 0.15 45)"},
+    {"label":"Brand C","value":31,"color":"var(--ce-color-cyan)"}
+  ]'
+></ce-bar-chart>

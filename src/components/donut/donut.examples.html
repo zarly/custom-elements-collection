@@ -1,0 +1,38 @@
+<!-- @example Default donut with center label -->
+<ce-donut
+  values="[42,28,18,12]"
+  labels='["Direct","Search","Referral","Social"]'
+  center-label="Traffic"
+></ce-donut>
+
+<!-- @example Pie variant — thickness 0 -->
+<ce-donut
+  values="[55,30,15]"
+  labels='["Free","Pro","Team"]'
+  thickness="0"
+  size="160"
+></ce-donut>
+
+<!-- @example Custom palette — semantic ok / warn / bad split -->
+<ce-donut
+  values="[72,18,10]"
+  labels='["Healthy","Warning","Failing"]'
+  colors='["var(--ce-color-green)","var(--ce-color-amber)","var(--ce-color-red)"]'
+  center-label="Services"
+></ce-donut>
+
+<!-- @example Rich center via slot — big number + label -->
+<ce-donut values="[68,32]" colors='["var(--ce-color-blue)","var(--ce-surface-2)"]' size="160" thickness="14">
+  <div slot="center" style="text-align:center">
+    <div style="font-size:var(--ce-text-xl);font-weight:600">68%</div>
+    <div style="font-size:var(--ce-text-xs);color:var(--ce-muted)">complete</div>
+  </div>
+</ce-donut>
+
+<!-- @example Compact with five segments -->
+<ce-donut
+  values="[12,9,7,5,3]"
+  labels='["A","B","C","D","E"]'
+  size="96"
+  thickness="12"
+></ce-donut>

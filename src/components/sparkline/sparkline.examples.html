@@ -1,0 +1,30 @@
+<!-- @example Inline trend line beside a KPI value -->
+<p style="display:flex;align-items:center;gap:var(--ce-space-3)">
+  <strong>$12,480</strong>
+  <ce-sparkline values="[3,5,4,7,6,9,8,12,11,15]" color="green"></ce-sparkline>
+  <span style="color:var(--ce-color-green)">+18%</span>
+</p>
+
+<!-- @example Filled area shape -->
+<ce-sparkline
+  values="[12,15,11,14,18,22,19,25,28,24,30,33]"
+  shape="area"
+  color="blue"
+  width="160"
+  height="40"
+></ce-sparkline>
+
+<!-- @example Bar shape — small histogram -->
+<ce-sparkline
+  values="[2,4,1,3,5,8,6,9,7,10]"
+  shape="bar"
+  color="purple"
+  width="120"
+  height="32"
+></ce-sparkline>
+
+<!-- @example Trend down — error rate over the last 24h -->
+<p style="display:flex;align-items:center;gap:var(--ce-space-3)">
+  <span style="color:var(--ce-muted)">Errors / hr</span>
+  <ce-sparkline values="[42,38,40,35,30,28,22,18,15,12,9,6]" color="red" shape="area"></ce-sparkline>
+</p>

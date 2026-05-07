@@ -61,6 +61,8 @@ Depth lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Consumer-side pat
 
 ## 4. Adding a new component
 
+> **Read this before designing the API.** The primary author of markup that uses this library is a large language model, not a human. That changes how we think about props, required fields, error states, and "wrong" input. Bias toward optional fields, accept multiple input shapes when ergonomically cheap, infer behavior from data rather than adding `mode` flags, and never punish the end user for an LLM author's omission. The full philosophy and the rules it produces — including when to refuse this lens — live in [ADR-009](docs/adr/adr-009-llm-tolerant-components.md). Component-level applications of the lens belong in the component's `CONCEPT.md` (see step 9 and [ADR-008](docs/adr/adr-008-component-concept-files.md)). Reference implementations: [`src/components/gauge/`](src/components/gauge/) and [`src/lesson/lesson-quickfire/`](src/lesson/lesson-quickfire/).
+
 Since [ADR-005](docs/adr/adr-005-component-meta.md) the flow is mostly automated. Work through this list top to bottom; every step is required.
 
 1. **Pick a folder.** UI tag → `src/components/<name>/`. Lesson tag → `src/lesson/<name>/`. The folder name matches the file stem (e.g. `feedback-bar/`).
@@ -71,7 +73,8 @@ Since [ADR-005](docs/adr/adr-005-component-meta.md) the flow is mostly automated
    **Tier picking rule** (ADR-006 §"Classification rule"): has internal mutable state, runs interactive logic, or fetches data → `widget`. Wraps multiple semantically structured children with named slots → `layout`. Otherwise → `brick`.
 5. **Generate exports.** Run `pnpm gen-exports`. The script regenerates `src/index.ts`, `src/auto.ts`, `src/entries/<name>.ts`, `src/manifest.ts`, and adds the `./<name>` entry to `package.json` `exports`. Do not edit those generated files by hand.
 6. **Regenerate the skill catalog.** Run `pnpm gen-skill`. The script refreshes the catalog block in `skill/SKILL.md` and `skill/references/index.md` from the meta files. `pnpm check` will fail if you skip this.
-7. **Demo example (optional).** If you want a live snippet on the catalog page, drop a `<name>.examples.html` next to your source. Each example begins with an HTML comment delimiter — multiple examples per file are fine:
+7. **Examples file (`<name>.examples.html`).** Drop one next to your source. Each example begins with an HTML comment delimiter — multiple examples per file are expected:
+
    ```html
    <!-- @example Default -->
    <ce-foo>Body</ce-foo>
@@ -79,10 +82,27 @@ Since [ADR-005](docs/adr/adr-005-component-meta.md) the flow is mostly automated
    <!-- @example With accent -->
    <ce-foo accent="green">Tinted</ce-foo>
    ```
-   The catalog renders props/events/slots/CSS-vars straight from the meta file; `*.examples.html` only carries rendered HTML snippets, parsed by [`demo/parse-examples.js`](demo/parse-examples.js). The demo discovers files via `import.meta.glob`, so renames travel with the folder.
-8. **Verify.** Run `pnpm check`. Typecheck, validate-meta, gen-skill:check, tests, and build must all be green.
 
-The canonical reference implementation is [`src/components/card/`](src/components/card/) — copy its shape.
+   The catalog renders props/events/slots/CSS-vars straight from the meta file; `*.examples.html` only carries rendered HTML snippets, parsed by [`demo/parse-examples.js`](demo/parse-examples.js). The demo discovers files via `import.meta.glob`, so renames travel with the folder.
+
+   **When examples are required.** Driven by the `tier` (ADR-006) and `category` fields in the meta:
+
+   | meta state | examples file | rationale |
+   |---|---|---|
+   | `tier: brick` AND `category: ui` or `lesson` | **required**, ≥3 examples covering the prop matrix | direct end-user surface — humans browse them in the catalog and LLM code-generators copy them from `dist/registry*` |
+   | `tier: widget` AND `category: ui` or `lesson` | **required**, ≥3 examples — at least one showing the interactive/stateful behavior the widget owns | same audience, more behavior surface to demonstrate |
+   | `tier: layout` (any category) | **skip** | layout primitives are slot containers — meaningful examples need real children pulled from neighboring components and tend to duplicate those components' own examples |
+   | `category: internal` (any tier) | **skip** | internal components serve the demo / docs site itself, not external consumers; they are not part of the published catalog narrative |
+
+   "≥3 examples" means three independent `<!-- @example … -->` blocks in the same file — distinct prop combinations, slot patterns, or states. The bar is "a reader who has never seen this tag can copy any one block, paste it, and see something representative." If you can only think of one example, the meta description is probably hiding two more.
+
+   **`*.examples.html` is markup-only — no `<script>` tags.** This is mandatory, not stylistic. Examples become reference material both for human readers of the catalog *and* for LLM code-generators that consume `dist/registry*.json` and the per-component examples. Embedding script in an example trains LLMs to emit script alongside your component, breaks the "drop a tag in plain HTML" promise from §5, and creates a CSP / untrusted-input footgun for any consumer rendering generated code. If your example needs structural data, **put it on an attribute as JSON** (the property must already use `jsonProp()` per §5). Prefer separate properties (`x-label`, `y-label`, `height`, `type`, `color`) over stuffing everything into one JSON blob — keep each example readable. If a feature truly cannot be demonstrated without script, that is a missing-attribute API and the right fix is to extend the component, not the example.
+8. **Verify.** Run `pnpm check`. Typecheck, validate-meta, gen-skill:check, tests, and build must all be green.
+9. **Optional — `CONCEPT.md`** ([ADR-008](docs/adr/adr-008-component-concept-files.md)). When the component involves non-trivial design decisions — anything where you weighed ≥2 options or where the *why* would surprise a future reader — drop a `CONCEPT.md` next to the source. Prose, not schema-validated, never published (npm `files` only ships `dist/`). It captures decisions, edge cases, closed-bug lessons, and deferred questions so the next contributor (human or agent) doesn't re-litigate them. Reference implementation: [`src/components/gauge/CONCEPT.md`](src/components/gauge/CONCEPT.md). Skip entirely for mechanically obvious components.
+
+   **If a component already has a `CONCEPT.md`, read it before changing the component.** Updating it as you make new decisions is the same obligation that already applies to the meta file — they are companion canonicals (meta = *what*, concept = *why*).
+
+The canonical reference implementation for the source/test/meta/examples shape is [`src/components/card/`](src/components/card/). For the optional `CONCEPT.md` shape, see [`src/components/gauge/CONCEPT.md`](src/components/gauge/CONCEPT.md).
 
 ## 5. The string-props rule (important)
 
@@ -175,6 +195,10 @@ When in doubt, read the ADR first.
 - [ADR-003 — Theming via CSS custom properties](docs/adr/adr-003-theming.md): consumers override any `--ce-*` token.
 - [ADR-004 — Distribution modes](docs/adr/adr-004-distribution-modes.md): inline, linked-local, linked-cdn — and why all three matter.
 - [ADR-005 — Component meta JSON files](docs/adr/adr-005-component-meta.md): every component carries a `*.meta.json` validated by Zod; `index.ts`, `auto.ts`, `entries/`, and `manifest.ts` are generated from it.
+- [ADR-006 — Component tier](docs/adr/adr-006-component-tier.md): every component is `brick`, `widget`, or `layout` — the tier shapes how much API surface is appropriate.
+- [ADR-007 — Component registry](docs/adr/adr-007-component-registry.md): per-component `dist/registry/<tag>.json` plus filtered views, the LLM-tool-use-shaped projection of the meta.
+- [ADR-008 — Per-component CONCEPT.md](docs/adr/adr-008-component-concept-files.md): optional sibling file capturing the *why* behind each component's design decisions.
+- [ADR-009 — Tolerant components for LLM-driven authoring](docs/adr/adr-009-llm-tolerant-components.md): how we design APIs when the primary author of the markup is a non-deterministic LLM — flexibility, optional fields, data-shape inference, minimum surface. Read before adding props, modes, or required fields.
 
 ## 10. Keeping the AI skill up to date
 

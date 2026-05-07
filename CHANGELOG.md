@@ -4,6 +4,111 @@ All notable changes to `custom-elements-collection` are documented here. The
 format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.4.0] — 2026-05-07
+
+This release lands the charts-v2 program — `ce-plot` ships as a new SVG-based
+multi-series chart and `ce-bar-chart` is replaced wholesale by its polished
+successor. Two governance ADRs are added: ADR-008 introduces optional
+`CONCEPT.md` files for per-component design rationale, and ADR-009 defines the
+"components are tools, not products" tolerance contract for LLM-authored
+markup.
+
+### Added
+
+- **`ce-plot`** — multi-series chart covering line / area / bar geometries in
+  a single component. Pure SVG, no runtime dependencies. Auto-detects the x
+  scale (`Date` → time, number → linear, string → category). Hover crosshair
+  + tooltip card. Click-to-toggle legend. Four
+  `ce-chart-{hover,leave,select,toggle}` events with documented payloads.
+  Honours `prefers-reduced-motion`. ~8 KB gz.
+- **`src/internal/charts/`** — shared helpers (`format`, `scale`, `color`,
+  `easing`, `events`) consumed by `ce-bar-chart` and `ce-plot`. Not exported.
+- **ADR-008 — per-component `CONCEPT.md` files.** Optional prose document next
+  to a component's source that captures design rationale, alternatives
+  considered, and closed-bug lessons. Read before non-trivial changes; never
+  hand-edited by generators; never published. Reference implementation:
+  `src/components/gauge/CONCEPT.md`. Companion `src/lesson/lesson-quickfire/CONCEPT.md`
+  added in the same release.
+- **ADR-009 — components are tools, not products.** Defines the tolerance
+  contract for LLM-authored markup: bias toward optional fields, accept
+  multiple input shapes, infer intent from data instead of `mode` flags,
+  no visible-error chrome on missing inputs. Governs API design across the
+  library; does not loosen framework invariants (tag prefixes, design tokens,
+  slot-only-no-script).
+- **`ce-textarea` examples** — co-located `textarea.examples.html` (was
+  missing in v0.3).
+- **`lesson-quickfire` test suite** — the component shipped without a sibling
+  `*.test.ts` in v0.3; the new file covers scored / open / mixed-mode
+  scoring, `correct: string[]`, and primitive coercion.
+
+### Changed (breaking)
+
+- **`ce-bar-chart` API replaced wholesale.** The previous minimal implementation
+  is gone; the polished implementation that briefly shipped under the temporary
+  tag `ce-bar-chart-v2` now owns the `ce-bar-chart` tag. Effects on existing
+  consumers:
+  - **Data shape:** `BarRow.color` widens from a typed enum (`CecColor`) to
+    `string`. Existing values keep working; the field also accepts arbitrary
+    CSS colors (`#5a8`, `oklch(...)`, `var(--brand)`) routed through
+    `resolveColor()`.
+  - **Default `label-width` changes from `180px` to `auto`.** Bars across rows
+    align via CSS subgrid. To preserve old behavior, set `label-width="180px"`
+    on the tag.
+  - **New default `animated="true"`** — width transitions on data change. Set
+    `animated="false"` for the previous static look; `prefers-reduced-motion`
+    always wins regardless.
+  - **New attributes** (additive, default-off): `gridlines`, `sparkline`,
+    `show-values`, `format`, `empty-text`.
+  - **Now dispatches** `ce-chart-{hover,leave,select}` events; rows are
+    `tabindex=0` and respond to Enter/Space.
+  - **Shadow-DOM internal class names changed** (`.ce-bar-row → .ce-row`,
+    etc.). External CSS targeting the previous shadow internals will not
+    apply; the public surface is the host attributes and `--ce-bar-*`
+    CSS variables.
+  - **Stability stays `stable`.** The temporary `ce-bar-chart-v2` tag is
+    removed from the manifest — drop any `custom-elements-collection/bar-chart-v2`
+    imports.
+- **`ce-bar-chart` bundle grew from 1.51 KB gz to 3.64 KB gz** as a result of
+  the merge. Within the < 4 KB target set in the charts-v2 concept doc.
+
+### Changed
+
+- **`lesson-quickfire` rounds — `correct` is now optional and accepts
+  `string | string[]`** (ADR-009 in practice). Rounds without `correct` run as
+  ungraded polls — the picked option flashes neutral instead of red, the
+  score header is hidden, and the completion screen reads "Done!" instead of
+  `0 / N`. The `lesson-quickfire-done` event payload's `total` field counts
+  scored rounds only. Mixed scored/poll quizzes work in one element.
+  Primitive answers are coerced via `String(x)` at match time.
+- **`ce-gauge` polish** — hovering the gauge surfaces a native browser
+  tooltip with the value, range, and target; the optional target tick shows
+  a `Target: N` tooltip. The dial background token swapped from
+  `--ce-surface-2` to `--ce-surface-3` for stronger contrast against the
+  surrounding card.
+
+### Fixed
+
+- **`ce-chart` ref directive** — replaced an inlined `RefDirective` (which
+  never set the canvas reference, so Chart.js never mounted) with the
+  standard `ref()` import from `lit/directives/ref.js`. The component now
+  renders.
+- **`ce-plot` SVG geometry** — clamped chart height to its container box
+  (the SVG was overflowing on narrow viewports) and hardcoded the bar corner
+  radius (`rx=2`) since SVG geometric attributes do not accept CSS variables.
+- **`ce-bar-chart` row alignment** — rows share a single subgrid label
+  column; bars now line up across rows when label widths differ.
+
+### Documentation
+
+- ADR-008 — Per-component `CONCEPT.md` files.
+- ADR-009 — Components are tools, not products: tolerant inputs and
+  user-defined use.
+- `CONTRIBUTING.md` updated for both ADRs and the markup-only `*.examples.html`
+  contract (no `<script>` tags, ever — the library is consumed by LLM
+  code-generators).
+
 ## [0.3.0] — 2026-05-06
 
 This release expands the library from 34 to 72 components and introduces a
@@ -144,6 +249,8 @@ Initial public surface: 31 components + 6 lesson widgets (= 37 tags), token
 system, dark/light themes, `auto.ts` registration, tree-shakable per-tag
 entries.
 
+[Unreleased]: https://github.com/zarly/custom-elements-collection/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/zarly/custom-elements-collection/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/zarly/custom-elements-collection/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/zarly/custom-elements-collection/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/zarly/custom-elements-collection/releases/tag/v0.1.0

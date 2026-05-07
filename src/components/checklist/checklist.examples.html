@@ -1,0 +1,32 @@
+<!-- @example Static task list — items via JSON attribute -->
+<ce-checklist
+  items='[
+    {"id":"a","text":"Open the editor","checked":true},
+    {"id":"b","text":"Read the brief","checked":true},
+    {"id":"c","text":"Draft the outline"},
+    {"id":"d","text":"Ship the draft"}
+  ]'
+></ce-checklist>
+
+<!-- @example Editable list — inline add input -->
+<ce-checklist
+  allow-edit
+  items='[
+    {"id":"buy","text":"Buy oat milk"},
+    {"id":"call","text":"Call the dentist"}
+  ]'
+></ce-checklist>
+
+<!-- @example Persisted across reloads via localStorage -->
+<ce-checklist
+  persist-key="onboarding-v1"
+  allow-edit
+  items='[
+    {"id":"profile","text":"Complete profile"},
+    {"id":"team","text":"Invite team"},
+    {"id":"deploy","text":"Deploy first project"}
+  ]'
+></ce-checklist>
+
+<!-- @example Empty state with edit-mode — start from scratch -->
+<ce-checklist allow-edit></ce-checklist>

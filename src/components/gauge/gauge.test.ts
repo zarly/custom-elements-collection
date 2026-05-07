@@ -63,6 +63,31 @@ describe("<ce-gauge>", () => {
     host.remove();
   });
 
+  it("renders SVG <title> tooltip with value, range, and target", async () => {
+    const host = mount(`<ce-gauge value="68" target="80" label="CPU load"></ce-gauge>`);
+    const el = host.querySelector("ce-gauge") as CeGauge;
+    await ready(el);
+    const svg = el.shadowRoot!.querySelector("svg")!;
+    const titles = svg.querySelectorAll("title");
+    const svgTitle = Array.from(titles).find((t) => t.parentElement === svg)!;
+    expect(svgTitle.textContent).toBe("CPU load: 68 of 100 (target 80)");
+    expect(svg.getAttribute("aria-label")).toBe(
+      "CPU load: 68 of 100 (target 80)"
+    );
+    const tickTitle = el.shadowRoot!.querySelector("line.tick > title")!;
+    expect(tickTitle.textContent).toBe("Target: 80");
+    host.remove();
+  });
+
+  it("omits target from tooltip when no target is set", async () => {
+    const host = mount(`<ce-gauge value="40"></ce-gauge>`);
+    const el = host.querySelector("ce-gauge") as CeGauge;
+    await ready(el);
+    const title = el.shadowRoot!.querySelector("svg > title")!;
+    expect(title.textContent).toBe("Value: 40 of 100");
+    host.remove();
+  });
+
   it("color attribute reflects", async () => {
     const host = mount(`<ce-gauge color="green" value="10"></ce-gauge>`);
     const el = host.querySelector("ce-gauge") as CeGauge;

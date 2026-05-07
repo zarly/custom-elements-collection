@@ -56,13 +56,14 @@ tmp/
 
 # ───── Internal / operator-only notes ─────
 # Keep BRD, STATUS, PROGRESS, HANDOFF, TODO, NOTES etc. out of the public repo.
-internal/
-# Bundle analyzer artifacts — emitted by `pnpm analyze` into internal/, but
+# Anchored at repo root so nested `src/internal/**` source modules stay tracked.
+/internal/
+# Bundle analyzer artifacts — emitted by `pnpm analyze` into /internal/, but
 # listed explicitly so contributors can grep this file and know what they are.
-internal/bundle-stats.jsonl
-internal/bundle-visualizer-treemap.html
-internal/bundle-visualizer-sunburst.html
-internal/bundle-visualizer-network.html
+/internal/bundle-stats.jsonl
+/internal/bundle-visualizer-treemap.html
+/internal/bundle-visualizer-sunburst.html
+/internal/bundle-visualizer-network.html
 vis/
 
 # ───── AI / assistant tooling artifacts ─────
@@ -70,11 +71,22 @@ vis/
 .aider*
 .cursor/
 .continue/
+.agents/
+.opencode/
 
 # Project-local Claude memory + project-instructions files. Operator-only;
 # track via internal/ if a public mirror is needed.
 /CLAUDE.md
 /MEMORY.md
+/AGENTS.md
+.mcp.json
+
+# ───── Nightly cron workflow ─────
+# Per-firing logs and the lock file — generated, do not commit.
+.nightrun/*.jsonl
+.nightrun/.lock
+.nightrun/
+/PROGRESS.md
 
 # ───── Misc ─────
 *.local

@@ -1,5 +1,6 @@
 import { html, css } from "lit";
 import { property } from "lit/decorators.js";
+import { createRef, ref, type Ref } from "lit/directives/ref.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 
 /**
@@ -42,7 +43,7 @@ export class CeChart extends CecElement {
   @property(jsonProp<unknown>({})) options: unknown = {};
 
   #chart: any = null;
-  #canvas: HTMLCanvasElement | null = null;
+  #canvasRef: Ref<HTMLCanvasElement> = createRef();
   #error = "";
 
   override async firstUpdated(): Promise<void> {
@@ -53,6 +54,7 @@ export class CeChart extends CecElement {
   override updated(changed: Map<PropertyKey, unknown>): void {
     if (this.#chart && (changed.has("data") || changed.has("options") || changed.has("type"))) {
       this.#chart.destroy();
+      this.#chart = null;
       this.#mount();
     }
   }
@@ -85,8 +87,9 @@ export class CeChart extends CecElement {
 
   #mount(): void {
     const w = window as unknown as { Chart?: any };
-    if (!w.Chart || !this.#canvas) return;
-    this.#chart = new w.Chart(this.#canvas, {
+    const canvas = this.#canvasRef.value;
+    if (!w.Chart || !canvas) return;
+    this.#chart = new w.Chart(canvas, {
       type: this.type,
       data: this.data,
       options: this.options,
@@ -97,25 +100,6 @@ export class CeChart extends CecElement {
     if (this.#error) {
       return html`<div class="ce-chart__err">Chart load failed: ${this.#error}</div>`;
     }
-    return html`<canvas
-      ${ref((el: Element | undefined) => {
-        this.#canvas = (el as HTMLCanvasElement) ?? null;
-      })}
-    ></canvas>`;
+    return html`<canvas ${ref(this.#canvasRef)}></canvas>`;
   }
 }
-
-// Minimal ref directive for capturing element instances. Lit ships one in
-// lit/directives/ref.js, but we inline a tiny version to avoid extra imports.
-import { directive, Directive } from "lit/directive.js";
-class RefDirective extends Directive {
-  cb: ((el: Element | undefined) => void) | null = null;
-  override update(_part: any, [cb]: [(el: Element | undefined) => void]) {
-    this.cb = cb;
-    return this.render(cb);
-  }
-  render(cb: (el: Element | undefined) => void) {
-    return cb;
-  }
-}
-const ref = directive(RefDirective);

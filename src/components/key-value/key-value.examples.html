@@ -1,0 +1,51 @@
+<!-- @example Single-column metadata block -->
+<ce-key-value>
+  <dt>Status</dt>
+  <dd>Active</dd>
+  <dt>Plan</dt>
+  <dd>Team — annual</dd>
+  <dt>Renews</dt>
+  <dd>2026-09-14</dd>
+  <dt>Seats</dt>
+  <dd>12 of 25</dd>
+</ce-key-value>
+
+<!-- @example Two-column packing for a specifications panel -->
+<ce-key-value columns="2">
+  <dt>CPU</dt>
+  <dd>8 vCPU</dd>
+  <dt>Memory</dt>
+  <dd>32 GiB</dd>
+  <dt>Disk</dt>
+  <dd>500 GB SSD</dd>
+  <dt>Region</dt>
+  <dd>eu-west-1</dd>
+  <dt>OS</dt>
+  <dd>Ubuntu 24.04 LTS</dd>
+  <dt>Kernel</dt>
+  <dd>6.8.0-31-generic</dd>
+</ce-key-value>
+
+<!-- @example Three-column compact roster -->
+<ce-key-value columns="3">
+  <dt>Owner</dt>
+  <dd>Ada L.</dd>
+  <dt>Team</dt>
+  <dd>Platform</dd>
+  <dt>Stage</dt>
+  <dd>Beta</dd>
+  <dt>Tickets</dt>
+  <dd>14 open</dd>
+  <dt>SLA</dt>
+  <dd>P1: 1h</dd>
+  <dt>Region</dt>
+  <dd>Global</dd>
+</ce-key-value>
+
+<!-- @example Single-line ellipsised values — wrap=false -->
+<ce-key-value wrap="false" style="max-width:320px">
+  <dt>Endpoint</dt>
+  <dd>https://api.example.com/v2/very/long/path/that/will/be/clipped</dd>
+  <dt>Request ID</dt>
+  <dd>req_01J9XKM7N2P4Q6R8S0T1U2V3W4-a1b2c3d4e5f6g7h8i9j0</dd>
+</ce-key-value>

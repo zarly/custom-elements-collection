@@ -1,0 +1,25 @@
+<!-- @example Basic checkbox with label -->
+<ce-checkbox label="I agree to the terms"></ce-checkbox>
+
+<!-- @example Three states stacked -->
+<div style="display:flex;flex-direction:column;gap:var(--ce-space-2)">
+  <ce-checkbox label="Unchecked"></ce-checkbox>
+  <ce-checkbox label="Checked" checked></ce-checkbox>
+  <ce-checkbox label="Mixed (parent of partial selection)" indeterminate></ce-checkbox>
+  <ce-checkbox label="Disabled" disabled></ce-checkbox>
+  <ce-checkbox label="Disabled + checked" disabled checked></ce-checkbox>
+</div>
+
+<!-- @example Parent + children pattern using indeterminate -->
+<ce-checkbox label="Notification preferences" indeterminate></ce-checkbox>
+<div style="margin-left:var(--ce-space-5);display:flex;flex-direction:column;gap:var(--ce-space-2)">
+  <ce-checkbox label="Email" checked></ce-checkbox>
+  <ce-checkbox label="Push"></ce-checkbox>
+  <ce-checkbox label="SMS" checked></ce-checkbox>
+</div>
+
+<!-- @example Slot replaces label — rich content -->
+<ce-checkbox checked>
+  <strong>Auto-renew</strong> &nbsp;
+  <span style="color:var(--ce-muted);font-size:var(--ce-text-xs)">Cancel anytime</span>
+</ce-checkbox>
