@@ -1,7 +1,26 @@
-<!-- @example Three filters -->
+<!-- @example Three filters (single-select default) -->
 <ce-filter-bar
   label="Filter by"
   value="all"
   options='[{"value":"all","label":"All","count":31},{"value":"ui","label":"UI","count":25},{"value":"lesson","label":"Lesson","count":6}]'
 ></ce-filter-bar>
 
+<!-- @example Multi-select with comma-joined value -->
+<ce-filter-bar
+  label="Tags"
+  multiple
+  value="ui,layout"
+  options='[{"value":"ui","label":"UI"},{"value":"layout","label":"Layout"},{"value":"forms","label":"Forms"},{"value":"charts","label":"Charts"}]'
+></ce-filter-bar>
+
+<!-- @example Plain options without counts -->
+<ce-filter-bar
+  options='[{"value":"all","label":"All"},{"value":"active","label":"Active"},{"value":"archived","label":"Archived"}]'
+></ce-filter-bar>
+
+<!-- @example Static chip row (decorative) — use plain <ce-chip>, not <ce-filter-bar> -->
+<div style="display:flex;gap:var(--ce-space-2)">
+  <ce-chip type="blue">UI</ce-chip>
+  <ce-chip type="green">Layout</ce-chip>
+  <ce-chip type="amber">Forms</ce-chip>
+</div>

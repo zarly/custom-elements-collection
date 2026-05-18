@@ -3,8 +3,8 @@
   "tag": "ce-key-value",
   "name": "Key Value",
   "className": "CeKeyValue",
-  "goal": "Render a definition list as an aligned grid with optional multi-column packing and tight typography.",
-  "description": "Wraps the slotted <dt>/<dd> pairs in a CSS-grid <dl> so keys align in a column. Supports 1-3 column-pairs side-by-side for compact specifications and metadata blocks. Keys render uppercase + muted; values use the default text color.",
+  "goal": "Render a definition list or ce-kv rows as an aligned grid with optional multi-column packing and tight typography.",
+  "description": "Two authoring modes. Mode A (dt/dd): wraps slotted `<dt>/<dd>` pairs in a CSS-grid `<dl>` so keys align in a column — supports 1-3 column-pairs side-by-side. Mode B (ce-kv): when direct children include `<ce-kv>` elements, stacks them in a flex column — values in each row accept any HTML content per CDR-002. If any `<ce-kv>` children are present Mode B is used; otherwise Mode A.",
   "stability": "stable",
   "props": [
     {
@@ -28,7 +28,7 @@
   "slots": [
     {
       "name": "",
-      "description": "Alternating <dt>/<dd> pairs."
+      "description": "Mode A: alternating `<dt>`/`<dd>` pairs. Mode B: `<ce-kv>` children — detected automatically; values in each `<ce-kv>` accept any HTML content including `<a>`, `<time>`, `<ce-chip>`, or typed renderers (CDR-002)."
     }
   ],
   "cssVariables": [
@@ -72,9 +72,10 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": ["ce-kv"],
   "related": [
-    "ce-table"
+    "ce-table",
+    "ce-kv"
   ],
   "category": "ui",
   "tier": "layout",

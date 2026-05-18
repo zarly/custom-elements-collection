@@ -1,0 +1,29 @@
+<!-- @example Minimal — text and author -->
+<ce-quote author="Анна, PM в FinTech">
+  Мы пробовали Notion AI, ChatGPT, ещё пяток — никто не понимает наш контекст.
+</ce-quote>
+
+<!-- @example Card with source citation -->
+<ce-quote author="Дмитрий" source="Customer interview, 2026-03">
+  Раньше тратили на ревью 3 часа, теперь 20 минут.
+</ce-quote>
+
+<!-- @example Pull-quote variant — emphasis without card chrome -->
+<ce-quote variant="pull" author="Sam Altman">
+  Compute is the new oil.
+</ce-quote>
+
+<!-- @example Rich slots — linked author, chip + time in source -->
+<ce-quote>
+  Это спасло нам месяц работы.
+  <span slot="author"><a href="mailto:anna@example.com">Анна Кротова</a>, PM FinTech</span>
+  <span slot="source">
+    <ce-chip type="green" inline>verified</ce-chip>
+    <time datetime="2026-03-15">15 марта 2026</time>
+  </span>
+</ce-quote>
+
+<!-- @example Inline variant — narrative prose blockquote -->
+<ce-quote variant="inline" author="Андрей, CTO">
+  Мы не заменяем команду — мы даём ей суперспособности.
+</ce-quote>

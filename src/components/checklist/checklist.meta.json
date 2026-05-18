@@ -3,8 +3,8 @@
   "tag": "ce-checklist",
   "name": "Checklist",
   "className": "CeChecklist",
-  "goal": "Render an interactive task list with optional add-row and localStorage persistence.",
-  "description": "Markdown-style task list rendered as native checkboxes. Items may be supplied as a JSON attribute or via the JS property; toggling an item emits ce-check-change. Setting `persist-key` mirrors state to localStorage so progress survives reloads. With `allow-edit`, a small input appears so users can append new items inline.",
+  "goal": "Render a task list — static read-only by default, interactive with persist-key / allow-edit opt-in.",
+  "description": "Markdown-style task list rendered as native checkboxes. Without persist-key, this is a static read-only display — no localStorage writes happen and no mutation events fire. Items may be supplied as a JSON attribute (items prop) or as <ce-check-item> slot children per CDR-005 (resolution order: JSON prop non-empty → slot children → empty state). Setting persist-key mirrors state to localStorage so progress survives reloads. With allow-edit, a small input appears so users can append new items inline. With group-by=\"category\", items are rendered under <h4> section headers.",
   "stability": "stable",
   "props": [
     {
@@ -12,7 +12,7 @@
       "type": "CeChecklistItem[]",
       "required": false,
       "default": "[]",
-      "description": "Array of {id, text, checked?} items."
+      "description": "Array of {id, text, checked?, category?} items. When non-empty takes priority over slot children per CDR-005."
     },
     {
       "name": "allowEdit",
@@ -28,7 +28,15 @@
       "required": false,
       "default": "\"\"",
       "attribute": "persist-key",
-      "description": "When set, mirror state to localStorage at key `ce-checklist:<persistKey>`."
+      "description": "When set, mirror state to localStorage at key `ce-checklist:<persistKey>`. Without this attribute no localStorage writes occur."
+    },
+    {
+      "name": "groupBy",
+      "type": "\"\" | \"category\"",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "group-by",
+      "description": "When \"category\", render <h4> section headers grouping items by their category field. Items without a category fall into a default unlabelled group."
     }
   ],
   "events": [
@@ -37,29 +45,40 @@
       "detail": "{ id: string, checked: boolean }",
       "bubbles": true,
       "composed": true,
-      "description": "Fired when an item is toggled."
+      "description": "Fired when an item is toggled. Only fires when allowEdit or persistKey is set — static mode checkboxes are disabled."
     },
     {
       "name": "ce-checklist-add",
       "detail": "{ id: string, text: string }",
       "bubbles": true,
       "composed": true,
-      "description": "Fired when a new item is added via the inline input."
+      "description": "Fired when a new item is added via the inline input (allow-edit only)."
     }
   ],
-  "slots": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "<ce-check-item> children. When no items JSON is provided, the checklist reads id/checked/category attributes and inner HTML from each <ce-check-item> child per CDR-005."
+    }
+  ],
   "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Small spacing used as group-header bottom padding."
+    },
     {
       "name": "--ce-space-2",
       "kind": "size",
       "source": "token",
-      "description": "Gap between rows."
+      "description": "Gap between checkbox and text, and between rows."
     },
     {
       "name": "--ce-space-3",
       "kind": "size",
       "source": "token",
-      "description": "Margin above add row."
+      "description": "Margin above add row and above group headers."
     },
     {
       "name": "--ce-text-base",
@@ -71,7 +90,7 @@
       "name": "--ce-text-sm",
       "kind": "size",
       "source": "token",
-      "description": "Add-input font size."
+      "description": "Add-input font size and group header font size."
     },
     {
       "name": "--ce-line-snug",
@@ -89,7 +108,7 @@
       "name": "--ce-muted",
       "kind": "color",
       "source": "token",
-      "description": "Done item text color."
+      "description": "Done item text color and group header color."
     },
     {
       "name": "--ce-surface-2",
@@ -101,13 +120,13 @@
       "name": "--ce-border",
       "kind": "color",
       "source": "token",
-      "description": "Add-input border."
+      "description": "Add-input border and group header bottom border."
     },
     {
       "name": "--ce-radius-sm",
       "kind": "radius",
       "source": "token",
-      "description": "Add-input + button radius."
+      "description": "Add-input and button radius."
     },
     {
       "name": "--ce-inset-lg",
@@ -119,7 +138,7 @@
       "name": "--ce-color-blue",
       "kind": "color",
       "source": "token",
-      "description": "Checkbox accent + add-button background."
+      "description": "Checkbox accent and add-button background."
     }
   ],
   "globalDependencies": [
@@ -132,15 +151,16 @@
   "sideEffects": [
     {
       "kind": "storage",
-      "description": "Reads/writes localStorage when persist-key is set.",
+      "description": "Reads/writes localStorage when persist-key is set. Without persist-key, no storage operations occur.",
       "reason": "Stateful checklists across reloads.",
       "guarded": true
     }
   ],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": ["ce-check-item"],
   "related": [
-    "ce-toc"
+    "ce-toc",
+    "ce-check-item"
   ],
   "category": "ui",
   "tier": "widget",

@@ -4,3 +4,30 @@
   branches='[{"label":"Yes","kind":"yes","result":"Ship"},{"label":"No","kind":"no","result":"Add tests first"}]'
 ></ce-decision-tree>
 
+<!-- @example Three-way branch: pursue / investigate / drop -->
+<ce-decision-tree
+  question="Should we pursue this opportunity?"
+  branches='[
+    {"label":"Pain > 8","kind":"yes","result":"Pursue"},
+    {"label":"Pain 5–8","kind":"neutral","result":"Investigate further"},
+    {"label":"Pain < 5","kind":"no","result":"Deprioritise"}
+  ]'
+></ce-decision-tree>
+
+<!-- @example Migration trigger -->
+<ce-decision-tree
+  question="Migrate to v2?"
+  branches='[
+    {"label":"v1 deprecation < 90d","kind":"yes","result":"Migrate now"},
+    {"label":"v1 deprecation > 90d","kind":"no","result":"Defer to next sprint"}
+  ]'
+></ce-decision-tree>
+
+<!-- @example Production-readiness gate -->
+<ce-decision-tree
+  question="Ready for production?"
+  branches='[
+    {"label":"All quality gates green","kind":"yes","result":"Ship"},
+    {"label":"≥1 gate failing","kind":"no","result":"Block until green"}
+  ]'
+></ce-decision-tree>

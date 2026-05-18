@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-qr",
+  "name": "Qr",
+  "className": "CeQr",
+  "goal": "Render a scannable QR code as a single SVG path with no runtime dependencies and a hand-rolled encoder.",
+  "description": "Pure-SVG QR code. The full ISO/IEC 18004 encoder ships in the bundle (byte mode, versions 1-40, error-correction levels L/M/Q/H). Auto-picks the smallest version that fits the data, picks the optimal mask via penalty scoring, and emits a single <path> with merged horizontal runs. Fully themable via --ce-qr-fg / --ce-qr-bg. No CDN, no canvas, no QR library.",
+  "stability": "experimental",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "description": "Text or URL to encode. UTF-8 is supported (every byte counts toward capacity)."
+    },
+    {
+      "name": "ecc",
+      "type": "\"L\" | \"M\" | \"Q\" | \"H\"",
+      "required": false,
+      "default": "\"M\"",
+      "description": "Error correction level. L=7%, M=15%, Q=25%, H=30%. Higher means more recovery on damaged scans but a denser grid."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": "160",
+      "description": "Rendered SVG width and height in CSS pixels. The internal grid scales to fit."
+    },
+    {
+      "name": "margin",
+      "type": "number",
+      "required": false,
+      "default": "4",
+      "description": "Quiet-zone modules around the code. Spec recommends 4. Lower for tight layouts (may reduce scanner reliability)."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Foreground CSS color. When empty, uses --ce-qr-fg (default --ce-text). Accepts any CSS color."
+    },
+    {
+      "name": "bg",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Background CSS color. When empty, uses --ce-qr-bg (default --ce-surface). Pass 'transparent' for no background."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-qr-error",
+      "detail": "{ message: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when value cannot fit in any version (>2953 bytes at ECC L). The component renders a fallback error message instead of an SVG."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-qr-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Foreground color (modules). Default: var(--ce-text)."
+    },
+    {
+      "name": "--ce-qr-bg",
+      "kind": "color",
+      "source": "local",
+      "description": "Background color (quiet zone + light modules). Default: var(--ce-surface)."
+    },
+    {
+      "name": "--ce-qr-radius",
+      "kind": "radius",
+      "source": "local",
+      "description": "Optional border-radius on the SVG. Default: 0."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default foreground."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Default background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Error message border + text."
+    },
+    {
+      "name": "--ce-mono",
+      "kind": "other",
+      "source": "token",
+      "description": "Error message font."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Error message font size."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Error message radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Error message padding."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["ce-image"],
+  "category": "ui",
+  "tier": "brick",
+  "tags": ["Content", "qr", "encode"],
+  "limitations": "Byte mode only — no numeric or alphanumeric optimization (URLs/text are fine; pure-numeric strings encode at the same density). Maximum capacity is v40 ECC L (~2953 bytes); larger inputs emit ce-qr-error. Render is synchronous (~1-2 ms for a v40 grid in modern engines) — not suitable for streaming live data.",
+  "a11y": {
+    "role": "img",
+    "notes": "SVG has role=img and aria-label set to the encoded value. The error fallback uses role=alert."
+  }
+}

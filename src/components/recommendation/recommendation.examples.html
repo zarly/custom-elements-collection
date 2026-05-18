@@ -1,0 +1,24 @@
+<!-- @example Minimal — priority + title + body -->
+<ce-recommendation priority="p1" title="Внедрить connection pooling в pgbouncer">
+  Сейчас каждый запрос открывает соединение напрямую. PgBouncer в transaction-mode даст 5× throughput.
+</ce-recommendation>
+
+<!-- @example With impact attribute -->
+<ce-recommendation priority="p2" title="Edge CDN" impact="−120ms TTFB у 70% юзеров">
+  Перенести фронтенд на Cloudflare Pages / Vercel. Статика кешируется у пользователя.
+</ce-recommendation>
+
+<!-- @example Rich slots — chip in impact, links in body -->
+<ce-recommendation priority="p1" title="Заменить ORM-запросы на raw SQL для отчётов">
+  <span slot="impact">−60% CPU <ce-chip type="green" inline>verified</ce-chip></span>
+  Текущие запросы генерируют N+1 на JOIN. Переход на <code>pg.query()</code> даст предсказуемые планы.
+  Подробнее — <a href="#pg-raw">в документации</a>.
+</ce-recommendation>
+
+<!-- @example Rich title + meta + actions footer -->
+<ce-recommendation priority="p3">
+  <span slot="title">Заменить <code>moment</code> на <code>date-fns</code> <ce-chip type="blue" inline>tooling</ce-chip></span>
+  <span slot="meta">owner: frontend · due: Q3</span>
+  Tree-shakable, −70KB gzip. Миграция автоматизирована codemod-ом.
+  <a slot="actions" href="#jira-123">Открыть задачу</a>
+</ce-recommendation>

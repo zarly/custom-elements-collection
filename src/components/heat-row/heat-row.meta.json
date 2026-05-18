@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-heat-row",
+  "name": "HeatRow",
+  "className": "CeHeatRow",
+  "goal": "Single row of heatmap cells for use inside <ce-heatmap> slot mode (CDR-005), or as a standalone minimal row when used outside.",
+  "description": "Carries a label attribute (Y-axis header) and a default slot for <ce-heat-cell> children. When nested inside ce-heatmap the parent reads label as an attribute and iterates ce-heat-cell children via querySelectorAll — the row itself renders nothing (display:contents). When used standalone it renders a labeled flex row of cells. Non-ce-heat-cell slot children are passed through to light DOM and ignored by the parent's data-resolution path.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Row label displayed in the Y-axis header column. CDR-002 NOT-applicable: always a short identifier string."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Default slot for <ce-heat-cell> children. Non-ce-heat-cell elements are passed through to light DOM and ignored by the parent ce-heatmap data path."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between cells and row padding in standalone mode."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding in standalone mode."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color in standalone mode."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size in standalone mode."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-heatmap"],
+  "dependencies": ["ce-heat-cell"],
+  "related": ["ce-heatmap", "ce-heat-cell"],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Metrics & charts",
+    "heatmap",
+    "row",
+    "data-viz"
+  ],
+  "a11y": {
+    "role": "none (standalone flex row)",
+    "notes": "In standalone mode renders a visible labeled row. When nested inside ce-heatmap the parent provides table-row semantics via <tr>/<th>/<td>. The label attribute is always plain text per HTML."
+  }
+}

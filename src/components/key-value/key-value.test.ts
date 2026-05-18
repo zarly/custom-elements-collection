@@ -1,9 +1,11 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeKeyValue } from "./key-value.js";
+import { CeKv } from "../kv/kv.js";
 
 beforeAll(() => {
   defineOnce("ce-key-value", CeKeyValue);
+  defineOnce("ce-kv", CeKv);
 });
 
 function mount(html: string): HTMLElement {
@@ -70,6 +72,31 @@ describe("<ce-key-value>", () => {
     el.columns = 2;
     await ready(el);
     expect(el.getAttribute("columns")).toBe("2");
+    host.remove();
+  });
+
+  it("Mode B: switches to flex wrapper when ce-kv children are present", async () => {
+    const host = mount(`<ce-key-value>
+      <ce-kv key="Model">chat-deep</ce-kv>
+    </ce-key-value>`);
+    const el = host.querySelector("ce-key-value") as CeKeyValue;
+    await ready(el);
+    // Allow MutationObserver to trigger and re-render
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector(".ce-key-value__kv-list")).not.toBeNull();
+    expect(el.shadowRoot!.querySelector("dl")).toBeNull();
+    host.remove();
+  });
+
+  it("Mode B: projects ce-kv children through slot", async () => {
+    const host = mount(`<ce-key-value>
+      <ce-kv key="Status">Active</ce-kv>
+      <ce-kv key="Plan">Team</ce-kv>
+    </ce-key-value>`);
+    const el = host.querySelector("ce-key-value") as CeKeyValue;
+    await ready(el);
+    await el.updateComplete;
+    expect(el.querySelectorAll("ce-kv").length).toBe(2);
     host.remove();
   });
 });

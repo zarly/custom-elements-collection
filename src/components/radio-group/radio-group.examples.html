@@ -1,0 +1,38 @@
+<!-- @example Classic radios (default) -->
+<ce-radio-group
+  name="size"
+  value="m"
+  options='[{"value":"s","label":"Small"},{"value":"m","label":"Medium"},{"value":"l","label":"Large"}]'
+></ce-radio-group>
+
+<!-- @example Segmented control -->
+<ce-radio-group
+  variant="segmented"
+  name="view"
+  value="grid"
+  options='[{"value":"list","label":"List"},{"value":"grid","label":"Grid"},{"value":"map","label":"Map"}]'
+></ce-radio-group>
+
+<!-- @example Card variant with hints -->
+<ce-radio-group
+  variant="card"
+  name="plan"
+  value="pro"
+  options='[
+    {"value":"free","label":"Free","hint":"Up to 3 projects"},
+    {"value":"pro","label":"Pro","hint":"$12/mo · unlimited projects"},
+    {"value":"team","label":"Team","hint":"$32/mo · seat-based pricing"}
+  ]'
+></ce-radio-group>
+
+<!-- @example Disabled item + vertical layout -->
+<ce-radio-group
+  vertical
+  name="shipping"
+  value="standard"
+  options='[
+    {"value":"standard","label":"Standard (3-5 days)"},
+    {"value":"express","label":"Express (1-2 days)"},
+    {"value":"sameday","label":"Same-day","disabled":true}
+  ]'
+></ce-radio-group>

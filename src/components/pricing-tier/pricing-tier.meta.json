@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-pricing-tier",
+  "name": "PricingTier",
+  "className": "CePricingTier",
+  "goal": "Display a single pricing tier card with name, price, feature list, and optional CTA; composes into a grid via ce-grid.",
+  "description": "A card-shaped pricing tier: badge, tier name, sub-headline, big-number price, feature list (JSON or slot children), and an optional CTA button or link. Use highlighted for the recommended tier. Compose side-by-side via ce-grid instead of a dedicated pricing container (CDR-006).",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Tier name shown as the heading (e.g. Free, Pro, Enterprise). Required because every tier must be identifiable."
+    },
+    {
+      "name": "sub",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Sub-headline beneath the tier name (e.g. \"for teams up to 20\")."
+    },
+    {
+      "name": "price",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Price string displayed large (e.g. \"1 990 ₽\", \"по запросу\"). Override with slot=\"price\" for rich markup (strikethrough, badge, etc.)."
+    },
+    {
+      "name": "period",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Period suffix appended to the price in smaller text (e.g. \"мес\", \"year\")."
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short label shown above the tier name as a pill badge (e.g. \"Популярный\", \"Best value\"). Override with slot=\"badge\" for rich markup."
+    },
+    {
+      "name": "highlighted",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true, the card border becomes 2px solid --ce-color-blue, visually emphasising this tier as the recommended choice."
+    },
+    {
+      "name": "cta",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Call-to-action label. When set, renders a button. When cta-href is also set, renders as an <a>. Omit (and leave slot=\"cta\" empty) to suppress the CTA entirely."
+    },
+    {
+      "name": "ctaHref",
+      "type": "string",
+      "required": false,
+      "attribute": "cta-href",
+      "default": "\"\"",
+      "description": "When set alongside cta, the CTA renders as an <a href> instead of a <button>."
+    },
+    {
+      "name": "features",
+      "type": "PricingFeature[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of feature objects {label, included?, note?}. When non-empty, wins over default slot children (CDR-005). Use the slot for rich or handwritten markup; use this for generator / server-side output."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-pricing-cta",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the button-form CTA is clicked (only when cta-href is not set)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Feature items. Each direct child receives a checkmark prefix via CSS. Children with the not-included attribute receive a × prefix and muted color. Children with the included attribute receive explicit ✓. Ignored when the features JSON prop is non-empty (CDR-005)."
+    },
+    {
+      "name": "price",
+      "description": "Rich price override. Replaces the price attribute rendering. Use for strikethrough, combined badges, sub-decimal notation, etc. (CDR-002)."
+    },
+    {
+      "name": "badge",
+      "description": "Rich badge override. Replaces the badge attribute rendering."
+    },
+    {
+      "name": "cta",
+      "description": "Rich CTA override. Replaces the cta/cta-href rendering. Use for custom buttons or links."
+    },
+    {
+      "name": "footer",
+      "description": "Optional area below features, separated by a border. Use for footnotes, fine print, or extra links."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default card border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Footer separator."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "CTA button radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Badge pill radius."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Sub and price-wrap top margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Feature item gap, CTA top margin, period left margin, badge/footer padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Card inner gap between sections."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Card vertical padding and CTA horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card horizontal padding."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border transition."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "CTA hover transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Highlighted border, CTA text color, badge text."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Badge background and CTA hover background."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Badge border and CTA border."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Checkmark icon color for included features."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Tier name and price text color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "CTA text color when highlighted (fills button)."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Sub-headline, period, and footer text color."
+    },
+    {
+      "name": "--ce-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Not-included feature text color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge and feature note font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Sub-headline, period, feature items, CTA font size."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Tier name font size."
+    },
+    {
+      "name": "--ce-text-2xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Price font size."
+    },
+    {
+      "name": "--ce-line-tight",
+      "kind": "other",
+      "source": "token",
+      "description": "Line height for name and price."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge vertical inset."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "CTA vertical inset."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-grid",
+    "ce-feature-card",
+    "ce-card",
+    "ce-kpi"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "pricing",
+    "tier"
+  ],
+  "a11y": {
+    "notes": "The price wrapper carries an aria-label combining price and period for screen readers. The CTA uses native <button> or <a> so ARIA semantics are native. Feature checkmarks are aria-hidden; text labels carry the accessible meaning."
+  }
+}

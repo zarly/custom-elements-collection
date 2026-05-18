@@ -1,0 +1,20 @@
+<!-- @example Slot mode — handwritten steps -->
+<ce-steps>
+  <ce-step title="Discovery" state="done">15 интервью + анализ топ-5 конкурентов</ce-step>
+  <ce-step title="Prototype" state="active">Кликабельный Figma + paper-prototype</ce-step>
+  <ce-step title="Validate">5 follow-up интервью</ce-step>
+</ce-steps>
+
+<!-- @example JSON mode — generator output -->
+<ce-steps data='[
+  {"title":"Discovery","desc":"15 интервью + анализ конкурентов","state":"done"},
+  {"title":"Prototype","desc":"Кликабельный Figma + paper-prototype","state":"active"},
+  {"title":"Validate","desc":"5 follow-up интервью"}
+]'></ce-steps>
+
+<!-- @example Horizontal direction with metadata -->
+<ce-steps direction="horizontal" data='[
+  {"title":"Q1","desc":"Исследование","state":"done","meta":"Янв–Март"},
+  {"title":"Q2","desc":"MVP","state":"active","meta":"Апр–Июнь"},
+  {"title":"Q3","desc":"Запуск","meta":"Июль–Сент"}
+]'></ce-steps>

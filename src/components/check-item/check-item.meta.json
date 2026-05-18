@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-check-item",
+  "name": "CheckItem",
+  "className": "CeCheckItem",
+  "goal": "Single checklist row carrying a checkbox and rich-content default slot; used as a slot child inside ce-checklist or standalone.",
+  "description": "Carries id, checked, and category attributes. Default slot accepts rich content — links, chips, code, dates — per CDR-002. When nested inside ce-checklist the parent reads attributes via DOM and renders the slot HTML; the item itself renders nothing (display:contents). Standalone renders a single checkbox + label row.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Item identifier; used by ce-checklist for toggle/persist keying."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Whether the item is checked/done."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Optional grouping label; used by ce-checklist group-by=\"category\" to render section headers."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-check-item-change",
+      "detail": "{ id: string, checked: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired in standalone mode when the checkbox is toggled."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Item text and optional rich content: <a>, <code>, <ce-chip>, <time>, or any inline element per CDR-002.",
+      "required": true
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between checkbox and label in standalone mode."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color in standalone mode."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Done item text color (line-through) in standalone mode."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size in standalone mode."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Label line-height in standalone mode."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Checkbox accent color in standalone mode."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-checklist"],
+  "dependencies": [],
+  "related": ["ce-checklist"],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "checkbox",
+    "task",
+    "form"
+  ],
+  "a11y": {
+    "role": "checkbox (standalone mode only)",
+    "notes": "In standalone mode renders a native checkbox with aria-checked reflecting the checked state. The default slot carries the accessible label. When nested inside ce-checklist the parent handles all ARIA — the item renders nothing."
+  }
+}

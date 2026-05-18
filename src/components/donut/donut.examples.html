@@ -1,16 +1,17 @@
-<!-- @example Default donut with center label -->
+<!-- @example Default — just data; legend auto-renders when ≥ 2 segments (CDR-007) -->
 <ce-donut
   values="[42,28,18,12]"
   labels='["Direct","Search","Referral","Social"]'
-  center-label="Traffic"
 ></ce-donut>
+
+<!-- @example Single segment — legend auto-hides (no redundancy) -->
+<ce-donut values="[100]" labels='["Complete"]' center-label="100%"></ce-donut>
 
 <!-- @example Pie variant — thickness 0 -->
 <ce-donut
   values="[55,30,15]"
   labels='["Free","Pro","Team"]'
   thickness="0"
-  size="160"
 ></ce-donut>
 
 <!-- @example Custom palette — semantic ok / warn / bad split -->
@@ -29,10 +30,9 @@
   </div>
 </ce-donut>
 
-<!-- @example Compact with five segments -->
-<ce-donut
-  values="[12,9,7,5,3]"
-  labels='["A","B","C","D","E"]'
-  size="96"
-  thickness="12"
-></ce-donut>
+<!-- @example Custom legend via slot (per-instance escape hatch per CDR-003) -->
+<ce-donut values="[42,28,18,12]" labels='["Direct","Search","Referral","Social"]'>
+  <aside slot="legend" style="margin-top:var(--ce-space-3);font-size:var(--ce-text-sm);color:var(--ce-muted)">
+    Source: GA4, last 30 days. <a href="#breakdown">Full breakdown</a>.
+  </aside>
+</ce-donut>

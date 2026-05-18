@@ -148,7 +148,6 @@ A machine-readable manifest of every component is exported as [`COMPONENTS`](./s
 - [Usage guide](./docs/USAGE.md) — plain HTML, bundlers, Vue / React / Svelte, theming, composition patterns, troubleshooting.
 - [Architecture](./docs/ARCHITECTURE.md) — repo layout, component anatomy, build pipeline, theming model.
 - [ADRs](./docs/adr/) — framework choice, Light DOM, theming, distribution modes, component meta files.
-- [Component meta plan](./docs/COMPONENT_META_PLAN.md) — schema, scripts, migration phases, generator design.
 
 ---
 

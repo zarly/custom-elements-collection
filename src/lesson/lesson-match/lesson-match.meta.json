@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-match",
+  "name": "LessonMatch",
+  "className": "LessonMatch",
+  "goal": "Drill term-definition or any-to-any pairing through clickable two-column matching — a strong recall-reinforcement primitive.",
+  "description": "Renders two columns of buttons. Learner clicks one item on the left, then one on the right; correct pairs lock in green and disable, wrong pairs flash red and clear the selection. The right column is shuffled deterministically so the order does not encode the answer. After every pair is matched, the host gets the submitted attribute and lesson-match-complete fires once with the attempt count. lesson-match-pair fires on every click-pair attempt with { left, right, correct }. Accepts pairs as a JSON [{ left, right }, ...] attribute or property.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "pairs",
+      "type": "Array<{ left: string; right: string }>",
+      "required": true,
+      "default": "[]",
+      "description": "JSON array of pair objects. Each {left, right} defines one correct match."
+    },
+    {
+      "name": "leftLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "left-label",
+      "description": "Optional column header above the left column."
+    },
+    {
+      "name": "rightLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "right-label",
+      "description": "Optional column header above the right column."
+    },
+    {
+      "name": "submitted",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Auto-set to true after every pair has been matched. Disables further interaction."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-match-pair",
+      "detail": "{ left: string; right: string; correct: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every left+right click pair. correct=true when the pair is a defined match."
+    },
+    {
+      "name": "lesson-match-complete",
+      "detail": "{ attempts: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once when every pair has been matched. attempts counts every left+right click pair (including wrong ones)."
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Clears matched + wrong + submitted state and the attempts counter."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
+    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Default item background." },
+    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Card and item border." },
+    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
+    { "name": "--ce-radius-sm", "kind": "radius", "source": "token", "description": "Item border radius." },
+    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card horizontal padding + item horizontal padding (with --ce-space-4)." },
+    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Card vertical padding + grid column gap + item horizontal padding." },
+    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Header bottom margin + result top margin + grid row gap + item vertical padding." },
+    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Column item gap." },
+    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Item text color." },
+    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Selected / correct / wrong item text color." },
+    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Item font size." },
+    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Column-label font size + result font size." },
+    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Column-label color." },
+    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Selected item background and hover border." },
+    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Correct item background + result text color." },
+    { "name": "--ce-color-red", "kind": "color", "source": "token", "description": "Wrong item background." },
+    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Item transition." }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "Tracks selected items, matched pairs, last wrong pair, attempt count, and submitted state.",
+      "reason": "Required to render selection and lock matched pairs without re-rendering wrong rows after the next click."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["lesson-quiz", "lesson-gap", "lesson-vocab"],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": ["Education", "match", "retrieval"]
+}

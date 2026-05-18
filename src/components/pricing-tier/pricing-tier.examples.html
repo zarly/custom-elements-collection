@@ -1,0 +1,39 @@
+<!-- @example Minimal -->
+<ce-pricing-tier name="Pro" price="1 990 ₽">
+  <span>Unlimited storage</span>
+  <span>Приоритетная поддержка</span>
+</ce-pricing-tier>
+
+<!-- @example With badge and highlighted -->
+<ce-pricing-tier name="Pro" sub="для команд до 20" price="1 990 ₽" period="мес" badge="Популярный" highlighted cta="Начать бесплатно" cta-href="/signup">
+  <span included>Unlimited storage</span>
+  <span included>Приоритетная поддержка</span>
+  <span not-included>SSO + SAML</span>
+</ce-pricing-tier>
+
+<!-- @example JSON features mode -->
+<ce-pricing-tier name="Enterprise" price="по запросу" cta="Связаться с нами" features='[
+  {"label":"Unlimited storage","included":true},
+  {"label":"Приоритетная поддержка","included":true},
+  {"label":"SSO + SAML","included":true},
+  {"label":"Выделенный менеджер","included":true,"note":"SLA 99.9%"}
+]'></ce-pricing-tier>
+
+<!-- @example Three tiers side by side via ce-grid (CDR-006) -->
+<ce-grid columns="3" min-col-width="240px">
+  <ce-pricing-tier name="Free" price="0 ₽" cta="Попробовать" cta-href="/free">
+    <span>1 проект</span>
+    <span>Сообщество</span>
+    <span not-included>Приоритетная поддержка</span>
+  </ce-pricing-tier>
+  <ce-pricing-tier name="Pro" price="1 990 ₽" period="мес" badge="Популярный" highlighted cta="Начать" cta-href="/pro">
+    <span>10 проектов</span>
+    <span>Приоритетная поддержка</span>
+    <span not-included>SSO</span>
+  </ce-pricing-tier>
+  <ce-pricing-tier name="Enterprise" price="по запросу" cta="Связаться" cta-href="/enterprise">
+    <span>Неограниченно</span>
+    <span>Выделенный менеджер</span>
+    <span>SSO + SAML</span>
+  </ce-pricing-tier>
+</ce-grid>

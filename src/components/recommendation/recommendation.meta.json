@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-recommendation",
+  "name": "Recommendation",
+  "className": "CeRecommendation",
+  "goal": "Display a prioritised recommendation or advice block with a colored left-border accent, title, impact line, and optional actions footer.",
+  "description": "Card-like block that encodes a single actionable recommendation. A four-value priority enum (p0–p3) drives the left-border color and the visible priority badge. Title and impact accept both plain string attributes and rich slot overrides (CDR-002). Body accepts arbitrary children. An optional actions slot holds call-to-action buttons or links.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "priority",
+      "type": "\"p0\" | \"p1\" | \"p2\" | \"p3\"",
+      "required": false,
+      "default": "\"p2\"",
+      "reflect": true,
+      "description": "Priority tier. Drives left-border color and badge: p0=red (critical), p1=amber (high), p2=blue (medium, default), p3=neutral (low)."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short headline text. Use slot='title' for rich markup (code, chips, links)."
+    },
+    {
+      "name": "impact",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short impact line (e.g. '−40% latency'). Use slot='impact' for rich markup."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Body / description text. Accepts arbitrary children: plain text, <a>, <code>, <ce-chip>, etc."
+    },
+    {
+      "name": "title",
+      "description": "Rich title override; used when the title needs <code>, <ce-chip>, or other inline elements. Supersedes the title attribute."
+    },
+    {
+      "name": "impact",
+      "description": "Rich impact override; used when the impact line needs inline chips, links, or emphasis. Supersedes the impact attribute."
+    },
+    {
+      "name": "meta",
+      "description": "Optional metadata line shown below the title row (e.g. 'owner: backend', 'due: Q3')."
+    },
+    {
+      "name": "actions",
+      "description": "Optional footer row of action buttons or links, separated by a top border. Accepts arbitrary children (CDR-006)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Card outer border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Actions footer separator."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "p3 left-border color and p3 badge border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card and badge border radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Header gap, badge horizontal padding, actions gap, impact/meta bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding and actions top margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text and title text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Meta line text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Impact line, meta line, and body font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "p0 left-border color and badge text."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "p0 badge background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "p1 left-border color and badge text."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "p1 badge background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "p2 left-border color and badge text (default)."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "p2 badge background (default)."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Impact line text color (positive impact signal)."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-callout",
+    "ce-card",
+    "ce-chip"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "recommendation",
+    "advice"
+  ],
+  "a11y": {
+    "role": "article",
+    "notes": "The inner <article> element provides implicit landmark semantics. The priority badge carries aria-label='Priority: P{n}' so screen readers announce the tier without relying on color alone."
+  }
+}

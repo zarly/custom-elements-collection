@@ -35,17 +35,25 @@
       "required": false,
       "default": "\"\"",
       "description": "Override icon character; empty string uses the default for the type."
+    },
+    {
+      "name": "inline",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Compact pill layout (per-instance override). Default slot becomes the label; empty slot falls back to the type-default label (Go / No-go / Mixed / Info). Pairs with --ce-verdict-layout for document-wide control via @container style()."
     }
   ],
   "events": [],
   "slots": [
     {
       "name": "title",
-      "description": "Custom title markup; overrides the title attribute."
+      "description": "Custom title markup; overrides the title attribute (banner mode only)."
     },
     {
       "name": "",
-      "description": "Detail content; falls back to the detail attribute."
+      "description": "Banner mode: detail content; falls back to the detail attribute. Inline mode: label text; falls back to the type-default label (Go / No-go / Mixed / Info)."
     }
   ],
   "cssVariables": [
@@ -174,6 +182,25 @@
       "kind": "color",
       "source": "token",
       "description": "Detail text color."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline-pill inner gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline-pill horizontal padding."
+    },
+    {
+      "name": "--ce-verdict-layout",
+      "kind": "other",
+      "source": "local",
+      "fallback": "auto",
+      "description": "Document-wide layout knob: auto (default; honour [inline] attr) | inline (force pill) | banner (force banner). Read via @container style() so it cascades from any ancestor."
     }
   ],
   "globalDependencies": [],

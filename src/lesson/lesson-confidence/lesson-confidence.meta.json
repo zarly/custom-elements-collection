@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-confidence",
+  "name": "LessonConfidence",
+  "className": "LessonConfidence",
+  "goal": "Ask the learner to rate their confidence on a topic before or after an exercise (1=not confident, 5=very confident).",
+  "description": "Metacognitive rating widget with 5 circular buttons. The label prop sets the prompt. Clicking a button sets rating, marks the card submitted (attribute reflects), disables all other buttons, and fires lesson-confidence-rate. reset() clears state. Supports Bjork's desirable-difficulty framework.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"How confident are you?\"",
+      "description": "Prompt text shown above the rating buttons."
+    },
+    {
+      "name": "submitted",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Auto-set to true when a rating is selected. Disables further interaction."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-confidence-rate",
+      "detail": "{ rating: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user picks a rating. detail.rating is 1–5."
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Clears the rating and removes the submitted state."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
+    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Card and button border." },
+    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
+    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Card vertical padding." },
+    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card horizontal padding." },
+    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Label bottom margin." },
+    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Button gap + result top margin." },
+    { "name": "--ce-space-1", "kind": "size", "source": "token", "description": "Scale top margin." },
+    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Label and button font size." },
+    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Scale label and result font size." },
+    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Label, scale label, and muted text color." },
+    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Button default background." },
+    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Button text color." },
+    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Selected button text color." },
+    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Selected button background + result color." },
+    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Button transition." }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "Tracks selected rating and submitted state.",
+      "reason": "Required to render selection and disable buttons after submission."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["lesson-quiz", "lesson-reveal", "lesson-frame"],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": ["Education", "confidence", "metacognition"]
+}

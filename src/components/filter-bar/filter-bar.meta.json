@@ -4,7 +4,7 @@
   "name": "FilterBar",
   "className": "CeFilterBar",
   "goal": "Render a chip-toggle filter row with single- or multi-select semantics and a comma-joined value.",
-  "description": "Chip-style filter bar. Each option becomes a pressable pill; aria-pressed reflects selection state. Single-select by default; multiple=true allows multi-select with the value attribute holding a comma-joined string.",
+  "description": "Chip-style filter bar for interactive filtering. Each option becomes a pressable pill; aria-pressed reflects selection state. Single-select by default; multiple=true allows multi-select with the value attribute holding a comma-joined string. Emits ce-filter-bar-change events. For decorative chip rows in static documents (no events, no aria-pressed state), prefer a `<div>` of `<ce-chip>` elements.",
   "stability": "stable",
   "props": [
     {

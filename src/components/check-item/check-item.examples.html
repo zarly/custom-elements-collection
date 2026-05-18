@@ -1,0 +1,14 @@
+<!-- @example Standalone checked item -->
+<ce-check-item id="tls" checked>TLS 1.3 enforced</ce-check-item>
+
+<!-- @example Standalone unchecked item with rich content (link per CDR-002) -->
+<ce-check-item id="issue42">TLS 1.3 enforced <a href="#42">#42</a></ce-check-item>
+
+<!-- @example Item with category (used by ce-checklist group-by="category") -->
+<ce-check-item id="saml" category="Security" checked>SAML SSO configured</ce-check-item>
+
+<!-- @example Multiple standalone items as a simple list -->
+<ce-check-item id="p1" checked>Deploy to staging</ce-check-item>
+<ce-check-item id="p2" checked>Run smoke tests</ce-check-item>
+<ce-check-item id="p3">Tag release</ce-check-item>
+<ce-check-item id="p4">Notify stakeholders</ce-check-item>

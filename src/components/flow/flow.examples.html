@@ -1,5 +1,36 @@
-<!-- @example Pipeline -->
+<!-- @example Pipeline (JSON mode) -->
 <ce-flow
   steps='[{"title":"Input","caption":"raw data"},{"title":"Parse","caption":"structured","color":"blue"},{"title":"Render","caption":"HTML","color":"green"}]'
 ></ce-flow>
 
+<!-- @example Vertical pipeline with step numbers (JSON mode) -->
+<ce-flow
+  vertical
+  steps='[{"n":"1","title":"Discovery","caption":"15 interviews"},{"n":"2","title":"Prototype","caption":"Figma clickable","color":"blue"},{"n":"3","title":"Validate","caption":"5 usability sessions","color":"green"}]'
+></ce-flow>
+
+<!-- @example Slot mode — minimal vertical steps -->
+<ce-flow vertical>
+  <ce-flow-step n="1" title="Discovery">
+    15 interviews + top-5 competitor analysis.
+  </ce-flow-step>
+  <ce-flow-step n="2" title="Prototype">
+    Clickable Figma + paper-prototype for 3 key JTBD.
+  </ce-flow-step>
+</ce-flow>
+
+<!-- @example Slot mode — color tints and horizontal layout -->
+<ce-flow>
+  <ce-flow-step n="1" title="Research" color="amber" icon="🔍">
+    Desk research + competitor audit.
+  </ce-flow-step>
+  <ce-flow-step n="2" title="Build" color="blue" icon="🔧">
+    Two-week engineering sprint.
+  </ce-flow-step>
+  <ce-flow-step n="3" title="Ship" color="green" icon="🚀">
+    Beta release to design partners.
+  </ce-flow-step>
+</ce-flow>
+
+<!-- @example Custom arrow override -->
+<ce-flow arrow="⇒" steps='[{"title":"Draft"},{"title":"Review"},{"title":"Publish","color":"green"}]'></ce-flow>

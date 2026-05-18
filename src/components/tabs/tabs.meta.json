@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-tabs",
+  "name": "Tabs",
+  "className": "CeTabs",
+  "goal": "Render a tab strip + paired panels with shared chip-pill head treatment, full keyboard support, and two ergonomic input shapes.",
+  "description": "Tabbed content widget for interactive production UX. The head reuses the same chip-pill visual style as ce-filter-bar (one family across the catalog). Two ways to provide tab labels: a JSON tabs[] prop (string or {label, badge?, disabled?}) for the data path, or slotted <button slot=\"tab\"> children for richer markup. Panels always come from <* slot=\"panel\"> children, paired with tabs by index. Roving tabindex; arrow keys / Home / End move selection; Space / Enter activate. Aria-selected, aria-controls, aria-labelledby connect tabs to panels. For static anchored sections in a vis-style document, prefer <ce-section> + <ce-toc>.",
+  "stability": "experimental",
+  "props": [
+    {
+      "name": "tabs",
+      "type": "(string | TabItem)[]",
+      "required": false,
+      "default": "[]",
+      "description": "Tab labels. Strings or { label, badge?, disabled? } objects. Empty switches to slot-based mode where slot=tab children are used directly."
+    },
+    {
+      "name": "active",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "reflect": true,
+      "description": "Index of the currently visible panel."
+    },
+    {
+      "name": "vertical",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Render the tab strip on the leading edge instead of above the panels. Switches arrow-key axis to up/down."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-tab-change",
+      "detail": "{ active: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user picks a different tab."
+    }
+  ],
+  "slots": [
+    {
+      "name": "tab",
+      "description": "Tab buttons (slot-based mode). Each child becomes a tab. Component sets role=tab, aria-selected, tabindex, id, and click/keydown handlers automatically."
+    },
+    {
+      "name": "panel",
+      "description": "Panel content. Each child becomes a panel paired by index with a tab. Component sets role=tabpanel, aria-labelledby, hidden."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Active-tab background and hover border."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default tab label color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Active-tab label color (defaults to white)."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle badge text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle tab background."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle badge background."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle tab border."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Tab chip radius."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical-mode head gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Default head gap, padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Head→body margin; chip horizontal padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical-mode head→body gap."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge font size."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing on chip hover/active."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["ce-filter-bar", "ce-toc"],
+  "category": "ui",
+  "tier": "widget",
+  "tags": ["Layout & primitives", "navigation", "interactive"],
+  "a11y": {
+    "role": "tablist",
+    "notes": "Inner tablist gets aria-orientation horizontal/vertical based on the vertical attr. Each tab has role=tab + aria-selected + aria-controls. Each panel has role=tabpanel + aria-labelledby. Inactive panels get hidden; only the active panel is in the accessibility tree."
+  }
+}

@@ -4,8 +4,10 @@
   "name": "Stat Group",
   "className": "CeStatGroup",
   "goal": "Lay out clustered KPI cells in a uniform responsive grid.",
-  "description": "Grid wrapper that arranges KPI tiles (or any cells) with a consistent gutter. Choose a fixed column count (2-6) or 'auto' for a fit-content layout that breaks into rows on narrow viewports. Pairs with <ce-kpi>, but tolerates any child element.",
-  "stability": "stable",
+  "description": "**Deprecated** — use `<ce-grid>` with `<ce-kpi>` children instead. Will be removed in next minor (see ADR-010). Grid wrapper that arranges KPI tiles (or any cells) with a consistent gutter. Choose a fixed column count (2-6) or 'auto' for a fit-content layout that breaks into rows on narrow viewports. Pairs with <ce-kpi>, but tolerates any child element.",
+  "stability": "deprecated",
+  "deprecatedIn": "0.4.0",
+  "replacedBy": "ce-grid + ce-kpi",
   "props": [
     {
       "name": "columns",

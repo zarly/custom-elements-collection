@@ -1,5 +1,5 @@
 import { html, css, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 import { resolveColor } from "../../internal/charts/color.js";
 import { number as formatNumber } from "../../internal/charts/format.js";
@@ -24,13 +24,44 @@ export interface BarRow {
 const GRID_STOPS = [0, 0.25, 0.5, 0.75, 1] as const;
 
 /**
- * `<ce-bar-chart>` — successor to `ce-bar-chart`. Phases 4–5 ship the
- * render skeleton + props, hover affordance, value tooltip, smooth fill
- * width transitions, optional gridlines, and an opt-in sparkline mode.
+ * Build a BarRow[] from `<ce-bar-row>` slot-children of the given parent.
+ * Non-ce-bar-row children are gracefully ignored per CDR-006.
+ */
+function rowsFromSlotChildren(parent: HTMLElement, fallbackColor: string): BarRow[] {
+  const result: BarRow[] = [];
+  for (const child of Array.from(parent.children)) {
+    if (child.tagName.toLowerCase() !== "ce-bar-row") continue;
+    const el = child as HTMLElement & { value?: number; color?: string };
+    const value = Number(el.getAttribute("value") ?? el.value ?? 0);
+    const color = el.getAttribute("color") ?? el.color ?? fallbackColor;
+    // Read label slot: first element with slot="label", else text content of label slot
+    const labelEl = el.querySelector<HTMLElement>("[slot='label']");
+    const label = labelEl ? (labelEl.textContent?.trim() ?? "") : el.textContent?.trim() ?? "";
+    // Read meta slot
+    const metaEl = el.querySelector<HTMLElement>("[slot='meta']");
+    const meta = metaEl ? (metaEl.textContent?.trim() ?? "") : undefined;
+    result.push({
+      label,
+      value,
+      color: color || undefined,
+      meta: meta || undefined,
+    });
+  }
+  return result;
+}
+
+/**
+ * `<ce-bar-chart>` — animated horizontal bar chart.
  *
- * Backward-compatible row shape (`BarRow` is a superset of `BarRow`):
- * consumers can flip imports without rewriting data. Per-row `color`
- * accepts both named tokens and arbitrary CSS values via `resolveColor()`.
+ * Two ways to provide row data (CDR-005 — resolution order):
+ *   1. `data` JSON prop non-empty → current behaviour, fully preserved.
+ *   2. `<ce-bar-row>` slot children → parent reads value/color as attributes
+ *      and consumes label/meta slot HTML; both modes render identically.
+ *   3. Neither → empty state.
+ *
+ * Per-row `color` accepts both named tokens and arbitrary CSS values via
+ * `resolveColor()`. Non-`ce-bar-row` slot children are left in light DOM
+ * and ignored by the data-resolution path (CDR-006).
  */
 export class CeBarChart extends CecElement {
   static override styles = css`
@@ -223,6 +254,13 @@ export class CeBarChart extends CecElement {
 
   @property(jsonProp<BarRow[]>([])) data: BarRow[] = [];
   @property({ type: Number }) max = 0;
+
+  /** Rows derived from <ce-bar-row> slot children. Updated by MutationObserver. */
+  @state() private _slotRows: BarRow[] = [];
+
+  /** MutationObserver watching direct children for ce-bar-row changes. */
+  #childObserver: MutationObserver | null = null;
+
   @property({ type: String, reflect: true }) color = "blue";
   @property({ type: String, attribute: "label-width" }) labelWidth = "auto";
   @property({ type: Boolean, reflect: true }) compact = false;
@@ -235,6 +273,27 @@ export class CeBarChart extends CecElement {
     formatNumber(v);
   @property({ type: String, attribute: "empty-text" }) emptyText = "No data";
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this.#childObserver = new MutationObserver(() => {
+      this._slotRows = rowsFromSlotChildren(this, this.color);
+    });
+    this.#childObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["value", "color"],
+    });
+    // Read initial children (may already be present when upgraded).
+    this._slotRows = rowsFromSlotChildren(this, this.color);
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.#childObserver?.disconnect();
+    this.#childObserver = null;
+  }
+
   override updated(): void {
     this.style.setProperty("--ce-bar-label-width", this.labelWidth);
     // Reduced-motion gate: when the user prefers no motion, force the
@@ -246,10 +305,15 @@ export class CeBarChart extends CecElement {
     this.style.setProperty("--ce-bar-fade", fade);
   }
 
+  /** Resolved rows: data[] takes priority, else slot children, else []. */
+  get #rows(): BarRow[] {
+    return this.data && this.data.length > 0 ? this.data : this._slotRows;
+  }
+
   get #effectiveMax(): number {
     if (this.max > 0) return this.max;
     let m = 0;
-    for (const row of this.data) if (row.value > m) m = row.value;
+    for (const row of this.#rows) if (row.value > m) m = row.value;
     return m || 1;
   }
 
@@ -288,7 +352,8 @@ export class CeBarChart extends CecElement {
   };
 
   override render() {
-    if (!this.data || this.data.length === 0) {
+    const rows = this.#rows;
+    if (!rows || rows.length === 0) {
       return html`<div class="ce-empty">${this.emptyText}</div>`;
     }
     const max = this.#effectiveMax;
@@ -296,7 +361,7 @@ export class CeBarChart extends CecElement {
     const showTooltip = !this.sparkline;
     return html`
       <ol class="ce-rows" role=${this.sparkline ? "img" : "list"}>
-        ${this.data.map((row, index) => {
+        ${rows.map((row, index) => {
           const pct = Math.max(0, Math.min(100, (row.value / max) * 100));
           const fill = resolveColor(row.color ?? this.color);
           const valueText = this.format(row.value);

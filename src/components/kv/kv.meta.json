@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-kv",
+  "name": "KV",
+  "className": "CeKv",
+  "goal": "Render a single key-value row with a short label and composable slotted value content.",
+  "description": "Single key-value row brick. The `key` attribute is the short label; the default slot carries the value and accepts any HTML content: plain text, `<a>`, `<time>`, `<code>`, `<ce-chip>`, or future typed renderers. Follows CDR-002: values stay in children so typed renderers can compose in later.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "key",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short label for the key column (identity-shaped string — e.g. \"Model\", \"Phone\", \"Status\")."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Value content. Accepts plain text, `<a>`, `<time>`, `<code>`, `<ce-chip>`, or any inline renderer (CDR-002)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Column gap between key and value."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Base font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Key label font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Value text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Key label color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-key-value", "ce-persona"],
+  "dependencies": [],
+  "related": ["ce-key-value"],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "metadata",
+    "key-value"
+  ]
+}

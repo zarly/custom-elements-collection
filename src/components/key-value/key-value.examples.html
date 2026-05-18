@@ -1,4 +1,4 @@
-<!-- @example Single-column metadata block -->
+<!-- @example Single-column metadata block (Mode A — dt/dd) -->
 <ce-key-value>
   <dt>Status</dt>
   <dd>Active</dd>
@@ -10,7 +10,7 @@
   <dd>12 of 25</dd>
 </ce-key-value>
 
-<!-- @example Two-column packing for a specifications panel -->
+<!-- @example Two-column packing for a specifications panel (Mode A) -->
 <ce-key-value columns="2">
   <dt>CPU</dt>
   <dd>8 vCPU</dd>
@@ -26,7 +26,7 @@
   <dd>6.8.0-31-generic</dd>
 </ce-key-value>
 
-<!-- @example Three-column compact roster -->
+<!-- @example Three-column compact roster (Mode A) -->
 <ce-key-value columns="3">
   <dt>Owner</dt>
   <dd>Ada L.</dd>
@@ -42,10 +42,24 @@
   <dd>Global</dd>
 </ce-key-value>
 
-<!-- @example Single-line ellipsised values — wrap=false -->
+<!-- @example Single-line ellipsised values — wrap=false (Mode A) -->
 <ce-key-value wrap="false" style="max-width:320px">
   <dt>Endpoint</dt>
   <dd>https://api.example.com/v2/very/long/path/that/will/be/clipped</dd>
   <dt>Request ID</dt>
   <dd>req_01J9XKM7N2P4Q6R8S0T1U2V3W4-a1b2c3d4e5f6g7h8i9j0</dd>
+</ce-key-value>
+
+<!-- @example ce-kv children with composable values (Mode B — CDR-002) -->
+<ce-key-value>
+  <ce-kv key="Model">chat-deep</ce-kv>
+  <ce-kv key="Status"><ce-chip type="green" dot>Live</ce-chip></ce-kv>
+  <ce-kv key="MRR"><strong>$12 480</strong> <ce-chip type="green">+18%</ce-chip></ce-kv>
+  <ce-kv key="Updated"><time datetime="2026-05-18">May 18, 2026</time></ce-kv>
+</ce-key-value>
+
+<!-- @example ce-kv with link and tel values (Mode B) -->
+<ce-key-value>
+  <ce-kv key="Phone"><a href="tel:+79991234567">+7 999 123-45-67</a></ce-kv>
+  <ce-kv key="Docs"><a href="https://example.com">Reference guide</a></ce-kv>
 </ce-key-value>

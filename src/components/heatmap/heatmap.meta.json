@@ -4,7 +4,7 @@
   "name": "Heatmap",
   "className": "CeHeatmap",
   "goal": "Render a 2D value grid with row + column labels and per-cell color intensity drawn from a 5-color palette.",
-  "description": "2D heatmap. Takes rows / cols / data arrays as JS properties or JSON attributes; colors each cell by interpolating the palette token between min and max (auto-detected when max is 0). Cell hover surfaces a focus outline.",
+  "description": "2D heatmap. Accepts data via two modes (CDR-005): (1) JSON mode — rows/cols/data arrays as JS properties or JSON attributes; (2) slot mode — <ce-heat-row> children each containing <ce-heat-cell> children. Resolution order: data non-empty → JSON mode; else iterate <ce-heat-row> slot children; else empty state. Both modes produce visually identical output for equivalent data. In JSON mode each cell may be a plain number (original API, CDR-008 additive) or a CellInput object { value?, tone?, title? } where tone (1-5) overrides the palette-derived alpha and title becomes the cell tooltip. Palette colors each cell by interpolating the palette token between min and max (auto-detected when max is 0). Cell hover surfaces a focus outline.",
   "stability": "stable",
   "props": [
     {
@@ -12,21 +12,21 @@
       "type": "string[]",
       "required": false,
       "default": "[]",
-      "description": "Row labels (Y axis)."
+      "description": "Row labels (Y axis). Used in JSON mode; ignored in slot mode (labels come from <ce-heat-row label>)."
     },
     {
       "name": "cols",
       "type": "string[]",
       "required": false,
       "default": "[]",
-      "description": "Column labels (X axis)."
+      "description": "Column labels (X axis). Used in both modes; in slot mode falls back to numeric indices when empty."
     },
     {
       "name": "data",
-      "type": "number[][]",
+      "type": "(number | CellInput)[][]",
       "required": false,
       "default": "[]",
-      "description": "Grid values, rows × cols."
+      "description": "Grid values, rows × cols. Each cell is either a plain number (original API preserved per CDR-008) or a CellInput object { value?: number; tone?: 1|2|3|4|5; title?: string }. When tone is set it overrides the palette-derived alpha via the 1-5 ramp. When non-empty, slot children are ignored (CDR-005 resolution order)."
     },
     {
       "name": "min",
@@ -48,11 +48,16 @@
       "required": false,
       "default": "\"blue\"",
       "reflect": true,
-      "description": "Color ramp."
+      "description": "Color ramp. Applied in both JSON and slot modes."
     }
   ],
   "events": [],
-  "slots": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Default slot for <ce-heat-row> children (slot mode per CDR-005). Each row carries a label attr and <ce-heat-cell> children. Non-ce-heat-row elements are passed through to light DOM and ignored by the data-resolution path."
+    }
+  ],
   "cssVariables": [
     {
       "name": "--ce-text-sm",
@@ -118,8 +123,10 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": ["ce-heat-row", "ce-heat-cell"],
   "related": [
+    "ce-heat-row",
+    "ce-heat-cell",
     "ce-bar-chart",
     "ce-chart"
   ],

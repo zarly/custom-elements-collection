@@ -1,0 +1,32 @@
+<!-- @example Default — auto-tier from value, max=10 assumed -->
+<ce-score value="9.4"></ce-score>
+
+<!-- @example Custom max — 0–100 scale -->
+<ce-score value="42" max="100"></ce-score>
+
+<!-- @example Explicit tier override — high despite low value -->
+<ce-score value="3.1" tier="high"></ce-score>
+
+<!-- @example All three tiers side by side in an inline context -->
+<ce-score value="8.5"></ce-score>
+<ce-score value="5.0"></ce-score>
+<ce-score value="1.8"></ce-score>
+
+<!-- @example Rich slot content — decorated label -->
+<ce-score value="9.4">9.4<sup>*</sup></ce-score>
+
+<!-- @example In a table cell context (inline=true default) -->
+<table>
+  <tr>
+    <td>Product A</td>
+    <td><ce-score value="8.7"></ce-score></td>
+  </tr>
+  <tr>
+    <td>Product B</td>
+    <td><ce-score value="4.2"></ce-score></td>
+  </tr>
+  <tr>
+    <td>Product C</td>
+    <td><ce-score value="2.1"></ce-score></td>
+  </tr>
+</table>

@@ -1,12 +1,15 @@
-<!-- @example Syntax -->
-<ce-rating mode="thumbs"></ce-rating>  <ce-rating mode="stars" max="5" allow-half></ce-rating>
-
-<!-- @example Thumbs feedback -->
-<ce-rating mode="thumbs" name="helpful"></ce-rating>
-
-<!-- @example 5-star rating with half precision -->
-<ce-rating mode="stars" max="5" allow-half name="quality"></ce-rating>
-
-<!-- @example Read-only stars (display only) -->
+<!-- @example Static read-only stars (default for vis-style documents per CDR-004) -->
 <ce-rating mode="stars" max="5" value="4" readonly></ce-rating>
 
+<!-- @example Read-only thumbs vote display -->
+<ce-rating mode="thumbs" value="1" readonly></ce-rating>
+
+<!-- @example Interactive 5-star rating (opt-in via `name` attribute) -->
+<ce-rating mode="stars" max="5" allow-half name="quality"></ce-rating>
+
+<!-- @example Interactive thumbs feedback (form-associated) -->
+<ce-rating mode="thumbs" name="helpful"></ce-rating>
+
+<!-- @example Syntax overview -->
+<ce-rating mode="thumbs"></ce-rating>
+<ce-rating mode="stars" max="5" allow-half></ce-rating>

@@ -4,7 +4,7 @@
   "name": "BarChart",
   "className": "CeBarChart",
   "goal": "Animated horizontal bar chart with hover affordance + tooltip, optional gridlines, and an opt-in inline sparkline mode — sub-4KB, no JS deps.",
-  "description": "Horizontal bar chart accepting a JSON-attribute or property-bound array of { label, value, meta?, color? } rows. Auto-scales when max is unset, renders ARIA progressbars per row, and routes color through the shared resolveColor() helper so per-row color accepts both named tokens (\"blue\", \"green\", …) and arbitrary CSS values (\"#5a8\", \"var(--brand)\"). Each row is keyboard-focusable and emits ce-chart-hover / ce-chart-leave / ce-chart-select with a shared family payload. CSS-only tooltip pinned to each row reveals the formatted value (and meta, when present) on hover or focus. Optional `gridlines` overlays 4 evenly-spaced ticks (0/25/50/75/100% of max) plus a labeled axis strip. Optional `sparkline` mode collapses the chart into an inline mini-strip (no labels, no axis). Width transitions honour prefers-reduced-motion and the `animated` prop.",
+  "description": "Horizontal bar chart accepting a JSON-attribute or property-bound array (data=[]) OR slotted <ce-bar-row> children (CDR-005). Resolution order: data non-empty → use it; else iterate ce-bar-row slot children; else show empty state. Both modes produce visually identical output for equivalent data. Non-ce-bar-row slot children are passed through to light DOM and ignored by the data path (CDR-006). Auto-scales when max is unset, renders ARIA progressbars per row, and routes color through the shared resolveColor() helper so per-row color accepts both named tokens (\"blue\", \"green\", …) and arbitrary CSS values. Each row is keyboard-focusable and emits ce-chart-hover / ce-chart-leave / ce-chart-select. Optional gridlines and sparkline modes.",
   "limitations": "Single-series only. For multi-series trends or line/area charts, use ce-plot (planned in phases 7–9). Tooltip is positioned above the bar and may clip in tight overflow:hidden parents — render the chart in a container with adequate top padding when needed.",
   "stability": "stable",
   "props": [
@@ -118,7 +118,12 @@
       "description": "Fires on row click or Enter/Space keypress while focused."
     }
   ],
-  "slots": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Accept <ce-bar-row> children for slot mode (CDR-005). Non-ce-bar-row children pass through to light DOM and are not used as data rows (CDR-006)."
+    }
+  ],
   "cssVariables": [
     {
       "name": "--ce-bar-label-width",
@@ -296,7 +301,7 @@
   ],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": ["ce-bar-row"],
   "related": [
     "ce-bar-chart",
     "ce-chart"

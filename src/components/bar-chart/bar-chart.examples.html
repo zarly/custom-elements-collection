@@ -1,4 +1,4 @@
-<!-- @example Animated bars with hover tooltips, gridlines, and meta values -->
+<!-- @example JSON mode — animated bars with hover tooltips, gridlines, and meta values -->
 <ce-bar-chart
   gridlines
   data='[
@@ -8,6 +8,26 @@
     {"label":"Plot","value":9,"color":"purple","meta":"+0%"}
   ]'
 ></ce-bar-chart>
+
+<!-- @example Slot mode — ce-bar-row children with rich labels and meta -->
+<ce-bar-chart gridlines>
+  <ce-bar-row value="42">
+    <span slot="label">Hero</span>
+    <span slot="meta">+12%</span>
+  </ce-bar-row>
+  <ce-bar-row value="27" color="green">
+    <span slot="label">Kpi</span>
+    <span slot="meta">+3%</span>
+  </ce-bar-row>
+  <ce-bar-row value="18" color="amber">
+    <span slot="label">Card</span>
+    <span slot="meta">-2%</span>
+  </ce-bar-row>
+  <ce-bar-row value="9" color="purple">
+    <span slot="label">Plot</span>
+    <span slot="meta">+0%</span>
+  </ce-bar-row>
+</ce-bar-chart>
 
 <!-- @example Sparkline mode — inline mini-strip, no labels or axis -->
 <p style="display:flex;align-items:center;gap:var(--ce-space-3)">

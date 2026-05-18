@@ -1,0 +1,44 @@
+<!-- @example Prop-based tabs (simple string array) -->
+<ce-tabs tabs='["Overview","Settings","Logs"]' active="0">
+  <div slot="panel">
+    <h3>Overview</h3>
+    <p>Project status, key metrics, recent activity.</p>
+  </div>
+  <div slot="panel">
+    <h3>Settings</h3>
+    <p>Configure integrations and notification preferences.</p>
+  </div>
+  <div slot="panel">
+    <h3>Logs</h3>
+    <p>Tail of the last 24h of build, deploy, and error events.</p>
+  </div>
+</ce-tabs>
+
+<!-- @example Tabs with badges -->
+<ce-tabs
+  active="0"
+  tabs='[{"label":"Inbox","badge":12},{"label":"Sent"},{"label":"Drafts","badge":2},{"label":"Spam","disabled":true}]'
+>
+  <div slot="panel">12 unread messages</div>
+  <div slot="panel">Recent sent items</div>
+  <div slot="panel">2 drafts</div>
+  <div slot="panel">Spam folder</div>
+</ce-tabs>
+
+<!-- @example Slot-based tabs (richer markup per tab) -->
+<ce-tabs active="1">
+  <button slot="tab">📊 Dashboard</button>
+  <button slot="tab">⚙ Settings</button>
+  <button slot="tab">📁 Files</button>
+  <div slot="panel">Dashboard panel</div>
+  <div slot="panel">Settings panel</div>
+  <div slot="panel">Files panel</div>
+</ce-tabs>
+
+<!-- @example Vertical tabs -->
+<ce-tabs vertical active="0" tabs='["Profile","Account","Security","Billing"]'>
+  <div slot="panel">Profile content</div>
+  <div slot="panel">Account content</div>
+  <div slot="panel">Security content</div>
+  <div slot="panel">Billing content</div>
+</ce-tabs>

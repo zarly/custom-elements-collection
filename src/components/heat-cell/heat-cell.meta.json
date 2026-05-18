@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-heat-cell",
+  "name": "HeatCell",
+  "className": "CeHeatCell",
+  "goal": "Single colored heatmap cell for use inside <ce-heat-row> (slot mode per CDR-005), or as a standalone colored cell when used outside.",
+  "description": "Carries a tone (1-5 intensity), a title (tooltip string), and a default slot for rich display content per CDR-002. When nested inside ce-heat-row the parent reads tone and title as attributes and consumes the slot text to build the heatmap data grid — the cell itself renders nothing (display:contents). When used standalone it renders a colored inline-flex box with the palette-blue ramp. Tone maps to alpha 0.05/0.175/0.30/0.425/0.55.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "tone",
+      "type": "1 | 2 | 3 | 4 | 5",
+      "required": false,
+      "default": "3",
+      "reflect": true,
+      "description": "Color intensity on a 1-5 ramp (1=faint, 5=vivid). Overrides value-based palette calculation when set explicitly. CDR-002 NOT-applicable: fixed-shape configuration number that drives layout math."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Tooltip text shown on hover. Maps to the HTML title attribute on the rendered cell. CDR-002 NOT-applicable: must be a plain string per HTML spec."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Cell display content. Can carry any inline element — text, <a>, <ce-chip>, etc. per CDR-002. Read as textContent by ce-heat-row parent in slot mode."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding in standalone mode."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding in standalone mode."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell border color in standalone mode."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Cell text color in standalone mode."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Cell font size in standalone mode."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover outline color in standalone mode."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Outline transition in standalone mode."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-heat-row", "ce-heatmap"],
+  "dependencies": [],
+  "related": ["ce-heat-row", "ce-heatmap"],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Metrics & charts",
+    "heatmap",
+    "cell",
+    "data-viz"
+  ],
+  "a11y": {
+    "role": "none (standalone inline-flex cell)",
+    "notes": "In standalone mode exposes a title attribute for tooltip. When nested inside ce-heatmap the parent provides table cell semantics via <td> with the title attribute. The default slot can carry any semantic HTML."
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-flow-step",
+  "name": "FlowStep",
+  "className": "CeFlowStep",
+  "goal": "Single step for use inside <ce-flow> slot mode (CDR-005), or as a standalone step card with number, icon, title, and rich body content.",
+  "description": "Carries a step number (n), title, optional icon, and optional color tint. Default slot accepts rich body content: paragraphs, lists, links, chips — anything HTML (CDR-002). When nested inside ce-flow the parent reads n/title/icon/color as attributes and consumes the default slot HTML via querySelectorAll — the step itself renders nothing (display:contents). When used standalone it renders a full step card.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "n",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Step number or label. Short string displayed as a step counter (e.g. \"1\", \"2\", \"A\")."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Step title. Short identity string shown as the step heading."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Optional icon glyph or emoji displayed alongside the step number."
+    },
+    {
+      "name": "color",
+      "type": "CecColor | \"\"",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Optional color tint. One of the CecColor vocabulary values: neutral, green, red, amber, blue, purple, cyan."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Rich step body content. Can contain paragraphs, lists, links, chips, or any HTML. In standalone mode rendered inside the step card; when nested in ce-flow the parent reads this HTML."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between step number and icon in standalone aside; step title bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Column gap between aside and main in standalone mode; vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding in standalone mode."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Step card background in standalone mode."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Step card border in standalone mode."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Step card border radius in standalone mode."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green border."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber border."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue border."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple border."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan border."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Step title color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Step number and body text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Title and body font size."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-flow"],
+  "dependencies": [],
+  "related": ["ce-flow", "ce-timeline"],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "flow",
+    "step",
+    "process"
+  ],
+  "a11y": {
+    "role": "none (standalone: wrapper div; parent ce-flow handles list semantics)",
+    "notes": "In standalone mode the icon is aria-hidden. When nested in ce-flow the parent renders the full accessible step list. The default slot can carry semantic HTML including links, time elements, and other inline semantics."
+  }
+}

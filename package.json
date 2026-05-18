@@ -1,7 +1,7 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.4.0",
-  "description": "A collection of 72 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface and feedback-UI primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
+  "version": "0.5.0",
+  "description": "A collection of 99 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface and feedback-UI primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
   "homepage": "https://github.com/zarly/custom-elements-collection#readme",
@@ -69,6 +69,10 @@
       "types": "./dist/entries/bar-chart.d.ts",
       "import": "./dist/entries/bar-chart.js"
     },
+    "./bar-row": {
+      "types": "./dist/entries/bar-row.d.ts",
+      "import": "./dist/entries/bar-row.js"
+    },
     "./bookmark": {
       "types": "./dist/entries/bookmark.d.ts",
       "import": "./dist/entries/bookmark.js"
@@ -92,6 +96,10 @@
     "./chat-bubble": {
       "types": "./dist/entries/chat-bubble.d.ts",
       "import": "./dist/entries/chat-bubble.js"
+    },
+    "./check-item": {
+      "types": "./dist/entries/check-item.d.ts",
+      "import": "./dist/entries/check-item.js"
     },
     "./checkbox": {
       "types": "./dist/entries/checkbox.d.ts",
@@ -205,6 +213,10 @@
       "types": "./dist/entries/flow.d.ts",
       "import": "./dist/entries/flow.js"
     },
+    "./flow-step": {
+      "types": "./dist/entries/flow-step.d.ts",
+      "import": "./dist/entries/flow-step.js"
+    },
     "./gauge": {
       "types": "./dist/entries/gauge.d.ts",
       "import": "./dist/entries/gauge.js"
@@ -212,6 +224,14 @@
     "./grid": {
       "types": "./dist/entries/grid.d.ts",
       "import": "./dist/entries/grid.js"
+    },
+    "./heat-cell": {
+      "types": "./dist/entries/heat-cell.d.ts",
+      "import": "./dist/entries/heat-cell.js"
+    },
+    "./heat-row": {
+      "types": "./dist/entries/heat-row.d.ts",
+      "import": "./dist/entries/heat-row.js"
     },
     "./heatmap": {
       "types": "./dist/entries/heatmap.d.ts",
@@ -241,9 +261,21 @@
       "types": "./dist/entries/kpi.d.ts",
       "import": "./dist/entries/kpi.js"
     },
+    "./kv": {
+      "types": "./dist/entries/kv.d.ts",
+      "import": "./dist/entries/kv.js"
+    },
     "./lesson-audio": {
       "types": "./dist/entries/lesson-audio.d.ts",
       "import": "./dist/entries/lesson-audio.js"
+    },
+    "./lesson-compare": {
+      "types": "./dist/entries/lesson-compare.d.ts",
+      "import": "./dist/entries/lesson-compare.js"
+    },
+    "./lesson-confidence": {
+      "types": "./dist/entries/lesson-confidence.d.ts",
+      "import": "./dist/entries/lesson-confidence.js"
     },
     "./lesson-frame": {
       "types": "./dist/entries/lesson-frame.d.ts",
@@ -253,6 +285,22 @@
       "types": "./dist/entries/lesson-gap.d.ts",
       "import": "./dist/entries/lesson-gap.js"
     },
+    "./lesson-hint": {
+      "types": "./dist/entries/lesson-hint.d.ts",
+      "import": "./dist/entries/lesson-hint.js"
+    },
+    "./lesson-match": {
+      "types": "./dist/entries/lesson-match.d.ts",
+      "import": "./dist/entries/lesson-match.js"
+    },
+    "./lesson-myth": {
+      "types": "./dist/entries/lesson-myth.d.ts",
+      "import": "./dist/entries/lesson-myth.js"
+    },
+    "./lesson-note": {
+      "types": "./dist/entries/lesson-note.d.ts",
+      "import": "./dist/entries/lesson-note.js"
+    },
     "./lesson-quickfire": {
       "types": "./dist/entries/lesson-quickfire.d.ts",
       "import": "./dist/entries/lesson-quickfire.js"
@@ -261,9 +309,25 @@
       "types": "./dist/entries/lesson-quiz.d.ts",
       "import": "./dist/entries/lesson-quiz.js"
     },
+    "./lesson-reveal": {
+      "types": "./dist/entries/lesson-reveal.d.ts",
+      "import": "./dist/entries/lesson-reveal.js"
+    },
     "./lesson-rule": {
       "types": "./dist/entries/lesson-rule.d.ts",
       "import": "./dist/entries/lesson-rule.js"
+    },
+    "./lesson-step": {
+      "types": "./dist/entries/lesson-step.d.ts",
+      "import": "./dist/entries/lesson-step.js"
+    },
+    "./lesson-summary": {
+      "types": "./dist/entries/lesson-summary.d.ts",
+      "import": "./dist/entries/lesson-summary.js"
+    },
+    "./lesson-vocab": {
+      "types": "./dist/entries/lesson-vocab.d.ts",
+      "import": "./dist/entries/lesson-vocab.js"
     },
     "./nav-list": {
       "types": "./dist/entries/nav-list.d.ts",
@@ -277,17 +341,45 @@
       "types": "./dist/entries/plot.d.ts",
       "import": "./dist/entries/plot.js"
     },
+    "./pricing-tier": {
+      "types": "./dist/entries/pricing-tier.d.ts",
+      "import": "./dist/entries/pricing-tier.js"
+    },
     "./progress": {
       "types": "./dist/entries/progress.d.ts",
       "import": "./dist/entries/progress.js"
+    },
+    "./progress-list": {
+      "types": "./dist/entries/progress-list.d.ts",
+      "import": "./dist/entries/progress-list.js"
+    },
+    "./qr": {
+      "types": "./dist/entries/qr.d.ts",
+      "import": "./dist/entries/qr.js"
+    },
+    "./quote": {
+      "types": "./dist/entries/quote.d.ts",
+      "import": "./dist/entries/quote.js"
+    },
+    "./radio-group": {
+      "types": "./dist/entries/radio-group.d.ts",
+      "import": "./dist/entries/radio-group.js"
     },
     "./rating": {
       "types": "./dist/entries/rating.d.ts",
       "import": "./dist/entries/rating.js"
     },
+    "./recommendation": {
+      "types": "./dist/entries/recommendation.d.ts",
+      "import": "./dist/entries/recommendation.js"
+    },
     "./retry-button": {
       "types": "./dist/entries/retry-button.d.ts",
       "import": "./dist/entries/retry-button.js"
+    },
+    "./score": {
+      "types": "./dist/entries/score.d.ts",
+      "import": "./dist/entries/score.js"
     },
     "./section": {
       "types": "./dist/entries/section.d.ts",
@@ -313,9 +405,21 @@
       "types": "./dist/entries/status-light.d.ts",
       "import": "./dist/entries/status-light.js"
     },
+    "./step": {
+      "types": "./dist/entries/step.d.ts",
+      "import": "./dist/entries/step.js"
+    },
+    "./steps": {
+      "types": "./dist/entries/steps.d.ts",
+      "import": "./dist/entries/steps.js"
+    },
     "./table": {
       "types": "./dist/entries/table.d.ts",
       "import": "./dist/entries/table.js"
+    },
+    "./tabs": {
+      "types": "./dist/entries/tabs.d.ts",
+      "import": "./dist/entries/tabs.js"
     },
     "./textarea": {
       "types": "./dist/entries/textarea.d.ts",

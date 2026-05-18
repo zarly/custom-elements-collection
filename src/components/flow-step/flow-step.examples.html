@@ -1,0 +1,53 @@
+<!-- @example Minimal vertical flow using slot mode -->
+<ce-flow vertical>
+  <ce-flow-step n="1" title="Discovery">
+    15 interviews + top-5 competitor analysis.
+  </ce-flow-step>
+  <ce-flow-step n="2" title="Prototype">
+    Clickable Figma + paper-prototype for 3 key JTBD.
+  </ce-flow-step>
+  <ce-flow-step n="3" title="Validate">
+    5 usability sessions; iterate on critical flows.
+  </ce-flow-step>
+</ce-flow>
+
+<!-- @example Standalone step card with rich body content -->
+<ce-flow-step n="2" title="Prototype" color="blue" icon="🎨">
+  <p>Build a clickable mockup covering the three highest-pain journeys:</p>
+  <ul>
+    <li>Onboarding to first value</li>
+    <li>Data import and mapping</li>
+    <li>Sharing a report with a stakeholder</li>
+  </ul>
+</ce-flow-step>
+
+<!-- @example Step with color tints and inline chips in body -->
+<ce-flow>
+  <ce-flow-step n="1" title="Research" color="amber">
+    <ce-chip type="amber">In progress</ce-chip>
+    Desk research + 8 user interviews scheduled for next week.
+  </ce-flow-step>
+  <ce-flow-step n="2" title="Build" color="blue">
+    <ce-chip type="blue">Upcoming</ce-chip>
+    Two-week engineering sprint. Target: <a href="#sprint-1">Sprint 1 scope</a>.
+  </ce-flow-step>
+  <ce-flow-step n="3" title="Ship" color="green">
+    <ce-chip type="green">Planned</ce-chip>
+    Beta release to 50 design partners.
+  </ce-flow-step>
+</ce-flow>
+
+<!-- @example Step with icon, links, and mixed inline content -->
+<ce-flow vertical>
+  <ce-flow-step n="1" title="Sign up" icon="✍️">
+    Create your account at <a href="#">app.example.com</a>.
+    Takes less than <strong>60 seconds</strong>.
+  </ce-flow-step>
+  <ce-flow-step n="2" title="Connect your data" icon="🔗" color="blue">
+    Import from CSV, connect via API, or paste a spreadsheet URL.
+    Supported sources: Google Sheets, Notion, Airtable.
+  </ce-flow-step>
+  <ce-flow-step n="3" title="Share your report" icon="📤" color="green">
+    One-click publish or embed the live dashboard anywhere.
+  </ce-flow-step>
+</ce-flow>

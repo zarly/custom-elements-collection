@@ -1,0 +1,27 @@
+<!-- @example Standalone cell — default tone -->
+<ce-heat-cell title="Production ready">V</ce-heat-cell>
+
+<!-- @example Standalone cell — high tone (5) -->
+<ce-heat-cell tone="5" title="Critical issue detected">!</ce-heat-cell>
+
+<!-- @example Standalone cell — low tone (1) -->
+<ce-heat-cell tone="1" title="Not applicable">—</ce-heat-cell>
+
+<!-- @example Standalone cell — rich slot content with a link -->
+<ce-heat-cell tone="4" title="MCP SDK is production-ready"><a href="#">SDK</a></ce-heat-cell>
+
+<!-- @example All five tones side by side -->
+<ce-heat-cell tone="1" title="Tone 1">1</ce-heat-cell>
+<ce-heat-cell tone="2" title="Tone 2">2</ce-heat-cell>
+<ce-heat-cell tone="3" title="Tone 3">3</ce-heat-cell>
+<ce-heat-cell tone="4" title="Tone 4">4</ce-heat-cell>
+<ce-heat-cell tone="5" title="Tone 5">5</ce-heat-cell>
+
+<!-- @example Inside ce-heat-row nested in ce-heatmap (slot mode) -->
+<ce-heatmap cols='["Jan","Feb","Mar"]'>
+  <ce-heat-row label="Signups">
+    <ce-heat-cell tone="2" title="Jan signups">12</ce-heat-cell>
+    <ce-heat-cell tone="4" title="Feb signups">38</ce-heat-cell>
+    <ce-heat-cell tone="5" title="Mar signups">55</ce-heat-cell>
+  </ce-heat-row>
+</ce-heatmap>

@@ -4,7 +4,7 @@
   "name": "Rating",
   "className": "CeRating",
   "goal": "Capture human feedback on chat responses or content via thumbs up/down or 1..N stars, in one form-associated control.",
-  "description": "Two-mode feedback control. In thumbs mode, two side-by-side buttons toggle between up/down/null with aria-pressed. In stars mode, max buttons form a radiogroup with optional half-star precision via pointermove offset, click-to-clear, and arrow-key navigation. Form-associated via ElementInternals so the resolved value participates in surrounding <form> submissions when name is set. Always emits ce-rating-change with a uniform detail shape.",
+  "description": "Two-mode feedback control. **Supports static read-only display via `readonly` — the first example demonstrates this canonical vis-document usage (CDR-004).** In thumbs mode, two side-by-side buttons toggle between up/down/null with aria-pressed. In stars mode, max buttons form a radiogroup with optional half-star precision via pointermove offset, click-to-clear, and arrow-key navigation. Form-associated via ElementInternals so the resolved value participates in surrounding <form> submissions when name is set. Emits ce-rating-change with a uniform detail shape when interactive.",
   "stability": "stable",
   "props": [
     {

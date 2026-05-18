@@ -56,6 +56,10 @@
     {
       "name": "center",
       "description": "Override center-label with arbitrary HTML."
+    },
+    {
+      "name": "legend",
+      "description": "Override the auto-generated legend with custom markup. Useful for annotated or aggregated legends."
     }
   ],
   "cssVariables": [
@@ -112,6 +116,43 @@
       "kind": "color",
       "source": "token",
       "description": "Default palette color 6."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Legend percent / muted text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend row font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend row gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Legend row inner gap (dot↔label)."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Space between chart and legend."
+    },
+    {
+      "name": "--ce-donut-legend-display",
+      "kind": "other",
+      "source": "local",
+      "fallback": "auto",
+      "description": "Document-wide legend visibility: auto (default; visible when ≥ 2 segments) | always | none. Read via @container style() so it cascades from any ancestor."
     }
   ],
   "globalDependencies": [],

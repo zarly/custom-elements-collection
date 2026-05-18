@@ -61,10 +61,13 @@ Depth lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Consumer-side pat
 
 ## 4. Adding a new component
 
-> **Read this before designing the API.** The primary author of markup that uses this library is a large language model, not a human. That changes how we think about props, required fields, error states, and "wrong" input. Bias toward optional fields, accept multiple input shapes when ergonomically cheap, infer behavior from data rather than adding `mode` flags, and never punish the end user for an LLM author's omission. The full philosophy and the rules it produces — including when to refuse this lens — live in [ADR-009](docs/adr/adr-009-llm-tolerant-components.md). Component-level applications of the lens belong in the component's `CONCEPT.md` (see step 9 and [ADR-008](docs/adr/adr-008-component-concept-files.md)). Reference implementations: [`src/components/gauge/`](src/components/gauge/) and [`src/lesson/lesson-quickfire/`](src/lesson/lesson-quickfire/).
+> **Read this before designing the API.** The primary author of markup that uses this library is a large language model, not a human. That changes how we think about props, required fields, error states, and "wrong" input. Bias toward optional fields, accept multiple input shapes when ergonomically cheap, infer behavior from data rather than adding `mode` flags, and never punish the end user for an LLM author's omission. The full philosophy and the rules it produces — including when to refuse this lens — live in [ADR-009](docs/adr/adr-009-llm-tolerant-components.md). The daily-design conventions that implement that philosophy live in [`docs/cdr/`](docs/cdr/) (Component Design Records — recommended, not mandatory). Component-level applications of the lens belong in the component's `CONCEPT.md` (see step 9 and [ADR-008](docs/adr/adr-008-component-concept-files.md)). Reference implementations: [`src/components/gauge/`](src/components/gauge/) and [`src/lesson/lesson-quickfire/`](src/lesson/lesson-quickfire/).
+>
+> **Pre-flight checklist before designing a new public API.** Run through the [8 CDRs](docs/cdr/) as a self-review. Each one captures a recurring API-design mistake — a CDR violation is allowed when justified by user-facing benefit, but the deviation must be documented in the component's `CONCEPT.md`. See [`docs/cdr/README.md`](docs/cdr/README.md) for the compliance levels (ADR = MUST, CDR = SHOULD, CONCEPT.md = MAY).
 
 Since [ADR-005](docs/adr/adr-005-component-meta.md) the flow is mostly automated. Work through this list top to bottom; every step is required.
 
+0. **CDR pre-flight self-review** (recommended). Before sketching the API, skim the [8 Component Design Records](docs/cdr/). They encode recurring API-design mistakes — vocabulary in enums (CDR-001), values as string attributes (CDR-002), per-instance presentation policy (CDR-003), stateful default (CDR-004), JSON-only collection (CDR-005), hard wrappers (CDR-006), verbose first example (CDR-007), removed APIs (CDR-008). Justified deviations are allowed; document the reason in `CONCEPT.md`.
 1. **Pick a folder.** UI tag → `src/components/<name>/`. Lesson tag → `src/lesson/<name>/`. The folder name matches the file stem (e.g. `feedback-bar/`).
 2. **Source.** Create `src/components/<name>/<name>.ts`. Export a class `Ce<Name>` that extends `CecElement` (from `src/core/base.ts`). Use `ce-<name>` as the registered tag (or `lesson-<name>` for the lesson pack).
 3. **Tests.** Create `src/components/<name>/<name>.test.ts`. At minimum **6 tests** covering: attribute form of each prop, JS-property form of each prop, default slot rendering, named slot rendering (if any), events fired, one edge/error case. Mirror the shape of `src/components/card/card.test.ts`.
@@ -199,6 +202,19 @@ When in doubt, read the ADR first.
 - [ADR-007 — Component registry](docs/adr/adr-007-component-registry.md): per-component `dist/registry/<tag>.json` plus filtered views, the LLM-tool-use-shaped projection of the meta.
 - [ADR-008 — Per-component CONCEPT.md](docs/adr/adr-008-component-concept-files.md): optional sibling file capturing the *why* behind each component's design decisions.
 - [ADR-009 — Tolerant components for LLM-driven authoring](docs/adr/adr-009-llm-tolerant-components.md): how we design APIs when the primary author of the markup is a non-deterministic LLM — flexibility, optional fields, data-shape inference, minimum surface. Read before adding props, modes, or required fields.
+
+### Component Design Records (CDR)
+
+CDRs are the **system-wide design conventions** that implement ADR-009 at the daily-design level. They are **RECOMMENDED (SHOULD)**, not **REQUIRED (MUST)** like ADRs — a user-focused exception is allowed, but must be documented in the component's `CONCEPT.md`. The folder index lives at [`docs/cdr/README.md`](docs/cdr/README.md).
+
+- [CDR-001 — Style enum is finite; content text is unbounded → use slots](docs/cdr/cdr-001-style-enum-content-slot.md)
+- [CDR-002 — Typed values belong in children, not in string attributes](docs/cdr/cdr-002-typed-values-as-children.md)
+- [CDR-003 — Presentation policy is global; markup is data-first](docs/cdr/cdr-003-presentation-policy-global.md)
+- [CDR-004 — Static-first; stateful behavior is opt-in](docs/cdr/cdr-004-static-first-stateful-optin.md)
+- [CDR-005 — Collections accept both data-array and slot-children](docs/cdr/cdr-005-collections-json-and-slot.md)
+- [CDR-006 — Components compose; no hard wrappers](docs/cdr/cdr-006-components-compose.md)
+- [CDR-007 — Sensible defaults; zero-attribute usage works for the common case](docs/cdr/cdr-007-sensible-defaults.md)
+- [CDR-008 — Additive changes only; deprecate via stability + ADR](docs/cdr/cdr-008-additive-changes-only.md)
 
 ## 10. Keeping the AI skill up to date
 

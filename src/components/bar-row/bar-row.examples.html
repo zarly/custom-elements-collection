@@ -1,0 +1,43 @@
+<!-- @example Simplest usage — bare value, no slots required (CDR-007) -->
+<ce-bar-row value="42"></ce-bar-row>
+
+<!-- @example Standalone bar with rich label slot and meta suffix -->
+<ce-bar-row value="56" color="blue" label="Engineering" max="100">
+  <span slot="label">Engineering</span>
+  <span slot="meta">9 agents</span>
+</ce-bar-row>
+
+<!-- @example value-display variants: inside (default), outside, hidden -->
+<ce-bar-row value="72" color="green" label="Inside (default)" value-display="inside">
+  <span slot="label">Inside (default)</span>
+</ce-bar-row>
+
+<ce-bar-row value="72" color="amber" label="Outside" value-display="outside">
+  <span slot="label">Outside</span>
+</ce-bar-row>
+
+<ce-bar-row value="72" color="purple" label="Hidden" value-display="hidden">
+  <span slot="label">Hidden</span>
+</ce-bar-row>
+
+<!-- @example Slot mode inside ce-bar-chart — rich labels with meta -->
+<ce-bar-chart>
+  <ce-bar-row value="88" color="blue">
+    <span slot="label">Alpha</span>
+    <span slot="meta">+12%</span>
+  </ce-bar-row>
+  <ce-bar-row value="64" color="green">
+    <span slot="label">Beta</span>
+    <span slot="meta">+3%</span>
+  </ce-bar-row>
+  <ce-bar-row value="31" color="red">
+    <span slot="label">Gamma</span>
+    <span slot="meta">below target</span>
+  </ce-bar-row>
+</ce-bar-chart>
+
+<!-- @example Custom max — value/max arithmetic -->
+<ce-bar-row value="7" max="10" color="cyan">
+  <span slot="label">7 of 10 tasks</span>
+  <span slot="meta">70%</span>
+</ce-bar-row>

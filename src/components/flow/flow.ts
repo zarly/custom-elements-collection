@@ -1,5 +1,5 @@
 import { html, css } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { CecElement, jsonProp, type CecColor } from "../../core/index.js";
 
 export interface FlowStep {
@@ -8,14 +8,24 @@ export interface FlowStep {
   caption?: string;
   /** Color token (default neutral). */
   color?: CecColor;
+  /** Step number label. */
+  n?: string;
+  /** Icon glyph or emoji. */
+  icon?: string;
 }
 
 /**
- * `<ce-flow>` — horizontal flow diagram: boxes separated by arrows.
+ * `<ce-flow>` — horizontal or vertical flow diagram: boxes separated by arrows.
  *
  * Attributes:
- *   arrow   — arrow character (default "→")
- *   vertical — boolean; stack boxes vertically with down arrows
+ *   steps    — JSON array of FlowStep objects (JSON mode).
+ *   arrow    — arrow character (default "→").
+ *   vertical — boolean; stack boxes vertically with down arrows.
+ *
+ * Slot mode (CDR-005): when `steps` is empty, iterate `<ce-flow-step>` children
+ * instead. Both modes produce visually identical output for equivalent data.
+ * Resolution order: steps non-empty → JSON path; else → slot children; else →
+ * empty state.
  */
 export class CeFlow extends CecElement {
   static override styles = css`
@@ -46,6 +56,17 @@ export class CeFlow extends CecElement {
     .ce-flow-step.c-purple { border-color: var(--ce-color-purple); background: var(--ce-color-purple-bg); }
     .ce-flow-step.c-cyan   { border-color: var(--ce-color-cyan);   background: var(--ce-color-cyan-bg);   }
 
+    .ce-flow-step .ce-flow-n {
+      font-size: var(--ce-text-xs);
+      font-weight: 700;
+      color: var(--ce-muted);
+      margin-bottom: 2px;
+    }
+    .ce-flow-step .ce-flow-icon {
+      font-size: var(--ce-text-lg);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
     .ce-flow-step .ce-flow-title {
       font-weight: 700;
       color: var(--ce-text);
@@ -76,10 +97,61 @@ export class CeFlow extends CecElement {
   @property({ type: String }) arrow = "→";
   @property({ type: Boolean, reflect: true }) vertical = false;
 
+  /** Steps derived from <ce-flow-step> slot children. Updated by MutationObserver. */
+  @state() private _slotSteps: FlowStep[] = [];
+
+  #childObserver: MutationObserver | null = null;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this.#childObserver = new MutationObserver(() => {
+      this._slotSteps = this.#readSlotChildren();
+    });
+    this.#childObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["title", "n", "icon", "color"],
+    });
+    this._slotSteps = this.#readSlotChildren();
+  }
+
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.#childObserver?.disconnect();
+    this.#childObserver = null;
+  }
+
+  /** Read FlowStep data from <ce-flow-step> direct children (CDR-005 slot mode). */
+  #readSlotChildren(): FlowStep[] {
+    const result: FlowStep[] = [];
+    for (const child of Array.from(this.children)) {
+      if (child.tagName.toLowerCase() !== "ce-flow-step") continue;
+      const el = child as HTMLElement;
+      result.push({
+        title: el.getAttribute("title") ?? "",
+        n: el.getAttribute("n") ?? undefined,
+        icon: el.getAttribute("icon") ?? undefined,
+        color: (el.getAttribute("color") as CecColor) ?? undefined,
+        // caption: body HTML from default slot — read as textContent for JSON-parity
+        caption: el.textContent?.trim() || undefined,
+      });
+    }
+    return result;
+  }
+
+  /** Resolved steps: steps[] takes priority, else slot children, else []. */
+  get #effectiveSteps(): FlowStep[] {
+    return this.steps && this.steps.length > 0
+      ? this.steps
+      : this._slotSteps;
+  }
+
   override render() {
     const arrow = this.vertical ? this.#verticalArrow() : this.arrow;
+    const steps = this.#effectiveSteps;
     const items: unknown[] = [];
-    this.steps.forEach((s, i) => {
+    steps.forEach((s, i) => {
       if (i > 0) {
         items.push(
           html`<div class="ce-flow-arrow" aria-hidden="true">${arrow}</div>`
@@ -88,6 +160,8 @@ export class CeFlow extends CecElement {
       items.push(
         html`
           <div class="ce-flow-step ${s.color ? `c-${s.color}` : ""}">
+            ${s.n ? html`<div class="ce-flow-n">${s.n}</div>` : ""}
+            ${s.icon ? html`<div class="ce-flow-icon" aria-hidden="true">${s.icon}</div>` : ""}
             <div class="ce-flow-title">${s.title}</div>
             ${s.caption ? html`<div class="ce-flow-caption">${s.caption}</div>` : ""}
           </div>

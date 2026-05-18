@@ -46,7 +46,7 @@ describe("<ce-verdict>", () => {
     el.remove();
   });
 
-  it("renders title and detail", async () => {
+  it("renders title and detail in banner mode", async () => {
     const el = document.createElement("ce-verdict") as CeVerdict;
     el.type = "go";
     el.title = "Ready to ship";
@@ -63,7 +63,7 @@ describe("<ce-verdict>", () => {
     el.remove();
   });
 
-  it("omits title block when title is empty", async () => {
+  it("omits title block when title is empty (banner mode)", async () => {
     const el = document.createElement("ce-verdict") as CeVerdict;
     el.detail = "x";
     document.body.appendChild(el);
@@ -71,4 +71,55 @@ describe("<ce-verdict>", () => {
     expect(el.shadowRoot!.querySelector(".ce-verdict__title")).toBeNull();
     el.remove();
   });
+
+  it("inline mode renders a single label, no title block, no detail block", async () => {
+    const el = document.createElement("ce-verdict") as CeVerdict;
+    el.type = "go";
+    el.inline = true;
+    el.textContent = "SHIP IT";
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const sr = el.shadowRoot!;
+    expect(sr.querySelector(".ce-verdict__label")).not.toBeNull();
+    expect(sr.querySelector(".ce-verdict__title")).toBeNull();
+    expect(sr.querySelector(".ce-verdict__detail")).toBeNull();
+    expect(el.getAttribute("inline")).toBe("");
+    el.remove();
+  });
+
+  it("inline mode with empty default slot falls back to type-default label", async () => {
+    const el = document.createElement("ce-verdict") as CeVerdict;
+    el.inline = true;
+    el.type = "no-go";
+    document.body.appendChild(el);
+    await el.updateComplete;
+    // Lit renders the fallback DOM inside the <slot>, which jsdom exposes as textContent.
+    const labelEl = el.shadowRoot!.querySelector(".ce-verdict__label") as HTMLElement | null;
+    expect(labelEl).not.toBeNull();
+    const fallback = labelEl?.querySelector("slot")?.textContent ?? labelEl?.textContent ?? "";
+    expect(fallback.trim()).toBe("No-go");
+    el.remove();
+  });
+
+  it("inline mode uses CDR-001 canonical labels for every type", async () => {
+    const cases: Array<[VerdictType, string]> = [
+      ["go", "Go"],
+      ["no-go", "No-go"],
+      ["mixed", "Mixed"],
+      ["info", "Info"],
+    ];
+    for (const [type, expected] of cases) {
+      const el = document.createElement("ce-verdict") as CeVerdict;
+      el.type = type;
+      el.inline = true;
+      document.body.appendChild(el);
+      await el.updateComplete;
+      const labelEl = el.shadowRoot!.querySelector(".ce-verdict__label") as HTMLElement | null;
+      const fallback = labelEl?.querySelector("slot")?.textContent ?? labelEl?.textContent ?? "";
+      expect(fallback.trim()).toBe(expected);
+      el.remove();
+    }
+  });
 });
+
+type VerdictType = "go" | "no-go" | "mixed" | "info";

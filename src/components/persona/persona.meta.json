@@ -3,8 +3,8 @@
   "tag": "ce-persona",
   "name": "Persona",
   "className": "CePersona",
-  "goal": "Display a user-research persona card with avatar, name, role, and slotted attribute list.",
-  "description": "Persona / role card. Top row shows an emoji-or-character avatar plus name + role; below sits a tags slot for chips and a default slot for an attribute list (typically a <dl>). Six color tints set the top border and avatar tint.",
+  "goal": "Display a user-research persona card with avatar, name, role, identity pills, detail paragraph, and metadata rows.",
+  "description": "Persona / role card. Top row shows an emoji-or-character avatar plus name + role; optional `rank` and `score` attributes render as small pills beside the name. Below the head sits a `tags` slot for chips, a `detail` slot for a rich description paragraph, a `meta` slot for `<ce-kv>` metadata rows, and a default slot for arbitrary body content. Six color tints set the top border and avatar/pill tint.",
   "stability": "stable",
   "props": [
     {
@@ -35,6 +35,20 @@
       "default": "\"neutral\"",
       "reflect": true,
       "description": "Top-border + avatar tint."
+    },
+    {
+      "name": "rank",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short identity pill label shown beside the name (e.g. \"#1\", \"Top\"). Tinted by color."
+    },
+    {
+      "name": "score",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Short identity pill label shown beside the name (e.g. \"8 / 10\"). Tinted by color."
     }
   ],
   "events": [],
@@ -44,8 +58,16 @@
       "description": "Optional chip row below the role."
     },
     {
+      "name": "detail",
+      "description": "Rich detail paragraph. Accepts `<p>`, `<a>`, `<ce-chip>`, or inline content."
+    },
+    {
+      "name": "meta",
+      "description": "Free-form metadata rows. Typically contains `<ce-kv slot=\"meta\" key=\"...\">value</ce-kv>` items."
+    },
+    {
       "name": "",
-      "description": "Body content (typically a <dl> of attributes)."
+      "description": "Body content (typically a <dl> of attributes or legacy detail list)."
     }
   ],
   "cssVariables": [
@@ -209,14 +231,62 @@
       "name": "--ce-space-2",
       "kind": "size",
       "source": "token",
-      "description": "Tags top + bottom margin."
+      "description": "Tags top + bottom margin; name-row gap."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Rank/score pill border radius."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral pill border color."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green pill border."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red pill border."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber pill border."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue pill border."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple pill border."
+    },
+    {
+      "name": "--ce-color-cyan-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan pill border."
     }
   ],
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": [],
-  "related": [],
+  "dependencies": ["ce-kv"],
+  "related": ["ce-kv"],
   "category": "ui",
   "tier": "brick",
   "tags": [

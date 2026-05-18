@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-step",
+  "name": "Step",
+  "className": "CeStep",
+  "goal": "Render a single numbered process step with a state-coded disk, title, optional meta line, and rich description slot.",
+  "description": "A single step brick for process / roadmap / onboarding flows. Displays a 32px circle disk (number or check), a title row with optional inline metadata, and a description area. State enum (pending|active|done) drives disk color and title weight via CSS custom properties — no domain vocabulary in the enum (CDR-001). Default slot carries rich description content (CDR-002). Slot=\"title\" overrides the title attribute for rich inline content. Can be used standalone or nested inside ce-steps (CDR-006); the parent auto-assigns n when auto-number is enabled.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "n",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Step number or letter rendered in the disk. Omit to hide the disk (standalone usage without numbering)."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Plain-text step title. Slot=\"title\" wins over this attribute for rich content (CDR-002)."
+    },
+    {
+      "name": "state",
+      "type": "\"pending\" | \"active\" | \"done\"",
+      "required": false,
+      "default": "\"pending\"",
+      "reflect": true,
+      "description": "Visual state driving disk color and title weight. CDR-001 finite 3-value style enum: pending=neutral, active=blue+bold, done=green+check."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Description text or rich content (<a>, <code>, <ce-chip>, etc.). Hidden when empty."
+    },
+    {
+      "name": "title",
+      "description": "Rich title override. Wins over the title attribute when supplied (CDR-002). Accepts inline elements and composed children."
+    },
+    {
+      "name": "meta",
+      "description": "Optional metadata shown beside the title (e.g. '~2 weeks', 'Q3 2026'). Hidden when empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-step-disk-size",
+      "kind": "size",
+      "source": "local",
+      "description": "Width and height of the numbered circle disk.",
+      "fallback": "32px"
+    },
+    {
+      "name": "--ce-step-disk-bg",
+      "kind": "color",
+      "source": "local",
+      "description": "Disk background color; overridden per state.",
+      "fallback": "var(--ce-surface-2)"
+    },
+    {
+      "name": "--ce-step-disk-fg",
+      "kind": "color",
+      "source": "local",
+      "description": "Disk foreground (number / check) color; overridden per state.",
+      "fallback": "var(--ce-muted)"
+    },
+    {
+      "name": "--ce-step-title-weight",
+      "kind": "other",
+      "source": "local",
+      "description": "Title font-weight; 700 when state=active.",
+      "fallback": "400"
+    },
+    {
+      "name": "--ce-step-title-color",
+      "kind": "color",
+      "source": "local",
+      "description": "Title text color.",
+      "fallback": "var(--ce-text)"
+    },
+    {
+      "name": "--ce-step-gap",
+      "kind": "size",
+      "source": "local",
+      "description": "Gap between disk and body block.",
+      "fallback": "var(--ce-space-3)"
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default disk background."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk background when state=active."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk foreground when state=active."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk border when state=active."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk background when state=done."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk foreground when state=done."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Disk border when state=done."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default disk foreground and description text color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title color."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default disk border."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Disk border-radius (circular)."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Description top margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between title and meta label."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default gap between disk and body."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Meta and description font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Title line height."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "other",
+      "source": "token",
+      "description": "Description line height."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Disk color transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": ["ce-steps"],
+  "dependencies": [],
+  "related": ["ce-steps", "ce-flow", "ce-checklist"],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "step",
+    "process"
+  ],
+  "a11y": {
+    "role": "generic (host)",
+    "notes": "Number disk has aria-hidden='true' (decorative). state='active' sets aria-current='step' on host. state='done' prepends a visually-hidden 'Completed:' span before the title slot so screen readers announce completion. The sr-only span uses clip/overflow pattern (not display:none) so it is read aloud."
+  }
+}

@@ -1,8 +1,12 @@
 import { describe, it, expect, beforeAll, vi } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeBarChart } from "./bar-chart.js";
+import { CeBarRow } from "../bar-row/bar-row.js";
 
-beforeAll(() => defineOnce("ce-bar-chart", CeBarChart));
+beforeAll(() => {
+  defineOnce("ce-bar-chart", CeBarChart);
+  defineOnce("ce-bar-row", CeBarRow);
+});
 
 function widths(el: CeBarChart): number[] {
   return Array.from(el.shadowRoot!.querySelectorAll(".ce-fill")).map((f) =>
@@ -243,5 +247,113 @@ describe("<ce-bar-chart>", () => {
     ).map((t) => t.textContent?.trim());
     expect(tickTexts).toEqual(["0%", "25%", "50%", "75%", "100%"]);
     el.remove();
+  });
+
+  // --- Slot mode (CDR-005) ---
+
+  it("renders rows from <ce-bar-row> slot children when data is empty", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.innerHTML = `
+      <ce-bar-row value="10"><span slot="label">A</span></ce-bar-row>
+      <ce-bar-row value="20"><span slot="label">B</span></ce-bar-row>
+    `;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(rows(el).length).toBe(2);
+    el.remove();
+  });
+
+  it("slot mode auto-scales so the largest row is 100%", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.innerHTML = `
+      <ce-bar-row value="10"><span slot="label">A</span></ce-bar-row>
+      <ce-bar-row value="20"><span slot="label">B</span></ce-bar-row>
+    `;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const w = widths(el);
+    expect(w[1]).toBe(100);
+    expect(w[0]).toBe(50);
+    el.remove();
+  });
+
+  it("slot mode respects per-row color attribute", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.innerHTML = `
+      <ce-bar-row value="10" color="green"><span slot="label">A</span></ce-bar-row>
+    `;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(fills(el)[0].style.background).toContain("var(--ce-color-green)");
+    el.remove();
+  });
+
+  it("data prop takes priority over slot children", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.data = [{ label: "X", value: 99 }];
+    el.innerHTML = `
+      <ce-bar-row value="1"><span slot="label">Y</span></ce-bar-row>
+    `;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    // Should use data prop → 1 row scaled to 100%
+    expect(rows(el).length).toBe(1);
+    expect(widths(el)[0]).toBe(100);
+    el.remove();
+  });
+
+  it("gracefully ignores non-ce-bar-row slot children", async () => {
+    const el = document.createElement("ce-bar-chart") as CeBarChart;
+    el.innerHTML = `
+      <p>This is not a bar row</p>
+      <ce-bar-row value="50"><span slot="label">Valid</span></ce-bar-row>
+    `;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    // Only the ce-bar-row counts; the <p> is ignored
+    expect(rows(el).length).toBe(1);
+    el.remove();
+  });
+
+  // --- Snapshot parity (CDR-005 core requirement) ---
+
+  it("snapshot parity: JSON mode and slot mode produce the same row count and widths", async () => {
+    const dataset = [
+      { label: "Alpha", value: 10 },
+      { label: "Beta", value: 20 },
+    ];
+
+    // JSON mode
+    const jsonEl = document.createElement("ce-bar-chart") as CeBarChart;
+    jsonEl.data = dataset;
+    document.body.appendChild(jsonEl);
+    await jsonEl.updateComplete;
+
+    // Slot mode
+    const slotEl = document.createElement("ce-bar-chart") as CeBarChart;
+    slotEl.innerHTML = `
+      <ce-bar-row value="10"><span slot="label">Alpha</span></ce-bar-row>
+      <ce-bar-row value="20"><span slot="label">Beta</span></ce-bar-row>
+    `;
+    document.body.appendChild(slotEl);
+    await slotEl.updateComplete;
+
+    const jsonWidths = widths(jsonEl);
+    const slotWidths = widths(slotEl);
+
+    expect(jsonWidths).toEqual(slotWidths);
+    expect(rows(jsonEl).length).toBe(rows(slotEl).length);
+
+    // Check ARIA values match
+    const jsonPbValues = Array.from(
+      jsonEl.shadowRoot!.querySelectorAll('[role="progressbar"]')
+    ).map((el) => el.getAttribute("aria-valuenow"));
+    const slotPbValues = Array.from(
+      slotEl.shadowRoot!.querySelectorAll('[role="progressbar"]')
+    ).map((el) => el.getAttribute("aria-valuenow"));
+    expect(jsonPbValues).toEqual(slotPbValues);
+
+    jsonEl.remove();
+    slotEl.remove();
   });
 });

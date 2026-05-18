@@ -1,0 +1,17 @@
+<!-- @example URL — default ECC -->
+<ce-qr value="https://github.com/anthropics/claude-code" size="180"></ce-qr>
+
+<!-- @example High error correction with custom colors -->
+<ce-qr
+  value="https://example.com/checkout?cart=abc123"
+  ecc="H"
+  size="200"
+  color="#0a0a0a"
+  bg="#ffd700"
+></ce-qr>
+
+<!-- @example Plain text + tight margin -->
+<ce-qr value="Wi-Fi: GuestNet / Password: hello-world" size="160" margin="1"></ce-qr>
+
+<!-- @example UTF-8 multi-byte payload -->
+<ce-qr value="🚀 Привет, мир!" size="160" ecc="Q"></ce-qr>

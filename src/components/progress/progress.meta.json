@@ -137,7 +137,7 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": [],
+  "dependents": ["ce-progress-list"],
   "dependencies": [],
   "related": [],
   "category": "ui",

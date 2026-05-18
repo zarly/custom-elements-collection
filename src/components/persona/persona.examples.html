@@ -1,8 +1,29 @@
-<!-- @example Persona -->
+<!-- @example Basic persona -->
 <ce-persona name="Ada" role="Frontend engineer" avatar="👩‍💻" color="purple">
   <dl>
     <dt>Goal</dt><dd>Ship fast</dd>
     <dt>Pain</dt><dd>CSS drift</dd>
   </dl>
+</ce-persona>
+
+<!-- @example Persona with rank and score pills -->
+<ce-persona name="Ada" role="Solo agency owner" avatar="👩‍💼" color="green" rank="#1" score="8 / 10">
+  <ce-chip slot="tags" type="green">High Pain</ce-chip>
+  <ce-chip slot="tags" type="amber">Medium WTP</ce-chip>
+</ce-persona>
+
+<!-- @example Persona with detail slot -->
+<ce-persona name="Boris" role="Product manager" avatar="🧑‍💼" color="blue" rank="#2">
+  <ce-chip slot="tags" type="blue">B2B</ce-chip>
+  <p slot="detail">2–15 person product teams building internal tools. Primary pain: reporting takes 3+ hours per sprint. <a href="#research">Research notes</a></p>
+</ce-persona>
+
+<!-- @example Full persona with meta slot using ce-kv -->
+<ce-persona name="Clara" role="Freelance consultant" avatar="👩‍🔬" color="amber" rank="#3" score="6 / 10">
+  <ce-chip slot="tags" type="amber">Mid Pain</ce-chip>
+  <p slot="detail">Independent consultants billing hourly. Needs quick proposals and client dashboards.</p>
+  <ce-kv slot="meta" key="WTP">$30–100/mo</ce-kv>
+  <ce-kv slot="meta" key="TAM">12 000 firms</ce-kv>
+  <ce-kv slot="meta" key="Channel">LinkedIn</ce-kv>
 </ce-persona>
 

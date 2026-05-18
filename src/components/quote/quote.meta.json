@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-quote",
+  "name": "Quote",
+  "className": "CeQuote",
+  "goal": "Render a semantic blockquote with optional author and source attribution in three visual treatments: card, pull, and inline.",
+  "description": "Blockquote component used in research, customer development, B2B reports, and persona documents. Wraps a native <blockquote> and <cite> for correct ARIA semantics. Attribution accepts plain text via attributes (author, source) or rich markup via named slots — links, time elements, chips. Three variants cover the most common corpus patterns: card (purple left-border block), pull (oversized centered pull-quote), and inline (indented prose blockquote).",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "author",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "description": "Short author name for the simple case. Used as fallback text when slot=\"author\" is empty."
+    },
+    {
+      "name": "source",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "description": "Short source citation for the simple case. Used as fallback when slot=\"source\" is empty."
+    },
+    {
+      "name": "variant",
+      "type": "QuoteVariant",
+      "required": false,
+      "default": "\"card\"",
+      "reflect": true,
+      "description": "Visual treatment: card (purple left-border block), pull (oversized centered italic), inline (indented italic blockquote, no card chrome)."
+    },
+    {
+      "name": "lang",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Language tag forwarded to the host element lang= attribute. Useful when the quote is in a different language from the surrounding page."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The quote text. REQUIRED. May contain inline rich content: <em>, <a>, <strong>.",
+      "required": true
+    },
+    {
+      "name": "author",
+      "description": "Rich author block; overrides the author attribute. Allows links, chips, time elements."
+    },
+    {
+      "name": "source",
+      "description": "Rich source citation; overrides the source attribute. Allows links, time elements, chips."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card variant background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Card variant left-border color."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Inline variant left-border color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius (card variant only)."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Separator horizontal margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Attribution top margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Card/pull vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card horizontal padding; pull vertical padding; inline left inset."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Pull horizontal padding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Quote body text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Attribution (author + source) text color."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Card and inline body font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Attribution font size."
+    },
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Pull variant oversized body font size."
+    },
+    {
+      "name": "--ce-line-relaxed",
+      "kind": "other",
+      "source": "token",
+      "description": "Default body line-height."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Pull variant body line-height."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-callout",
+    "ce-card",
+    "ce-chip"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Comparison & narrative",
+    "quote",
+    "testimonial"
+  ],
+  "a11y": {
+    "role": "blockquote (implicit from <blockquote> element)",
+    "notes": "The shadow DOM renders a native <blockquote> element containing the default slot. Attribution is rendered inside a <footer><cite> so screen readers announce it as a citation. The separator dot is aria-hidden."
+  }
+}

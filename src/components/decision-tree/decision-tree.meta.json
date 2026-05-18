@@ -4,7 +4,8 @@
   "name": "DecisionTree",
   "className": "CeDecisionTree",
   "goal": "Render a one-level decision diagram: a question followed by yes / no / neutral branches each labelled with a result.",
-  "description": "Single-level decision tree component for if/then teaching diagrams. Renders a centered question and a responsive grid of branches; each branch declares yes / no / neutral kind, gets a tinted border + arrow label (↓ YES / ↓ NO / ↓), and shows label and result text.",
+  "description": "Single-level decision tree component for if/then teaching diagrams. Renders a centered question and a responsive grid of branches; each branch declares yes / no / neutral kind, gets a tinted border + arrow label (↓ YES / ↓ NO / ↓), and shows label and result text. **Limitation: single-level only** — for multi-level hierarchical trees, use plain `<ul>/<li>` or a future `ce-tree`.",
+  "limitations": "Single-level only. Branches do not nest. For multi-level decision flows use a chained sequence of `<ce-decision-tree>` elements (one per level) or plain `<ul>/<li>`.",
   "stability": "stable",
   "props": [
     {

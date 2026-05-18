@@ -1,3 +1,24 @@
-<!-- @example Go -->
+<!-- @example Default banner with type-default label -->
 <ce-verdict type="go" title="Ship it" detail="All quality gates green."></ce-verdict>
 
+<!-- @example Banner with mixed verdict and rich detail -->
+<ce-verdict type="mixed" title="Investigate first">
+  Two suites are still flaky on Windows runners. <a href="#issue-42">Track #42</a>.
+</ce-verdict>
+
+<!-- @example Inline pill — vocabulary in the default slot (CDR-001) -->
+<p>
+  We landed three changes today:
+  <ce-verdict type="go" inline>SHIP IT</ce-verdict>
+  <ce-verdict type="no-go" inline>veto</ce-verdict>
+  <ce-verdict type="mixed" inline>investigate further</ce-verdict>
+</p>
+
+<!-- @example Inline pill with type-default label fallback -->
+<ce-verdict type="go" inline></ce-verdict>
+<ce-verdict type="no-go" inline></ce-verdict>
+<ce-verdict type="mixed" inline></ce-verdict>
+<ce-verdict type="info" inline></ce-verdict>
+
+<!-- @example Inline pill with icon override -->
+<ce-verdict type="go" inline icon="🚀">launch</ce-verdict>

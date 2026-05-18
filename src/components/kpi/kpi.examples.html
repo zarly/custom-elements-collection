@@ -5,3 +5,14 @@
   <ce-kpi value="0" label="Blockers" color="red"></ce-kpi>
 </ce-grid>
 
+<!-- @example KPI with inline sparkline trend (per CDR-006 composition) -->
+<ce-card>
+  <ce-kpi value="$12 480" label="MRR" trend="+18%" color="green"></ce-kpi>
+  <ce-sparkline values="[3,5,4,7,6,9,8,12]" color="var(--ce-color-green)"></ce-sparkline>
+</ce-card>
+
+<!-- @example KPI tile with descriptive paragraph -->
+<ce-card>
+  <ce-kpi value="142ms" label="P95 latency" trend="-9ms"></ce-kpi>
+  <p>Last 30 days. <a href="#latency-breakdown">Breakdown</a>.</p>
+</ce-card>

@@ -1,0 +1,17 @@
+<!-- @example Correct vs Wrong -->
+<lesson-compare mode="correct-wrong" left-label="✗ Common mistake" right-label="✓ Correct">
+  <div slot="left">Confusing correlation with causation in your analysis.</div>
+  <div slot="right">Testing for causation with a controlled experiment.</div>
+</lesson-compare>
+
+<!-- @example Before / After -->
+<lesson-compare mode="before-after" left-label="Before" right-label="After refactor">
+  <div slot="left">for (let i = 0; i &lt; arr.length; i++) { process(arr[i]); }</div>
+  <div slot="right">arr.forEach(process);</div>
+</lesson-compare>
+
+<!-- @example Neutral A vs B -->
+<lesson-compare left-label="Approach A" right-label="Approach B">
+  <div slot="left">Eager loading: load all data upfront.</div>
+  <div slot="right">Lazy loading: fetch data only when needed.</div>
+</lesson-compare>

@@ -79,4 +79,44 @@ describe("<ce-donut>", () => {
     expect(el.shadowRoot!.querySelectorAll("path").length).toBe(0);
     host.remove();
   });
+
+  it("sets data-multi when there are ≥ 2 segments (legend visible by default)", async () => {
+    const host = mount(`<ce-donut values="[10,20,30]"></ce-donut>`);
+    const el = host.querySelector("ce-donut") as CeDonut;
+    await ready(el);
+    expect(el.hasAttribute("data-multi")).toBe(true);
+    host.remove();
+  });
+
+  it("omits data-multi for a single segment (legend hidden by default)", async () => {
+    const host = mount(`<ce-donut values="[100]"></ce-donut>`);
+    const el = host.querySelector("ce-donut") as CeDonut;
+    await ready(el);
+    expect(el.hasAttribute("data-multi")).toBe(false);
+    host.remove();
+  });
+
+  it("auto-generated legend lists every segment with label and percent", async () => {
+    const host = mount(
+      `<ce-donut values="[60,40]" labels='["Hits","Misses"]'></ce-donut>`
+    );
+    const el = host.querySelector("ce-donut") as CeDonut;
+    await ready(el);
+    const rows = el.shadowRoot!.querySelectorAll(".legend__row");
+    expect(rows.length).toBe(2);
+    const text = el.shadowRoot!.querySelector(".legend")!.textContent ?? "";
+    expect(text).toContain("Hits");
+    expect(text).toContain("60%");
+    expect(text).toContain("Misses");
+    expect(text).toContain("40%");
+    host.remove();
+  });
+
+  it("legend slot exists for per-instance overrides", async () => {
+    const host = mount(`<ce-donut values="[1,2,3]"></ce-donut>`);
+    const el = host.querySelector("ce-donut") as CeDonut;
+    await ready(el);
+    expect(el.shadowRoot!.querySelector('slot[name="legend"]')).not.toBeNull();
+    host.remove();
+  });
 });

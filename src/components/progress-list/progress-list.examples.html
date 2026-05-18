@@ -1,0 +1,42 @@
+<!--
+  Layout decision: ce-progress uses Shadow DOM internally. Its host element is
+  a block-level element rendered by the browser; the shadow tree is not
+  reachable by parent CSS grid selectors. Option (a) — display:contents on
+  ce-progress to expose label + bar into a parent grid — is therefore not
+  viable: display:contents on a shadow-host does not propagate shadow children
+  into the parent's grid context in any current browser.
+
+  Option (b) — flex-column on ce-progress-list — is chosen. Each ce-progress
+  is a full-width row; the label + bar alignment within each row is handled
+  by ce-progress's own internal flex layout. This gives consistent vertical
+  spacing without relying on Shadow DOM internals.
+-->
+
+<!-- @example Three progress rows -->
+<ce-progress-list>
+  <ce-progress label="Engineering" value="56" color="blue"></ce-progress>
+  <ce-progress label="QA"          value="56" color="green"></ce-progress>
+  <ce-progress label="Research"    value="50" color="purple"></ce-progress>
+</ce-progress-list>
+
+<!-- @example Mixed content: progress + narrative inline -->
+<ce-progress-list>
+  <ce-progress label="Deploys" value="42"></ce-progress>
+  <p>Last 7 days. <a href="#breakdown">Breakdown</a>.</p>
+  <ce-progress label="Tests" value="78" color="green"></ce-progress>
+</ce-progress-list>
+
+<!-- @example Indeterminate and show-value -->
+<ce-progress-list>
+  <ce-progress label="Uploading" indeterminate color="amber"></ce-progress>
+  <ce-progress label="Coverage" value="91" color="green" show-value></ce-progress>
+  <ce-progress label="Errors"   value="4"  color="red"   show-value></ce-progress>
+</ce-progress-list>
+
+<!-- @example Custom gap via CSS property -->
+<ce-progress-list style="--ce-progress-list-gap: var(--ce-space-5)">
+  <ce-progress label="Sprint 1" value="100" color="green"></ce-progress>
+  <ce-progress label="Sprint 2" value="72"  color="blue"></ce-progress>
+  <ce-progress label="Sprint 3" value="15"  color="amber"></ce-progress>
+  <ce-progress label="Sprint 4" value="0"   color="cyan" indeterminate></ce-progress>
+</ce-progress-list>

@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-score",
+  "name": "Score",
+  "className": "CeScore",
+  "goal": "Display a color-coded numeric score pill that auto-tiers itself into high, med, or low based on the value-to-max ratio.",
+  "description": "Small inline pill showing a numeric score with semantic color coding: green for high, amber for med, red for low. Tier auto-computes from value/max (default max=10 matches the dominant 0–10 corpus scale). Explicit tier attribute overrides auto-computation. Global thresholds are overridable via --ce-score-breakpoints. Exposes role=meter ARIA semantics.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "required": true,
+      "default": "0",
+      "reflect": true,
+      "description": "The numeric score. Drives auto-tier computation and ARIA aria-valuenow."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "10",
+      "description": "Denominator for tier computation. Defaults to 10 because the corpus primarily uses 0–10 and 0–5 rating scales."
+    },
+    {
+      "name": "tier",
+      "type": "ScoreTier | \"\"",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Explicit tier override: \"high\" (green) | \"med\" (amber) | \"low\" (red). When empty, tier is auto-computed from value/max against the breakpoint thresholds. 3-value style enum per CDR-001."
+    },
+    {
+      "name": "inline",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When true (default), the pill is inline-flex for use in table cells and inline text. Set to false for a block-level standalone score."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Label override. When empty, the formatted value (1 decimal, e.g. 9.4) is shown. Supply custom content such as <strong>9.4</strong>★ for rich decoration."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-score-breakpoints",
+      "kind": "other",
+      "source": "local",
+      "fallback": "0.66 0.33",
+      "description": "Two space-separated ratio thresholds for auto-tier: '<high-threshold> <med-threshold>'. Scores >= high-threshold → high, >= med-threshold → med, else → low. Override at :root to change the global threshold policy (CDR-003). Example: \"0.8 0.5\"."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding inside the pill."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding inside the pill."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Full pill border radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Score label font size."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Background tint for tier=high."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Text and border color for tier=high."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border color for tier=high."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Background tint for tier=med."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Text and border color for tier=med."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border color for tier=med."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Background tint for tier=low."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Text and border color for tier=low."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Border color for tier=low."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-badge",
+    "ce-chip",
+    "ce-kpi",
+    "ce-rating"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Metrics & charts",
+    "score",
+    "rating"
+  ],
+  "a11y": {
+    "role": "meter",
+    "notes": "The host element carries role=\"meter\", aria-valuenow (the score), aria-valuemin=\"0\", aria-valuemax (the max), and aria-valuetext (\"<value> of <max>\"). These are set in willUpdate so they stay in sync with value/max changes."
+  }
+}

@@ -6,6 +6,135 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-05-18
+
+This release lands two things at once: a **governance layer** (8 Component
+Design Records, sister to ADR) and the **first wave of components driven by
+real corpus evidence**. A 2026-05-17 audit of 335 `vis/`-folder HTML files
+across four working roots found that only 10% used any `ce-*` tag — 90% of
+visualisations were written as raw HTML. The 16 new components in this release
+target the highest-frequency raw patterns from that audit, and every API was
+validated against the new CDRs before implementation.
+
+### Added — 8 Component Design Records (`docs/cdr/`)
+
+System-wide design conventions sitting between ADR (MUST) and per-component
+`CONCEPT.md` (MAY). All eight are accepted at compliance level **SHOULD**:
+justified user-focused exceptions are allowed, but the deviation must be
+documented in the component's `CONCEPT.md`.
+
+- **CDR-001** — Style enum is finite (≤ 5 values); content vocabulary lives
+  in slots, not enum aliases.
+- **CDR-002** — Typed values belong in children, not in string attributes
+  (so `<a>`, `<time>`, `<code>`, future typed renderers compose in).
+- **CDR-003** — Presentation policy is global (CSS custom properties on
+  `:root`), not per-instance boolean attributes.
+- **CDR-004** — Static-first; stateful behaviour (`persist-key`, form
+  association, events) is opt-in.
+- **CDR-005** — Collections accept BOTH JSON-on-attribute AND slot-children;
+  resolution order: `data` non-empty → JSON, else slot, else empty state.
+- **CDR-006** — Components compose; no hard wrappers that filter children
+  by tag name.
+- **CDR-007** — Sensible defaults; the simplest invocation works for the
+  common case and the first `@example` block uses ≤ 2 attrs beyond data.
+- **CDR-008** — Additive changes only; deprecate via `stability: deprecated`
+  + ADR before removal.
+
+`CONTRIBUTING.md` §4 now references the CDRs as a pre-flight checklist for any
+new component's public API. See [`docs/cdr/README.md`](docs/cdr/README.md) for
+the lifecycle (candidate → accepted → distilled into a `validate.py` rule).
+
+### Added — 16 new components
+
+**Forms & content (Cluster 1):**
+- **`ce-qr`** (brick, experimental, ~5 KB gz) — hand-rolled QR encoder per
+  ISO/IEC 18004 byte mode, versions 1–40, ECC L/M/Q/H. No runtime dependency.
+- **`ce-radio-group`** (widget) — ARIA-compliant grouped radios with
+  form association.
+- **`ce-tabs`** (widget) — JSON-array `tabs` attribute OR slotted
+  `<button slot="tab">` children (the original CDR-005 reference).
+
+**CDR-005/006 slot-child pairs (Sprint 1+2):**
+- **`ce-kv`** — `key=` attribute + default-slot value (CDR-002). Used inside
+  `ce-key-value`.
+- **`ce-bar-row`** — per-row attributes + `label`/`meta` slots. Initially
+  shipped as `ce-bar-chart`'s slot child; now publicly addressable. Extended
+  in this release with `max`, `label`, `meta`, `value-display`.
+- **`ce-flow-step`** — identity attrs + rich body slot. Used inside `ce-flow`.
+- **`ce-heat-row` + `ce-heat-cell`** — slot mode for `ce-heatmap`; cells take
+  rich default-slot content.
+- **`ce-check-item`** — single checklist row. Used inside `ce-checklist`.
+
+**CDR-006 composition primitive:**
+- **`ce-progress-list`** — Light-DOM flex-column container that stacks
+  `ce-progress` rows and arbitrary HTML children (paragraphs, callouts) with
+  consistent gap. No tag-name filtering.
+
+**Frequent-patterns audit (Wave 1 + Wave 2):**
+- **`ce-score`** — color-coded numeric pill. Auto-tier from `value/max`
+  (high/med/low), with `--ce-score-breakpoints` CSS custom property for
+  document-wide threshold override (CDR-003). Replaces 1 168 raw `score s1..s5`
+  spans across 61 audit files.
+- **`ce-quote`** — semantic `<blockquote>`+`<cite>` with `card | pull | inline`
+  variants and dual attr/slot author/source API (CDR-002/CDR-007). Replaces
+  433 raw `quote-card` blocks across 35 audit files.
+- **`ce-step`** + **`ce-steps`** — numbered process step (brick) and
+  vertical/horizontal step list (layout). Steps accept JSON or slot children
+  (CDR-005), auto-number unnumbered slot children via MutationObserver.
+  Replaces 203–394 raw `step-num/step-title/step-desc` blocks across 13–25
+  audit files.
+- **`ce-pricing-tier`** — tier card with name, price, features (JSON or slot),
+  optional badge + CTA. Deliberately ships without a `ce-pricing` parent —
+  the canonical container is `<ce-grid columns="3"><ce-pricing-tier .../>`
+  (same pattern that earlier replaced `ce-stat-group` with
+  `<ce-grid><ce-kpi/>`). Replaces 322 raw `tier-*` blocks across 17 audit
+  files.
+- **`ce-recommendation`** — priority + title + impact + body block with 4-value
+  P-tier style enum (`p0` … `p3`). Replaces 113 raw `rec-item` blocks across
+  14 audit files.
+
+### Changed — CDR-aware extensions (additive per CDR-008)
+
+- **`ce-verdict`** — new `inline` boolean attribute for compact pill layout.
+  Default slot in inline mode becomes the label; empty slot falls back to the
+  canonical type label ("Go" / "No-go" / "Mixed" / "Info"). The `type` enum
+  is unchanged — unbounded vocabulary lives in the slot (CDR-001).
+  Document-wide layout knob via `--ce-verdict-layout: auto | banner | inline`
+  consumed through `@container style()` (CDR-003).
+- **`ce-donut`** — auto-generated legend (visible when ≥ 2 segments, hidden
+  for single-segment donuts) per CDR-007. New `--ce-donut-legend-display:
+  auto | always | none` for document-wide control (CDR-003).
+- **`ce-bar-chart`** — accepts `<ce-bar-row>` slot children when `rows` is
+  empty; snapshot parity test confirms equivalent rendering (CDR-005).
+- **`ce-key-value`** — accepts `<ce-kv>` slot children alongside the existing
+  `<dt>`/`<dd>` path (CDR-005).
+- **`ce-flow`** — accepts `<ce-flow-step>` slot children alongside `steps`
+  prop (CDR-005).
+- **`ce-heatmap`** — cell type widened from `number` to `number | CellInput`;
+  accepts `<ce-heat-row>` / `<ce-heat-cell>` slot children (CDR-005).
+- **`ce-checklist`** — accepts `<ce-check-item>` slot children when `items`
+  is empty; new `group-by="category"` attribute renders `<h4>` headers;
+  default rendering is now static (`readonly` / `persist-key` are opt-in
+  per CDR-004).
+- **`ce-persona`** — proposed `wtp` / `tam` attributes dropped in favour of
+  meta-slot composition via `<ce-kv>` children (CDR-002).
+- **`ce-rating`** — default rendering is now static / read-only; interactive
+  form behaviour requires explicit `name` attribute (CDR-004).
+
+### Fixed
+
+- **`ce-qr`** — corrected format-info row/column placement; codes are now
+  scannable.
+
+### Stats
+
+- 99 components (was 83 in v0.4.0) — 67 UI bricks/widgets/layouts +
+  16 lesson components + 3 internal.
+- 932 vitest cases passing (was 706 in v0.4.0).
+- 8 CDRs added; 9 ADRs unchanged.
+- `pnpm check` green: typecheck + validate-meta (99 files) + gen-skill drift
+  check + tests + build.
+
 ## [0.4.0] — 2026-05-07
 
 This release lands the charts-v2 program — `ce-plot` ships as a new SVG-based

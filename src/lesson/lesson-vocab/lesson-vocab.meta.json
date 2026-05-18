@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "tag": "lesson-vocab",
+  "name": "LessonVocab",
+  "className": "LessonVocab",
+  "goal": "Vocabulary term card with all metadata a learner needs: term, phonetic, part of speech, definition, example usage.",
+  "description": "Fully prop-driven vocabulary card. Shows the term in large bold text, optional phonetic in monospace, optional pos badge (amber), optional level badge (muted). Definition and example sentence below. Suitable for language learning and technical terminology. No slots — all content is prop-driven for LLM-friendly markup.",
+  "stability": "stable",
+  "props": [
+    {
+      "name": "term",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "The word or concept to define."
+    },
+    {
+      "name": "phonetic",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "IPA or phonetic transcription."
+    },
+    {
+      "name": "pos",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Part of speech: noun, verb, adj, adv, abbr, etc."
+    },
+    {
+      "name": "definition",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "The meaning or explanation."
+    },
+    {
+      "name": "example",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Example sentence shown in italics."
+    },
+    {
+      "name": "level",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Proficiency label: A1, B2, advanced, etc."
+    }
+  ],
+  "events": [],
+  "methods": [],
+  "slots": [],
+  "cssVariables": [
+    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
+    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Card border." },
+    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
+    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card padding." },
+    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Outer vertical margin." },
+    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Head bottom margin + gap." },
+    { "name": "--ce-text-xl", "kind": "size", "source": "token", "description": "Term font size." },
+    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Term and definition text color." },
+    { "name": "--ce-font-mono", "kind": "other", "source": "token", "description": "Phonetic font family." },
+    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Phonetic and example font size." },
+    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Phonetic, level badge, and example text color." },
+    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Badge font size." },
+    { "name": "--ce-radius-sm", "kind": "radius", "source": "token", "description": "Badge border radius." },
+    { "name": "--ce-color-amber-bg", "kind": "color", "source": "token", "description": "pos badge background." },
+    { "name": "--ce-color-amber", "kind": "color", "source": "token", "description": "pos badge text color." },
+    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "level badge background." },
+    { "name": "--ce-text-base", "kind": "size", "source": "token", "description": "Definition font size." }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["lesson-reveal", "lesson-frame"],
+  "category": "lesson",
+  "tier": "brick",
+  "tags": ["Education", "vocabulary", "definition"]
+}

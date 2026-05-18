@@ -1,4 +1,4 @@
-<!-- @example Small grid -->
+<!-- @example JSON mode — number[][] (minimal, original shape preserved) -->
 <ce-heatmap
   rows='["A","B"]'
   cols='["Mon","Tue","Wed"]'
@@ -6,3 +6,43 @@
   palette="green"
 ></ce-heatmap>
 
+<!-- @example JSON mode — object cells with tone override and tooltips -->
+<ce-heatmap
+  rows='["SDK","REST","gRPC"]'
+  cols='["Stability","Docs","Adoption"]'
+  data='[
+    [{"value":9,"tone":5,"title":"Very stable"},{"value":7,"tone":4,"title":"Good docs"},{"value":8,"tone":4}],
+    [{"value":5,"tone":3},{"value":6,"tone":3,"title":"Decent docs"},{"value":4,"tone":2}],
+    [{"tone":1,"title":"Preview only"}    ,{"tone":2},{"tone":1}]
+  ]'
+></ce-heatmap>
+
+<!-- @example Slot mode — ce-heat-row + ce-heat-cell children -->
+<ce-heatmap cols='["Q1","Q2","Q3","Q4"]'>
+  <ce-heat-row label="Revenue">
+    <ce-heat-cell tone="2" title="Q1: $12k">12</ce-heat-cell>
+    <ce-heat-cell tone="3" title="Q2: $28k">28</ce-heat-cell>
+    <ce-heat-cell tone="4" title="Q3: $41k">41</ce-heat-cell>
+    <ce-heat-cell tone="5" title="Q4: $60k">60</ce-heat-cell>
+  </ce-heat-row>
+  <ce-heat-row label="Churn">
+    <ce-heat-cell tone="4" title="Q1 churn: 8%">8</ce-heat-cell>
+    <ce-heat-cell tone="3" title="Q2 churn: 6%">6</ce-heat-cell>
+    <ce-heat-cell tone="2" title="Q3 churn: 4%">4</ce-heat-cell>
+    <ce-heat-cell tone="1" title="Q4 churn: 2%">2</ce-heat-cell>
+  </ce-heat-row>
+</ce-heatmap>
+
+<!-- @example Slot mode with custom palette (amber) -->
+<ce-heatmap palette="amber" cols='["Jan","Feb","Mar"]'>
+  <ce-heat-row label="Errors">
+    <ce-heat-cell tone="5" title="52 errors">52</ce-heat-cell>
+    <ce-heat-cell tone="3" title="23 errors">23</ce-heat-cell>
+    <ce-heat-cell tone="1" title="4 errors">4</ce-heat-cell>
+  </ce-heat-row>
+  <ce-heat-row label="Warnings">
+    <ce-heat-cell tone="3" title="31 warnings">31</ce-heat-cell>
+    <ce-heat-cell tone="2" title="18 warnings">18</ce-heat-cell>
+    <ce-heat-cell tone="1" title="5 warnings">5</ce-heat-cell>
+  </ce-heat-row>
+</ce-heatmap>

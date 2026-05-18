@@ -1,0 +1,39 @@
+<!-- @example Inside ce-heatmap with four cells — slot mode -->
+<ce-heatmap cols='["Q1","Q2","Q3","Q4"]'>
+  <ce-heat-row label="Revenue">
+    <ce-heat-cell tone="2" title="Q1 Revenue">12</ce-heat-cell>
+    <ce-heat-cell tone="3" title="Q2 Revenue">28</ce-heat-cell>
+    <ce-heat-cell tone="4" title="Q3 Revenue">41</ce-heat-cell>
+    <ce-heat-cell tone="5" title="Q4 Revenue">60</ce-heat-cell>
+  </ce-heat-row>
+  <ce-heat-row label="Churn">
+    <ce-heat-cell tone="4" title="Q1 Churn">8</ce-heat-cell>
+    <ce-heat-cell tone="3" title="Q2 Churn">6</ce-heat-cell>
+    <ce-heat-cell tone="2" title="Q3 Churn">4</ce-heat-cell>
+    <ce-heat-cell tone="1" title="Q4 Churn">2</ce-heat-cell>
+  </ce-heat-row>
+</ce-heatmap>
+
+<!-- @example Standalone heat-row with labeled cells -->
+<ce-heat-row label="Week 1">
+  <ce-heat-cell tone="1">Mon</ce-heat-cell>
+  <ce-heat-cell tone="3">Tue</ce-heat-cell>
+  <ce-heat-cell tone="5">Wed</ce-heat-cell>
+  <ce-heat-cell tone="2">Thu</ce-heat-cell>
+</ce-heat-row>
+
+<!-- @example Multiple rows slot-mode with palette override -->
+<ce-heatmap palette="amber" cols='["Jan","Feb","Mar"]'>
+  <ce-heat-row label="Errors">
+    <ce-heat-cell tone="5" title="Jan: 52 errors">52</ce-heat-cell>
+    <ce-heat-cell tone="3" title="Feb: 23 errors">23</ce-heat-cell>
+    <ce-heat-cell tone="1" title="Mar: 4 errors">4</ce-heat-cell>
+  </ce-heat-row>
+</ce-heatmap>
+
+<!-- @example Row with rich cell content — link inside a cell -->
+<ce-heat-row label="APIs">
+  <ce-heat-cell tone="4" title="MCP SDK production-ready"><a href="#">SDK</a></ce-heat-cell>
+  <ce-heat-cell tone="2" title="REST API beta">REST</ce-heat-cell>
+  <ce-heat-cell tone="3" title="gRPC in preview">gRPC</ce-heat-cell>
+</ce-heat-row>

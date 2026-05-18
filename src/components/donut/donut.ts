@@ -1,4 +1,4 @@
-import { html, css, svg } from "lit";
+import { html, css, svg, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 
@@ -17,12 +17,19 @@ const DEFAULT_PALETTE = [
  * Attributes:
  *   values  — JSON array of numbers (segment sizes).
  *   colors  — JSON array of CSS color strings (cycles when shorter).
- *   labels  — JSON array of label strings (used in aria-label).
+ *   labels  — JSON array of label strings (used in aria-label and legend).
  *   size    — square SVG size in CSS px (default 140).
  *   thickness — donut ring thickness (px). 0 = pie, default 18.
  *   center-label — small text rendered in the donut hole.
  *
- * Slot: "center" — overrides center-label with arbitrary HTML.
+ * Slots:
+ *   center — overrides center-label with arbitrary HTML.
+ *   legend — overrides the default legend with arbitrary HTML.
+ *
+ * Per CDR-003, legend visibility is policy, not data. The default behaviour
+ * (visible when ≥ 2 segments) covers ~99 % of cases. Override document-wide
+ * via the CSS custom property `--ce-donut-legend-display: auto | always |
+ * none`, or per-instance via the `legend` named slot.
  */
 export class CeDonut extends CecElement {
   static override styles = css`
@@ -48,6 +55,44 @@ export class CeDonut extends CecElement {
       line-height: 1.2;
       text-align: center;
     }
+
+    /* Default legend — light text rows; visible per --ce-donut-legend-display. */
+    .legend {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ce-space-1);
+      margin-top: var(--ce-space-3);
+      font-size: var(--ce-text-sm);
+      line-height: 1.4;
+      color: var(--ce-text);
+    }
+    .legend__row {
+      display: flex;
+      align-items: center;
+      gap: var(--ce-space-2);
+    }
+    .legend__dot {
+      width: 0.6em;
+      height: 0.6em;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+    .legend__label { flex: 1 1 auto; }
+    .legend__pct {
+      color: var(--ce-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Default policy: hide when only 1 segment, show when ≥ 2. */
+    :host(:not([data-multi])) .legend { display: none; }
+
+    /* Document-wide override via CSS custom property. */
+    @container style(--ce-donut-legend-display: always) {
+      .legend { display: flex; }
+    }
+    @container style(--ce-donut-legend-display: none) {
+      .legend { display: none; }
+    }
   `;
 
   protected override createRenderRoot(): ShadowRoot {
@@ -61,6 +106,17 @@ export class CeDonut extends CecElement {
   @property({ type: Number }) size = 140;
   @property({ type: Number }) thickness = 18;
   @property({ type: String, attribute: "center-label" }) centerLabel = "";
+
+  protected override willUpdate(): void {
+    const segCount = Array.isArray(this.values)
+      ? this.values.filter((n) => n > 0).length
+      : 0;
+    if (segCount >= 2) {
+      this.setAttribute("data-multi", "");
+    } else {
+      this.removeAttribute("data-multi");
+    }
+  }
 
   override render() {
     const v = Array.isArray(this.values) ? this.values.filter((n) => n > 0) : [];
@@ -113,6 +169,21 @@ export class CeDonut extends CecElement {
       }
     }
 
+    const legendRows = v.length === 0
+      ? nothing
+      : v.map((val, i) => {
+          const pct = total ? Math.round((val / total) * 100) : 0;
+          const lbl = this.labels[i] ?? `segment ${i + 1}`;
+          const fill = palette[i % palette.length];
+          return html`
+            <div class="legend__row">
+              <span class="legend__dot" style="background:${fill}"></span>
+              <span class="legend__label">${lbl}</span>
+              <span class="legend__pct">${pct}%</span>
+            </div>
+          `;
+        });
+
     return html`
       <div class="wrap" style="width:${s}px;height:${s}px;">
         <svg
@@ -125,6 +196,9 @@ export class CeDonut extends CecElement {
         <div class="center">
           <slot name="center">${this.centerLabel}</slot>
         </div>
+      </div>
+      <div class="legend" part="legend" aria-hidden="true">
+        <slot name="legend">${legendRows}</slot>
       </div>
     `;
   }

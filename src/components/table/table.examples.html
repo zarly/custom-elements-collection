@@ -9,3 +9,21 @@
   </table>
 </ce-table>
 
+<!-- @example Table with inline sparklines per CDR-006 composition -->
+<ce-table>
+  <table>
+    <thead><tr><th>Metric</th><th class="num">Now</th><th>Trend (30d)</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Active users</td>
+        <td class="num">12 480</td>
+        <td><ce-sparkline values="[100,140,180,160,220,260,300,340]" color="var(--ce-color-blue)"></ce-sparkline></td>
+      </tr>
+      <tr>
+        <td>P95 latency</td>
+        <td class="num">142 ms</td>
+        <td><ce-sparkline values="[180,170,165,160,155,150,148,142]" color="var(--ce-color-green)"></ce-sparkline></td>
+      </tr>
+    </tbody>
+  </table>
+</ce-table>

@@ -1,0 +1,14 @@
+<!-- @example Default — minimal numbered step -->
+<ce-step n="1" title="Discovery">15 интервью + анализ топ-5 конкурентов</ce-step>
+
+<!-- @example All three states side by side -->
+<ce-step n="1" title="Discovery" state="done">15 интервью + анализ конкурентов</ce-step>
+<ce-step n="2" title="Prototype" state="active">Кликабельный Figma + paper-prototype</ce-step>
+<ce-step n="3" title="Validate" state="pending">5 follow-up интервью</ce-step>
+
+<!-- @example Rich title slot and meta (CDR-002) -->
+<ce-step n="2">
+  <span slot="title">Prototype</span>
+  <span slot="meta">~2 weeks</span>
+  Кликабельный Figma + paper-prototype для 5 сценариев
+</ce-step>

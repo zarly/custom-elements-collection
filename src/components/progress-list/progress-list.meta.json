@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-progress-list",
+  "name": "Progress List",
+  "className": "CeProgressList",
+  "goal": "Stack multiple progress bars and arbitrary inline content into a vertically-gapped list with consistent spacing.",
+  "description": "Flex-column layout container. Accepts ce-progress rows, narrative paragraphs, ce-callout annotations, and any other children. Gap between rows is controlled by the --ce-progress-list-gap custom property. No hard wrappers — any HTML child renders correctly (CDR-006).",
+  "stability": "stable",
+  "props": [],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Any children: ce-progress rows, p, ce-callout, arbitrary HTML."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-progress-list-gap",
+      "kind": "size",
+      "source": "local",
+      "description": "Gap between rows. Defaults to --ce-space-3.",
+      "fallback": "var(--ce-space-3)"
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default row gap token."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": ["ce-progress"],
+  "related": ["ce-progress", "ce-grid"],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "progress",
+    "list"
+  ]
+}

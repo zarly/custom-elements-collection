@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-radio-group",
+  "name": "RadioGroup",
+  "className": "CeRadioGroup",
+  "goal": "Provide a single-select group control with classic, segmented, or card visual variants and full keyboard support.",
+  "description": "Radio-group with three visual treatments: 'classic' (traditional radio circles), 'segmented' (joined-button group), and 'card' (option-as-card with optional hint line). Roving tabindex; arrow keys + Home/End move selection; Space/Enter activate. Options provided as a JSON array; per-option disabled state honored. Emits ce-change with { name, value }.",
+  "stability": "experimental",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form-control name; echoed in ce-change detail."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Currently selected option value. Empty means no selection."
+    },
+    {
+      "name": "variant",
+      "type": "\"classic\" | \"segmented\" | \"card\"",
+      "required": false,
+      "default": "\"classic\"",
+      "reflect": true,
+      "description": "Visual treatment. Invalid values fall back to 'classic'."
+    },
+    {
+      "name": "vertical",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Stack options vertically. Default for card variant when grid would otherwise wrap."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable the entire group."
+    },
+    {
+      "name": "options",
+      "type": "RadioOption[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of { value, label, hint?, disabled? }. Settable as a JS property or as a JSON-encoded attribute."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ name: string, value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user picks a different option."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected indicator + segmented-active background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Segmented-active label color (defaults to white)."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Card-variant hint color."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Classic-circle background; segmented track."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background on segmented buttons."
+    },
+    {
+      "name": "--ce-state-selected",
+      "kind": "color",
+      "source": "token",
+      "description": "Card-selected background tint."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover/strong border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Segmented group radius."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on each option."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Inner spacing."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Default gap and inner padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding x."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Card hint font size."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": ["ce-checkbox", "ce-toggle", "ce-filter-bar"],
+  "category": "ui",
+  "tier": "widget",
+  "tags": ["Forms", "interactive", "control"],
+  "a11y": {
+    "role": "radiogroup",
+    "notes": "Roving tabindex (only the current option is tabbable). Arrow keys / Home / End move selection + focus; Space / Enter explicitly activate. aria-checked reflects the selection."
+  }
+}

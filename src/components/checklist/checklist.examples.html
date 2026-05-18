@@ -1,12 +1,21 @@
-<!-- @example Static task list — items via JSON attribute -->
-<ce-checklist
-  items='[
-    {"id":"a","text":"Open the editor","checked":true},
-    {"id":"b","text":"Read the brief","checked":true},
-    {"id":"c","text":"Draft the outline"},
-    {"id":"d","text":"Ship the draft"}
-  ]'
-></ce-checklist>
+<!-- @example Static checklist (no localStorage, no events) -->
+<ce-checklist items='[{"id":"a","text":"TLS 1.3","checked":true},{"id":"b","text":"SAML SSO"}]'></ce-checklist>
+
+<!-- @example Slot mode — items as ce-check-item children (CDR-005) -->
+<ce-checklist>
+  <ce-check-item id="tls" checked>TLS 1.3 enforced <a href="#42">#42</a></ce-check-item>
+  <ce-check-item id="saml">SAML SSO configured</ce-check-item>
+  <ce-check-item id="audit">Security audit passed</ce-check-item>
+</ce-checklist>
+
+<!-- @example Grouped by category (group-by="category") -->
+<ce-checklist group-by="category">
+  <ce-check-item id="tls2" category="Security" checked>TLS 1.3 enforced</ce-check-item>
+  <ce-check-item id="saml2" category="Security">SAML SSO configured</ce-check-item>
+  <ce-check-item id="profile" category="Onboarding">Complete profile</ce-check-item>
+  <ce-check-item id="team" category="Onboarding">Invite team</ce-check-item>
+  <ce-check-item id="deploy" category="Onboarding">Deploy first project</ce-check-item>
+</ce-checklist>
 
 <!-- @example Editable list — inline add input -->
 <ce-checklist
@@ -22,9 +31,9 @@
   persist-key="onboarding-v1"
   allow-edit
   items='[
-    {"id":"profile","text":"Complete profile"},
-    {"id":"team","text":"Invite team"},
-    {"id":"deploy","text":"Deploy first project"}
+    {"id":"profile2","text":"Complete profile"},
+    {"id":"team2","text":"Invite team"},
+    {"id":"deploy2","text":"Deploy first project"}
   ]'
 ></ce-checklist>
 
