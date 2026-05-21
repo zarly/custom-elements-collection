@@ -6,6 +6,8 @@
   "goal": "Render a line-level diff between two text blobs in unified or split layout.",
   "description": "Compact LCS-based diff viewer for code review surfaces and PR comments. Choose unified (single column with +/−/ space markers) or split (two columns side-by-side). Header surfaces the language label and the add/delete summary. The LCS algorithm runs in O(n × m) so it's intended for short-to-medium diffs (a few hundred lines).",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "beforeText",

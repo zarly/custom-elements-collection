@@ -10,10 +10,11 @@ custom-elements-collection/
 │   ├── core/           Lit base class (CecElement) + registration helper (defineOnce)
 │   ├── meta/           Zod schema + TS interfaces for *.meta.json (ADR-005)
 │   ├── tokens/         Design tokens as plain CSS (tokens.css + 10 theme bundles)
-│   ├── components/     66 ce-* UI components — one subfolder per tag with
-│   │                   <stem>.{ts, test.ts, meta.json}
-│   ├── lesson/         6 lesson-* widgets — same per-tag subfolder layout
-│   ├── entries/        GENERATED — 72 per-tag side-effect wrappers
+│   ├── components/     113 ce-* UI components (110 published + 3 internal layout) —
+│   │                   one subfolder per tag with <stem>.{ts, test.ts, meta.json,
+│   │                   examples.html, optional CONCEPT.md}
+│   ├── lesson/         16 lesson-* widgets — same per-tag subfolder layout
+│   ├── entries/        GENERATED — 129 per-tag side-effect wrappers
 │   ├── index.ts        GENERATED — named exports of every component class
 │   ├── auto.ts         GENERATED — registers every tag at once
 │   ├── manifest.ts     GENERATED — machine-readable catalog (COMPONENTS) + loadOnDemand()
@@ -143,7 +144,7 @@ pnpm build   →   pnpm gen-exports          (prebuild hook)
 
 ## Test pipeline
 
-- **Vitest** with the `jsdom` environment runs unit tests co-located with each component (`<stem>/<stem>.test.ts`). 508 tests across 75 files at the time of writing.
+- **Vitest** with the `jsdom` environment runs unit tests co-located with each component (`<stem>/<stem>.test.ts`). 1169 tests across 138 files at the time of writing.
 - Tests use `defineOnce` to register a tag once per process, then `await el.updateComplete` to synchronise with Lit's render cycle.
 - `pnpm check` runs typecheck + `validate-meta` (Zod) + `gen-skill:check` (drift gate for the agent skill) + tests + build, in sequence. Any of those failing blocks the PR.
 
@@ -151,7 +152,7 @@ pnpm build   →   pnpm gen-exports          (prebuild hook)
 
 Three entry styles supported simultaneously:
 
-1. **Auto-register everything.** One side-effect import registers every shipped tag (72 at the time of writing):
+1. **Auto-register everything.** One side-effect import registers every shipped tag (126 published + 3 internal at the time of writing):
    ```ts
    import "custom-elements-collection/auto";
    ```

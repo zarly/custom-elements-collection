@@ -6,6 +6,8 @@
   "goal": "Single colored heatmap cell for use inside <ce-heat-row> (slot mode per CDR-005), or as a standalone colored cell when used outside.",
   "description": "Carries a tone (1-5 intensity), a title (tooltip string), and a default slot for rich display content per CDR-002. When nested inside ce-heat-row the parent reads tone and title as attributes and consumes the slot text to build the heatmap data grid — the cell itself renders nothing (display:contents). When used standalone it renders a colored inline-flex box with the palette-blue ramp. Tone maps to alpha 0.05/0.175/0.30/0.425/0.55.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "tone",
@@ -77,9 +79,15 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-heat-row", "ce-heatmap"],
+  "dependents": [
+    "ce-heat-row",
+    "ce-heatmap"
+  ],
   "dependencies": [],
-  "related": ["ce-heat-row", "ce-heatmap"],
+  "related": [
+    "ce-heat-row",
+    "ce-heatmap"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

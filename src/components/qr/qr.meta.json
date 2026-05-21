@@ -5,7 +5,10 @@
   "className": "CeQr",
   "goal": "Render a scannable QR code as a single SVG path with no runtime dependencies and a hand-rolled encoder.",
   "description": "Pure-SVG QR code. The full ISO/IEC 18004 encoder ships in the bundle (byte mode, versions 1-40, error-correction levels L/M/Q/H). Auto-picks the smallest version that fits the data, picks the optimal mask via penalty scoring, and emits a single <path> with merged horizontal runs. Fully themable via --ce-qr-fg / --ce-qr-bg. No CDN, no canvas, no QR library.",
+  "limitations": "Byte mode only — no numeric or alphanumeric optimization (URLs/text are fine; pure-numeric strings encode at the same density). Maximum capacity is v40 ECC L (~2953 bytes); larger inputs emit ce-qr-error. Render is synchronous (~1-2 ms for a v40 grid in modern engines) — not suitable for streaming live data.",
   "stability": "experimental",
+  "created": "2026-05-08",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",
@@ -126,11 +129,16 @@
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["ce-image"],
+  "related": [
+    "ce-image"
+  ],
   "category": "ui",
   "tier": "brick",
-  "tags": ["Content", "qr", "encode"],
-  "limitations": "Byte mode only — no numeric or alphanumeric optimization (URLs/text are fine; pure-numeric strings encode at the same density). Maximum capacity is v40 ECC L (~2953 bytes); larger inputs emit ce-qr-error. Render is synchronous (~1-2 ms for a v40 grid in modern engines) — not suitable for streaming live data.",
+  "tags": [
+    "Content",
+    "qr",
+    "encode"
+  ],
   "a11y": {
     "role": "img",
     "notes": "SVG has role=img and aria-label set to the encoded value. The error fallback uses role=alert."

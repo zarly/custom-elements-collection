@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-pagination",
+  "name": "Pagination",
+  "className": "CePagination",
+  "goal": "Render a page-navigation strip with first / prev / numbered / next / last controls and emit a ce-pagechange event.",
+  "description": "Static-by-default page navigation: renders the current state from page + total, emits ce-pagechange on activation, and only mutates page itself when manage='self' is set (CDR-004 stateful opt-in). The numbered range collapses with ellipses when there are gaps, controlled by the sibling count. A compact mode swaps the number buttons for a 'n / total' info line for tight surfaces.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "page",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Current page (1-indexed). Clamped to [1, total]."
+    },
+    {
+      "name": "total",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Total number of pages."
+    },
+    {
+      "name": "sibling",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Numeric siblings shown around the current page before ellipses kick in."
+    },
+    {
+      "name": "manage",
+      "type": "\"external\" | \"self\"",
+      "required": false,
+      "default": "\"external\"",
+      "description": "'external' (default) leaves page mutation to the parent; 'self' updates page on click."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Hides number buttons; shows only first/prev/info/next/last."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-pagechange",
+      "detail": "{ page: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when the user activates a page control. Detail.page is the clamped target page."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default button text."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Active button text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Ellipsis and compact info text."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Button background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Active page background + border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button corner radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Control font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Strip gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Ellipsis and info padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical inset."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/active transitions."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-table",
+    "ce-nav-list",
+    "ce-breadcrumbs"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "navigation",
+    "pagination"
+  ],
+  "a11y": {
+    "role": "navigation",
+    "notes": "Wrapped in <nav aria-label='Pagination'>. Each numbered button carries an aria-label, the current page is marked with aria-current='page'. Compact info uses aria-live='polite' so screen readers announce page changes."
+  }
+}

@@ -6,6 +6,8 @@
   "goal": "Provide an on/off switch with role=switch, keyboard support, and emitted ce-change events.",
   "description": "Switch-style boolean control. Click, Enter, or Space toggles state. The host carries role=switch and aria-checked, so screen readers announce changes correctly. Pairs nicely as the right edge of a labelled row.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "checked",
@@ -109,7 +111,8 @@
   "dependencies": [],
   "related": [
     "ce-checkbox",
-    "ce-button"
+    "ce-button",
+    "ce-select"
   ],
   "category": "ui",
   "tier": "brick",

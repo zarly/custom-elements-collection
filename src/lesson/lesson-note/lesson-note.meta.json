@@ -6,6 +6,8 @@
   "goal": "Callout aside for lesson content — tip, info, key point, warning, or danger.",
   "description": "Renders a left-bordered, tinted callout block with an auto-selected icon based on type. The icon can be overridden. Five types supported: tip (blue), info (cyan), key (amber), warning (amber), danger (red).",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",
@@ -32,30 +34,122 @@
     }
   ],
   "cssVariables": [
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Outer vertical margin + icon/body gap." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Wrap vertical padding." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Wrap horizontal padding." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Default left border color." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Wrap border radius." },
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Default background." },
-    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Info type background." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Tip left border color." },
-    { "name": "--ce-color-blue-bg", "kind": "color", "source": "token", "description": "Tip background." },
-    { "name": "--ce-color-cyan", "kind": "color", "source": "token", "description": "Info left border color." },
-    { "name": "--ce-color-amber", "kind": "color", "source": "token", "description": "Key and warning left border color." },
-    { "name": "--ce-color-amber-bg", "kind": "color", "source": "token", "description": "Key and warning background." },
-    { "name": "--ce-color-red", "kind": "color", "source": "token", "description": "Danger left border color." },
-    { "name": "--ce-color-red-bg", "kind": "color", "source": "token", "description": "Danger background." },
-    { "name": "--ce-text-md", "kind": "size", "source": "token", "description": "Icon font size." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Body text color." },
-    { "name": "--ce-text-base", "kind": "size", "source": "token", "description": "Body font size." }
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + icon/body gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Wrap vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Wrap horizontal padding."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default left border color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Wrap border radius."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Default background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Info type background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Tip left border color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Tip background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Info left border color."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Key and warning left border color."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Key and warning background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Danger left border color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Danger background."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text color."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-rule", "lesson-frame"],
+  "related": [
+    "lesson-rule",
+    "lesson-frame"
+  ],
   "category": "lesson",
   "tier": "brick",
-  "tags": ["Education", "callout", "note"]
+  "tags": [
+    "Education",
+    "callout",
+    "note"
+  ]
 }

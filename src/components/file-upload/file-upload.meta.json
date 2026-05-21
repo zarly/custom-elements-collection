@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-file-upload",
+  "name": "File upload",
+  "className": "CeFileUpload",
+  "goal": "Provide a drag-and-drop dropzone that collects a File[] selection and emits a ce-files event.",
+  "description": "Static-by-default dropzone with click-to-browse + drag-over highlight + drop handling. The component itself never uploads anything — it only collects a File[] from the native <input type=file> or a DragEvent and emits ce-files. The parent owns transport. Default state is an idle, idiomatic zone with a sensible label and hint (CDR-007); attributes accept, multiple, name, label, hint, disabled are all optional. Multimodal chat composers, profile-photo pickers, and report attach surfaces are the primary use cases.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "accept",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "MIME / extension filter forwarded to the native <input> (e.g. 'image/*', '.csv,.tsv')."
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Allow selecting / dropping more than one file. Drops are truncated to one when off."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name; echoed in ce-files detail."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Choose a file\"",
+      "description": "Primary headline shown in the zone."
+    },
+    {
+      "name": "hint",
+      "type": "string",
+      "required": false,
+      "default": "\"or drag it here\"",
+      "description": "Secondary line below the label."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables clicks, keyboard, drag-over, and drop."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-files",
+      "detail": "{ name: string, files: File[] }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired whenever the user picks or drops a file (or files when multiple is set)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "icon",
+      "description": "Leading icon glyph or component. Defaults to ⬆."
+    },
+    {
+      "name": "label",
+      "description": "Overrides the label attribute when used."
+    },
+    {
+      "name": "hint",
+      "description": "Overrides the hint attribute when used."
+    },
+    {
+      "name": "",
+      "description": "Body content below the zone (a rendered file list, validation messages, ...)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle zone background."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Dashed border colour."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover and dragging accent."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Dragging background tint."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Hint and idle icon colour."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Zone corner radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Hint font size."
+    },
+    {
+      "name": "--ce-text-2xl",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical gap between rows + body offset."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal zone padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical zone padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover/dragging transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Triggers the native file picker dialog on click or Enter/Space.",
+      "reason": "Dropzone affordance — the user activated the control."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-file-card",
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "file",
+    "upload",
+    "dropzone"
+  ],
+  "a11y": {
+    "role": "button",
+    "notes": "Zone has role=button and is keyboard-activatable via Enter/Space. aria-labelledby points to the visible label, aria-disabled mirrors the disabled prop, and the native <input type=file> remains in the DOM (visually hidden) so screen readers still see a file control."
+  }
+}

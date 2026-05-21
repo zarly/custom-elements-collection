@@ -6,6 +6,8 @@
   "goal": "Display a single big-number stat with label, optional trend indicator, and semantic color tint.",
   "description": "Single-stat KPI block — large value, small uppercase label, and optional inline trend (e.g. '+12%') that auto-colors based on its leading sign (+ green, - red, otherwise neutral). Used inside <ce-hero slot=\"stats\"> or in any grid row.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

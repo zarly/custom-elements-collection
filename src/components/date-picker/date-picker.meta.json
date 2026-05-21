@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-date-picker",
+  "name": "Date picker",
+  "className": "CeDatePicker",
+  "goal": "Provide a labelled date / time / datetime / month / week picker wrapped around a native HTML input.",
+  "description": "Form primitive that delegates date / time parsing, keyboard handling, and the calendar popup to the browser's native input. Mirrors ce-input's label / help / error / prefix / suffix layout for consistency across the forms group. The `type` attribute switches between date (default), time, datetime-local, month, and week. min, max, step are forwarded as-is. Emits ce-input per keystroke and ce-change on commit.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "ISO-shaped value (YYYY-MM-DD, HH:mm, etc.) matching the chosen type."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name; echoed in ce-change detail."
+    },
+    {
+      "name": "type",
+      "type": "\"date\" | \"time\" | \"datetime-local\" | \"month\" | \"week\"",
+      "required": false,
+      "default": "\"date\"",
+      "reflect": true,
+      "description": "Which native picker variant to render."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Visible label above the field."
+    },
+    {
+      "name": "help",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Helper text below the field; hidden when error is set."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Error text below the field; overrides help when present."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Placeholder forwarded to the native input (mostly visible on type=text fallback)."
+    },
+    {
+      "name": "min",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Minimum value forwarded to the native input."
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Maximum value forwarded to the native input."
+    },
+    {
+      "name": "step",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Step value forwarded to the native input."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Marks the control as required and renders an asterisk on the label."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables the control."
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Renders the invalid border styling; aria-invalid follows."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-input",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on every value change (native input event)."
+    },
+    {
+      "name": "ce-change",
+      "detail": "{ name: string, value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on commit (native change event)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "prefix",
+      "description": "Inline content rendered before the native control."
+    },
+    {
+      "name": "suffix",
+      "description": "Inline content rendered after the native control."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Field background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Field corner radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Invalid border + error text."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label and value text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Help and placeholder text."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label / control font-size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Help and error font-size."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Field padding."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Row gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Prefix/suffix padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border/shadow transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-select"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "form",
+    "date",
+    "time",
+    "picker"
+  ],
+  "a11y": {
+    "notes": "Delegates to the native input so keyboard navigation, the calendar popup, OS locale, and screen-reader semantics come from the browser. Label is associated via label[for]=input.id. aria-invalid follows the invalid prop / error message."
+  }
+}

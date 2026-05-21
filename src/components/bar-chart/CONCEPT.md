@@ -29,7 +29,7 @@ Considered two observation strategies:
 | Strategy | Timing | Supports streaming? |
 |---|---|---|
 | `connectedCallback` only | Once on connect | No — children added after upgrade are missed |
-| MutationObserver on `childList + attributes` | Live | Yes — mdflow streams tokens into slots post-upgrade |
+| MutationObserver on `childList + attributes` | Live | Yes — streaming-markdown consumers (e.g. `@generative-dom/plugin-companion`) stream tokens into slots post-upgrade |
 
 Chose **MutationObserver** per CLAUDE.md "Light components must keep slot streaming working". Observer watches `childList` and attribute changes on `["value", "color"]` so live updates to `ce-bar-row` children trigger re-render.
 

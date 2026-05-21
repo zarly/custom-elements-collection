@@ -6,6 +6,8 @@
   "goal": "Run a fill-in-the-blank exercise with multiple-choice options, instant feedback, and a public reset() method.",
   "description": "Fill-in-the-blank exercise. Splits the prompt at the first '___' marker and renders the gap as a colored span; below sit the options as buttons. After the user picks, the chosen button colors green or red, the gap fills with the correct answer when correct, and a feedback strip shows the explanation. lesson-gap-answer fires once per exercise.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "prompt",

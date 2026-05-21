@@ -6,6 +6,8 @@
   "goal": "Two-column side-by-side comparison for before/after, correct/wrong, or neutral approach A vs B.",
   "description": "Renders a two-column grid with labeled headers and named slots. Three modes: neutral (default), correct-wrong (left red, right green labels), before-after (left muted, right blue labels). Mode reflects on host for CSS selector targeting.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "left-label",
@@ -43,26 +45,98 @@
     }
   ],
   "cssVariables": [
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Outer vertical margin." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Column vertical padding." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Column horizontal padding." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Label bottom margin and padding." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Outer border + column divider + label bottom border." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Grid border radius." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Default label and body text color." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Label font size." },
-    { "name": "--ce-text-base", "kind": "size", "source": "token", "description": "Body font size." },
-    { "name": "--ce-color-red", "kind": "color", "source": "token", "description": "correct-wrong mode: left label color." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "correct-wrong mode: right label color." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "before-after mode: left label color." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "before-after mode: right label color." }
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Column vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Column horizontal padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Label bottom margin and padding."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border + column divider + label bottom border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Grid border radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label and body text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "correct-wrong mode: left label color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "correct-wrong mode: right label color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "before-after mode: left label color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "before-after mode: right label color."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-rule", "lesson-note"],
+  "related": [
+    "lesson-rule",
+    "lesson-note"
+  ],
   "category": "lesson",
   "tier": "brick",
-  "tags": ["Education", "compare", "before-after"]
+  "tags": [
+    "Education",
+    "compare",
+    "before-after"
+  ]
 }

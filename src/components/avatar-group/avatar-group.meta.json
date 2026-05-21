@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-avatar-group",
+  "name": "Avatar group",
+  "className": "CeAvatarGroup",
+  "goal": "Lay out a row of overlapping avatars with an automatic +N overflow chip when the count exceeds a max.",
+  "description": "Container for ce-avatar (or arbitrary HTML) children that visually overlaps each child by a configurable amount and renders a +N chip in their stead once the total exceeds max. Propagates its size attribute to size-aware ce-avatar children for consistent sizing.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "max",
+      "type": "number",
+      "required": false,
+      "default": "4",
+      "description": "Number of children to render before collapsing the remainder into a +N chip."
+    },
+    {
+      "name": "size",
+      "type": "CecSize",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Sizes the overflow chip and propagates to size-aware ce-avatar children."
+    },
+    {
+      "name": "overlap",
+      "type": "number",
+      "required": false,
+      "default": "8",
+      "description": "Pixel overlap between adjacent children (negative margin)."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Avatar children (typically ce-avatar but arbitrary HTML is accepted per CDR-006)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-avatar-group-overlap",
+      "kind": "size",
+      "source": "local",
+      "description": "Computed pixel overlap, set internally from the overlap attribute."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "+N overflow chip background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "+N overflow chip text."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "+N overflow chip border."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "+N chip horizontal padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "+N chip font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets display:none on children beyond max.",
+      "reason": "Mechanism for collapsing overflow without restructuring slotted nodes."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [
+    "ce-avatar"
+  ],
+  "related": [
+    "ce-avatar"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "identity",
+    "avatar"
+  ]
+}

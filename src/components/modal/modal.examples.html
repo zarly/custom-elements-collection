@@ -1,0 +1,26 @@
+<!-- @example Basic modal — title and body text, already open -->
+<ce-modal open title="Welcome to the dashboard">
+  <p>This is your main workspace. Use the navigation on the left to explore sections.</p>
+</ce-modal>
+
+<!-- @example With footer actions — body content and two action buttons -->
+<ce-modal open title="Confirm deletion">
+  <p>Are you sure you want to delete <strong>project-alpha</strong>? This action cannot be undone.</p>
+  <ce-button slot="footer" variant="ghost">Cancel</ce-button>
+  <ce-button slot="footer" variant="danger">Delete project</ce-button>
+</ce-modal>
+
+<!-- @example Non-dismissible — ESC and backdrop-click are suppressed, close button hidden -->
+<ce-modal open title="Processing payment" dismissible="false">
+  <p>Your payment is being processed. Please do not close this window.</p>
+</ce-modal>
+
+<!-- @example Rich body — longer content demonstrating scroll containment -->
+<ce-modal open title="Terms of service">
+  <p>By using this service you agree to the following terms and conditions.</p>
+  <p>Section 1 — You are responsible for maintaining the confidentiality of your account credentials.</p>
+  <p>Section 2 — Prohibited uses include any activity that violates applicable law or regulation.</p>
+  <p>Section 3 — We reserve the right to suspend access for violations of these terms.</p>
+  <ce-button slot="footer">Decline</ce-button>
+  <ce-button slot="footer">Accept & continue</ce-button>
+</ce-modal>

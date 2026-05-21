@@ -6,6 +6,8 @@
   "goal": "Present a feature with an icon, title, body, and optional CTA button or link.",
   "description": "Marketing-style feature card. Top: tinted icon disk. Middle: title + slotted body. Bottom: optional CTA — rendered as an <a> when href is set, otherwise a <button> that emits ce-feature-cta. Six color tints adjust the icon disk.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "icon",

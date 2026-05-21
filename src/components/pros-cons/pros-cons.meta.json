@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-pros-cons",
+  "name": "Pros & cons",
+  "className": "CeProsCons",
+  "goal": "Render explicit pros vs cons in a two-column block with semantic colour accents.",
+  "description": "Decision-analysis primitive that replaces the ad-hoc 'ce-compare for pros/cons' workaround surfaced in audit. Two columns: left=pros (green accent, ✓ markers), right=cons (red accent, ✗ markers). Each side accepts either a JSON array of strings (CDR-005 JSON mode) or slotted <li> / arbitrary children (slot mode), and the two modes may be mixed (JSON pros + slotted cons). Headers default to 'Pros' / 'Cons' and accept attribute overrides for localised or domain-specific phrasing ('Benefits' / 'Risks', 'Plusy' / 'Minusy', etc.). Stacks to a single column below ~540 px.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "pros",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of pros (strings). When empty, the 'pros' named slot is used."
+    },
+    {
+      "name": "cons",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of cons (strings). When empty, the 'cons' named slot is used."
+    },
+    {
+      "name": "prosLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Pros\"",
+      "attribute": "pros-label",
+      "description": "Left-column header."
+    },
+    {
+      "name": "consLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Cons\"",
+      "attribute": "cons-label",
+      "description": "Right-column header."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "pros",
+      "description": "List items (or arbitrary nodes) for the pros column. Used when the pros array is empty."
+    },
+    {
+      "name": "cons",
+      "description": "List items (or arbitrary nodes) for the cons column. Used when the cons array is empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Column background fallback."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Pros accent border, marker, icon."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pros column tinted background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Cons accent border, marker, icon."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Cons column tinted background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Column outline."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Column corner radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Header + item text."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon text on coloured background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Generic bullet fallback."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Item + header font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Icon glyph font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Header / item gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Column gap + column vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Column horizontal padding."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "other",
+      "source": "token",
+      "description": "Item line-height."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-compare",
+    "ce-recommendation",
+    "ce-verdict"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "decision",
+    "pros-cons"
+  ],
+  "a11y": {
+    "notes": "Each column is a <section> with a visible <header>. Icons are aria-hidden because the column header text and item markers already convey the meaning. Stacks to a single column on narrow viewports via a CSS media query — no script needed."
+  }
+}

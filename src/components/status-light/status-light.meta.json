@@ -6,6 +6,8 @@
   "goal": "Display a small traffic-light style dot with state color, optional pulse, and inline label.",
   "description": "Compact status indicator for dashboards, lists, and report rows. Five states (ok/warn/bad/neutral/pending) map to semantic color tokens, an optional pulse animation highlights live activity, and the label is provided either via the label attribute or the default slot. Use `ce-status-light` when `pulse` animation is needed (live dashboards); use `<ce-chip dot>` for static state in documents (overlap is intentional but the cases split on whether motion is desired).",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "state",

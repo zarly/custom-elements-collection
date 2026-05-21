@@ -6,6 +6,8 @@
   "goal": "Wrap a native <table> in a styled scroll container with consistent header, row, and hover treatments.",
   "description": "Light-DOM-aware wrapper around a slotted <table>. Adds surface border, radius, horizontal scroll container, and ambient styles for headers, cells, hover, and special td classes (.num, .center, .mono). Sticky and compact attributes are honored via the ambient stylesheet.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "sticky",
@@ -133,7 +135,9 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": [],
+  "related": [
+    "ce-pagination"
+  ],
   "category": "ui",
   "tier": "layout",
   "tags": [

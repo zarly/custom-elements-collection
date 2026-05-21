@@ -92,4 +92,46 @@ describe("<ce-nav-list>", () => {
     warn.mockRestore();
     el.remove();
   });
+
+  it("renders the optional per-item meta HTML as raw markup", async () => {
+    const el = document.createElement("ce-nav-list") as CeNavList;
+    el.items = [
+      { label: "A", href: "#a", meta: "<span data-test='m'>3d ago</span>" },
+      { label: "B", href: "#b" },
+    ];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const metaSpans = el.shadowRoot!.querySelectorAll(".ce-nav__meta");
+    expect(metaSpans.length).toBe(1);
+    const inner = metaSpans[0].querySelector("[data-test='m']");
+    expect(inner).not.toBeNull();
+    expect(inner!.textContent).toBe("3d ago");
+    el.remove();
+  });
+
+  it("omits the meta block when meta field is absent", async () => {
+    const el = document.createElement("ce-nav-list") as CeNavList;
+    el.items = [{ label: "A", href: "#a" }];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelectorAll(".ce-nav__meta").length).toBe(0);
+    el.remove();
+  });
+
+  it("renders labelHtml as raw markup when provided", async () => {
+    const el = document.createElement("ce-nav-list") as CeNavList;
+    el.items = [
+      {
+        label: "Card",
+        labelHtml: "C<span data-hit>ar</span>d",
+        href: "#card",
+      },
+    ];
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const inner = el.shadowRoot!.querySelector("[data-hit]");
+    expect(inner).not.toBeNull();
+    expect(inner!.textContent).toBe("ar");
+    el.remove();
+  });
 });

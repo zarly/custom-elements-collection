@@ -6,6 +6,8 @@
   "goal": "Group page content under a titled header with optional number badge, lede, and right-aligned count chip.",
   "description": "Titled content section. Renders a header row containing an optional circular number badge, a heading, and an optional count chip on the right; underneath the row sits an optional lede paragraph and the default body slot. Used to break long pages into numbered chapters.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "title",

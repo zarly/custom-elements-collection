@@ -6,6 +6,8 @@
   "goal": "Render a task list — static read-only by default, interactive with persist-key / allow-edit opt-in.",
   "description": "Markdown-style task list rendered as native checkboxes. Without persist-key, this is a static read-only display — no localStorage writes happen and no mutation events fire. Items may be supplied as a JSON attribute (items prop) or as <ce-check-item> slot children per CDR-005 (resolution order: JSON prop non-empty → slot children → empty state). Setting persist-key mirrors state to localStorage so progress survives reloads. With allow-edit, a small input appears so users can append new items inline. With group-by=\"category\", items are rendered under <h4> section headers.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "items",
@@ -157,7 +159,9 @@
     }
   ],
   "dependents": [],
-  "dependencies": ["ce-check-item"],
+  "dependencies": [
+    "ce-check-item"
+  ],
   "related": [
     "ce-toc",
     "ce-check-item"

@@ -1,0 +1,28 @@
+<!-- @example Plain horizontal rule -->
+<p>Section one.</p>
+<ce-divider></ce-divider>
+<p>Section two.</p>
+
+<!-- @example Rule with a centered label -->
+<p>Sign in to continue.</p>
+<ce-divider>OR</ce-divider>
+<p>Create a new account.</p>
+
+<!-- @example Inset variants -->
+<ce-divider inset="sm">small inset</ce-divider>
+<ce-divider inset="md">medium inset</ce-divider>
+<ce-divider inset="lg">large inset</ce-divider>
+
+<!-- @example Vertical separator between inline groups -->
+<div style="display:flex;align-items:center;gap:var(--ce-space-2)">
+  <ce-link href="/docs">Docs</ce-link>
+  <ce-divider orientation="vertical"></ce-divider>
+  <ce-link href="/api">API</ce-link>
+  <ce-divider orientation="vertical"></ce-divider>
+  <ce-link href="/blog">Blog</ce-link>
+</div>
+
+<!-- @example Label with rich inline content -->
+<ce-divider>
+  <ce-chip type="cyan" dot>Beta</ce-chip>
+</ce-divider>

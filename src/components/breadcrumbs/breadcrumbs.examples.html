@@ -1,0 +1,24 @@
+<!-- @example Three-level path -->
+<ce-breadcrumbs items='[
+  {"label":"Home","href":"/"},
+  {"label":"Docs","href":"/docs"},
+  {"label":"Components"}
+]'></ce-breadcrumbs>
+
+<!-- @example Custom separator -->
+<ce-breadcrumbs separator="›" items='[
+  {"label":"Workspace","href":"/"},
+  {"label":"Projects","href":"/projects"},
+  {"label":"GenUI Stack","href":"/projects/genui"},
+  {"label":"Settings"}
+]'></ce-breadcrumbs>
+
+<!-- @example Slotted children (CDR-005 slot mode) -->
+<ce-breadcrumbs>
+  <a href="/">Home</a>
+  <a href="/dashboard">Dashboard</a>
+  <span>Billing</span>
+</ce-breadcrumbs>
+
+<!-- @example Single crumb -->
+<ce-breadcrumbs items='[{"label":"Home"}]'></ce-breadcrumbs>

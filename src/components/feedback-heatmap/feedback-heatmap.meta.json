@@ -6,6 +6,8 @@
   "goal": "Visualise the distribution of verdicts across an aggregated feedback subject as a small color-coded bar.",
   "description": "Companion to <ce-feedback-sink>. Listens for ce-feedback-state events on document and renders a horizontal cell bar per item — green (thumbs up), red (thumbs down), blue (bookmarked), amber (dismissed), purple (commented), muted (no signal). Hydrates from any ancestor sink's getState() at connect, then updates incrementally on every state event. Optional inline legend.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "subject",

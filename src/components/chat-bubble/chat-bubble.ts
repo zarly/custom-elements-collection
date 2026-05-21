@@ -13,6 +13,10 @@ export type CeChatRole = "user" | "assistant" | "system" | "tool";
  *   timestamp   — ISO-8601 string; rendered verbatim (host can format upstream)
  *   model       — optional model name (e.g. "opus-4.7")
  *   tokens      — optional token count; rendered in the footer when set
+ *   follow-up   — boolean; hides the avatar slot, suppresses the author/model/
+ *                 timestamp head, and tightens the outer top margin. Used by
+ *                 `<ce-message-group>` (and any other cluster wrapper) to
+ *                 collapse repeated chrome on non-first bubbles in a run.
  *
  * Slots:
  *   (default) — message body
@@ -106,6 +110,19 @@ export class CeChatBubble extends CecElement {
     }
     .ce-bubble__head:empty { display: none; }
 
+    /* Follow-up mode (set externally by ce-message-group on non-first
+       bubbles in a same-role cluster): hide the avatar column, drop the
+       header line, and pull the bubble up tight against the previous one. */
+    :host([follow-up]) {
+      margin-top: var(--ce-space-1);
+    }
+    :host([follow-up]) .ce-bubble__avatar {
+      visibility: hidden;
+    }
+    :host([follow-up]) .ce-bubble__head {
+      display: none;
+    }
+
     .ce-bubble__body ::slotted(*:first-child) { margin-top: 0; }
     .ce-bubble__body ::slotted(*:last-child) { margin-bottom: 0; }
 
@@ -139,6 +156,15 @@ export class CeChatBubble extends CecElement {
   @property({ type: String }) timestamp = "";
   @property({ type: String }) model = "";
   @property({ type: Number }) tokens: number | null = null;
+
+  /**
+   * Opt-in flag set externally (typically by `<ce-message-group>`) to mark
+   * this bubble as a follow-up in a same-role cluster. When true, the bubble
+   * hides its avatar column, suppresses the author/model/timestamp head, and
+   * pulls up tight against the previous sibling.
+   */
+  @property({ type: Boolean, reflect: true, attribute: "follow-up" })
+  followUp = false;
 
   override willUpdate(changed: PropertyValues<this>): void {
     if (changed.has("author") || !this.hasAttribute("aria-label")) {

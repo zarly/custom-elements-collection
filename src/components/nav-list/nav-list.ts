@@ -1,5 +1,6 @@
 import { html, css, nothing } from "lit";
 import { property } from "lit/decorators.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 
 export interface NavItem {
@@ -7,10 +8,23 @@ export interface NavItem {
   group?: string;
   /** Visible label. */
   label: string;
+  /**
+   * Optional HTML rendered in place of `label` when present. Same trust contract
+   * as `meta`: consumer is responsible for safety, do NOT pass user input.
+   * Intended for inline highlight markup like `<ce-mark>`.
+   */
+  labelHtml?: string;
   /** Href / hash target. */
   href: string;
   /** Optional small monospace tag shown after the label (e.g. "ce-hero"). */
   tag?: string;
+  /**
+   * Optional HTML snippet rendered as a right-aligned secondary block on the row,
+   * after the label/tag. Intended for trust-controlled markup like `<ce-clock>`,
+   * `<ce-chip>`, or other small custom-element badges. The consumer is responsible
+   * for the safety of this string — do NOT pass user-controlled input here.
+   */
+  meta?: string;
 }
 
 /**
@@ -77,6 +91,17 @@ export class CeNavList extends CecElement {
     .ce-nav__link[aria-current="page"] .ce-nav__tag {
       color: var(--ce-color-blue);
     }
+    .ce-nav__meta {
+      margin-left: auto;
+      font-size: var(--ce-text-xs);
+      color: var(--ce-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ce-space-1);
+    }
+    .ce-nav__link[aria-current="page"] .ce-nav__meta {
+      color: var(--ce-color-blue);
+    }
   `;
 
   protected override createRenderRoot(): ShadowRoot {
@@ -124,8 +149,9 @@ export class CeNavList extends CecElement {
                 aria-current=${this.value === it.href ? "page" : "false"}
                 @click=${(ev: MouseEvent) => this.handleClick(it.href, ev)}
               >
-                <span>${it.label}</span>
+                <span>${it.labelHtml ? unsafeHTML(it.labelHtml) : it.label}</span>
                 ${it.tag ? html`<span class="ce-nav__tag">${it.tag}</span>` : nothing}
+                ${it.meta ? html`<span class="ce-nav__meta">${unsafeHTML(it.meta)}</span>` : nothing}
               </a>
             `,
           )}

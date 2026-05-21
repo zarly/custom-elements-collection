@@ -6,6 +6,8 @@
   "goal": "Bind a row of feedback controls to a single item id within a subject and emit one aggregated state event per change.",
   "description": "Per-item row container that walks its descendants on connect and on every slotchange to set data-ce-subject + data-ce-item on every ce-rating, ce-bookmark, ce-dismiss, and ce-comment that doesn't already declare them. Listens to bubbling change events from those descendants and re-emits a single aggregated ce-feedback-item-state event after every change. Does not stop propagation — the original events still bubble to an ancestor ce-feedback-sink.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "item",

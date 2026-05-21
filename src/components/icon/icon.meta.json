@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-icon",
+  "name": "Icon",
+  "className": "CeIcon",
+  "goal": "Wrap arbitrary icon content (SVG, emoji, glyph, image) in a consistently-sized currentColor-aware box.",
+  "description": "Themed icon slot. The library deliberately does not ship an icon set; authors drop their preferred SVG, emoji, or icon-font glyph into the default slot and ce-icon normalizes sizing and color inheritance. Slotted <svg> elements have their fill and stroke pinned to currentColor so they tint with the surrounding text. Three discrete sizes (sm/md/lg). Decorative by default; setting label promotes it to role=img with an accessible name.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "size",
+      "type": "CecSize",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Icon size — sm (12px) | md (16px) | lg (24px)."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Accessible name. When set, the icon is announced as role=img; when empty, the icon is decorative (aria-hidden=true)."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Icon content — inline <svg>, emoji glyph, <img>, or icon-font ligature."
+    }
+  ],
+  "cssVariables": [],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets role / aria-label / aria-hidden on the host based on the label prop.",
+      "reason": "Accessibility tree wants either a role+name pair or an aria-hidden flag, not both."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-badge",
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "icon",
+    "primitive"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-duration",
+  "name": "Duration",
+  "className": "CeDuration",
+  "goal": "Format a static duration in seconds (or milliseconds) as a compact or long human-readable string.",
+  "description": "Pure formatter for a fixed elapsed time — e.g. 'this task took 3725 seconds → 1h 2m'. Auto-picks the most significant units (days, hours, minutes, seconds) up to a cap (default 2). The compact format renders '1h 2m 5s'; the long format renders '1 hour 2 minutes 5 seconds' with correct plural agreement. Sub-second durations supplied via the ms attribute are formatted as a millisecond string. No live ticking — for a counting timer see ce-countdown, for relative age see ce-relative-time.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "seconds",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Duration in seconds."
+    },
+    {
+      "name": "ms",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Duration in milliseconds; overrides seconds when set and renders a sub-second unit when < 1000."
+    },
+    {
+      "name": "format",
+      "type": "\"compact\" | \"long\"",
+      "required": false,
+      "default": "\"compact\"",
+      "reflect": true,
+      "description": "Compact ('1h 2m 5s') or long ('1 hour 2 minutes 5 seconds') word form."
+    },
+    {
+      "name": "units",
+      "type": "number",
+      "required": false,
+      "default": "2",
+      "description": "Maximum number of significant units to render."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Text color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-countdown",
+    "ce-relative-time",
+    "ce-clock"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "time",
+    "primitive"
+  ]
+}

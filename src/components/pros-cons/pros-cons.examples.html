@@ -1,0 +1,27 @@
+<!-- @example Minimal pros / cons -->
+<ce-pros-cons
+  pros='["Ships fastest","No new deps","Reuses our existing token pipeline"]'
+  cons='["Locks API to current shape","Skips i18n review"]'
+></ce-pros-cons>
+
+<!-- @example Renamed headers — Benefits vs Risks -->
+<ce-pros-cons
+  pros-label="Benefits"
+  cons-label="Risks"
+  pros='["Higher activation rate","Cheaper retention","Better LTV"]'
+  cons='["Cold-start cost","Possible cannibalisation of paid tier"]'
+></ce-pros-cons>
+
+<!-- @example Slotted children with rich content (CDR-005) -->
+<ce-pros-cons>
+  <li slot="pros">Improves p95 by <strong>~40%</strong> in load tests.</li>
+  <li slot="pros">Removes the legacy worker pool entirely.</li>
+  <li slot="cons">Migration window of ~2 hours on the primary cluster.</li>
+  <li slot="cons">Requires a coordinated rollout with the mobile team — see <a href="#mobile">notes</a>.</li>
+</ce-pros-cons>
+
+<!-- @example Mixed mode — JSON pros, slotted cons -->
+<ce-pros-cons pros='["Cheap","Fast","Familiar API"]'>
+  <li slot="cons">Vendor lock-in (<code>aws-only</code> features).</li>
+  <li slot="cons">Cold-start latency >800 ms on tiny instances.</li>
+</ce-pros-cons>

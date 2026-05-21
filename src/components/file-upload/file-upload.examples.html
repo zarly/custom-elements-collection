@@ -1,0 +1,26 @@
+<!-- @example Idle dropzone (default state) -->
+<ce-file-upload name="attachment"></ce-file-upload>
+
+<!-- @example Image-only, multiple selection -->
+<ce-file-upload
+  name="screenshots"
+  accept="image/*"
+  multiple
+  label="Add screenshots"
+  hint="PNG or JPG, up to 5 MB each"
+></ce-file-upload>
+
+<!-- @example With supporting body content (validation hint) -->
+<ce-file-upload name="resume" accept=".pdf,.doc,.docx" label="Upload resume" hint="PDF or Word document">
+  <p style="margin:0;font-size:var(--ce-text-xs);color:var(--ce-muted);">
+    We accept PDF and Word files up to 10 MB. We never share resumes with third parties.
+  </p>
+</ce-file-upload>
+
+<!-- @example Custom icon slot -->
+<ce-file-upload name="ledger" accept=".csv" label="Drop CSV ledger">
+  <span slot="icon">📄</span>
+</ce-file-upload>
+
+<!-- @example Disabled state -->
+<ce-file-upload disabled label="Upload disabled" hint="Submit the form first."></ce-file-upload>

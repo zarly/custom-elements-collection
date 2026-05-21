@@ -1,0 +1,31 @@
+<!-- @example Recent activity timestamp -->
+<p>
+  Updated <ce-relative-time datetime="2026-05-20T12:30:00Z"></ce-relative-time>.
+</p>
+
+<!-- @example A row of recent and older items -->
+<ul>
+  <li>Just posted: <ce-relative-time datetime="2026-05-20T13:55:00Z"></ce-relative-time></li>
+  <li>This morning: <ce-relative-time datetime="2026-05-20T08:00:00Z"></ce-relative-time></li>
+  <li>Last week: <ce-relative-time datetime="2026-05-13T10:00:00Z"></ce-relative-time></li>
+  <li>Old archive: <ce-relative-time datetime="2024-01-01T00:00:00Z"></ce-relative-time></li>
+</ul>
+
+<!-- @example Future-tense reading (numeric=always) -->
+<p>
+  Release window opens
+  <ce-relative-time datetime="2026-06-01T00:00:00Z" numeric="always"></ce-relative-time>.
+</p>
+
+<!-- @example Localized rendering -->
+<p>
+  Sample (de-DE):
+  <ce-relative-time datetime="2026-05-19T12:00:00Z" locale="de-DE"></ce-relative-time>
+</p>
+
+<!-- @example Combined with absolute time via ce-clock -->
+<p>
+  <ce-clock format="absolute" tz="UTC"></ce-clock>
+  <ce-divider orientation="vertical"></ce-divider>
+  Last sync: <ce-relative-time datetime="2026-05-20T13:00:00Z"></ce-relative-time>
+</p>

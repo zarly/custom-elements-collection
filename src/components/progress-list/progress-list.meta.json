@@ -6,6 +6,8 @@
   "goal": "Stack multiple progress bars and arbitrary inline content into a vertically-gapped list with consistent spacing.",
   "description": "Flex-column layout container. Accepts ce-progress rows, narrative paragraphs, ce-callout annotations, and any other children. Gap between rows is controlled by the --ce-progress-list-gap custom property. No hard wrappers — any HTML child renders correctly (CDR-006).",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [],
   "events": [],
   "slots": [
@@ -32,8 +34,13 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": ["ce-progress"],
-  "related": ["ce-progress", "ce-grid"],
+  "dependencies": [
+    "ce-progress"
+  ],
+  "related": [
+    "ce-progress",
+    "ce-grid"
+  ],
   "category": "ui",
   "tier": "layout",
   "tags": [

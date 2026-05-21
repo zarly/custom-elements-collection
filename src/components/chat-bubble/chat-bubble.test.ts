@@ -104,4 +104,33 @@ describe("<ce-chat-bubble>", () => {
     expect(el.shadowRoot!.querySelector(".ce-bubble__tokens")).toBeNull();
     host.remove();
   });
+
+  it("follow-up attribute reflects from the property and back", async () => {
+    const host = document.createElement("div");
+    host.innerHTML = `<ce-chat-bubble follow-up>x</ce-chat-bubble>`;
+    document.body.appendChild(host);
+    const el = host.querySelector("ce-chat-bubble") as CeChatBubble;
+    await el.updateComplete;
+    expect(el.followUp).toBe(true);
+    el.followUp = false;
+    await el.updateComplete;
+    expect(el.hasAttribute("follow-up")).toBe(false);
+    host.remove();
+  });
+
+  it("keeps the follow-up attribute on the host and the head row in DOM", async () => {
+    // The CSS rule `:host([follow-up]) .ce-bubble__head { display: none }` is
+    // what hides the chrome visually. jsdom does not evaluate adopted styles
+    // through `:host` selectors, so we assert the observable contract: the
+    // attribute reaches the host (already covered above) and the head row
+    // stays in the shadow tree for the stylesheet to suppress.
+    const host = document.createElement("div");
+    host.innerHTML = `<ce-chat-bubble author="Claude" follow-up>x</ce-chat-bubble>`;
+    document.body.appendChild(host);
+    const el = host.querySelector("ce-chat-bubble") as CeChatBubble;
+    await el.updateComplete;
+    expect(el.hasAttribute("follow-up")).toBe(true);
+    expect(el.shadowRoot!.querySelector(".ce-bubble__head")).not.toBeNull();
+    host.remove();
+  });
 });

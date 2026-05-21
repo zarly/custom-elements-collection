@@ -1,10 +1,10 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.5.0",
-  "description": "A collection of 99 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface and feedback-UI primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
+  "version": "0.6.0",
+  "description": "A collection of 126 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface, RAG/agent, feedback-UI, decision-analysis, and form primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
-  "homepage": "https://github.com/zarly/custom-elements-collection#readme",
+  "homepage": "https://generativeui.ru/solutions/custom-elements-collection/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zarly/custom-elements-collection.git"
@@ -61,6 +61,22 @@
       "types": "./dist/entries/abbr.d.ts",
       "import": "./dist/entries/abbr.js"
     },
+    "./accordion": {
+      "types": "./dist/entries/accordion.d.ts",
+      "import": "./dist/entries/accordion.js"
+    },
+    "./attachment-strip": {
+      "types": "./dist/entries/attachment-strip.d.ts",
+      "import": "./dist/entries/attachment-strip.js"
+    },
+    "./avatar": {
+      "types": "./dist/entries/avatar.d.ts",
+      "import": "./dist/entries/avatar.js"
+    },
+    "./avatar-group": {
+      "types": "./dist/entries/avatar-group.d.ts",
+      "import": "./dist/entries/avatar-group.js"
+    },
     "./badge": {
       "types": "./dist/entries/badge.d.ts",
       "import": "./dist/entries/badge.js"
@@ -76,6 +92,10 @@
     "./bookmark": {
       "types": "./dist/entries/bookmark.d.ts",
       "import": "./dist/entries/bookmark.js"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/entries/breadcrumbs.d.ts",
+      "import": "./dist/entries/breadcrumbs.js"
     },
     "./button": {
       "types": "./dist/entries/button.d.ts",
@@ -96,6 +116,10 @@
     "./chat-bubble": {
       "types": "./dist/entries/chat-bubble.d.ts",
       "import": "./dist/entries/chat-bubble.js"
+    },
+    "./chat-input": {
+      "types": "./dist/entries/chat-input.d.ts",
+      "import": "./dist/entries/chat-input.js"
     },
     "./check-item": {
       "types": "./dist/entries/check-item.d.ts",
@@ -137,9 +161,17 @@
       "types": "./dist/entries/confirm.d.ts",
       "import": "./dist/entries/confirm.js"
     },
+    "./conversation-tree": {
+      "types": "./dist/entries/conversation-tree.d.ts",
+      "import": "./dist/entries/conversation-tree.js"
+    },
     "./copy-button": {
       "types": "./dist/entries/copy-button.d.ts",
       "import": "./dist/entries/copy-button.js"
+    },
+    "./countdown": {
+      "types": "./dist/entries/countdown.d.ts",
+      "import": "./dist/entries/countdown.js"
     },
     "./counter": {
       "types": "./dist/entries/counter.d.ts",
@@ -148,6 +180,10 @@
     "./cursor": {
       "types": "./dist/entries/cursor.d.ts",
       "import": "./dist/entries/cursor.js"
+    },
+    "./date-picker": {
+      "types": "./dist/entries/date-picker.d.ts",
+      "import": "./dist/entries/date-picker.js"
     },
     "./decision-tree": {
       "types": "./dist/entries/decision-tree.d.ts",
@@ -165,6 +201,10 @@
       "types": "./dist/entries/dismiss.d.ts",
       "import": "./dist/entries/dismiss.js"
     },
+    "./divider": {
+      "types": "./dist/entries/divider.d.ts",
+      "import": "./dist/entries/divider.js"
+    },
     "./docs-layout": {
       "types": "./dist/entries/docs-layout.d.ts",
       "import": "./dist/entries/docs-layout.js"
@@ -172,6 +212,10 @@
     "./donut": {
       "types": "./dist/entries/donut.d.ts",
       "import": "./dist/entries/donut.js"
+    },
+    "./duration": {
+      "types": "./dist/entries/duration.d.ts",
+      "import": "./dist/entries/duration.js"
     },
     "./example": {
       "types": "./dist/entries/example.d.ts",
@@ -204,6 +248,10 @@
     "./file-card": {
       "types": "./dist/entries/file-card.d.ts",
       "import": "./dist/entries/file-card.js"
+    },
+    "./file-upload": {
+      "types": "./dist/entries/file-upload.d.ts",
+      "import": "./dist/entries/file-upload.js"
     },
     "./filter-bar": {
       "types": "./dist/entries/filter-bar.d.ts",
@@ -241,6 +289,10 @@
       "types": "./dist/entries/hero.d.ts",
       "import": "./dist/entries/hero.js"
     },
+    "./icon": {
+      "types": "./dist/entries/icon.d.ts",
+      "import": "./dist/entries/icon.js"
+    },
     "./image": {
       "types": "./dist/entries/image.d.ts",
       "import": "./dist/entries/image.js"
@@ -252,6 +304,10 @@
     "./json": {
       "types": "./dist/entries/json.d.ts",
       "import": "./dist/entries/json.js"
+    },
+    "./kbd": {
+      "types": "./dist/entries/kbd.d.ts",
+      "import": "./dist/entries/kbd.js"
     },
     "./key-value": {
       "types": "./dist/entries/key-value.d.ts",
@@ -329,9 +385,33 @@
       "types": "./dist/entries/lesson-vocab.d.ts",
       "import": "./dist/entries/lesson-vocab.js"
     },
+    "./link": {
+      "types": "./dist/entries/link.d.ts",
+      "import": "./dist/entries/link.js"
+    },
+    "./mark": {
+      "types": "./dist/entries/mark.d.ts",
+      "import": "./dist/entries/mark.js"
+    },
+    "./matrix": {
+      "types": "./dist/entries/matrix.d.ts",
+      "import": "./dist/entries/matrix.js"
+    },
+    "./message-group": {
+      "types": "./dist/entries/message-group.d.ts",
+      "import": "./dist/entries/message-group.js"
+    },
+    "./modal": {
+      "types": "./dist/entries/modal.d.ts",
+      "import": "./dist/entries/modal.js"
+    },
     "./nav-list": {
       "types": "./dist/entries/nav-list.d.ts",
       "import": "./dist/entries/nav-list.js"
+    },
+    "./pagination": {
+      "types": "./dist/entries/pagination.d.ts",
+      "import": "./dist/entries/pagination.js"
     },
     "./persona": {
       "types": "./dist/entries/persona.d.ts",
@@ -353,6 +433,10 @@
       "types": "./dist/entries/progress-list.d.ts",
       "import": "./dist/entries/progress-list.js"
     },
+    "./pros-cons": {
+      "types": "./dist/entries/pros-cons.d.ts",
+      "import": "./dist/entries/pros-cons.js"
+    },
     "./qr": {
       "types": "./dist/entries/qr.d.ts",
       "import": "./dist/entries/qr.js"
@@ -365,13 +449,25 @@
       "types": "./dist/entries/radio-group.d.ts",
       "import": "./dist/entries/radio-group.js"
     },
+    "./rank-list": {
+      "types": "./dist/entries/rank-list.d.ts",
+      "import": "./dist/entries/rank-list.js"
+    },
     "./rating": {
       "types": "./dist/entries/rating.d.ts",
       "import": "./dist/entries/rating.js"
     },
+    "./reasoning": {
+      "types": "./dist/entries/reasoning.d.ts",
+      "import": "./dist/entries/reasoning.js"
+    },
     "./recommendation": {
       "types": "./dist/entries/recommendation.d.ts",
       "import": "./dist/entries/recommendation.js"
+    },
+    "./relative-time": {
+      "types": "./dist/entries/relative-time.d.ts",
+      "import": "./dist/entries/relative-time.js"
     },
     "./retry-button": {
       "types": "./dist/entries/retry-button.d.ts",
@@ -385,6 +481,10 @@
       "types": "./dist/entries/section.d.ts",
       "import": "./dist/entries/section.js"
     },
+    "./select": {
+      "types": "./dist/entries/select.d.ts",
+      "import": "./dist/entries/select.js"
+    },
     "./shell": {
       "types": "./dist/entries/shell.d.ts",
       "import": "./dist/entries/shell.js"
@@ -392,6 +492,10 @@
     "./skeleton": {
       "types": "./dist/entries/skeleton.d.ts",
       "import": "./dist/entries/skeleton.js"
+    },
+    "./source-card": {
+      "types": "./dist/entries/source-card.d.ts",
+      "import": "./dist/entries/source-card.js"
     },
     "./sparkline": {
       "types": "./dist/entries/sparkline.d.ts",
@@ -413,6 +517,18 @@
       "types": "./dist/entries/steps.d.ts",
       "import": "./dist/entries/steps.js"
     },
+    "./stop-button": {
+      "types": "./dist/entries/stop-button.d.ts",
+      "import": "./dist/entries/stop-button.js"
+    },
+    "./stream-status": {
+      "types": "./dist/entries/stream-status.d.ts",
+      "import": "./dist/entries/stream-status.js"
+    },
+    "./suggestion-chip": {
+      "types": "./dist/entries/suggestion-chip.d.ts",
+      "import": "./dist/entries/suggestion-chip.js"
+    },
     "./table": {
       "types": "./dist/entries/table.d.ts",
       "import": "./dist/entries/table.js"
@@ -420,6 +536,10 @@
     "./tabs": {
       "types": "./dist/entries/tabs.d.ts",
       "import": "./dist/entries/tabs.js"
+    },
+    "./tag": {
+      "types": "./dist/entries/tag.d.ts",
+      "import": "./dist/entries/tag.js"
     },
     "./textarea": {
       "types": "./dist/entries/textarea.d.ts",
@@ -448,6 +568,10 @@
     "./tool-call": {
       "types": "./dist/entries/tool-call.d.ts",
       "import": "./dist/entries/tool-call.js"
+    },
+    "./tool-result": {
+      "types": "./dist/entries/tool-result.d.ts",
+      "import": "./dist/entries/tool-result.js"
     },
     "./verdict": {
       "types": "./dist/entries/verdict.d.ts",
@@ -479,6 +603,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "echo '(no lint)'",
     "validate-meta": "tsx scripts/validate-meta.ts",
+    "sync-meta-dates": "tsx scripts/sync-meta-dates.ts",
+    "sync-meta-dates:dry": "tsx scripts/sync-meta-dates.ts --dry-run",
+    "sync-meta-dates:check": "tsx scripts/sync-meta-dates.ts --check",
     "gen-exports": "tsx scripts/generate-exports.ts",
     "gen-registry": "tsx scripts/generate-registry.ts",
     "gen-skill": "tsx scripts/generate-skill.ts",
@@ -488,7 +615,11 @@
     "analyze": "ANALYZE=1 vite build && tsc -p tsconfig.build.json && pnpm bundle-stats",
     "check": "pnpm typecheck && pnpm validate-meta && pnpm gen-skill:check && pnpm test && pnpm build",
     "pack:inspect": "pnpm pack --pack-destination /tmp && echo '→ tarball at /tmp/custom-elements-collection-<version>.tgz'",
-    "prepublishOnly": "pnpm gen-exports && pnpm build-publish-manifest --apply"
+    "prepublishOnly": "pnpm gen-exports && pnpm build-publish-manifest --apply",
+    "prepare": "simple-git-hooks || true"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bash scripts/pre-commit-hook.sh"
   },
   "devDependencies": {
     "@playwright/test": "1.59.1",
@@ -496,6 +627,7 @@
     "jsdom": "25.0.1",
     "lit": "3.2.1",
     "rollup-plugin-visualizer": "7.0.1",
+    "simple-git-hooks": "2.13.1",
     "tsx": "4.19.2",
     "typescript": "5.9.3",
     "vite": "5.4.10",

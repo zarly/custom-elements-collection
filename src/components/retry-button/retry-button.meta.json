@@ -6,6 +6,8 @@
   "goal": "Provide a small \"regenerate\" affordance for chat surfaces that emits a single ce-retry intent on click.",
   "description": "Compact button rendered in three styled variants (primary/secondary/ghost). Default content is a circular-arrow SVG plus the label, both replaceable via the default slot. Emits a bubbling, composed ce-retry CustomEvent on click — no detail payload.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "label",

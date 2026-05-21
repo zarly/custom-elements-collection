@@ -6,6 +6,8 @@
   "goal": "Reserve layout with an animated shimmer placeholder while content loads.",
   "description": "Loading placeholder with text-line, rectangle, and circle shapes. The text variant supports multiple lines with the last line shortened to mimic real prose. Decoration is hidden from assistive technology via aria-hidden.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "shape",

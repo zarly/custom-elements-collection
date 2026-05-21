@@ -6,6 +6,8 @@
   "goal": "Render a tab strip + paired panels with shared chip-pill head treatment, full keyboard support, and two ergonomic input shapes.",
   "description": "Tabbed content widget for interactive production UX. The head reuses the same chip-pill visual style as ce-filter-bar (one family across the catalog). Two ways to provide tab labels: a JSON tabs[] prop (string or {label, badge?, disabled?}) for the data path, or slotted <button slot=\"tab\"> children for richer markup. Panels always come from <* slot=\"panel\"> children, paired with tabs by index. Roving tabindex; arrow keys / Home / End move selection; Space / Enter activate. Aria-selected, aria-controls, aria-labelledby connect tabs to panels. For static anchored sections in a vis-style document, prefer <ce-section> + <ce-toc>.",
   "stability": "experimental",
+  "created": "2026-05-08",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "tabs",
@@ -152,10 +154,17 @@
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["ce-filter-bar", "ce-toc"],
+  "related": [
+    "ce-filter-bar",
+    "ce-toc"
+  ],
   "category": "ui",
   "tier": "widget",
-  "tags": ["Layout & primitives", "navigation", "interactive"],
+  "tags": [
+    "Layout & primitives",
+    "navigation",
+    "interactive"
+  ],
   "a11y": {
     "role": "tablist",
     "notes": "Inner tablist gets aria-orientation horizontal/vertical based on the vertical attr. Each tab has role=tab + aria-selected + aria-controls. Each panel has role=tabpanel + aria-labelledby. Inactive panels get hidden; only the active panel is in the accessibility tree."

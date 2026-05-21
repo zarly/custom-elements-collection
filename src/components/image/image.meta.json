@@ -6,6 +6,8 @@
   "goal": "Render a lazily-loaded image with optional caption and graceful fallback when the source fails.",
   "description": "Themable <figure> wrapping a native <img>. Defaults to lazy loading; on a load error, swaps to a fallback URL when provided or shows a styled error placeholder otherwise. Caption can be set as an attribute or via the named slot. Emits ce-image-error so consumers can log or substitute.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "src",

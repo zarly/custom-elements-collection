@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-conversation-tree",
+  "name": "Conversation tree",
+  "className": "CeConversationTree",
+  "goal": "Compact prev/next branch picker for forked LLM conversations — controls for selecting among regenerated responses with N / M indicator.",
+  "description": "Inline pill control rendering a prev arrow, an index/total counter, and a next arrow. Used to switch among forked or regenerated responses in chat surfaces. Emits ce-branch-prev / ce-branch-next on directional clicks plus a unified ce-branch-select on every change. Supports ArrowLeft / ArrowRight keyboard navigation when focused.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "index",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "reflect": true,
+      "description": "1-based current branch index; clamped to [1, total]."
+    },
+    {
+      "name": "total",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "reflect": true,
+      "description": "Total branch count. Values below 1 are treated as 1, effectively disabling both buttons."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional descriptive label rendered before the controls (e.g. \"Response\")."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables both navigation buttons."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-branch-prev",
+      "detail": "{ index: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the index decreases by one. Detail carries the NEW index. Not fired when prev is disabled."
+    },
+    {
+      "name": "ce-branch-next",
+      "detail": "{ index: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the index increases by one. Detail carries the NEW index. Not fired when next is disabled."
+    },
+    {
+      "name": "ce-branch-select",
+      "detail": "{ index: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every change (prev OR next) so hosts can subscribe to a single event."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Overrides the auto-generated \"N / M\" counter content (e.g. a custom label like \"Branch B of 3\")."
+    },
+    {
+      "name": "prev-icon",
+      "description": "Overrides the default chevron-left icon."
+    },
+    {
+      "name": "next-icon",
+      "description": "Overrides the default chevron-right icon."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill border."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Counter and button icon color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Optional leading label color."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Button hover background."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring on the host and buttons."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer pill border-radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Inner button border-radius."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Label right margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between elements and outer horizontal padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer pill font size."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Pill font family."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Button hover background transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chat-bubble",
+    "ce-retry-button",
+    "ce-tabs"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "navigation",
+    "branch"
+  ],
+  "a11y": {
+    "role": "(none — host is a generic focusable container)",
+    "notes": "The host receives tabindex=\"0\" on connect and listens for ArrowLeft / ArrowRight. Each inner button has an aria-label (\"Previous branch\" / \"Next branch\"). The counter span uses aria-live=\"polite\" so screen readers announce index changes."
+  }
+}

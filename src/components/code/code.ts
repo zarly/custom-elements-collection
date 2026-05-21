@@ -4,11 +4,32 @@ import { CecElement } from "../../core/index.js";
 
 /**
  * `<ce-code>` — code block with optional language label and copy button.
- * No syntax-highlighting runtime; consumers who want tokens can use pre-rendered
- * <span class="tok-k"> etc. in the slotted content (sees tokens.css).
+ *
+ * No syntax-highlighting runtime is bundled — keeping `<ce-code>` small and
+ * theme-agnostic. Consumers who want tokens have two paths:
+ *
+ *   1. **Pre-render token spans** as slotted children, then style them per
+ *      whichever class scheme they pick. The slot accepts any inline content
+ *      verbatim — copy/paste keeps working because spans are inert.
+ *   2. **In a streaming-markdown pipeline**, plug a highlighter into
+ *      `@generative-dom/plugin-companion`'s `contentRenderers` option. The
+ *      canonical recipe wires `@generative-dom/plugin-highlight`'s public
+ *      `tokenize` + `renderTokens` exports into a per-tag renderer for
+ *      `<ce-code>`, emitting `<span class="hl-keyword">`, `hl-string`,
+ *      `hl-number`, etc. See the plugin-companion README.
+ *
+ * Either way, the consumer owns the token-class palette. `<ce-code>` itself
+ * stays neutral and styles only the frame (border, header, copy button).
  *
  * Attributes:
- *   lang       — optional language label shown top-right ("ts", "html", "bash")
+ *   lang       — optional language label shown top-right. Any string is
+ *                accepted; the `@generative-dom/plugin-highlight` runtime
+ *                ships built-in tokenisers for: `js`/`javascript`,
+ *                `ts`/`typescript`, `json`, `html`, `css`, `bash`/`sh`/
+ *                `shell`/`zsh`, `c`, `cpp`/`c++`, `yaml`/`yml`,
+ *                `markdown`/`md`, `diff`/`patch`, `julia`/`jl`, `zig`.
+ *                Authoritative list lives in that package's `BUILTIN_LANGS`.
+ *                Other tags render as a plain label.
  *   filename   — optional filename label shown top-left
  *   copy       — boolean; show a copy button (default true)
  *

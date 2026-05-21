@@ -6,6 +6,8 @@
   "goal": "Ask the learner to rate their confidence on a topic before or after an exercise (1=not confident, 5=very confident).",
   "description": "Metacognitive rating widget with 5 circular buttons. The label prop sets the prompt. Clicking a button sets rating, marks the card submitted (attribute reflects), disables all other buttons, and fires lesson-confidence-rate. reset() clears state. Supports Bjork's desirable-difficulty framework.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "label",
@@ -41,22 +43,102 @@
   ],
   "slots": [],
   "cssVariables": [
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Card and button border." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Card vertical padding." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card horizontal padding." },
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Label bottom margin." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Button gap + result top margin." },
-    { "name": "--ce-space-1", "kind": "size", "source": "token", "description": "Scale top margin." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Label and button font size." },
-    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Scale label and result font size." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Label, scale label, and muted text color." },
-    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Button default background." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Button text color." },
-    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Selected button text color." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Selected button background + result color." },
-    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Button transition." }
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Card and button border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Card vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card horizontal padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Label bottom margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Button gap + result top margin."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Scale top margin."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label and button font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Scale label and result font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label, scale label, and muted text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Button default background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Button text color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected button text color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected button background + result color."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Button transition."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [
@@ -68,8 +150,16 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-quiz", "lesson-reveal", "lesson-frame"],
+  "related": [
+    "lesson-quiz",
+    "lesson-reveal",
+    "lesson-frame"
+  ],
   "category": "lesson",
   "tier": "widget",
-  "tags": ["Education", "confidence", "metacognition"]
+  "tags": [
+    "Education",
+    "confidence",
+    "metacognition"
+  ]
 }

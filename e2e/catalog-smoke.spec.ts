@@ -15,6 +15,9 @@ const REPRESENTATIVE_TAGS = [
   "ce-verdict", // Comparison & narrative
   "ce-chat-bubble", // Chat surfaces
   "ce-feedback-sink", // Feedback
+  "ce-input", // Forms
+  "ce-clock", // Dashboard
+  "ce-json", // Content
   "lesson-frame", // Lesson
   "ce-docs-layout", // Internal
 ];
@@ -40,7 +43,7 @@ test("demo catalog: every representative tag upgrades after auto.ts", async ({
   expect(registered.every(Boolean)).toBe(true);
 });
 
-test("demo catalog: the manifest exposes 49 components and the sidebar lists them", async ({
+test("demo catalog: the manifest exposes a healthy component count and the sidebar lists them", async ({
   page,
 }) => {
   await page.goto("/");
@@ -49,7 +52,11 @@ test("demo catalog: the manifest exposes 49 components and the sidebar lists the
     const mod = await import("/src/manifest.ts");
     return mod.COMPONENTS.length;
   });
-  expect(manifest).toBe(49);
+  // The catalog grows over time. The previous exact-count assertion (49) went
+  // stale silently because nothing forced a bump on every component ship; use
+  // a lower bound so a regression that *cuts* components still trips the spec.
+  // Update the floor on intentional shrink.
+  expect(manifest).toBeGreaterThanOrEqual(118);
 
   const sidebar = page.locator("ce-nav-list#nav");
   await expect(sidebar).toBeVisible();

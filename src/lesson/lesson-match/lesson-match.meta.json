@@ -6,6 +6,8 @@
   "goal": "Drill term-definition or any-to-any pairing through clickable two-column matching — a strong recall-reinforcement primitive.",
   "description": "Renders two columns of buttons. Learner clicks one item on the left, then one on the right; correct pairs lock in green and disable, wrong pairs flash red and clear the selection. The right column is shuffled deterministically so the order does not encode the answer. After every pair is matched, the host gets the submitted attribute and lesson-match-complete fires once with the attempt count. lesson-match-pair fires on every click-pair attempt with { left, right, correct }. Accepts pairs as a JSON [{ left, right }, ...] attribute or property.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "pairs",
@@ -64,24 +66,114 @@
   ],
   "slots": [],
   "cssVariables": [
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
-    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Default item background." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Card and item border." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
-    { "name": "--ce-radius-sm", "kind": "radius", "source": "token", "description": "Item border radius." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card horizontal padding + item horizontal padding (with --ce-space-4)." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Card vertical padding + grid column gap + item horizontal padding." },
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Header bottom margin + result top margin + grid row gap + item vertical padding." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Column item gap." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Item text color." },
-    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Selected / correct / wrong item text color." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Item font size." },
-    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Column-label font size + result font size." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Column-label color." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Selected item background and hover border." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Correct item background + result text color." },
-    { "name": "--ce-color-red", "kind": "color", "source": "token", "description": "Wrong item background." },
-    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Item transition." }
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default item background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Card and item border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Item border radius."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card horizontal padding + item horizontal padding (with --ce-space-4)."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Card vertical padding + grid column gap + item horizontal padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Header bottom margin + result top margin + grid row gap + item vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Column item gap."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Item text color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected / correct / wrong item text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Item font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Column-label font size + result font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Column-label color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected item background and hover border."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct item background + result text color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Wrong item background."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Item transition."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [
@@ -93,8 +185,16 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-quiz", "lesson-gap", "lesson-vocab"],
+  "related": [
+    "lesson-quiz",
+    "lesson-gap",
+    "lesson-vocab"
+  ],
   "category": "lesson",
   "tier": "widget",
-  "tags": ["Education", "match", "retrieval"]
+  "tags": [
+    "Education",
+    "match",
+    "retrieval"
+  ]
 }

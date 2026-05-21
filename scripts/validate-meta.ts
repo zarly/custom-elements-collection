@@ -231,6 +231,50 @@ async function main(): Promise<void> {
     );
   }
 
+  // — Step 3.5: event-name drift gate (ADR-011 follow-up) ————————————
+  // Every meta `events[].name` MUST appear as a string literal somewhere
+  // in the component's folder (any sibling .ts file — covers helpers and
+  // tests). Catches the exact bug class that broke v2's group-by:
+  // a meta declared an event name no source code references at all.
+  for (const metaFile of metaFiles) {
+    const meta = await fs
+      .readFile(metaFile, "utf8")
+      .then((raw) => JSON.parse(raw) as ComponentMeta)
+      .catch(() => null);
+    if (!meta || !Array.isArray(meta.events) || meta.events.length === 0) continue;
+    const folder = path.dirname(metaFile);
+    // Concatenate every sibling .ts file PLUS the shared internal helpers
+    // (src/internal/* and src/core/*) — chart components dispatch events
+    // through a shared internal/charts/events helper, etc.
+    const sharedSearchRoots = [
+      folder,
+      path.join(SRC_DIR, "internal"),
+      path.join(SRC_DIR, "core"),
+    ];
+    const tsFiles: string[] = [];
+    for (const root of sharedSearchRoots) {
+      const all = await walk(root);
+      for (const f of all) if (f.endsWith(".ts")) tsFiles.push(f);
+    }
+    let folderText = "";
+    for (const f of tsFiles) {
+      try {
+        folderText += await fs.readFile(f, "utf8");
+        folderText += "\n";
+      } catch {}
+    }
+    for (const ev of meta.events) {
+      const literalDouble = `"${ev.name}"`;
+      const literalSingle = `'${ev.name}'`;
+      if (!folderText.includes(literalDouble) && !folderText.includes(literalSingle)) {
+        errors.push({
+          file: metaFile,
+          message: `events[].name "${ev.name}" is not referenced as a string literal anywhere in the component folder (${path.relative(REPO_ROOT, folder)}) or shared helpers (src/internal, src/core). Either source or meta drifted — fix the one that's wrong.`,
+        });
+      }
+    }
+  }
+
   // — Step 4: dependency-graph symmetry (warnings only) ——————————————
   for (const [tag, meta] of validMetas) {
     for (const depTag of meta.dependencies) {

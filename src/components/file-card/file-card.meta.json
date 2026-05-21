@@ -6,6 +6,8 @@
   "goal": "Render a downloadable attachment card with name, size, type icon, and optional thumbnail.",
   "description": "Compact attachment card for use in chat surfaces or message bodies. When `href` is set the whole card becomes an anchor (target=_blank); otherwise it renders a non-interactive group. Type icon is derived from the `type` attribute or, failing that, the file extension; a `thumbnail` URL replaces the icon with an actual preview.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "name",

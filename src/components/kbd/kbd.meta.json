@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-kbd",
+  "name": "Keyboard key",
+  "className": "CeKbd",
+  "goal": "Render a single keyboard key cap with consistent monospace styling and a subtle inset shadow.",
+  "description": "Inline primitive for keyboard shortcuts. The slotted text is shown inside a small bordered cap with monospace font and a 1px lower-edge shadow that suggests a physical key. The component carries no attributes by design — multi-key chords compose with regular HTML (drop multiple <ce-kbd> next to each other separated by a plus or hyphen). role=text is set by default so screen readers treat the cap as a single token rather than splitting on punctuation.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Key label — a glyph (⌘, ⇧, ↵), a letter (K), or a multi-character name (Esc, Enter, Shift)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Key-cap font family."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Key-cap font size."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Key-cap background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Key-cap text color."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Key-cap border color."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Key-cap inset shadow color."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Key-cap corner radius."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Key-cap horizontal padding."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-code",
+    "ce-chip"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "keyboard",
+    "primitive"
+  ]
+}

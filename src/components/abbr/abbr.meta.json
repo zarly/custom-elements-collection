@@ -6,6 +6,8 @@
   "goal": "Render an inline abbreviation with a focusable, accessible tooltip-style expansion.",
   "description": "Inline abbreviation glyph (e.g. 'API', 'WWW') with the full text exposed via the native title tooltip and aria-label. The host carries tabindex=0 so the expansion is reachable via keyboard. Shadow DOM only because the dotted underline uses the standardised :host styling.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "title",

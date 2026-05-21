@@ -6,6 +6,8 @@
   "goal": "Single checklist row carrying a checkbox and rich-content default slot; used as a slot child inside ce-checklist or standalone.",
   "description": "Carries id, checked, and category attributes. Default slot accepts rich content — links, chips, code, dates — per CDR-002. When nested inside ce-checklist the parent reads attributes via DOM and renders the slot HTML; the item itself renders nothing (display:contents). Standalone renders a single checkbox + label row.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "id",
@@ -88,9 +90,13 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-checklist"],
+  "dependents": [
+    "ce-checklist"
+  ],
   "dependencies": [],
-  "related": ["ce-checklist"],
+  "related": [
+    "ce-checklist"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

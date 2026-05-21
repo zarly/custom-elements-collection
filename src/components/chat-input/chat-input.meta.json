@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-chat-input",
+  "name": "Chat input",
+  "className": "CeChatInput",
+  "goal": "Composite chat composer with auto-growing textarea, send/stop/attach buttons, and Enter-to-submit behaviour.",
+  "description": "A self-contained chat composer widget that grows the textarea as the user types (up to max-rows), emits ce-chat-submit on Enter or send-button click, switches to a stop button while busy, and optionally renders an attach button. All buttons and icons are overrideable via named slots.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"Type a message\\u2026\"",
+      "attribute": "placeholder",
+      "reflect": false,
+      "description": "Textarea placeholder text."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "value",
+      "reflect": false,
+      "description": "Live textarea contents. Settable by host for controlled-input use. Not reflected back to attribute."
+    },
+    {
+      "name": "busy",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "busy",
+      "reflect": true,
+      "description": "When true the send button is replaced by a stop button."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "disabled",
+      "reflect": true,
+      "description": "Disables the textarea and all action buttons."
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "attribute": "max-length",
+      "reflect": false,
+      "description": "Hard character limit passed to the textarea. 0 means unlimited."
+    },
+    {
+      "name": "allowAttach",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "allow-attach",
+      "reflect": true,
+      "description": "Renders the attach (paperclip) button when true."
+    },
+    {
+      "name": "rows",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "attribute": "rows",
+      "reflect": false,
+      "description": "Initial textarea row count. The textarea grows up to max-rows."
+    },
+    {
+      "name": "maxRows",
+      "type": "number",
+      "required": false,
+      "default": "8",
+      "attribute": "max-rows",
+      "reflect": false,
+      "description": "Upper bound for autogrow. Beyond this height the textarea scrolls."
+    },
+    {
+      "name": "submitOnEnter",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "attribute": "submit-on-enter",
+      "reflect": false,
+      "description": "When false, Enter inserts a newline and submission is only possible via the send button. Not reflected: set via JS property for the false case."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-chat-submit",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when Enter (no Shift) is pressed or the send button is clicked. Empty or whitespace-only values are suppressed."
+    },
+    {
+      "name": "ce-chat-stop",
+      "detail": "{}",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the stop button is clicked or Escape is pressed while busy=true."
+    },
+    {
+      "name": "ce-chat-attach",
+      "detail": "{}",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the attach button is clicked. Only available when allow-attach=true."
+    },
+    {
+      "name": "ce-chat-input",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires on every textarea input event, mirroring native input. Detail carries the current value."
+    }
+  ],
+  "slots": [
+    {
+      "name": "prefix",
+      "description": "Content rendered above the textarea (e.g. a model-picker chip)."
+    },
+    {
+      "name": "suffix",
+      "description": "Content rendered below the buttons row (e.g. a character counter or hint text)."
+    },
+    {
+      "name": "attach-icon",
+      "description": "Override the default paperclip SVG inside the attach button."
+    },
+    {
+      "name": "send-icon",
+      "description": "Override the default arrow-up SVG inside the send button."
+    },
+    {
+      "name": "stop-icon",
+      "description": "Override the default square SVG inside the stop button."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Composer container background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Composer default border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Composer border when focused."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Composer container border radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button border radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Textarea and button text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Textarea placeholder and attach-button default color."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Composer font family."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Composer font size."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "other",
+      "source": "token",
+      "description": "Textarea line-height."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between action buttons; textarea bottom padding; actions row bottom padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Textarea vertical padding and prefix/suffix horizontal padding."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Send button background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Send button text and hover border."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Send button default border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Stop button background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Stop button text and hover border."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Stop button default border."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Attach button hover background."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring on buttons and the composer container."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for border, shadow, and button state changes."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chat-bubble",
+    "ce-retry-button",
+    "ce-tool-call"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "input",
+    "composer"
+  ],
+  "a11y": {
+    "role": "none (host); textarea has aria-label mirroring placeholder",
+    "notes": "The textarea carries aria-label equal to its placeholder. Buttons carry aria-label (Send message, Stop generation, Attach file). Focus-within on the container raises border and adds focus-ring. Escape while busy emits ce-chat-stop. prefers-reduced-motion disables transitions."
+  }
+}

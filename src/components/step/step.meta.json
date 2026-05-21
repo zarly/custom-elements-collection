@@ -6,6 +6,8 @@
   "goal": "Render a single numbered process step with a state-coded disk, title, optional meta line, and rich description slot.",
   "description": "A single step brick for process / roadmap / onboarding flows. Displays a 32px circle disk (number or check), a title row with optional inline metadata, and a description area. State enum (pending|active|done) drives disk color and title weight via CSS custom properties — no domain vocabulary in the enum (CDR-001). Default slot carries rich description content (CDR-002). Slot=\"title\" overrides the title attribute for rich inline content. Can be used standalone or nested inside ce-steps (CDR-006); the parent auto-assigns n when auto-number is enabled.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "n",
@@ -207,9 +209,15 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-steps"],
+  "dependents": [
+    "ce-steps"
+  ],
   "dependencies": [],
-  "related": ["ce-steps", "ce-flow", "ce-checklist"],
+  "related": [
+    "ce-steps",
+    "ce-flow",
+    "ce-checklist"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

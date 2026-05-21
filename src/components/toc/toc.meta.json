@@ -6,6 +6,8 @@
   "goal": "Render a flat or numbered table of contents from a JSON entries array (or slotted anchors) with optional sticky positioning.",
   "description": "Table of contents component. Accepts an entries array of { href, label } via property or JSON attribute; optionally numbers each entry and sticks to the top of its scroll parent. When entries is empty, falls back to the default slot so consumers can supply <a> children directly.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "entries",

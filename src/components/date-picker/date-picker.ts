@@ -1,0 +1,172 @@
+import { html, css } from "lit";
+import { property, state } from "lit/decorators.js";
+import { CecElement } from "../../core/index.js";
+
+/**
+ * `<ce-date-picker>` — labelled date / time / month picker over a native input.
+ *
+ * Wraps the browser's `<input type="date|time|datetime-local|month|week">` so
+ * keyboard, calendar popup, OS locale, and accessibility all come from the
+ * platform. Mirrors `ce-input`'s label/help/error/prefix-suffix layout.
+ *
+ * Attributes:
+ *   value, name, label, help, error, placeholder
+ *   type — "date" (default) | "time" | "datetime-local" | "month" | "week"
+ *   min, max, step
+ *   required, disabled, invalid (boolean, reflected)
+ *
+ * Slots:
+ *   prefix — leading inline content inside the field shell
+ *   suffix — trailing inline content
+ *
+ * Events:
+ *   ce-input  — { value } on every value change
+ *   ce-change — { name, value } on commit
+ */
+export type CeDatePickerType = "date" | "time" | "datetime-local" | "month" | "week";
+
+export class CeDatePicker extends CecElement {
+  static override styles = css`
+    :host {
+      display: block;
+    }
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ce-space-1);
+    }
+    label {
+      font-size: var(--ce-text-sm);
+      color: var(--ce-text);
+      font-weight: 600;
+    }
+    .field {
+      display: flex;
+      align-items: stretch;
+      background: var(--ce-surface-2);
+      border: 1px solid var(--ce-border);
+      border-radius: var(--ce-radius-sm);
+      transition: border-color var(--ce-transition), box-shadow var(--ce-transition);
+    }
+    .field:focus-within {
+      border-color: var(--ce-color-blue);
+      box-shadow: var(--ce-focus-ring);
+    }
+    input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: var(--ce-inset-lg);
+      color: var(--ce-text);
+      font: inherit;
+      font-size: var(--ce-text-sm);
+    }
+    input::placeholder { color: var(--ce-muted); }
+    /* The picker indicator looks fine in dark themes when we invert it. */
+    input::-webkit-calendar-picker-indicator {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+    input::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+    .prefix, .suffix {
+      display: flex;
+      align-items: center;
+      padding: 0 var(--ce-space-2);
+      color: var(--ce-muted);
+      font-size: var(--ce-text-sm);
+    }
+    .help { font-size: var(--ce-text-xs); color: var(--ce-muted); }
+    .err  { font-size: var(--ce-text-xs); color: var(--ce-color-red); }
+    :host([invalid]) .field {
+      border-color: var(--ce-color-red);
+    }
+    :host([disabled]) {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  `;
+
+  protected override createRenderRoot(): ShadowRoot {
+    return this.createShadowRootWithStyles();
+  }
+
+  @property({ type: String }) value = "";
+  @property({ type: String }) name = "";
+  @property({ type: String, reflect: true }) type: CeDatePickerType = "date";
+  @property({ type: String }) label = "";
+  @property({ type: String }) help = "";
+  @property({ type: String }) error = "";
+  @property({ type: String }) placeholder = "";
+  @property({ type: String }) min = "";
+  @property({ type: String }) max = "";
+  @property({ type: String }) step = "";
+  @property({ type: Boolean, reflect: true }) required = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  @state() private _id = `cd${Math.random().toString(36).slice(2, 8)}`;
+
+  #onInput(e: InputEvent): void {
+    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(
+      new CustomEvent("ce-input", {
+        bubbles: true,
+        composed: true,
+        detail: { value: this.value },
+      }),
+    );
+  }
+
+  #onChange(e: Event): void {
+    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(
+      new CustomEvent("ce-change", {
+        bubbles: true,
+        composed: true,
+        detail: { name: this.name, value: this.value },
+      }),
+    );
+  }
+
+  override render() {
+    const showErr = !!this.error;
+    return html`
+      <div class="row">
+        ${this.label
+          ? html`<label for=${this._id}
+              >${this.label}${this.required ? html`<span aria-hidden="true"> *</span>` : ""}</label
+            >`
+          : ""}
+        <div class="field">
+          <span class="prefix"><slot name="prefix"></slot></span>
+          <input
+            id=${this._id}
+            type=${this.type}
+            name=${this.name}
+            placeholder=${this.placeholder}
+            ?required=${this.required}
+            ?disabled=${this.disabled}
+            min=${this.min || ""}
+            max=${this.max || ""}
+            step=${this.step || ""}
+            .value=${this.value}
+            aria-invalid=${this.invalid || showErr ? "true" : "false"}
+            aria-describedby=${showErr ? this._id + "-err" : this.help ? this._id + "-help" : ""}
+            @input=${this.#onInput}
+            @change=${this.#onChange}
+          />
+          <span class="suffix"><slot name="suffix"></slot></span>
+        </div>
+        ${showErr
+          ? html`<div id=${this._id + "-err"} class="err">${this.error}</div>`
+          : this.help
+            ? html`<div id=${this._id + "-help"} class="help">${this.help}</div>`
+            : ""}
+      </div>
+    `;
+  }
+}

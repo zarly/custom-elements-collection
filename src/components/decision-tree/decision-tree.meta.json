@@ -7,6 +7,8 @@
   "description": "Single-level decision tree component for if/then teaching diagrams. Renders a centered question and a responsive grid of branches; each branch declares yes / no / neutral kind, gets a tinted border + arrow label (↓ YES / ↓ NO / ↓), and shows label and result text. **Limitation: single-level only** — for multi-level hierarchical trees, use plain `<ul>/<li>` or a future `ce-tree`.",
   "limitations": "Single-level only. Branches do not nest. For multi-level decision flows use a chained sequence of `<ce-decision-tree>` elements (one per level) or plain `<ul>/<li>`.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "question",
@@ -134,7 +136,8 @@
   "dependents": [],
   "dependencies": [],
   "related": [
-    "ce-flow"
+    "ce-flow",
+    "ce-matrix"
   ],
   "category": "ui",
   "tier": "widget",

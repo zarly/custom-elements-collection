@@ -1,0 +1,31 @@
+<!-- @example Team row with no overflow -->
+<ce-avatar-group max="6">
+  <ce-avatar name="Ada Lovelace" color="purple"></ce-avatar>
+  <ce-avatar name="Grace Hopper" color="cyan"></ce-avatar>
+  <ce-avatar name="Donald Knuth" color="amber"></ce-avatar>
+</ce-avatar-group>
+
+<!-- @example Overflow collapsed into +N chip -->
+<ce-avatar-group max="3">
+  <ce-avatar name="A B"></ce-avatar>
+  <ce-avatar name="C D"></ce-avatar>
+  <ce-avatar name="E F"></ce-avatar>
+  <ce-avatar name="G H"></ce-avatar>
+  <ce-avatar name="I J"></ce-avatar>
+  <ce-avatar name="K L"></ce-avatar>
+</ce-avatar-group>
+
+<!-- @example Large sizing propagated to children -->
+<ce-avatar-group size="lg" max="4">
+  <ce-avatar name="A B" color="blue"></ce-avatar>
+  <ce-avatar name="C D" color="green"></ce-avatar>
+  <ce-avatar name="E F" color="red"></ce-avatar>
+</ce-avatar-group>
+
+<!-- @example Tighter overlap -->
+<ce-avatar-group overlap="14" max="5">
+  <ce-avatar name="A"></ce-avatar>
+  <ce-avatar name="B"></ce-avatar>
+  <ce-avatar name="C"></ce-avatar>
+  <ce-avatar name="D"></ce-avatar>
+</ce-avatar-group>

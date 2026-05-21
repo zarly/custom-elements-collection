@@ -6,6 +6,8 @@
   "goal": "Highlight short admonition text (info / success / warn / danger / neutral) with a left-border accent and tinted background.",
   "description": "Tinted left-border admonition box. Replaces drift between callout / admonition / alert / note / risk markup. Five semantic types color-code the border and background; an optional title overrides via attribute or named slot.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",

@@ -6,6 +6,8 @@
   "goal": "Render aggregated feedback statistics from an ancestor ce-feedback-sink as plain HTML stat cells with no internal-component dependency.",
   "description": "Read-only dashboard panel. On connect, walks up to find the nearest ce-feedback-sink, pulls its current state, and (when live) listens to ce-feedback-state events to re-render. Sections are selected via the show attribute (any of: counts, avg, top-liked, top-disliked, distribution). top-n caps the top-N lists; live=false freezes after the initial render. Plain HTML output keyed off --ce-* tokens — does not depend on ce-kpi or any other internal component, keeping the feedback set zero-internal-dep.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "subject",

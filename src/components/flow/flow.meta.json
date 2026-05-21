@@ -6,6 +6,8 @@
   "goal": "Render a horizontal or vertical step flow diagram from either a JSON array of steps (steps prop) or from <ce-flow-step> slot children (CDR-005 dual mode).",
   "description": "Step-flow diagram. Boxes separated by arrows; each step can have a caption, step number (n), icon, and a color tint. Vertical attribute stacks boxes top-to-bottom and switches the default arrow from → to ↓. Accepts both JSON mode (steps prop) and slot mode (<ce-flow-step> children); JSON takes priority when non-empty (CDR-005).",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "steps",
@@ -186,7 +188,9 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": ["ce-flow-step"],
+  "dependencies": [
+    "ce-flow-step"
+  ],
   "related": [
     "ce-flow-step",
     "ce-timeline",

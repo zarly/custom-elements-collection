@@ -88,7 +88,7 @@ Adding ranges, segments, multi-needle, or animated sweeps to `ce-gauge` would pu
 
 **Why.** The component uses `:host([color="green"]) .fill { stroke: var(--ce-color-green); }` to map the `color` attribute to fill stroke. `:host([attr])` is a Shadow-DOM-only selector. Without Shadow DOM the attribute mapping would have to move to JS or to global CSS keyed off the tag, both worse trade-offs.
 
-**Consequence.** Slot streaming (mdflow) considerations don't apply — this component has no slots, only an attribute API. Fine.
+**Consequence.** Slot streaming (streaming-markdown consumers such as `@generative-dom/plugin-companion`) considerations don't apply — this component has no slots, only an attribute API. Fine.
 
 ---
 

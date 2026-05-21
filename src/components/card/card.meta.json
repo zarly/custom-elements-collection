@@ -6,6 +6,8 @@
   "goal": "Present arbitrary content on a surface with optional left-border accent, hover lift, and clickable activation.",
   "description": "Generic content card with title, body, and footer slots. Supports a colored left-border accent, hover-elevation, compact padding, and a clickable mode that adds role=button + Enter/Space activation and emits ce-card-activate.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "accent",

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-select",
+  "name": "Select",
+  "className": "CeSelect",
+  "goal": "Provide a labelled single-select dropdown with help, error, and prefix/suffix slots over a native <select>.",
+  "description": "Form-primitive companion to ce-input wrapping a native <select> for full keyboard, screen-reader, and OS-popup behaviour. Options accept the dual-mode CDR-005 shape — a JSON-on-attribute array or slotted <option>/<optgroup> children. Mirrors ce-input's label / help / error / prefix-suffix layout so forms compose consistently. Emits ce-change on selection.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Currently selected option value."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name; echoed in ce-change detail."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Visible label above the field."
+    },
+    {
+      "name": "help",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Helper text below the field; hidden when error is set."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Error text below the field; overrides help when present."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Inline placeholder rendered as a disabled first option."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Marks the control as required and renders an asterisk on the label."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables the control."
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Renders the invalid border styling; aria-invalid follows."
+    },
+    {
+      "name": "options",
+      "type": "SelectOption[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of options ({value, label?, disabled?, group?}). When empty, slotted <option>/<optgroup> children are used instead."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ name: string, value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when the user picks a different option."
+    }
+  ],
+  "slots": [
+    {
+      "name": "prefix",
+      "description": "Inline content rendered before the native control."
+    },
+    {
+      "name": "suffix",
+      "description": "Inline content rendered after the native control; replaces the default chevron when used."
+    },
+    {
+      "name": "",
+      "description": "<option> / <optgroup> children for the slot-mode authoring path (CDR-005)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Field background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Field corner radius."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Invalid border + error text."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label and value text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Help text + chevron."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label / control font-size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Help and error font-size."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Field padding."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Row gap between label/field/help."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Prefix/suffix padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Chevron right offset."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Native select right padding (room for chevron)."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border/shadow transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-radio-group",
+    "ce-toggle"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Forms",
+    "form",
+    "select",
+    "dropdown"
+  ],
+  "a11y": {
+    "role": "combobox (native)",
+    "notes": "Delegates to a native <select> so keyboard navigation, type-ahead, screen-reader semantics, and OS-level popup behaviour all come from the browser. aria-invalid follows the invalid prop / error message; label-for/id pairing wires the label to the native element."
+  }
+}

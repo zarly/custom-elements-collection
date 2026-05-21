@@ -6,6 +6,8 @@
   "goal": "Provide a token-driven button with primary/secondary/ghost/destructive variants and a loading state.",
   "description": "Themable action button. Wraps a native <button> so keyboard, focus, and form-submit behavior come for free; emits ce-click in addition. Loading state replaces the label with a spinner and blocks activation. Accepts an icon attribute or a named `icon` slot for arbitrary glyphs/SVG.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "variant",

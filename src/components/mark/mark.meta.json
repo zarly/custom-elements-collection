@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-mark",
+  "name": "Mark",
+  "className": "CeMark",
+  "goal": "Highlight a span of inline text with a themed color tint.",
+  "description": "Inline highlight primitive used for search-result hits, AI-mentioned entities, or 'this changed' emphasis. Seven CecColor tints (amber default), two emphasis weights (subtle uses a tinted background, strong uses a saturated fill with inverted text). Uses box-decoration-break:clone so the highlight wraps cleanly across line breaks.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "color",
+      "type": "CecColor | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Highlight color (amber default when null)."
+    },
+    {
+      "name": "weight",
+      "type": "\"subtle\" | \"strong\"",
+      "required": false,
+      "default": "\"subtle\"",
+      "reflect": true,
+      "description": "Emphasis — subtle uses a tinted background; strong uses a saturated fill with inverted text."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Highlighted text or inline content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline horizontal padding."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Highlight corner radius."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Default subtle highlight background."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green subtle background."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red subtle background."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue subtle background."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple subtle background."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan subtle background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "color=neutral subtle background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (amber default)."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (green)."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (red)."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (blue)."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (purple)."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight saturated fill (cyan)."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "color=neutral text + strong-weight neutral fill."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Subtle-weight foreground text."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Strong-weight inverted foreground text."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chip",
+    "ce-callout"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "highlight",
+    "primitive"
+  ]
+}

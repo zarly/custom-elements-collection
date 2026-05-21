@@ -1,0 +1,27 @@
+<!-- @example Inline SVG icon, decorative -->
+<ce-icon>
+  <svg viewBox="0 0 24 24"><path d="M12 2 L15 9 L22 9 L17 14 L18 21 L12 17 L6 21 L7 14 L2 9 L9 9 Z"/></svg>
+</ce-icon>
+
+<!-- @example Three sizes side-by-side -->
+<div style="display:flex;gap:var(--ce-space-3);align-items:center">
+  <ce-icon size="sm">★</ce-icon>
+  <ce-icon size="md">★</ce-icon>
+  <ce-icon size="lg">★</ce-icon>
+</div>
+
+<!-- @example Accessible icon with a label -->
+<ce-icon label="External link">↗</ce-icon>
+
+<!-- @example currentColor tints slotted SVG -->
+<div style="display:flex;gap:var(--ce-space-3);align-items:center">
+  <ce-icon style="color:var(--ce-color-green)">
+    <svg viewBox="0 0 24 24"><path d="M20 6 L9 17 L4 12"/></svg>
+  </ce-icon>
+  <ce-icon style="color:var(--ce-color-red)">
+    <svg viewBox="0 0 24 24"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+  </ce-icon>
+</div>
+
+<!-- @example Emoji glyph at lg size -->
+<ce-icon size="lg" label="Rocket">🚀</ce-icon>

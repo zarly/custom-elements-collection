@@ -6,6 +6,8 @@
   "goal": "Play a short audio clip via a button with optional phonetic transcription and an inline error state.",
   "description": "Pronunciation / audio-clip button. Renders a play button (label is configurable, default '🔊 Play') plus an optional monospace phonetic string. First click instantiates a single HTMLAudioElement and plays it; subsequent plays reuse the same element. Error states show inline.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "src",

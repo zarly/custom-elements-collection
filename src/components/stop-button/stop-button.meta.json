@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-stop-button",
+  "name": "Stop button",
+  "className": "CeStopButton",
+  "goal": "Emit a stop-generation intent for chat surfaces — the counterpart to ce-retry-button for mid-stream cancellation.",
+  "description": "Compact button rendered in three styled variants (primary/secondary/ghost). Default content is a stop-square SVG plus the label, both replaceable via the default slot. Emits a bubbling, composed ce-chat-stop CustomEvent on click or Enter/Space — no event fired when disabled.",
+  "stability": "beta",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Stop\"",
+      "description": "Visible label when no slotted content is provided."
+    },
+    {
+      "name": "variant",
+      "type": "\"primary\" | \"secondary\" | \"ghost\"",
+      "required": false,
+      "default": "\"secondary\"",
+      "reflect": true,
+      "description": "Visual variant; styling is driven via :host([variant=…]) selectors."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables the button; the ce-chat-stop event is NOT fired when disabled."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-chat-stop",
+      "detail": "{}",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on click or Enter/Space when the button is focused. Not fired when disabled. Hosts use this as the stop-generation signal."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional override for the icon + label content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label color and ghost variant color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary variant background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Secondary variant border."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant text color and hover border color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant background tint."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Primary variant border tint."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Ghost variant hover overlay."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button border radius."
+    },
+    {
+      "name": "--ce-inset-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between icon and label."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring applied on focus-visible."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition timing for background and border-color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-retry-button",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "button",
+    "intent"
+  ],
+  "a11y": {
+    "role": "button",
+    "notes": "Native <button> element; the SVG is aria-hidden so the label text drives the accessible name. Keyboard activation (Enter/Space) is handled on the inner button's keydown event."
+  }
+}

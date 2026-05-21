@@ -1,0 +1,29 @@
+<!-- @example Default amber highlight inside body copy -->
+<p>The fox is <ce-mark>quick</ce-mark> and the dog is <ce-mark>lazy</ce-mark>.</p>
+
+<!-- @example Semantic color tints -->
+<p>
+  Status: <ce-mark color="green">passed</ce-mark>,
+  <ce-mark color="red">failed</ce-mark>,
+  <ce-mark color="amber">pending</ce-mark>,
+  <ce-mark color="blue">queued</ce-mark>.
+</p>
+
+<!-- @example Strong-weight saturated highlights -->
+<p>
+  Stand-out tags:
+  <ce-mark weight="strong" color="purple">VIP</ce-mark>,
+  <ce-mark weight="strong" color="cyan">NEW</ce-mark>,
+  <ce-mark weight="strong" color="red">BUG</ce-mark>.
+</p>
+
+<!-- @example Highlight wrapping across multiple lines -->
+<p style="max-width:18em">
+  A long passage where <ce-mark>this entire fragment is highlighted and naturally wraps onto a second line without breaking the background</ce-mark> across the wrap point.
+</p>
+
+<!-- @example Rich content inside the slot -->
+<p>
+  <ce-mark color="blue"><strong>@alex</strong> mentioned you</ce-mark>
+  in the daily standup notes.
+</p>

@@ -6,6 +6,8 @@
   "goal": "Render a donut or pie chart for a small set of categorical segments with an optional center label.",
   "description": "Inline SVG donut/pie. Provide a JSON array of segment values, optional colors and labels, and an optional center label or `center` slot to fill the hole. Setting thickness=0 turns it into a pie. Best for 3-6 segments; for ranked breakdowns prefer ce-bar-chart.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "values",

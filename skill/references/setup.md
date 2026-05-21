@@ -136,9 +136,9 @@ React 19+ supports custom elements directly. For 18 and below, use the `@propert
 
 Just drop the tag in. Set theme bundles via `<link rel="stylesheet">` in your layout component / template.
 
-### Streaming markdown (MdFlow)
+### Streaming markdown (Generative DOM)
 
-Companion of `@mdflow/plugin-companion`. Stream tokens into a slot; the component upgrades when registered and the slotted content keeps updating. This is why all chat-surface components support late-added children — see `ce-chat-bubble`, `ce-cursor`, `ce-tool-call`.
+Companion of [`@generative-dom/plugin-companion`](https://github.com/generative-dom/generative-dom). Stream tokens into a slot; the component upgrades when registered and the slotted content keeps updating. This is why all chat-surface components support late-added children — see `ce-chat-bubble`, `ce-cursor`, `ce-tool-call`.
 
 ---
 

@@ -1,0 +1,22 @@
+<!-- @example Collapsed reasoning trace -->
+<ce-reasoning label="Reasoning" tokens="142" duration-ms="3402">
+  <p>First I need to identify whether the question asks about a specific time period or a general pattern. The user's phrasing suggests they want a general answer. I should structure my response around the three main factors: accessibility, cost, and prior knowledge. Accessibility is highest because it requires no specialised hardware. Cost is effectively zero for open models. Prior knowledge dependency is moderate — a basic Python environment is assumed but nothing else.</p>
+</ce-reasoning>
+
+<!-- @example Open by default -->
+<ce-reasoning label="Reasoning" tokens="89" duration-ms="1870" open>
+  <p>The problem reduces to a shortest-path search on a weighted directed graph. Dijkstra's algorithm applies directly because edge weights are non-negative. The priority queue should use a min-heap keyed by cumulative cost. I'll initialise the distance map with infinity for all nodes except the source, then relax edges greedily until the destination is reached or the queue empties.</p>
+</ce-reasoning>
+
+<!-- @example Streaming — reasoning still arriving -->
+<ce-reasoning label="Reasoning" streaming open>
+  <p>Let me work through this step by step. The user is asking about…</p>
+</ce-reasoning>
+
+<!-- @example Inline next to a ce-chat-bubble -->
+<ce-reasoning label="Reasoning" tokens="214" duration-ms="5120">
+  <p>The regulation applies to entities processing personal data of EU residents regardless of where the entity is established. Key obligations include appointing a DPO when processing at scale, conducting DPIAs for high-risk activities, and ensuring lawful basis for each processing purpose. I'll lead with the lawful basis question since it determines the rest of the analysis.</p>
+</ce-reasoning>
+<ce-chat-bubble role="assistant">
+  Based on GDPR Article 6, the most relevant lawful bases for your use case are legitimate interest and contractual necessity…
+</ce-chat-bubble>

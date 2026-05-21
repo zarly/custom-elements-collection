@@ -6,6 +6,8 @@
   "goal": "Display a prioritised recommendation or advice block with a colored left-border accent, title, impact line, and optional actions footer.",
   "description": "Card-like block that encodes a single actionable recommendation. A four-value priority enum (p0–p3) drives the left-border color and the visible priority badge. Title and impact accept both plain string attributes and rich slot overrides (CDR-002). Body accepts arbitrary children. An optional actions slot holds call-to-action buttons or links.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "priority",

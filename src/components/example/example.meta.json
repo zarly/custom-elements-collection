@@ -6,6 +6,8 @@
   "goal": "Mark a snippet as a Good / Wrong / neutral example with a colored left-border accent and label.",
   "description": "Color-coded example block. type=good tints green and labels 'Good'; type=bad tints red and labels 'Wrong'; type=neutral uses a neutral border and labels 'Example'. Consumers can override the label text via the label attribute.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",

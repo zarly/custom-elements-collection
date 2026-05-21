@@ -6,6 +6,8 @@
   "goal": "Provide a themable checkbox control with checked/indeterminate states and full keyboard support.",
   "description": "Three-state checkbox (unchecked / checked / indeterminate). Indeterminate is a visual middle state used for parent rows of partially-selected groups; toggling clears it and selects the box. Carries role=checkbox + aria-checked (true/false/mixed) and supports Space and Enter to toggle.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "checked",

@@ -1,0 +1,17 @@
+<!-- @example Release countdown with labels -->
+<ce-countdown target="2026-06-01T00:00:00Z" format="dhms" labels></ce-countdown>
+
+<!-- @example Compact hours:minutes:seconds -->
+<ce-countdown target="2026-05-21T00:00:00Z" format="hms"></ce-countdown>
+
+<!-- @example Short timer in minutes:seconds -->
+<ce-countdown target="2026-05-20T15:00:00Z" format="ms"></ce-countdown>
+
+<!-- @example Pure seconds counter -->
+<ce-countdown target="2026-05-20T14:05:00Z" format="s"></ce-countdown>
+
+<!-- @example Embedded in a card -->
+<ce-card>
+  <h3 slot="title">Launch in</h3>
+  <ce-countdown target="2026-06-01T00:00:00Z" format="dhms" labels></ce-countdown>
+</ce-card>

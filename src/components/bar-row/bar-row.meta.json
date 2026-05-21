@@ -7,6 +7,8 @@
   "description": "Carries a numeric value (0..max), optional color, rich label slot, and meta slot. When nested inside ce-bar-chart the parent reads value/color as attributes and consumes the label/meta slot HTML via querySelectorAll — the row renders nothing (display:contents). When used standalone it renders a complete single-row bar with ARIA progressbar semantics, label, animated fill, and meta. The value-display attribute controls where the numeric value appears: inside the fill (default), outside to the right, or hidden. Rich label/meta content is supported per CDR-002: the slots can carry <span>, <a>, <ce-chip>, or any inline element.",
   "limitations": "Standalone rendering always scales fill as value/max — there is no auto-scale across sibling rows. Use ce-bar-chart for a multi-row auto-scaling chart. When nested inside ce-bar-chart, the max attribute on ce-bar-row is ignored; the parent chart's own max/auto-scale governs fill width.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",
@@ -136,9 +138,13 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-bar-chart"],
+  "dependents": [
+    "ce-bar-chart"
+  ],
   "dependencies": [],
-  "related": ["ce-bar-chart"],
+  "related": [
+    "ce-bar-chart"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

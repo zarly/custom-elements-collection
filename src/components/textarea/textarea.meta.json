@@ -6,6 +6,8 @@
   "goal": "Provide a labelled multi-line text input with auto-grow, help, and error regions.",
   "description": "Themed multi-line input. Auto-grows up to max-rows on input, then becomes scrollable. Renders an optional label, help text, or error message; aria-invalid and aria-describedby stay in sync. ce-input fires per keystroke; ce-change fires on blur/commit.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-modal",
+  "name": "Modal",
+  "className": "CeModal",
+  "goal": "Render a themed, accessible modal dialog wrapping the native <dialog> element with slots for body and footer actions.",
+  "description": "A modal dialog built on the native <dialog> element with showModal(). Provides header with title and optional dismiss button, default body slot, and right-aligned footer slot. Supports ESC and backdrop-click dismissal (guarded by dismissible attribute). Emits ce-modal-open and ce-modal-close events. Returns focus to the invoking element on close.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true the modal is visible; setting to false closes it."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Text rendered as the modal header title."
+    },
+    {
+      "name": "dismissible",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When true (default), ESC and backdrop-click close the modal. When false, only programmatic .close() works."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-modal-open",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the modal becomes visible."
+    },
+    {
+      "name": "ce-modal-close",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the modal closes."
+    }
+  ],
+  "methods": [
+    {
+      "name": "show",
+      "signature": "show(): void",
+      "description": "Opens the modal (equivalent to setting open=true)."
+    },
+    {
+      "name": "close",
+      "signature": "close(): void",
+      "description": "Closes the modal (equivalent to removing the open attribute)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Modal body content."
+    },
+    {
+      "name": "footer",
+      "description": "Action buttons, right-aligned. Footer bar is hidden when this slot is empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Dialog background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Dialog border and header/footer separators."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Dialog corner radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Close button corner radius."
+    },
+    {
+      "name": "--ce-shadow-lg",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Dialog elevation shadow."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title and body text color."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title and close-button font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Close button icon color."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Close button hover overlay."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on close button."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for close button hover."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Footer button gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Footer vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Header and body vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Header, body, and footer horizontal padding."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLDialogElement.showModal",
+      "purpose": "Opens the dialog in the top-layer with a focus trap.",
+      "writes": false
+    },
+    {
+      "api": "document.activeElement",
+      "purpose": "Caches the previously-focused element so focus can be restored on close.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Calls dialog.showModal() and dialog.close() to manage the native top-layer.",
+      "reason": "Required to leverage the browser's built-in top-layer, focus-trap, and backdrop rendering.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Returns focus to document.activeElement captured at open time.",
+      "reason": "WCAG 2.1 SC 2.4.3 focus management: focus must return to the trigger element after a dialog closes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-confirm",
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "overlay",
+    "dialog",
+    "interactive"
+  ],
+  "a11y": {
+    "role": "dialog",
+    "notes": "The native <dialog> element supplies role=dialog and focus-trap automatically when opened with showModal(). aria-modal=true and aria-label are added to the dialog element. The close button has aria-label='Close'. ESC dismissal is handled via the native cancel event (when dismissible)."
+  }
+}

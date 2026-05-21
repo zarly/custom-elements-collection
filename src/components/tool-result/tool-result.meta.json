@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-tool-result",
+  "name": "Tool result",
+  "className": "CeToolResult",
+  "goal": "Display the return value of a tool/function call with status-driven accent treatment — the standalone counterpart to ce-tool-call for agent traces and detached result panels.",
+  "description": "Pure-presentation brick for showing an agent tool return value without the collapsible call header. A coloured left border keys off status: green for ok, red for error, neutral border for empty. When name or duration-ms are provided, a compact monospace header row appears above the content. The default slot holds the result payload; when status='error' the payload area is replaced by the named 'error' slot. A meta slot adds an optional footer row (e.g. a cached/streamed chip). When status='empty' and the default slot has no assigned content, a muted '(no result)' placeholder renders. The compact boolean tightens padding for inline-trace contexts.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional tool/function name displayed as the result label in the header row."
+    },
+    {
+      "name": "status",
+      "type": "\"ok\" | \"error\" | \"empty\"",
+      "required": false,
+      "default": "\"ok\"",
+      "reflect": true,
+      "description": "Status drives the left-border accent: ok=green, error=red, empty=neutral border color."
+    },
+    {
+      "name": "durationMs",
+      "type": "number",
+      "required": false,
+      "default": "NaN",
+      "attribute": "duration-ms",
+      "description": "Optional wall-clock duration in milliseconds. Formatted as '123 ms' under 1s, '1.2 s' above. Omitted when not finite."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Tighter padding mode for inline-trace placement in agent traces."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The result content — commonly a <pre> JSON dump, a plain string, or rich content. Hidden when status='error'."
+    },
+    {
+      "name": "error",
+      "description": "Error details — shown ONLY when status='error', replacing the default slot area."
+    },
+    {
+      "name": "meta",
+      "description": "Optional metadata footer — e.g. a <ce-chip> indicating cached or streamed result. Hidden when empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Block background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default outer border and empty-status left accent."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Meta footer top separator."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Block corner radius."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Left-border accent for status='ok'."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Left-border accent for status='error', and error slot text tint."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Name label and body text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Duration text, empty placeholder, and meta footer text."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Name label font-family."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Duration text size and meta footer font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Header row font size, body pre font size, empty placeholder size, and compact mode font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Block outer margin, compact padding, header bottom margin, and meta top spacing."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default block padding."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-tool-call"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "tool",
+    "agent"
+  ],
+  "a11y": {
+    "notes": "Block is pure presentation. The status is conveyed through the left-border accent color and optionally through the name text. Consumers needing programmatic status announcements should manage aria-live externally."
+  }
+}

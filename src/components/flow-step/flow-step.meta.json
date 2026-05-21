@@ -6,6 +6,8 @@
   "goal": "Single step for use inside <ce-flow> slot mode (CDR-005), or as a standalone step card with number, icon, title, and rich body content.",
   "description": "Carries a step number (n), title, optional icon, and optional color tint. Default slot accepts rich body content: paragraphs, lists, links, chips — anything HTML (CDR-002). When nested inside ce-flow the parent reads n/title/icon/color as attributes and consumes the default slot HTML via querySelectorAll — the step itself renders nothing (display:contents). When used standalone it renders a full step card.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "n",
@@ -183,9 +185,14 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-flow"],
+  "dependents": [
+    "ce-flow"
+  ],
   "dependencies": [],
-  "related": ["ce-flow", "ce-timeline"],
+  "related": [
+    "ce-flow",
+    "ce-timeline"
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [

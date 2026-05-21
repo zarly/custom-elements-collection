@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-link",
+  "name": "Link",
+  "className": "CeLink",
+  "goal": "Provide a themed anchor with consistent underline, focus ring, external-link, and download affordances.",
+  "description": "Light wrapper around <a> that owns the underline/hover/focus treatment for the library. Setting external opens the link in a new tab, appends rel=noopener noreferrer for safety, and shows a small ↗ glyph; setting download forwards the attribute to the underlying <a>. The tone attribute switches between the default underlined link and a subtle in-flow link that only shows its underline on hover.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Destination URL. Falls back to '#' when empty."
+    },
+    {
+      "name": "external",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Opens in a new tab with rel=noopener noreferrer and shows a trailing ↗ glyph."
+    },
+    {
+      "name": "download",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Optional download filename hint, passed through to the underlying <a>."
+    },
+    {
+      "name": "tone",
+      "type": "\"default\" | \"subtle\"",
+      "required": false,
+      "default": "\"default\"",
+      "reflect": true,
+      "description": "Visual emphasis — default is underlined blue; subtle is in-flow with hover-only underline."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Link text and inline content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Default link color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover color."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Subtle-tone underline color."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover color transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-button"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "link",
+    "primitive"
+  ]
+}

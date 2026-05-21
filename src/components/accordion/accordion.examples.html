@@ -1,0 +1,36 @@
+<!-- @example FAQ list -->
+<ce-accordion items='[
+  {"id":"setup","summary":"How do I install the library?","body":"npm install custom-elements-collection then import auto-register or the per-tag entry points."},
+  {"id":"theme","summary":"Can I theme the components?","body":"Override any --ce-* CSS custom property on :root or a parent."},
+  {"id":"deps","summary":"Are there runtime peer dependencies?","body":"No. Lit is bundled and dist/ is self-sufficient."}
+]'></ce-accordion>
+
+<!-- @example Single-open mode with one item starting expanded -->
+<ce-accordion single items='[
+  {"id":"plan","summary":"Plan","body":"Define the rollout in three phases.","open":true},
+  {"id":"build","summary":"Build","body":"Implement, review, release."},
+  {"id":"measure","summary":"Measure","body":"Track adoption + feedback."}
+]'></ce-accordion>
+
+<!-- @example With counts on each row -->
+<ce-accordion items='[
+  {"summary":"Open bugs","body":"Bugs without a fix in progress.","count":12},
+  {"summary":"In-progress","body":"Currently being worked on.","count":4},
+  {"summary":"Recently closed","body":"Closed in the last 7 days.","count":18}
+]'></ce-accordion>
+
+<!-- @example Slot mode (CDR-005) — handwritten <details> children -->
+<ce-accordion>
+  <details>
+    <summary>Section A</summary>
+    Alpha body content.
+  </details>
+  <details open>
+    <summary>Section B</summary>
+    Bravo body content with <a href="#more">links</a> and arbitrary HTML.
+  </details>
+  <details>
+    <summary>Section C</summary>
+    Charlie body content.
+  </details>
+</ce-accordion>

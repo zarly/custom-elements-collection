@@ -1,0 +1,28 @@
+<!-- @example Image avatar -->
+<ce-avatar src="https://i.pravatar.cc/64?img=12" name="Ada Lovelace"></ce-avatar>
+
+<!-- @example Initials fallback derived from name -->
+<div style="display:flex;gap:var(--ce-space-3);align-items:center">
+  <ce-avatar name="Ada Lovelace"></ce-avatar>
+  <ce-avatar name="Grace Hopper" color="purple"></ce-avatar>
+  <ce-avatar name="Donald Knuth" color="cyan"></ce-avatar>
+</div>
+
+<!-- @example Three sizes side-by-side -->
+<div style="display:flex;gap:var(--ce-space-3);align-items:center">
+  <ce-avatar size="sm" name="A B"></ce-avatar>
+  <ce-avatar size="md" name="A B"></ce-avatar>
+  <ce-avatar size="lg" name="A B"></ce-avatar>
+</div>
+
+<!-- @example Square shape with tinted backgrounds -->
+<div style="display:flex;gap:var(--ce-space-3);align-items:center">
+  <ce-avatar shape="square" size="lg" name="QA" color="green"></ce-avatar>
+  <ce-avatar shape="square" size="lg" name="OPS" color="amber"></ce-avatar>
+  <ce-avatar shape="square" size="lg" name="ENG" color="blue"></ce-avatar>
+</div>
+
+<!-- @example Custom slotted glyph instead of initials -->
+<ce-avatar color="blue">
+  <span aria-hidden="true">★</span>
+</ce-avatar>

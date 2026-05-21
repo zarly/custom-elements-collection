@@ -6,6 +6,8 @@
   "goal": "Provide a two-pane documentation page layout with sticky header, sticky sidebar, and scrollable main column.",
   "description": "Internal composition primitive for documentation pages. Three slots: header (full-width sticky bar), sidebar (left sticky column, typically <ce-nav-list>), and default (main scrollable area). The sidebar collapses below 760px. sidebar-width attribute sets the column width.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "sidebarWidth",

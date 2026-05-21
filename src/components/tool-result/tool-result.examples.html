@@ -1,0 +1,20 @@
+<!-- @example OK result with JSON -->
+<ce-tool-result name="search" status="ok" duration-ms="612">
+  <pre style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">[
+  { "title": "Lit · Shadow DOM", "url": "https://lit.dev/docs/components/shadow-dom/" },
+  { "title": "MDN: Using shadow DOM", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM" }
+]</pre>
+</ce-tool-result>
+
+<!-- @example Error result -->
+<ce-tool-result status="error" duration-ms="3024">
+  <span slot="error" style="font-family:var(--ce-font-mono);font-size:12px;">DNS resolution failed: ENOTFOUND example.invalid</span>
+</ce-tool-result>
+
+<!-- @example Empty result -->
+<ce-tool-result status="empty"></ce-tool-result>
+
+<!-- @example Compact inline result -->
+<ce-tool-result name="classify" status="ok" duration-ms="88" compact>
+  <pre style="margin:0;font-family:var(--ce-font-mono);font-size:12px;">{ "label": "positive", "score": 0.97 }</pre>
+</ce-tool-result>

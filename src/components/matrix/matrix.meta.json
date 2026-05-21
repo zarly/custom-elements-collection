@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-matrix",
+  "name": "Matrix",
+  "className": "CeMatrix",
+  "goal": "Render a 2×2 quadrant chart (priority / Eisenhower / impact-effort) with axis labels, quadrant captions, and items placed per quadrant.",
+  "description": "Decision-analysis primitive that fills the gap between ce-heatmap (cells of values) and ce-pros-cons (two columns). Axes are configurable (defaults: x=Effort, y=Impact) with low/high markers; the four quadrants carry default captions (Quick wins / Big bets / Fill-ins / Money pits) overridable via the q-labels JSON array. Each quadrant is tinted with a different semantic colour so the placement reads at a glance. Items are placed via either a JSON `items` array with explicit quadrant 0..3 or slotted children carrying `data-quadrant=\"0..3\"` (CDR-005 dual mode). Quadrant order is reading-order: 0=TL, 1=TR, 2=BL, 3=BR.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "items",
+      "type": "MatrixItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of { label, quadrant: 0|1|2|3, hint? }. When empty, slotted children are used."
+    },
+    {
+      "name": "xLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Effort\"",
+      "attribute": "x-label",
+      "description": "Bottom axis label."
+    },
+    {
+      "name": "yLabel",
+      "type": "string",
+      "required": false,
+      "default": "\"Impact\"",
+      "attribute": "y-label",
+      "description": "Left axis label."
+    },
+    {
+      "name": "xLow",
+      "type": "string",
+      "required": false,
+      "default": "\"Low\"",
+      "attribute": "x-low",
+      "description": "Left x-axis marker."
+    },
+    {
+      "name": "xHigh",
+      "type": "string",
+      "required": false,
+      "default": "\"High\"",
+      "attribute": "x-high",
+      "description": "Right x-axis marker."
+    },
+    {
+      "name": "yLow",
+      "type": "string",
+      "required": false,
+      "default": "\"Low\"",
+      "attribute": "y-low",
+      "description": "Bottom y-axis marker."
+    },
+    {
+      "name": "yHigh",
+      "type": "string",
+      "required": false,
+      "default": "\"High\"",
+      "attribute": "y-high",
+      "description": "Top y-axis marker."
+    },
+    {
+      "name": "qLabels",
+      "type": "string[]",
+      "required": false,
+      "default": "[\"Quick wins\",\"Big bets\",\"Fill-ins\",\"Money pits\"]",
+      "attribute": "q-labels",
+      "description": "JSON array of 4 quadrant captions, in reading order (TL, TR, BL, BR)."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Slotted children carrying `data-quadrant=\"0..3\"` are routed into the matching quadrant cell."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer card background + per-item cell background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Quadrant background fallback."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Quadrant + item borders."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card corner radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Quadrant + item corner radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Item + header text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Axis labels + item hints."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Q0 (TL) tinted background."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Q0 border."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Q1 (TR) tinted background."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Q1 border."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Q2 (BL) tinted background."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Q2 border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Q3 (BR) tinted background."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Q3 border."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Axis label + item hint font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Quadrant header + item font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Item list gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Quadrant gaps + frame gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Quadrant padding + y-axis padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer card padding."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Item vertical inset."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-heatmap",
+    "ce-pros-cons",
+    "ce-decision-tree"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "decision",
+    "matrix",
+    "quadrant",
+    "eisenhower"
+  ],
+  "a11y": {
+    "role": "figure",
+    "notes": "Wrapped in a role=figure container with aria-label='2x2 matrix'. The axis-direction hints inside quadrant headers are aria-hidden because the parent axis labels already convey direction to assistive tech."
+  }
+}

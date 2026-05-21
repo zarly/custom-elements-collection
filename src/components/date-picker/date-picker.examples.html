@@ -1,0 +1,38 @@
+<!-- @example Labelled date input -->
+<ce-date-picker label="Due date" name="due"></ce-date-picker>
+
+<!-- @example Date range using min + max -->
+<ce-date-picker
+  label="Vacation start"
+  name="start"
+  min="2026-01-01"
+  max="2026-12-31"
+  help="2026 calendar year only."
+></ce-date-picker>
+
+<!-- @example Datetime-local with prefilled value -->
+<ce-date-picker
+  label="Run at"
+  name="run_at"
+  type="datetime-local"
+  value="2026-06-01T09:30"
+></ce-date-picker>
+
+<!-- @example Time picker with step (15-minute increments) -->
+<ce-date-picker
+  label="Meeting time"
+  name="meeting"
+  type="time"
+  step="900"
+></ce-date-picker>
+
+<!-- @example Month picker -->
+<ce-date-picker label="Reporting month" name="month" type="month" value="2026-05"></ce-date-picker>
+
+<!-- @example Error state -->
+<ce-date-picker
+  label="Birthday"
+  name="dob"
+  required
+  error="Please choose a date."
+></ce-date-picker>

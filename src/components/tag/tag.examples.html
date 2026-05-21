@@ -1,0 +1,37 @@
+<!-- @example A row of neutral tags -->
+<div style="display:flex;gap:var(--ce-space-2);flex-wrap:wrap">
+  <ce-tag>typescript</ce-tag>
+  <ce-tag>web-components</ce-tag>
+  <ce-tag>llm</ce-tag>
+  <ce-tag>design-system</ce-tag>
+</div>
+
+<!-- @example Colored topic tags -->
+<div style="display:flex;gap:var(--ce-space-2);flex-wrap:wrap">
+  <ce-tag color="blue">frontend</ce-tag>
+  <ce-tag color="purple">research</ce-tag>
+  <ce-tag color="green">ready</ce-tag>
+  <ce-tag color="amber">in-review</ce-tag>
+  <ce-tag color="cyan">docs</ce-tag>
+</div>
+
+<!-- @example Removable tags (active filter facet) -->
+<div style="display:flex;gap:var(--ce-space-2);flex-wrap:wrap">
+  <ce-tag removable value="ts">typescript</ce-tag>
+  <ce-tag removable value="lit">lit</ce-tag>
+  <ce-tag removable value="vite" color="blue">vite</ce-tag>
+</div>
+
+<!-- @example Rich content inside a tag -->
+<ce-tag color="amber">
+  <ce-icon size="sm" label="Warning">⚠</ce-icon> needs-attention
+</ce-tag>
+
+<!-- @example Inline tag cloud -->
+<p>
+  Topics:
+  <ce-tag>llm</ce-tag>
+  <ce-tag>rag</ce-tag>
+  <ce-tag>agents</ce-tag>
+  <ce-tag color="purple">eval</ce-tag>
+</p>

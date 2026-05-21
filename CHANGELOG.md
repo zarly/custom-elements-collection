@@ -6,6 +6,242 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-05-21
+
+This release closes the user-scenario gap-analysis backlog opened on 2026-05-20.
+Three component waves land together — **11 gap-filling components** (P0/P1
+forms, navigation, chat, decision-analysis), **8 chat-surface primitives**
+(Scenario 1), and **11 typography / identity / time primitives** that finish
+the Layout & primitives group. The catalog grows from 99 to **126 published**
+components (129 total with the 3 internal layout primitives), tests from 932
+to **1169 passing**.
+
+### Added — 11 typography, identity, and time primitives (Layout & primitives)
+
+Closes the last of the small-but-frequent gaps surfaced in the 2026-05-17
+corpus audit and the 2026-05-20 scenario backlog. Every tag follows the
+established conventions: validated meta, ≥ 6 vitest cases, ≥ 3 `@example`
+blocks (no `<script>`), all visuals via `--ce-*` tokens.
+
+**Identity (+3):**
+
+- **`ce-avatar`** (brick) — compact identity primitive. Renders `<img>` when
+  `src` is provided; otherwise derives up-to-two-letter monogram initials
+  from `name`; empty neutral disc when neither is given. Three sizes
+  (`sm`/`md`/`lg`), two shapes (`circle`/`square`), optional CecColor tint
+  on the initials fallback.
+- **`ce-avatar-group`** (widget) — overlaps `<ce-avatar>` (or arbitrary)
+  children by a configurable amount and renders a `+N` chip once the total
+  exceeds `max`. Propagates `size` to size-aware children for consistent
+  sizing.
+- **`ce-icon`** (brick) — themed icon slot. The library deliberately ships
+  no icon set; authors drop their preferred SVG, emoji, or icon-font glyph
+  into the default slot. Slotted `<svg>` elements have `fill` / `stroke`
+  pinned to `currentColor` so they tint with surrounding text. Decorative
+  by default; setting `label` promotes to `role="img"`.
+
+**Inline content (+5):**
+
+- **`ce-mark`** (brick) — inline highlight for search hits, AI-mentioned
+  entities, or "this changed" emphasis. Seven CecColor tints (amber
+  default), two emphasis weights (`subtle` / `strong`). Uses
+  `box-decoration-break: clone` so highlights wrap cleanly across lines.
+- **`ce-tag`** (brick) — content-categorisation token for tag clouds,
+  multi-select filter facets, and topical labels. Distinct from `ce-chip`
+  (status pip): leads with a faded `#` glyph, seven CecColor tints, and an
+  optional `×` button that emits `ce-tag-remove`. Vocabulary lives in the
+  slot (CDR-001).
+- **`ce-kbd`** (brick) — inline keyboard-shortcut primitive. Monospace
+  text inside a small bordered cap with a 1px lower-edge shadow suggesting
+  a physical key. Multi-key chords compose with regular HTML; `role="text"`
+  keeps screen readers from splitting on punctuation.
+- **`ce-link`** (brick) — light wrapper around `<a>` that owns the
+  library's underline / hover / focus treatment. `external` opens in a new
+  tab, appends `rel="noopener noreferrer"`, and renders a ↗ glyph;
+  `download` forwards to the underlying anchor; `tone="subtle"` switches
+  to an in-flow link that only underlines on hover.
+- **`ce-divider`** (brick) — lightweight separator. Continuous 1px rule by
+  default; with a slotted label the rule splits into two equal segments
+  framing the label. `orientation="vertical"` renders an inline column
+  separator. `inset` (`none` / `sm` / `md` / `lg`) pulls the rule away
+  from container edges. `role="separator"`.
+
+**Time-related (+3):**
+
+- **`ce-countdown`** (brick) — live countdown timer. Colon-separated
+  segments (days, hours, minutes, seconds) sized to `format`: `dhms`
+  auto-trims a leading 0-day, `hms` rolls days into hours, `ms` rolls
+  hours into minutes, `s` is a pure seconds count. Optional inline
+  per-segment labels for marketing-style countdowns. Fires
+  `ce-countdown-end` exactly once when the timer hits zero.
+- **`ce-duration`** (brick) — pure formatter for a fixed elapsed time
+  (e.g. `3725s → 1h 2m`). Auto-picks the most significant units (default
+  cap 2). `compact` renders `1h 2m 5s`; `long` renders `1 hour
+  2 minutes 5 seconds` with correct plural agreement. No live ticking —
+  see `ce-countdown` for a counting timer or `ce-relative-time` for live
+  age.
+- **`ce-relative-time`** (brick) — semantic `<time datetime="…">` whose
+  text content is the difference between the supplied timestamp and now,
+  formatted via `Intl.RelativeTimeFormat` with the largest sensible unit.
+  Self-rescheduling: ticks every second under a minute old, every 30s
+  under an hour, then larger steps to keep CPU / battery low for older
+  items.
+
+### Added — 8 Chat-surface components (Scenario 1 of the 2026-05-20 gap analysis)
+
+The 2026-05-20 user-scenario gap analysis identified "User chats with an
+AI agent" as the P0 hero scenario with the largest cluster of missing
+primitives. This batch ships 8 of the 10 candidates from that scenario
+(the remaining 2 — `ce-source-card` and `ce-tool-result` — already
+shipped in the prior batch below; `ce-tool-result` is **reshaped** to a
+brick-tier display-only API in this batch — see Changed).
+
+Every tag follows the established conventions: validated meta, ≥ 6
+vitest cases (most have 8–15), ≥ 3 `@example` blocks (no `<script>`),
+Shadow DOM with `createShadowRootWithStyles()`, all visuals via
+`--ce-*` tokens, dual-mode collection APIs (CDR-005) where applicable.
+
+- **`ce-chat-input`** (widget) — composite composer with auto-growing
+  textarea, send / stop / attach buttons, and Enter-to-submit (Shift+
+  Enter inserts newline). Emits `ce-chat-submit`, `ce-chat-stop`,
+  `ce-chat-attach`, `ce-chat-input`. Replaces the hand-rolled composer
+  that every consumer ships today.
+- **`ce-stop-button`** (brick) — emit-stop-intent button; counterpart
+  to `ce-retry-button` for mid-stream cancellation. Primary / secondary
+  / ghost variants. Emits `ce-chat-stop`.
+- **`ce-suggestion-chip`** (brick) — tappable follow-up prompt chip
+  ("explain more", "give an example"). Emits `ce-suggestion-select`
+  with the chip's `value` (falls back to trimmed `textContent`).
+  Distinct from `ce-chip` (status pip).
+- **`ce-attachment-strip`** (widget) — strip of removable preview
+  tiles above a chat composer. CDR-005: JSON `items` array OR slotted
+  children. Emits `ce-attachment-remove` with `{ id }`. Handles image
+  thumbnails (`thumb` URL) and kind-default icons (image / file /
+  audio / video / other).
+- **`ce-reasoning`** (widget) — collapsible chain-of-thought trace for
+  reasoning-capable models (Claude `thinking`, o1-style). Disclosure
+  pattern mirrored from `ce-tool-call`, with optional tokens / duration
+  / streaming pulse. Distinct from `ce-thinking` (pre-token spinner).
+- **`ce-message-group`** (layout) — cluster wrapper for consecutive
+  same-role chat messages. Role-driven alignment (user → right; others
+  → left), tighter spacing between siblings, group-level avatar slot
+  and optional auto-generated header. Composes `ce-chat-bubble`
+  children (CDR-006) without reaching into their shadow trees.
+- **`ce-conversation-tree`** (widget) — compact branch picker for
+  forked / regenerated LLM responses (the `◀ 2 / 5 ▶` pattern that
+  ChatGPT and Claude both ship). Emits `ce-branch-prev`,
+  `ce-branch-next`, plus a unified `ce-branch-select`. Keyboard:
+  ArrowLeft / ArrowRight.
+- **`ce-stream-status`** (brick) — connection-state pill for streaming
+  surfaces (idle / connecting / streaming / done / error) with optional
+  locale-formatted token count and tokens-per-second readout. Pulses
+  during `connecting` and `streaming`; respects
+  `prefers-reduced-motion`. `role="status"` + `aria-live="polite"`.
+
+### Changed
+
+- **`ce-tool-result` reshaped** (was widget → now brick). The original
+  `[Unreleased]` shape (`ok`/`error`/`partial` + `actions` / `footer`
+  slots) is replaced with a tighter display-only API (`ok`/`error`/
+  `empty` + `error` / `meta` slots, `compact` mode, no `actions`).
+  Rationale: the gap-analysis spec for Scenario 1 wanted a
+  *standalone* return-value display for agent traces, not a re-skin
+  of `ce-tool-call`. Both shapes were unreleased; no consumer impact.
+- Catalog grew from 107 to **115 published** components (118 total).
+
+### Added — 11 gap-filling components
+
+Closes the highest-leverage holes surfaced in the 2026-05-20 user-scenario
+gap analysis (and the standing `vis/feature-request-from-mdflow.html` ask).
+Every tag follows the conventions established in 0.5.0: validated meta,
+≥ 6 vitest cases, ≥ 3 `@example` blocks (no `<script>`), Shadow DOM with
+`createShadowRootWithStyles()`, all visuals via `--ce-*` tokens, dual-mode
+collection APIs (CDR-005) where applicable, static-first defaults (CDR-004)
+where applicable, and minimal first examples (CDR-007).
+
+**Forms (Forms group, +3):**
+
+- **`ce-select`** (brick) — labelled `<select>` over a native control with
+  prefix/suffix slots, help/error regions, and grouped options. Accepts
+  options as a JSON array or slotted `<option>` / `<optgroup>` children.
+- **`ce-file-upload`** (widget) — drag-and-drop dropzone with click-to-browse
+  and `accept` / `multiple` / `disabled` support. Emits `ce-files` with a
+  `File[]` selection; the parent owns transport (the component never uploads).
+- **`ce-date-picker`** (brick) — labelled date / time / datetime-local /
+  month / week picker wrapping the native input. Forwards `min` / `max` /
+  `step`; emits `ce-input` per keystroke and `ce-change` on commit.
+
+**Chat surfaces (Chat surfaces group, +2):**
+
+- **`ce-source-card`** (widget) — RAG / agent retrieved-source card. Title
+  + site label + snippet + optional index ([n]) and relevance score
+  (normalises 0..1 or 0..100 to a percent pill). Panel companion to inline
+  `ce-citation`.
+- **`ce-tool-result`** (widget) — return-value companion to `ce-tool-call`.
+  Coloured left border by status (`ok` / `error` / `partial`), optional
+  schema/type pill, humanised duration, and a slotted body for the payload.
+  Works standalone in a chat transcript or inside `ce-tool-call`'s `result`
+  slot.
+
+**Layout & primitives (+3):**
+
+- **`ce-pagination`** (widget) — first / prev / numbered / next / last page
+  controls with ellipses and a compact "n / total" mode. Static-by-default;
+  emits `ce-pagechange` and only mutates `page` itself when `manage="self"`
+  (CDR-004 opt-in).
+- **`ce-breadcrumbs`** (widget) — path-navigation strip with JSON `items`
+  or slotted `<a>` / `<span>` children (CDR-005). The last crumb gets
+  `aria-current="page"`.
+- **`ce-accordion`** (widget) — grouped disclosure rows. Static-first
+  (no localStorage); accepts JSON items or slotted `<details>` children;
+  `single` mode enforces radio-style FAQ semantics. Emits
+  `ce-accordion-change` with the array of currently-open ids.
+
+**Comparison & narrative (decision-analysis primitives, +3):**
+
+- **`ce-pros-cons`** (widget) — explicit two-column pros / cons block.
+  Green left border + `✓` markers on pros, red + `✗` on cons. Each side
+  takes a JSON string array or slotted `<li>` children, and the two
+  modes may be mixed.
+- **`ce-matrix`** (widget) — 2×2 quadrant chart (Eisenhower /
+  impact-effort / priority). Configurable axis labels and quadrant
+  captions; items placed by JSON quadrant index or slot routing via
+  `data-quadrant`.
+- **`ce-rank-list`** (widget) — ranked list with computed positional ranks
+  (#1, #2, …), optional score column, and optional movement deltas
+  (▲ / ▼ / —). Top-three medal accents by default; `flat` to disable.
+
+### Changed
+
+- Catalog grew from 96 to **107 published** components (110 total with the
+  3 internal layout primitives). Updated `README.md` catalog section,
+  `docs/ARCHITECTURE.md` counts, and the `package.json` description.
+- `e2e/catalog-smoke.spec.ts` swapped the exact-count assertion (`49`) for
+  a lower-bound check (`≥ 110`). The exact-count drifted silently twice;
+  a lower bound still trips when the catalog *shrinks* but never goes
+  stale on additions. Added one representative tag per Forms / Dashboard /
+  Content group so a regression in any group surfaces on smoke.
+
+### Documented
+
+- `src/components/date-picker/CONCEPT.md` — explains why `type` accepts
+  HTML spec strings (CDR-001 "When NOT to apply" exemption for native
+  enums) and why `value` stays as a string attribute (form-control data,
+  not display content per CDR-002).
+- `src/components/pros-cons/CONCEPT.md` — explains why slot mode uses two
+  named slots (`pros` / `cons`) instead of one default slot — the
+  component carries two parallel collections, same shape as
+  `ce-tool-call`'s `args` / `result` / `error`.
+
+### Stats
+
+- **126 published** components (was 99 in v0.5.0) — 110 UI bricks /
+  widgets / layouts + 16 lesson components + 3 internal.
+- **1169 vitest cases** passing across 138 files (was 932 across roughly
+  the same surface in v0.5.0).
+- `pnpm check` green: typecheck + validate-meta (129 files) + gen-skill
+  drift check + tests + build.
+
 ## [0.5.0] — 2026-05-18
 
 This release lands two things at once: a **governance layer** (8 Component
@@ -378,7 +614,9 @@ Initial public surface: 31 components + 6 lesson widgets (= 37 tags), token
 system, dark/light themes, `auto.ts` registration, tree-shakable per-tag
 entries.
 
-[Unreleased]: https://github.com/zarly/custom-elements-collection/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/zarly/custom-elements-collection/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/zarly/custom-elements-collection/compare/v0.5.0...v0.6.0
+[0.5.0]: https://github.com/zarly/custom-elements-collection/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/zarly/custom-elements-collection/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/zarly/custom-elements-collection/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/zarly/custom-elements-collection/compare/v0.1.0...v0.2.0

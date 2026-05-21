@@ -6,6 +6,8 @@
   "goal": "Present a common misconception, then reveal its correction on click — the myth-busting pattern.",
   "description": "Shows a red-tinted myth card with a '✗ Myth' badge and the false belief. On click, flips to a green-tinted truth card with '✓ Truth' badge and the correct statement. Optional explanation shown below truth. Fires lesson-myth-reveal once on first reveal. reset() returns to myth view.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "myth",
@@ -47,21 +49,96 @@
   ],
   "slots": [],
   "cssVariables": [
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Outer vertical margin + explanation top margin." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card padding." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Badge bottom margin + explanation top padding." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
-    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Card transition." },
-    { "name": "--ce-color-red-bg", "kind": "color", "source": "token", "description": "Myth card background." },
-    { "name": "--ce-color-red", "kind": "color", "source": "token", "description": "Myth card border + badge color." },
-    { "name": "--ce-color-green-bg", "kind": "color", "source": "token", "description": "Truth card background." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Truth card border + badge color." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Badge font size." },
-    { "name": "--ce-text-md", "kind": "size", "source": "token", "description": "Main text font size." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Main text color." },
-    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Prompt font size." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Prompt and explanation text color." },
-    { "name": "--ce-border-soft", "kind": "color", "source": "token", "description": "Explanation top border color." }
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + explanation top margin."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge bottom margin + explanation top padding."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Card transition."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Myth card background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Myth card border + badge color."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Truth card background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Truth card border + badge color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Main text font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Main text color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Prompt font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Prompt and explanation text color."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Explanation top border color."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [
@@ -73,8 +150,16 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-reveal", "lesson-note", "lesson-rule"],
+  "related": [
+    "lesson-reveal",
+    "lesson-note",
+    "lesson-rule"
+  ],
   "category": "lesson",
   "tier": "widget",
-  "tags": ["Education", "myth", "misconception"]
+  "tags": [
+    "Education",
+    "myth",
+    "misconception"
+  ]
 }

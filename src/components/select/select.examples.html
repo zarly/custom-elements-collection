@@ -1,0 +1,61 @@
+<!-- @example Labelled select with options -->
+<ce-select
+  label="Plan"
+  name="plan"
+  options='[
+    {"value":"free","label":"Free"},
+    {"value":"pro","label":"Pro"},
+    {"value":"team","label":"Team"}
+  ]'
+></ce-select>
+
+<!-- @example With placeholder + help text -->
+<ce-select
+  label="Region"
+  name="region"
+  placeholder="Select a region…"
+  help="Closest data center keeps latency low."
+  options='[
+    {"value":"us-east","label":"US East (Virginia)"},
+    {"value":"eu-west","label":"EU West (Dublin)"},
+    {"value":"ap-south","label":"Asia Pacific (Mumbai)"}
+  ]'
+></ce-select>
+
+<!-- @example Grouped options via the `group` field -->
+<ce-select
+  label="Instance size"
+  name="size"
+  options='[
+    {"value":"hosted-sm","label":"Small","group":"Hosted"},
+    {"value":"hosted-md","label":"Medium","group":"Hosted"},
+    {"value":"hosted-lg","label":"Large","group":"Hosted"},
+    {"value":"oss","label":"Self-host (OSS)","group":"Self-host"}
+  ]'
+></ce-select>
+
+<!-- @example Error state — error overrides help -->
+<ce-select
+  label="Plan"
+  name="plan"
+  error="Please choose a plan to continue."
+  placeholder="Select…"
+  options='[
+    {"value":"free","label":"Free"},
+    {"value":"pro","label":"Pro"}
+  ]'
+></ce-select>
+
+<!-- @example Slotted <option> children (CDR-005 slot mode, handwritten-friendly) -->
+<ce-select label="Country" name="country">
+  <option value="">Select…</option>
+  <option value="us">United States</option>
+  <option value="gb">United Kingdom</option>
+  <option value="de">Germany</option>
+</ce-select>
+
+<!-- @example Disabled + prefix slot -->
+<ce-select label="Plan" name="plan" value="pro" disabled
+  options='[{"value":"free","label":"Free"},{"value":"pro","label":"Pro"}]'>
+  <span slot="prefix">★</span>
+</ce-select>

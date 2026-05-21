@@ -1,0 +1,26 @@
+<!-- @example Mixed attachments via JSON -->
+<ce-attachment-strip
+  items='[{"id":"a","name":"design.png","kind":"image","thumb":"https://placehold.co/96"},{"id":"b","name":"notes.pdf","kind":"file","size":52030},{"id":"c","name":"voice.m4a","kind":"audio","size":120544}]'
+></ce-attachment-strip>
+
+<!-- @example Slotted custom tiles -->
+<ce-attachment-strip>
+  <div data-id="x" style="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--ce-border);border-radius:var(--ce-radius);background:var(--ce-surface);font-size:var(--ce-text-xs);color:var(--ce-text);">
+    📎 contract.docx
+  </div>
+  <div data-id="y" style="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--ce-border);border-radius:var(--ce-radius);background:var(--ce-surface);font-size:var(--ce-text-xs);color:var(--ce-text);">
+    🎬 demo.mp4
+  </div>
+</ce-attachment-strip>
+
+<!-- @example Non-removable read-only strip -->
+<ce-attachment-strip
+  removable="false"
+  items='[{"id":"a","name":"invoice.pdf","kind":"file","size":18432},{"id":"b","name":"screenshot.png","kind":"image","thumb":"https://placehold.co/96","size":204800}]'
+></ce-attachment-strip>
+
+<!-- @example Compact strip with video and other attachments -->
+<ce-attachment-strip
+  compact
+  items='[{"id":"a","name":"clip.mp4","kind":"video","size":5242880},{"id":"b","name":"archive.zip","kind":"other","size":1048576},{"id":"c","name":"cover.jpg","kind":"image","thumb":"https://placehold.co/96"}]'
+></ce-attachment-strip>

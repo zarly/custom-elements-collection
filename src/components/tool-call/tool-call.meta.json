@@ -6,6 +6,8 @@
   "goal": "Render an LLM/agent tool invocation as a collapsible row with a status indicator, name, duration, and slotted args/result/error panels.",
   "description": "Disclosure widget purpose-built for function-calling and MCP-call visibility. The header shows a status dot (running pulses; ok/error are static), the tool name in monospace, and a humanized duration. Clicking toggles a body panel that always renders args, plus result (status=ok) or error (status=error). Implements the disclosure semantics manually (header has aria-expanded + aria-controls) rather than wrapping native <details>, so styling is consistent across browsers.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "name",
@@ -190,7 +192,8 @@
   "dependencies": [],
   "related": [
     "ce-details",
-    "ce-chat-bubble"
+    "ce-chat-bubble",
+    "ce-tool-result"
   ],
   "category": "ui",
   "tier": "widget",

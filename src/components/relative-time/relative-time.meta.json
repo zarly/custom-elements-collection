@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-relative-time",
+  "name": "Relative time",
+  "className": "CeRelativeTime",
+  "goal": "Display the age of an ISO timestamp as an auto-updating relative phrase (e.g. '2 minutes ago').",
+  "description": "Renders a semantic <time datetime='...'> element whose text content is the difference between the supplied datetime and now, formatted via Intl.RelativeTimeFormat with the largest sensible unit (seconds → minutes → hours → days → months → years). Self-rescheduling: it ticks every second while under a minute old, every 30 seconds while under an hour, then larger steps to keep CPU and battery low for older items.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "datetime",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "ISO 8601 timestamp; an empty / unparseable value renders empty text."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "BCP-47 locale tag for Intl formatting; defaults to the document locale."
+    },
+    {
+      "name": "numeric",
+      "type": "\"auto\" | \"always\"",
+      "required": false,
+      "default": "\"auto\"",
+      "reflect": true,
+      "description": "Auto allows phrases like 'yesterday' / 'tomorrow'; always forces numeric forms like '1 day ago'."
+    },
+    {
+      "name": "tickMs",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "attribute": "tick-ms",
+      "description": "Override the auto-scheduled refresh interval (0 = use the unit-aware default)."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default relative-time text color."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "Schedules a setTimeout that re-renders at a unit-appropriate cadence.",
+      "reason": "The displayed phrase needs to refresh as wall-clock time advances."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-clock",
+    "ce-countdown",
+    "ce-duration"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "time",
+    "primitive"
+  ]
+}

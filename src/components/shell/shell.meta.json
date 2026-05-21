@@ -6,6 +6,8 @@
   "goal": "Wrap a documentation or app page so it has consistent max-width, padding, and a single theme-root attribute on <html>.",
   "description": "Page-level wrapper. Clamps content width (narrow / default / wide / full), applies the project's outer padding, and propagates the active theme to the document root via data-ce-theme so token CSS resolves correctly. Should be used at most once per page.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "theme",

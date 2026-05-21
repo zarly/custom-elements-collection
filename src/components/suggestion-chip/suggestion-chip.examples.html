@@ -1,0 +1,27 @@
+<!-- @example Suggestion row -->
+<div style="display:flex;flex-wrap:wrap;gap:var(--ce-space-2);margin-top:var(--ce-space-2)">
+  <ce-suggestion-chip value="explain-more">Explain more</ce-suggestion-chip>
+  <ce-suggestion-chip value="give-example">Give an example</ce-suggestion-chip>
+  <ce-suggestion-chip value="summarise">Summarise this</ce-suggestion-chip>
+</div>
+
+<!-- @example With icons -->
+<div style="display:flex;flex-wrap:wrap;gap:var(--ce-space-2)">
+  <ce-suggestion-chip icon="💡" value="hint">Give me a hint</ce-suggestion-chip>
+  <ce-suggestion-chip icon="🔍" value="deep-dive">Deep dive</ce-suggestion-chip>
+  <ce-suggestion-chip icon="📋" value="checklist">Show checklist</ce-suggestion-chip>
+  <ce-suggestion-chip icon="🔄" value="retry">Try again</ce-suggestion-chip>
+</div>
+
+<!-- @example Disabled and selected states -->
+<div style="display:flex;flex-wrap:wrap;gap:var(--ce-space-2)">
+  <ce-suggestion-chip selected value="chosen">Already chosen</ce-suggestion-chip>
+  <ce-suggestion-chip disabled value="unavailable">Unavailable</ce-suggestion-chip>
+  <ce-suggestion-chip value="active">Active prompt</ce-suggestion-chip>
+</div>
+
+<!-- @example Long-prompt chip -->
+<div style="display:flex;flex-wrap:wrap;gap:var(--ce-space-2)">
+  <ce-suggestion-chip value="long-1">What are the trade-offs between these two approaches?</ce-suggestion-chip>
+  <ce-suggestion-chip value="long-2">Can you walk me through this step by step?</ce-suggestion-chip>
+</div>

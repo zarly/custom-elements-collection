@@ -6,6 +6,8 @@
   "goal": "Provide a single-select group control with classic, segmented, or card visual variants and full keyboard support.",
   "description": "Radio-group with three visual treatments: 'classic' (traditional radio circles), 'segmented' (joined-button group), and 'card' (option-as-card with optional hint line). Roving tabindex; arrow keys + Home/End move selection; Space/Enter activate. Options provided as a JSON array; per-option disabled state honored. Emits ce-change with { name, value }.",
   "stability": "experimental",
+  "created": "2026-05-08",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "name",
@@ -189,10 +191,19 @@
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["ce-checkbox", "ce-toggle", "ce-filter-bar"],
+  "related": [
+    "ce-checkbox",
+    "ce-toggle",
+    "ce-filter-bar",
+    "ce-select"
+  ],
   "category": "ui",
   "tier": "widget",
-  "tags": ["Forms", "interactive", "control"],
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ],
   "a11y": {
     "role": "radiogroup",
     "notes": "Roving tabindex (only the current option is tabbable). Arrow keys / Home / End move selection + focus; Space / Enter explicitly activate. aria-checked reflects the selection."

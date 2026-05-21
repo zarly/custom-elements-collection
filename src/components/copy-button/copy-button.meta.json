@@ -6,6 +6,8 @@
   "goal": "Provide a one-click copy-to-clipboard trigger that targets any element by id or CSS selector and reports success via a CustomEvent.",
   "description": "A button paired with another element by `for=<id>` (or selector). Reads the target's textContent (or input/textarea value), writes it to the system clipboard via the Clipboard API, and falls back to a hidden textarea + execCommand path when the modern API is unavailable. The button briefly switches to the copied-label and dispatches ce-copy { text, ok }.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "for",

@@ -6,6 +6,8 @@
   "goal": "Display a numbered or 'golden' rule card with a circular badge, title, and explanatory body.",
   "description": "Rule card for educational content. Top row shows a circular blue badge (number / glyph / ★) plus a title; below sits a slotted body. golden=true switches to amber styling for emphasized, top-of-lesson rules.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "number",

@@ -6,6 +6,8 @@
   "goal": "Render an inline footnote-style source reference with an optional hover/focus popover preview.",
   "description": "Inline citation marker that renders as [index] superscript by default and reveals a popover with expanded source context on hover or keyboard focus. Becomes an anchor when href is set; remains a focusable span otherwise. Uses ARIA role=doc-noteref + a tooltip popover wired via aria-describedby.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "href",
@@ -131,7 +133,8 @@
   "dependents": [],
   "dependencies": [],
   "related": [
-    "ce-chat-bubble"
+    "ce-chat-bubble",
+    "ce-source-card"
   ],
   "category": "ui",
   "tier": "brick",

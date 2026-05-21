@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-stream-status",
+  "name": "Stream status",
+  "className": "CeStreamStatus",
+  "goal": "Streaming-connection state pill — idle / connecting / streaming / done / error — with optional token counter and tokens-per-second readout.",
+  "description": "Compact inline pill that communicates LLM streaming connection state via a color-coded background, border, and animated dot. Optionally renders a formatted token count and a tokens-per-second readout alongside the state label. Sets role=status + aria-live=polite so assistive technology announces state changes.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "state",
+      "type": "CeStreamState",
+      "required": false,
+      "default": "\"idle\"",
+      "attribute": "state",
+      "reflect": true,
+      "description": "Connection state; drives color, border, and pulse animation. One of idle | connecting | streaming | done | error."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "label",
+      "reflect": false,
+      "description": "Override label text. When empty, a state-default label is used (Idle / Connecting… / Streaming / Done / Error)."
+    },
+    {
+      "name": "tokens",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "attribute": "tokens",
+      "reflect": false,
+      "description": "Optional token count. When set, rendered as a locale-formatted number followed by 'tokens'."
+    },
+    {
+      "name": "tps",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "attribute": "tps",
+      "reflect": false,
+      "description": "Optional tokens-per-second. When set, rendered as an integer followed by 'tok/s', separated from the token count by a middle-dot."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Fully replaces the auto-generated label and counter content. When used, the host takes complete control of inner text."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral (idle) pill background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral (idle) pill border."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Pill border-radius."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding inside the pill."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal pill padding and gap between dot and label."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "font",
+      "source": "token",
+      "description": "Pill font size."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Pill font family."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill label text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Idle dot color and counter text color."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Label line-height."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Dot color when state=connecting."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background tint when state=connecting."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill border when state=connecting."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Dot color when state=streaming."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background tint when state=streaming."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill border when state=streaming."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Dot color when state=done."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background tint when state=done."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill border when state=done."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Dot color when state=error."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill background tint when state=error."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Pill border when state=error."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "Intl.NumberFormat",
+      "purpose": "Formats the token count with locale-appropriate thousands separators.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets role='status' and aria-live='polite' on the host element during connectedCallback.",
+      "reason": "Ensures assistive technology announces state changes without the consumer needing to add ARIA manually.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-status-light",
+    "ce-thinking",
+    "ce-cursor"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "status",
+    "stream"
+  ],
+  "a11y": {
+    "role": "status",
+    "notes": "On connectedCallback the host receives role='status' and aria-live='polite' (unless already set by the page). This causes assistive technology to announce state transitions politely without interrupting the current reading flow."
+  }
+}

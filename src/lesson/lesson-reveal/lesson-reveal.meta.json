@@ -6,6 +6,8 @@
   "goal": "Flashcard that displays a front (question/term) and reveals the back (answer) on click.",
   "description": "Single-card flashcard widget. Displays front-label + front text with a 'Click to reveal' hint. On click, flips to show back-label (green) + back text + reset hint. Fires lesson-reveal-flip on each flip. reset() returns to front state. Entire card is clickable.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "front",
@@ -54,19 +56,84 @@
   ],
   "slots": [],
   "cssVariables": [
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Default card border." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card padding." },
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Hint top margin." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Label bottom margin." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Hover border color." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Flipped border + back label color." },
-    { "name": "--ce-text-xs", "kind": "size", "source": "token", "description": "Label and hint font size." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Default label and hint color." },
-    { "name": "--ce-text-lg", "kind": "size", "source": "token", "description": "Main text font size." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Main text color." },
-    { "name": "--ce-line-relaxed", "kind": "other", "source": "token", "description": "Main text line height." }
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default card border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Hint top margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Label bottom margin."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Flipped border + back label color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Label and hint font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label and hint color."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Main text font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Main text color."
+    },
+    {
+      "name": "--ce-line-relaxed",
+      "kind": "other",
+      "source": "token",
+      "description": "Main text line height."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [
@@ -78,8 +145,16 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-quiz", "lesson-gap", "lesson-myth"],
+  "related": [
+    "lesson-quiz",
+    "lesson-gap",
+    "lesson-myth"
+  ],
   "category": "lesson",
   "tier": "widget",
-  "tags": ["Education", "flashcard", "reveal"]
+  "tags": [
+    "Education",
+    "flashcard",
+    "reveal"
+  ]
 }

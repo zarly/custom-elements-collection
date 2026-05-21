@@ -6,6 +6,8 @@
   "goal": "Display a color-coded numeric score pill that auto-tiers itself into high, med, or low based on the value-to-max ratio.",
   "description": "Small inline pill showing a numeric score with semantic color coding: green for high, amber for med, red for low. Tier auto-computes from value/max (default max=10 matches the dominant 0–10 corpus scale). Explicit tier attribute overrides auto-computation. Global thresholds are overridable via --ce-score-breakpoints. Exposes role=meter ARIA semantics.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

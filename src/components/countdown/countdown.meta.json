@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-countdown",
+  "name": "Countdown",
+  "className": "CeCountdown",
+  "goal": "Count down to a target ISO timestamp and fire a ce-countdown-end event when reached.",
+  "description": "Live countdown timer. Renders the remaining time as colon-separated segments (days, hours, minutes, seconds) sized to format: 'dhms' auto-trims a leading 0-day, 'hms' rolls days into hours, 'ms' rolls hours into minutes, and 's' renders a pure seconds count. Optional inline labels under each segment for marketing-style countdowns. Fires ce-countdown-end exactly once when the remaining time hits zero and stops its internal timer.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "target",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "ISO 8601 instant to count down to."
+    },
+    {
+      "name": "format",
+      "type": "\"dhms\" | \"hms\" | \"ms\" | \"s\"",
+      "required": false,
+      "default": "\"dhms\"",
+      "reflect": true,
+      "description": "Segment composition. dhms drops leading 0-day; hms folds days into hours; ms folds hours into minutes; s renders pure seconds."
+    },
+    {
+      "name": "labels",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Show small d/h/m/s labels under each segment."
+    },
+    {
+      "name": "tickMs",
+      "type": "number",
+      "required": false,
+      "default": "1000",
+      "attribute": "tick-ms",
+      "description": "Refresh interval in milliseconds."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-countdown-end",
+      "detail": "{ target: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires exactly once when the remaining time reaches zero."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Segment value color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Segment label + separator color."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Segment value font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Segment label font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between segments."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "timer",
+      "description": "Schedules a setInterval at tickMs to refresh the remaining time.",
+      "reason": "Live updates require a periodic re-render until the target instant."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-clock",
+    "ce-relative-time",
+    "ce-duration"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "time",
+    "primitive"
+  ]
+}

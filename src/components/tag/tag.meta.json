@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-tag",
+  "name": "Tag",
+  "className": "CeTag",
+  "goal": "Render a content-taxonomy label — a topic, facet, or category — with an optional remove affordance.",
+  "description": "Distinct from ce-chip (which is a status pip): ce-tag is a content-categorisation token used for tag clouds, multi-select filter facets, and topical labels. Leads with a faded # glyph for visual recognition. Seven CecColor tints (neutral default), and an optional × button that emits ce-tag-remove with the optional value identifier in the event detail. The label itself is slotted (vocabulary lives in children per CDR-001).",
+  "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "color",
+      "type": "CecColor | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Tag tint (neutral default when null)."
+    },
+    {
+      "name": "removable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Show a × button that emits ce-tag-remove on click."
+    },
+    {
+      "name": "value",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "description": "Opaque identifier surfaced in the ce-tag-remove event detail."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-tag-remove",
+      "detail": "{ value: string | null }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user activates the × remove button."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Tag label content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between hash, label, and remove button."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Line height."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Tag and remove-button radius."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral foreground."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Neutral border + remove-button hover surface."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green text."
+    },
+    {
+      "name": "--ce-color-green-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green border."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red text."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red border."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber text."
+    },
+    {
+      "name": "--ce-color-amber-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber border."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue background."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue text."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue border."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple background."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple text."
+    },
+    {
+      "name": "--ce-color-purple-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple border."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan background."
+    },
+    {
+      "name": "--ce-color-cyan",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan text."
+    },
+    {
+      "name": "--ce-color-cyan-border",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan border."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Remove-button focus ring."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chip",
+    "ce-filter-bar"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "tag",
+    "label"
+  ]
+}

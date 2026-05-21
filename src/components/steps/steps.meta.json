@@ -6,6 +6,8 @@
   "goal": "Container for ce-step items that accepts JSON data or slot children and auto-numbers unnumbered steps.",
   "description": "Layout container for process / roadmap steps implementing CDR-005 dual-mode: JSON array via the data attribute takes priority; slot children are used otherwise; empty state rendered when neither is present. When auto-number is enabled (default), sequential numbers are assigned to ce-step children that have no n attribute. Non-ce-step slot children are passed through without interference (CDR-006). Direction (vertical|horizontal) controls the flex axis. In JSON mode the container creates ce-step elements inline from the data array, producing visually identical output to the equivalent slot markup.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "data",
@@ -82,8 +84,14 @@
     }
   ],
   "dependents": [],
-  "dependencies": ["ce-step"],
-  "related": ["ce-step", "ce-flow", "ce-checklist"],
+  "dependencies": [
+    "ce-step"
+  ],
+  "related": [
+    "ce-step",
+    "ce-flow",
+    "ce-checklist"
+  ],
   "category": "ui",
   "tier": "layout",
   "tags": [

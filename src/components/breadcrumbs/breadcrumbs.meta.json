@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-breadcrumbs",
+  "name": "Breadcrumbs",
+  "className": "CeBreadcrumbs",
+  "goal": "Render a path-navigation strip with intermediate links and a current-page crumb.",
+  "description": "Static navigation primitive. Accepts both shapes (CDR-005): a JSON items array of { label, href? } or slotted <a>/<span> children. In JSON mode the last item is rendered as the current-page text (or a link if href is present but it's still flagged aria-current=page). In slot mode the last child gets the current styling via ::slotted(:last-child); the component assigns named slot positions on slotchange and renders the configured separator between crumbs.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "items",
+      "type": "BreadcrumbItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of crumbs ({ label, href? }). When empty, slotted children are used."
+    },
+    {
+      "name": "separator",
+      "type": "string",
+      "required": false,
+      "default": "\"/\"",
+      "description": "Visible separator glyph between crumbs."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Slotted crumb elements (typically <a> or <span>) for the slot-mode authoring path."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Current crumb text + hover anchor color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default crumb text."
+    },
+    {
+      "name": "--ce-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Separator color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Crumb font size."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Crumb line-height."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between crumbs and separators."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Crumb vertical inset."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Anchor focus rounding."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on links."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-nav-list",
+    "ce-toc",
+    "ce-pagination"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "navigation",
+    "breadcrumbs"
+  ],
+  "a11y": {
+    "role": "navigation",
+    "notes": "Wrapped in <nav aria-label='Breadcrumb'>. The current page is marked with aria-current='page'. The host element also receives aria-label='Breadcrumb' on first connection for assistive-tech consumers that read the outer element."
+  }
+}

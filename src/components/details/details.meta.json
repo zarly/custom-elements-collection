@@ -6,6 +6,8 @@
   "goal": "Provide a styled, animated collapsible disclosure with a summary row and optional count chip.",
   "description": "Thin wrapper over native <details> with chevron rotation, hover state, an optional right-aligned count chip, and a custom toggle event. Reflects open to the host attribute so consumers can style or query collapsed state.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "summary",
@@ -151,7 +153,9 @@
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": [],
+  "related": [
+    "ce-accordion"
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [

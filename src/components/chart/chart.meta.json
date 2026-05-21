@@ -6,6 +6,8 @@
   "goal": "Render a Chart.js-backed line / bar / radar / pie / doughnut chart from JSON data + options attributes.",
   "description": "Lazy-loaded Chart.js wrapper. On first update injects a <script src=…> for Chart.js if window.Chart is not already present, then mounts a chart on a managed canvas. Honors live updates to type / data / options by destroying and re-mounting. Renders an inline error block if the script fails to load.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",

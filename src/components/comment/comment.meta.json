@@ -6,6 +6,8 @@
   "goal": "Surface a compact comment trigger that expands to an auto-growing textarea with debounced change events and configurable submit semantics.",
   "description": "Compact-by-default comment input. Collapsed: a small button. Clicking expands to a textarea that auto-grows between min-rows and max-rows by computed scrollHeight. Typing emits debounced ce-comment-change events; explicit submission (per submit-on) emits ce-comment-commit. Supports submit-on blur, enter, cmd-enter, or manual. Auto-collapses on submit unless submit-on=manual; Cancel and Escape collapse without committing.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

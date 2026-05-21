@@ -6,6 +6,8 @@
   "goal": "Display a compact inline status pill with semantic color variants and optional dot or outlined treatment.",
   "description": "Small inline status indicator. Replaces ad-hoc badge / pill / tag / label markup with one canonical element. Seven color types (neutral / green / red / amber / blue / purple / cyan), optional leading dot, and an outlined treatment for low-emphasis use.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",

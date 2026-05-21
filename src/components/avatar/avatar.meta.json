@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-avatar",
+  "name": "Avatar",
+  "className": "CeAvatar",
+  "goal": "Render a user-identity badge as a circle or square showing an image, derived initials, or slotted custom content.",
+  "description": "Compact identity primitive. Renders an <img> when src is provided; otherwise derives monogram initials from name (up to two tokens). Falls back to an empty neutral disc when neither is given. Three sizes (sm/md/lg) and two shapes (circle/square). The initials fallback accepts an optional CecColor tint for category-coded teams or roles.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Image URL. When set, renders <img loading=lazy>."
+    },
+    {
+      "name": "alt",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Image alt text. Defaults to name when omitted."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Full name used to derive monogram initials (first letter of up to 2 whitespace-separated tokens)."
+    },
+    {
+      "name": "size",
+      "type": "CecSize",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Avatar size — sm | md | lg."
+    },
+    {
+      "name": "shape",
+      "type": "\"circle\" | \"square\"",
+      "required": false,
+      "default": "\"circle\"",
+      "reflect": true,
+      "description": "Render shape."
+    },
+    {
+      "name": "color",
+      "type": "CecColor | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Tint for the initials-fallback background; ignored when an image is shown."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional content (SVG icon, glyph) shown in place of initials when src is not set."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default initials-fallback background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default initials-fallback text color."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Subtle border around the avatar."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Corner radius used when shape=square."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=green background tint."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=red background tint."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=amber background tint."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=blue background tint."
+    },
+    {
+      "name": "--ce-color-purple-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=purple background tint."
+    },
+    {
+      "name": "--ce-color-cyan-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "color=cyan background tint."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [
+    "ce-avatar-group"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-persona",
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "identity",
+    "avatar"
+  ]
+}

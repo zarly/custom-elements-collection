@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-source-card",
+  "name": "Source card",
+  "className": "CeSourceCard",
+  "goal": "Render a single retrieved source for RAG / agent surfaces with title, site label, snippet, optional index and relevance score.",
+  "description": "Panel companion to ce-citation. While ce-citation lives inline inside prose, ce-source-card is the list / sidebar artefact answering 'what did the model retrieve'. Wraps the title in <a target=_blank> when url is set, derives the site label from the URL host when site is omitted, and renders a relevance score normalising both 0..1 and 0..100 inputs to a percent display. Snippet text goes in the default slot; an optional [n] index threads into inline citations.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "url",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Link target. Wraps the title in an anchor opening in a new tab when set."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Primary heading. Falls back to slotted title content."
+    },
+    {
+      "name": "site",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Display label for the source (host, publisher, repo). Falls back to the URL host."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional emoji or icon glyph rendered before the site label."
+    },
+    {
+      "name": "score",
+      "type": "number",
+      "required": false,
+      "default": "NaN",
+      "description": "Relevance score. Accepts 0..1 or 0..100; rendered as a small percent pill."
+    },
+    {
+      "name": "index",
+      "type": "number",
+      "required": false,
+      "default": "NaN",
+      "description": "Ordinal position rendered as [n]; wires the panel card to inline ce-citation references."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "title",
+      "description": "Rich title markup; overrides the title attribute when present."
+    },
+    {
+      "name": "",
+      "description": "Snippet / preview text."
+    },
+    {
+      "name": "meta",
+      "description": "Extra inline metadata (date, author) next to the site label."
+    },
+    {
+      "name": "footer",
+      "description": "Footer actions or secondary controls."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Footer separator."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card corner radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Focus ring rounding."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Score pill rounding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title and body text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Site label and snippet text."
+    },
+    {
+      "name": "--ce-dim",
+      "kind": "color",
+      "source": "token",
+      "description": "Inline meta text."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Title hover + score pill text."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Score pill background."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Top row + score + footer font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Tight vertical gaps."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Top-row gap + score pill padding + footer separator gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical card padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal card padding."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Score pill vertical inset."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "other",
+      "source": "token",
+      "description": "Title line-height."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "other",
+      "source": "token",
+      "description": "Body line-height."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Hover elevation."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Link focus ring."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Hover transition timing."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-citation",
+    "ce-card",
+    "ce-file-card"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "rag",
+    "source",
+    "card",
+    "citation"
+  ],
+  "a11y": {
+    "notes": "When url is set the title becomes a focusable anchor opening in a new tab with rel=noreferrer noopener. The score pill carries aria-label='Relevance score'. The card itself is not interactive; structural only."
+  }
+}

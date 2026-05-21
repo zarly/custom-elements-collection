@@ -6,6 +6,8 @@
   "goal": "Capture intent-to-revisit on a per-item basis with a switch-semantic toggle distinct from rating-based quality judgment.",
   "description": "Single boolean switch for save/shortlist/pin semantics. Reflects active to the host attribute and surfaces ARIA role=switch with aria-checked. Clicking the host or pressing Enter/Space toggles state and dispatches a bubbling ce-bookmark-change event. Slotted icon and label slots let consumers override the emoji defaults.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "active",

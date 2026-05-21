@@ -6,6 +6,8 @@
   "goal": "Cycle / select from a named list of values via an arrow-button + dropdown control, emitting ce-change on selection.",
   "description": "Compact cycler + dropdown. Layout: ‹ [ Current Label ▾ ] ›. Left/right arrows step through options; the label toggles a grouped dropdown; ArrowLeft/Right and Escape are handled inside the widget. The component is generic — it does not itself touch document themes; consumers wire the ce-change event to whatever they want updated.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

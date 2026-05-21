@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-attachment-strip",
+  "name": "Attachment strip",
+  "className": "CeAttachmentStrip",
+  "goal": "Strip of attachment previews above a chat composer, each with a remove affordance, accepting either a JSON items array or slotted child tiles.",
+  "description": "Horizontal scrolling row of attachment tiles placed above a chat input. Each tile shows a thumbnail (for images) or a kind icon (file, audio, video, other), the filename, and an optional size label. A ✕ button on each tile fires `ce-attachment-remove`; the host updates its source-of-truth. Accepts data as a JSON `items` attribute (CDR-005 JSON mode) or as slotted custom tiles when `items` is empty (CDR-005 slot mode).",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "items",
+      "type": "CeAttachment[]",
+      "required": false,
+      "default": "[]",
+      "attribute": "items",
+      "description": "JSON array of attachment descriptors. When non-empty, JSON mode is used and slotted children are ignored. Each item requires `id` and `name`; `kind`, `thumb`, and `size` are optional."
+    },
+    {
+      "name": "removable",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When false, the remove (✕) button is hidden on every tile. Useful for read-only previews."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Reduces tile min-width and padding for denser layouts."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-attachment-remove",
+      "detail": "{ id: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when a tile's remove button is clicked. `detail.id` matches the attachment's `id`. The host is responsible for removing the item from its source-of-truth."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Custom tile elements used when `items` is empty (CDR-005 slot mode). Each child SHOULD carry a `data-id` attribute so the host can route remove events. The strip wraps them in the same scrolling container."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Margin between thumbnail/icon and text body."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between tiles and strip vertical padding."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Tile background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon area and remove button background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Tile border and scrollbar thumb color."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Tile hover border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Tile border radius."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Thumbnail and icon area border radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Remove button and scrollbar thumb border radius."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "font",
+      "source": "token",
+      "description": "Tile filename and size font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Tile filename color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Tile size label and kind icon color."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Font family for tile text."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "font",
+      "source": "token",
+      "description": "Line height for compact tile text."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Remove button hover icon color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Remove button hover background."
+    },
+    {
+      "name": "--ce-color-red-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Remove button hover border."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on the remove button."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Tile hover and remove button color transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-file-card"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "attachments",
+    "preview"
+  ],
+  "a11y": {
+    "role": "list",
+    "notes": "The strip container carries role=list. Each JSON-mode tile has role=group with an aria-label from the filename. The remove button has an aria-label of 'Remove <filename>'. Focus ring is visible on the remove button via :focus-visible."
+  }
+}

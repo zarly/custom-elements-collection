@@ -6,6 +6,8 @@
   "goal": "Surface page-level action buttons (copy markdown, download json, submit, clear) that delegate work to the ancestor sink via bubbling export-request events.",
   "description": "Renders one button per requested format and dispatches a bubbling ce-feedback-export-request event the ancestor ce-feedback-sink handles. Listens to ce-feedback-persisted and ce-feedback-failed events from the sink to flash a transient status line (~1500ms) inside its UI. Layout can be row (default), menu (column), or floating (sticky to viewport bottom).",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "subject",

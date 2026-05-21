@@ -6,6 +6,8 @@
   "goal": "Show a final-decision banner — go / no-go / mixed / info — with an icon, title, and detail line.",
   "description": "Decision banner with icon, title, and detail. Four semantic types tint the border, background, icon, and title color. Default icons are ✓ ✗ ⚠ ℹ; consumers can override via the icon attribute or supply custom title markup via the title slot.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "type",

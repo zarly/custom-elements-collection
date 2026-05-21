@@ -6,6 +6,8 @@
   "goal": "Render a semicircle dial showing a single value within min..max with optional target tick.",
   "description": "Half-circle meter that visualises one numeric value relative to a range, with a fill arc, the value displayed inside, and an optional target tick mark to indicate a goal threshold. Hovering the gauge surfaces a native browser tooltip with the value, range, and target; the tick itself shows a 'Target: N' tooltip on hover. Pure inline SVG; clamps values outside the range so it stays within the dial.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

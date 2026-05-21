@@ -6,6 +6,8 @@
   "goal": "Display two slotted columns side by side as a Before/After (or A/B) panel separated by a configurable arrow.",
   "description": "Side-by-side comparison panel. Left column gets a red tint (Before), right column a green tint (After), and a center column shows a configurable arrow (default → ). Below 640px the layout collapses to a single column and the arrow hides.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "beforeLabel",
@@ -145,7 +147,8 @@
   "dependents": [],
   "dependencies": [],
   "related": [
-    "ce-example"
+    "ce-example",
+    "ce-pros-cons"
   ],
   "category": "ui",
   "tier": "widget",

@@ -138,6 +138,22 @@ export interface ComponentMeta {
   deprecatedIn?: string;
   /** tag name of replacement component */
   replacedBy?: string;
+  /**
+   * ISO-8601 date (YYYY-MM-DD) the meta was first introduced.
+   *
+   * SCRIPT-MANAGED — see ADR-011, ADR-012. Maintained automatically by
+   * `scripts/sync-meta-dates.ts`, fired from the simple-git-hooks
+   * pre-commit hook on every commit. Humans and agents never edit this.
+   */
+  created: string;
+  /**
+   * ISO-8601 date (YYYY-MM-DD) the component source last changed.
+   *
+   * SCRIPT-MANAGED — bumped automatically when the SHA-256 of `<stem>.ts`
+   * (only — see ADR-012) differs from the entry in
+   * `src/meta/content-hashes.json`. Must satisfy `updated >= created`.
+   */
+  updated: string;
 
   // — Public API ————————————————————————————————
   props: PropMeta[];

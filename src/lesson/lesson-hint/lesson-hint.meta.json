@@ -6,6 +6,8 @@
   "goal": "Progressive hint disclosure — reveal hints one at a time to give learners scaffolded support before giving up.",
   "description": "Shows a 'Show hint N of M' button. Each click reveals the next hint in a stacked list. The most recently revealed hint has a blue highlight. After all hints are shown the button changes to 'All hints shown' and disables. Fires lesson-hint-show with {index, hint} on each reveal. Accepts hints as a JSON string[] attribute.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "hints",
@@ -27,19 +29,84 @@
   "methods": [],
   "slots": [],
   "cssVariables": [
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Outer vertical margin + list top margin + item padding." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Button icon gap + list gap." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Button horizontal padding + item horizontal padding." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Button border, text, hover background; latest item border; hint number color." },
-    { "name": "--ce-radius-sm", "kind": "radius", "source": "token", "description": "Button and item border radius." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Button and item font size." },
-    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Button hover text color." },
-    { "name": "--ce-transition-fast", "kind": "other", "source": "token", "description": "Button transition." },
-    { "name": "--ce-border", "kind": "color", "source": "token", "description": "Disabled button border + item border." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Disabled button text color." },
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Item background." },
-    { "name": "--ce-surface-2", "kind": "color", "source": "token", "description": "Latest item background." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Item text color." }
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + list top margin + item padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Button icon gap + list gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Button horizontal padding + item horizontal padding."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Button border, text, hover background; latest item border; hint number color."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Button and item border radius."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Button and item font size."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Button hover text color."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Button transition."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Disabled button border + item border."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Disabled button text color."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Item background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Latest item background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Item text color."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [
@@ -51,8 +118,16 @@
   ],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-quiz", "lesson-gap", "lesson-note"],
+  "related": [
+    "lesson-quiz",
+    "lesson-gap",
+    "lesson-note"
+  ],
   "category": "lesson",
   "tier": "widget",
-  "tags": ["Education", "hint", "scaffold"]
+  "tags": [
+    "Education",
+    "hint",
+    "scaffold"
+  ]
 }

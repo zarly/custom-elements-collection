@@ -6,6 +6,8 @@
   "goal": "Render a definition list or ce-kv rows as an aligned grid with optional multi-column packing and tight typography.",
   "description": "Two authoring modes. Mode A (dt/dd): wraps slotted `<dt>/<dd>` pairs in a CSS-grid `<dl>` so keys align in a column — supports 1-3 column-pairs side-by-side. Mode B (ce-kv): when direct children include `<ce-kv>` elements, stacks them in a flex column — values in each row accept any HTML content per CDR-002. If any `<ce-kv>` children are present Mode B is used; otherwise Mode A.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "columns",
@@ -72,7 +74,9 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": ["ce-kv"],
+  "dependencies": [
+    "ce-kv"
+  ],
   "related": [
     "ce-table",
     "ce-kv"

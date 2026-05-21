@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-suggestion-chip",
+  "name": "Suggestion chip",
+  "className": "CeSuggestionChip",
+  "goal": "Tappable follow-up-prompt chip that emits its value when selected — for rendering quick replies and suggested next prompts under assistant messages.",
+  "description": "Interactive pill-shaped chip designed for chat surfaces. Emits a ce-suggestion-select event carrying the prompt value when clicked or activated via keyboard. Distinct from ce-chip (non-interactive status display): suggestion-chip is an intent primitive — it initiates user action. Supports disabled and selected states, an optional leading icon attribute, and a named icon slot for richer overrides.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "value",
+      "reflect": false,
+      "description": "Payload emitted in the ce-suggestion-select event detail. Falls back to trimmed textContent when empty."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "disabled",
+      "reflect": true,
+      "description": "Makes the chip non-interactive and visually greyed out."
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "selected",
+      "reflect": true,
+      "description": "Visually highlights the chip to indicate the prompt has already been chosen."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "attribute": "icon",
+      "reflect": false,
+      "description": "Optional leading emoji or short text rendered before the default slot. Overridden by slotted content in the icon slot."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-suggestion-select",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired on click or Enter/Space key when not disabled. detail.value is the value prop when non-empty, otherwise the trimmed textContent."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Chip label — the prompt text shown to the user.",
+      "required": false
+    },
+    {
+      "name": "icon",
+      "description": "Overrides the icon attribute with richer content such as an SVG icon.",
+      "required": false
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Vertical padding inside the chip."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between icon and label."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding inside the chip."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Full-pill border radius."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Default border color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Default background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "font",
+      "source": "token",
+      "description": "Chip font size."
+    },
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Chip font family."
+    },
+    {
+      "name": "--ce-line-snug",
+      "kind": "size",
+      "source": "token",
+      "description": "Line height inside the chip."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition duration for hover/focus state changes."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background overlay."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border color and selected text color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected state background."
+    },
+    {
+      "name": "--ce-color-blue-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Selected state border color."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible box-shadow ring."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chip",
+    "ce-retry-button"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Chat surfaces",
+    "chip",
+    "intent"
+  ],
+  "a11y": {
+    "role": "button",
+    "notes": "Host receives role=button and tabindex=0 on connect. When disabled, aria-disabled=true is set and tabindex is removed. Enter and Space activate the chip."
+  }
+}

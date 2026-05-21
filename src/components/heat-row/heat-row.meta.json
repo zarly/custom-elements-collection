@@ -6,6 +6,8 @@
   "goal": "Single row of heatmap cells for use inside <ce-heatmap> slot mode (CDR-005), or as a standalone minimal row when used outside.",
   "description": "Carries a label attribute (Y-axis header) and a default slot for <ce-heat-cell> children. When nested inside ce-heatmap the parent reads label as an attribute and iterates ce-heat-cell children via querySelectorAll — the row itself renders nothing (display:contents). When used standalone it renders a labeled flex row of cells. Non-ce-heat-cell slot children are passed through to light DOM and ignored by the parent's data-resolution path.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "label",
@@ -51,9 +53,16 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-heatmap"],
-  "dependencies": ["ce-heat-cell"],
-  "related": ["ce-heatmap", "ce-heat-cell"],
+  "dependents": [
+    "ce-heatmap"
+  ],
+  "dependencies": [
+    "ce-heat-cell"
+  ],
+  "related": [
+    "ce-heatmap",
+    "ce-heat-cell"
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [

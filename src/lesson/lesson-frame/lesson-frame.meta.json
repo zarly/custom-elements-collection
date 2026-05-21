@@ -6,6 +6,8 @@
   "goal": "Wrap a lesson page with a fixed top progress bar and a centered, padded content column.",
   "description": "Top-level lesson shell. Renders a fixed 4px progress bar at the top of the viewport (driven by the progress prop), a centered title + meta row, and a content column with a max-width of 880px. Used as the outermost element on a lesson page.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "progress",

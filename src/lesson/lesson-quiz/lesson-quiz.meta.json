@@ -6,6 +6,8 @@
   "goal": "Run a single-question multiple-choice quiz with instant feedback, an explanation reveal, and a reset() method.",
   "description": "Single-question multiple-choice quiz. Renders a question and a vertical list of options; clicking an option marks it green if correct or red if wrong (and outlines the correct one), shows the explanation below, and disables the rest. lesson-quiz-answer fires once per question.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "question",

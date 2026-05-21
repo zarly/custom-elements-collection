@@ -1,0 +1,41 @@
+<!-- @example Minimal RAG hit -->
+<ce-source-card
+  url="https://lit.dev/docs/components/shadow-dom/"
+  title="Lit · Shadow DOM"
+>The shadow DOM provides DOM encapsulation and style scoping for components…</ce-source-card>
+
+<!-- @example With index + relevance score -->
+<ce-source-card
+  index="1"
+  score="0.84"
+  url="https://developer.mozilla.org/en-US/docs/Web/Web_Components"
+  title="MDN — Web Components"
+>Web Components is a suite of different technologies allowing you to create reusable
+custom elements with encapsulated functionality.</ce-source-card>
+
+<!-- @example List of retrieved sources -->
+<ce-grid cols="2" gap="md">
+  <ce-source-card
+    index="1" score="0.91"
+    url="https://docs.example.com/architecture/streaming-ui"
+    site="Example Docs"
+    icon="📘"
+    title="Streaming UI with web components"
+  >A pattern for emitting custom elements from an LLM and progressively upgrading them as data streams in.
+    <span slot="meta">Updated 2026-04-22</span>
+  </ce-source-card>
+  <ce-source-card
+    index="2" score="0.77"
+    url="https://github.com/example/rag-eval"
+    icon="💻"
+    title="rag-eval — reference evaluation harness"
+  >Drop-in benchmark for retrieval quality with deterministic scoring.
+    <span slot="footer"><a href="https://github.com/example/rag-eval/releases">v0.4 released</a></span>
+  </ce-source-card>
+</ce-grid>
+
+<!-- @example No URL — passive bibliography entry -->
+<ce-source-card site="Internal note · 2026-05-12" title="Customer interview — Acme Co.">
+  Acme cited the lack of typed APIs as their #1 onboarding pain. They closed the deal after we shipped
+  the inferred-type pre-fill flow.
+</ce-source-card>

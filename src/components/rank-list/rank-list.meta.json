@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-rank-list",
+  "name": "Rank list",
+  "className": "CeRankList",
+  "goal": "Render a ranked list with computed position numbers, optional scores, and optional movement deltas.",
+  "description": "Static-by-default ranking primitive for leaderboards, top-N reports, and ordered priorities. Position numbers are computed from list order (#1, #2, …) so authors don't renumber on reorder; an offset start attribute lets the list begin at any rank. Optional score column right-aligns numeric or string values; optional delta column shows ▲ / ▼ / — movement coloured by direction. By default the top three items are accented with medal colours (gold / silver / bronze); pass `flat` to disable. Accepts JSON items or slotted <li> children (CDR-005); in slot mode the rank is rendered as a counter prefix.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "items",
+      "type": "RankItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of ranked entries ({label, hint?, score?, delta?}). When empty, slotted <li> children are used."
+    },
+    {
+      "name": "start",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "First rank number. Useful when continuing a list from a previous page."
+    },
+    {
+      "name": "flat",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable the top-3 medal accents; renders all ranks in a neutral pill."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Slotted <li> children for the slot-mode authoring path. The rank counter is rendered as a ::before prefix."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Row background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Delta pill background (even)."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Default rank pill background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Row border."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover border + silver medal background."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Row corner radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Delta pill rounding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label and score text."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Top-3 medal text colour."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Hint text + even delta colour."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Gold medal."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Up delta colour."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Up delta background."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Bronze medal + down delta colour."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Down delta background."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Row text font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Hint + rank-pill + delta font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "List gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Delta pill padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Row horizontal padding + column gap."
+    },
+    {
+      "name": "--ce-inset-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Row vertical inset."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Delta pill vertical inset."
+    },
+    {
+      "name": "--ce-sz-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Rank pill diameter."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border-color hover transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-table",
+    "ce-progress-list",
+    "ce-checklist"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Comparison & narrative",
+    "ranking",
+    "leaderboard"
+  ],
+  "a11y": {
+    "notes": "Uses a native <ol> so position semantics are preserved for assistive tech regardless of CSS counters. Each rank pill carries an aria-label so screen readers announce 'Rank N' independent of the visual '#N' label."
+  }
+}

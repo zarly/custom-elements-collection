@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-message-group",
+  "name": "Message group",
+  "className": "CeMessageGroup",
+  "goal": "Cluster consecutive same-role chat messages with shared metadata, suppressing repeated avatars and headers on follow-up bubbles for cleaner conversation timelines.",
+  "description": "Layout wrapper that renders a group-level avatar and header (author + timestamp) exactly once, then stacks slotted message children with tightened inter-bubble spacing. Role-driven alignment mirrors ce-chat-bubble: user groups align right, all others left. On every slotchange, the group sets the follow-up attribute on every slotted ce-chat-bubble after the first, so each follow-up bubble hides its own avatar column and header line — collapsing repeated chrome in the cluster. Compact mode further reduces the gap. Pure presentation; emits no events.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "role",
+      "type": "\"user\" | \"assistant\" | \"system\" | \"tool\"",
+      "required": false,
+      "default": "\"assistant\"",
+      "reflect": true,
+      "description": "Group role; drives color alignment and avatar placement. Overrides the LitElement-inherited role accessor."
+    },
+    {
+      "name": "author",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional group-level author name rendered once in the group header."
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional group-level timestamp rendered once in the group header."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Tighter spacing between clustered bubbles when true."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The messages — typically ce-chat-bubble children, but any element is accepted."
+    },
+    {
+      "name": "avatar",
+      "description": "Group-level avatar rendered once on the role-aligned side. Hidden via :has(::slotted(*)) when empty."
+    },
+    {
+      "name": "header",
+      "description": "Optional custom group header rendered above the messages stack, taking precedence over the auto-generated author/timestamp line."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Compact mode inter-bubble gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Default inter-bubble gap and header bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer grid gap between avatar column and body column."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin of the group."
+    },
+    {
+      "name": "--ce-sz-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Avatar diameter (40px)."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Avatar border radius (circular)."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Avatar fallback background."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Avatar fallback text color and header secondary color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Author name color in the group header."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "font",
+      "source": "token",
+      "description": "Group header font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "font",
+      "source": "token",
+      "description": "Author name font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "font",
+      "source": "token",
+      "description": "Avatar fallback font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets aria-roledescription=message group on the host so assistive tech identifies the cluster without conflating it with the chat-role attribute.",
+      "reason": "Reconciles the role= chat-role API with screen-reader expectations."
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-chat-bubble"
+  ],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Chat surfaces",
+    "layout",
+    "cluster"
+  ],
+  "a11y": {
+    "notes": "aria-roledescription=message group identifies the cluster to assistive tech. The role attribute carries the chat role, not an ARIA role. Each child ce-chat-bubble retains its own aria-roledescription=message."
+  }
+}

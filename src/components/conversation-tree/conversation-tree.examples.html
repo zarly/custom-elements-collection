@@ -1,0 +1,18 @@
+<!-- @example Inline branch picker -->
+<ce-conversation-tree index="2" total="5" label="Response"></ce-conversation-tree>
+
+<!-- @example Single branch (auto-disabled) -->
+<ce-conversation-tree index="1" total="1" label="Response"></ce-conversation-tree>
+
+<!-- @example Custom counter slot -->
+<ce-conversation-tree index="2" total="3">
+  <span>Branch B of 3</span>
+</ce-conversation-tree>
+
+<!-- @example Above a chat bubble -->
+<div style="display: flex; flex-direction: column; gap: var(--ce-space-2); align-items: flex-start;">
+  <ce-conversation-tree index="3" total="4" label="Regenerated"></ce-conversation-tree>
+  <ce-chat-bubble role="assistant" author="Claude" model="opus-4.7">
+    This is the third of four regenerated responses.
+  </ce-chat-bubble>
+</div>

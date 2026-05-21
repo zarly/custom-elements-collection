@@ -6,6 +6,8 @@
   "goal": "Render a horizontal progress bar with optional inline label, percent overlay, indeterminate shimmer, and semantic color.",
   "description": "Linear progress bar bound by value/max. Supports an optional left label, a numeric percent value on the right (show-value), an indeterminate shimmer, and five color tokens for the fill. Exposes ARIA progressbar semantics with valuemin / valuemax / valuenow / busy.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",
@@ -137,7 +139,9 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-progress-list"],
+  "dependents": [
+    "ce-progress-list"
+  ],
   "dependencies": [],
   "related": [],
   "category": "ui",

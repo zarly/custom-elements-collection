@@ -6,6 +6,8 @@
   "goal": "Display a user-research persona card with avatar, name, role, identity pills, detail paragraph, and metadata rows.",
   "description": "Persona / role card. Top row shows an emoji-or-character avatar plus name + role; optional `rank` and `score` attributes render as small pills beside the name. Below the head sits a `tags` slot for chips, a `detail` slot for a rich description paragraph, a `meta` slot for `<ce-kv>` metadata rows, and a default slot for arbitrary body content. Six color tints set the top border and avatar/pill tint.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "name",
@@ -285,8 +287,12 @@
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
-  "dependencies": ["ce-kv"],
-  "related": ["ce-kv"],
+  "dependencies": [
+    "ce-kv"
+  ],
+  "related": [
+    "ce-kv"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

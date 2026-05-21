@@ -1,0 +1,37 @@
+<!-- @example Top-5 leaderboard -->
+<ce-rank-list items='[
+  {"label":"Acme Co.","score":"$48 200"},
+  {"label":"Globex","score":"$31 480"},
+  {"label":"Initech","score":"$22 105"},
+  {"label":"Hooli","score":"$15 990"},
+  {"label":"Soylent","score":"$9 320"}
+]'></ce-rank-list>
+
+<!-- @example With movement deltas vs previous week -->
+<ce-rank-list items='[
+  {"label":"Backend platform","hint":"+3 contributors","score":42,"delta":2},
+  {"label":"Mobile","hint":"team APAC","score":31,"delta":-1},
+  {"label":"Docs","score":24,"delta":0},
+  {"label":"Growth","score":18,"delta":1}
+]'></ce-rank-list>
+
+<!-- @example Continue from rank 11 (pagination) -->
+<ce-rank-list start="11" items='[
+  {"label":"Region eu-west","score":"3.2%"},
+  {"label":"Region ap-south","score":"2.9%"},
+  {"label":"Region sa-east","score":"1.4%"}
+]'></ce-rank-list>
+
+<!-- @example Flat — no top-3 medal accents -->
+<ce-rank-list flat items='[
+  {"label":"Option A","hint":"Pain ÷ difficulty = 8.2","score":8.2},
+  {"label":"Option B","hint":"Pain ÷ difficulty = 6.4","score":6.4},
+  {"label":"Option C","hint":"Pain ÷ difficulty = 4.0","score":4.0}
+]'></ce-rank-list>
+
+<!-- @example Slot mode (CDR-005) — handwritten <li> children -->
+<ce-rank-list>
+  <li>First place finisher — <strong>Alice</strong></li>
+  <li>Runner-up — <strong>Bob</strong></li>
+  <li>Third — <strong>Carol</strong></li>
+</ce-rank-list>

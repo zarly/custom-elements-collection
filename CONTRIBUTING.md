@@ -13,6 +13,8 @@ pnpm demo
 
 If you want to iterate on library source directly, `pnpm dev` runs the Vite dev server against `src/`.
 
+> **`pnpm install` also installs the git pre-commit hook** (via `simple-git-hooks` + the `prepare` script). The hook runs `pnpm sync-meta-dates` on every commit and auto-stages updated meta files — see [§4.4 Dates and content-hash registry](#44-dates-and-content-hash-registry) for the contract.
+
 ## 2. Repo layout
 
 ```
@@ -61,51 +63,64 @@ Depth lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Consumer-side pat
 
 ## 4. Adding a new component
 
-> **Read this before designing the API.** The primary author of markup that uses this library is a large language model, not a human. That changes how we think about props, required fields, error states, and "wrong" input. Bias toward optional fields, accept multiple input shapes when ergonomically cheap, infer behavior from data rather than adding `mode` flags, and never punish the end user for an LLM author's omission. The full philosophy and the rules it produces — including when to refuse this lens — live in [ADR-009](docs/adr/adr-009-llm-tolerant-components.md). The daily-design conventions that implement that philosophy live in [`docs/cdr/`](docs/cdr/) (Component Design Records — recommended, not mandatory). Component-level applications of the lens belong in the component's `CONCEPT.md` (see step 9 and [ADR-008](docs/adr/adr-008-component-concept-files.md)). Reference implementations: [`src/components/gauge/`](src/components/gauge/) and [`src/lesson/lesson-quickfire/`](src/lesson/lesson-quickfire/).
->
-> **Pre-flight checklist before designing a new public API.** Run through the [8 CDRs](docs/cdr/) as a self-review. Each one captures a recurring API-design mistake — a CDR violation is allowed when justified by user-facing benefit, but the deviation must be documented in the component's `CONCEPT.md`. See [`docs/cdr/README.md`](docs/cdr/README.md) for the compliance levels (ADR = MUST, CDR = SHOULD, CONCEPT.md = MAY).
+> **Step-by-step procedure with verification gates lives in [`docs/protocols/new-component.md`](docs/protocols/new-component.md).** This section sets out the *design philosophy* and the *rules* the protocol implements. Read both before opening a PR.
 
-Since [ADR-005](docs/adr/adr-005-component-meta.md) the flow is mostly automated. Work through this list top to bottom; every step is required.
+### Design philosophy (read before sketching the API)
 
-0. **CDR pre-flight self-review** (recommended). Before sketching the API, skim the [8 Component Design Records](docs/cdr/). They encode recurring API-design mistakes — vocabulary in enums (CDR-001), values as string attributes (CDR-002), per-instance presentation policy (CDR-003), stateful default (CDR-004), JSON-only collection (CDR-005), hard wrappers (CDR-006), verbose first example (CDR-007), removed APIs (CDR-008). Justified deviations are allowed; document the reason in `CONCEPT.md`.
-1. **Pick a folder.** UI tag → `src/components/<name>/`. Lesson tag → `src/lesson/<name>/`. The folder name matches the file stem (e.g. `feedback-bar/`).
-2. **Source.** Create `src/components/<name>/<name>.ts`. Export a class `Ce<Name>` that extends `CecElement` (from `src/core/base.ts`). Use `ce-<name>` as the registered tag (or `lesson-<name>` for the lesson pack).
-3. **Tests.** Create `src/components/<name>/<name>.test.ts`. At minimum **6 tests** covering: attribute form of each prop, JS-property form of each prop, default slot rendering, named slot rendering (if any), events fired, one edge/error case. Mirror the shape of `src/components/card/card.test.ts`.
-4. **Meta file.** Create `src/components/<name>/<name>.meta.json`. The schema (`src/meta/schema.ts`) is enforced by `pnpm validate-meta` — required fields are `schemaVersion: 1`, `tag`, `name`, `className`, `goal` (≥20 chars SRP statement), `description` (≥20 chars), `stability` (`stable` | `beta` | `experimental` | `deprecated`), `props[]`, `events[]`, `slots[]`, `cssVariables[]`, `globalDependencies[]`, `sideEffects[]`, `dependents[]`, `dependencies[]`, `related[]`, `category` (`ui` | `lesson` | `internal`), `tier` (`brick` | `widget` | `layout`, see [ADR-006](docs/adr/adr-006-component-tier.md)), and `tags[]` (the first tag becomes the manifest `group` — must be one of `src/meta/groups.ts`). Mirror an existing meta file — `src/components/card/card.meta.json` is a good reference.
+The primary author of markup that uses this library is a large language model, not a human. That changes how we think about props, required fields, error states, and "wrong" input. Bias toward optional fields, accept multiple input shapes when ergonomically cheap, infer behaviour from data rather than adding `mode` flags, and never punish the end user for an LLM author's omission. The full philosophy and the rules it produces — including when to refuse this lens — live in [ADR-009](docs/adr/adr-009-llm-tolerant-components.md). The daily-design conventions that implement that philosophy live in [`docs/cdr/`](docs/cdr/) (Component Design Records — recommended, not mandatory). Component-level applications of the lens belong in the component's `CONCEPT.md` ([ADR-008](docs/adr/adr-008-component-concept-files.md)). Reference implementations: [`src/components/gauge/`](src/components/gauge/) and [`src/lesson/lesson-quickfire/`](src/lesson/lesson-quickfire/).
 
-   **Tier picking rule** (ADR-006 §"Classification rule"): has internal mutable state, runs interactive logic, or fetches data → `widget`. Wraps multiple semantically structured children with named slots → `layout`. Otherwise → `brick`.
-5. **Generate exports.** Run `pnpm gen-exports`. The script regenerates `src/index.ts`, `src/auto.ts`, `src/entries/<name>.ts`, `src/manifest.ts`, and adds the `./<name>` entry to `package.json` `exports`. Do not edit those generated files by hand.
-6. **Regenerate the skill catalog.** Run `pnpm gen-skill`. The script refreshes the catalog block in `skill/SKILL.md` and `skill/references/index.md` from the meta files. `pnpm check` will fail if you skip this.
-7. **Examples file (`<name>.examples.html`).** Drop one next to your source. Each example begins with an HTML comment delimiter — multiple examples per file are expected:
+**Pre-flight checklist before designing a new public API.** Walk the [8 CDRs](docs/cdr/) as a self-review (the protocol turns this into a one-question-per-CDR gate). Each CDR captures a recurring API-design mistake — a deviation is allowed when justified by user-facing benefit, but the deviation must be documented in the component's `CONCEPT.md`. See [`docs/cdr/README.md`](docs/cdr/README.md) for the compliance levels (ADR = MUST, CDR = SHOULD, CONCEPT.md = MAY).
 
-   ```html
-   <!-- @example Default -->
-   <ce-foo>Body</ce-foo>
+### Tier picking rule (ADR-006)
 
-   <!-- @example With accent -->
-   <ce-foo accent="green">Tinted</ce-foo>
-   ```
+- Has internal mutable state, runs interactive logic, or fetches data → `widget`.
+- Wraps multiple semantically structured children with named slots → `layout`.
+- Otherwise → `brick`.
 
-   The catalog renders props/events/slots/CSS-vars straight from the meta file; `*.examples.html` only carries rendered HTML snippets, parsed by [`demo/parse-examples.js`](demo/parse-examples.js). The demo discovers files via `import.meta.glob`, so renames travel with the folder.
+### When `<name>.examples.html` is required
 
-   **When examples are required.** Driven by the `tier` (ADR-006) and `category` fields in the meta:
+Driven by `tier` (ADR-006) and `category` in the meta:
 
-   | meta state | examples file | rationale |
-   |---|---|---|
-   | `tier: brick` AND `category: ui` or `lesson` | **required**, ≥3 examples covering the prop matrix | direct end-user surface — humans browse them in the catalog and LLM code-generators copy them from `dist/registry*` |
-   | `tier: widget` AND `category: ui` or `lesson` | **required**, ≥3 examples — at least one showing the interactive/stateful behavior the widget owns | same audience, more behavior surface to demonstrate |
-   | `tier: layout` (any category) | **skip** | layout primitives are slot containers — meaningful examples need real children pulled from neighboring components and tend to duplicate those components' own examples |
-   | `category: internal` (any tier) | **skip** | internal components serve the demo / docs site itself, not external consumers; they are not part of the published catalog narrative |
+| meta state | examples file | rationale |
+|---|---|---|
+| `tier: brick` AND `category: ui` or `lesson` | **required**, ≥ 3 examples covering the prop matrix | direct end-user surface — humans browse the catalog and LLM code-generators copy from `dist/registry*` |
+| `tier: widget` AND `category: ui` or `lesson` | **required**, ≥ 3 examples — at least one showing the interactive / stateful behaviour the widget owns | same audience, more behaviour surface to demonstrate |
+| `tier: layout` (any category) | **skip** | layout primitives are slot containers — meaningful examples need real children from neighbouring components and tend to duplicate those components' own examples |
+| `category: internal` (any tier) | **skip** | internal components serve the demo / docs site itself, not external consumers; they are not part of the published catalog narrative |
 
-   "≥3 examples" means three independent `<!-- @example … -->` blocks in the same file — distinct prop combinations, slot patterns, or states. The bar is "a reader who has never seen this tag can copy any one block, paste it, and see something representative." If you can only think of one example, the meta description is probably hiding two more.
+"≥ 3 examples" means three independent `<!-- @example … -->` blocks in the same file — distinct prop combinations, slot patterns, or states. The bar: a reader who has never seen this tag can copy any one block, paste it, and see something representative. If you can only think of one example, the meta description is probably hiding two more.
 
-   **`*.examples.html` is markup-only — no `<script>` tags.** This is mandatory, not stylistic. Examples become reference material both for human readers of the catalog *and* for LLM code-generators that consume `dist/registry*.json` and the per-component examples. Embedding script in an example trains LLMs to emit script alongside your component, breaks the "drop a tag in plain HTML" promise from §5, and creates a CSP / untrusted-input footgun for any consumer rendering generated code. If your example needs structural data, **put it on an attribute as JSON** (the property must already use `jsonProp()` per §5). Prefer separate properties (`x-label`, `y-label`, `height`, `type`, `color`) over stuffing everything into one JSON blob — keep each example readable. If a feature truly cannot be demonstrated without script, that is a missing-attribute API and the right fix is to extend the component, not the example.
-8. **Verify.** Run `pnpm check`. Typecheck, validate-meta, gen-skill:check, tests, and build must all be green.
-9. **Optional — `CONCEPT.md`** ([ADR-008](docs/adr/adr-008-component-concept-files.md)). When the component involves non-trivial design decisions — anything where you weighed ≥2 options or where the *why* would surprise a future reader — drop a `CONCEPT.md` next to the source. Prose, not schema-validated, never published (npm `files` only ships `dist/`). It captures decisions, edge cases, closed-bug lessons, and deferred questions so the next contributor (human or agent) doesn't re-litigate them. Reference implementation: [`src/components/gauge/CONCEPT.md`](src/components/gauge/CONCEPT.md). Skip entirely for mechanically obvious components.
+**`*.examples.html` is markup-only — no `<script>` tags.** Mandatory, not stylistic. Examples become reference material both for the catalog *and* for LLM code-generators that consume `dist/registry*.json`. Script in an example trains LLMs to emit script alongside your component, breaks the "drop a tag in plain HTML" promise from §5, and creates a CSP / untrusted-input footgun. If your example needs structural data, put it on an attribute as JSON (the property must already use `jsonProp()` per §5). Prefer separate properties (`x-label`, `y-label`, `height`, `type`, `color`) over a single JSON blob — keep each example readable. If a feature truly cannot be demonstrated without script, that is a missing-attribute API and the right fix is to extend the component.
 
-   **If a component already has a `CONCEPT.md`, read it before changing the component.** Updating it as you make new decisions is the same obligation that already applies to the meta file — they are companion canonicals (meta = *what*, concept = *why*).
+### Canonical references
 
-The canonical reference implementation for the source/test/meta/examples shape is [`src/components/card/`](src/components/card/). For the optional `CONCEPT.md` shape, see [`src/components/gauge/CONCEPT.md`](src/components/gauge/CONCEPT.md).
+- Source / test / meta / examples shape: [`src/components/card/`](src/components/card/).
+- Optional `CONCEPT.md` shape: [`src/components/gauge/CONCEPT.md`](src/components/gauge/CONCEPT.md).
+
+The step-by-step procedure — folder, source skeleton, test skeleton, meta scaffolding, generator catch-up, examples, `pnpm check`, optional `CONCEPT.md`, reverse `related[]` — lives in [`docs/protocols/new-component.md`](docs/protocols/new-component.md). Don't redo it from memory.
+
+### 4.4 Dates and content-hash registry
+
+Every component's `meta.json` carries two **script-managed** ISO-8601 dates:
+
+```jsonc
+{
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  …
+}
+```
+
+**Do not edit these by hand.** They are maintained by `scripts/sync-meta-dates.ts`, which fires from the `simple-git-hooks` pre-commit hook on every commit:
+
+- `created` — set once, the first time the meta lands.
+- `updated` — bumped automatically when the SHA-256 of the component's `<stem>.ts` changes. Test refactors, example tweaks, doc edits, and meta-prose changes do NOT bump `updated` — only edits to the `<stem>.ts` source itself.
+
+The companion file `src/meta/content-hashes.json` is the global tag → SHA-256 registry. Validated by the same Zod gate. See [ADR-011](docs/adr/adr-011-component-dates.md) and [ADR-012](docs/adr/adr-012-content-hash-registry.md) for the rationale.
+
+If you ever need to invoke manually: `pnpm sync-meta-dates`. To preview without writing: `pnpm sync-meta-dates:dry`. CI-style gate: `pnpm sync-meta-dates:check` (exits non-zero on drift).
+
+Bypass the hook only when debugging: `SKIP_SIMPLE_GIT_HOOKS=1 git commit …`.
 
 ## 5. The string-props rule (important)
 
@@ -258,6 +273,10 @@ Include the `skill/SKILL.md` change in the **same commit** as your component cha
 ---
 
 ## 11. Release (maintainers only)
+
+**Before the version bump, run the [pre-release protocol](docs/protocols/pre-release.md).** It is the audit-and-fix-drift step `pnpm check` doesn't do on its own — README catalog drift, stale doc counts, missing reverse `related[]` refs, tarball allow-list, etc. The protocol does not touch git or npm; it returns green or escalates.
+
+Once green:
 
 1. Bump `version` in `package.json`.
 2. Commit (`chore: release vX.Y.Z`) and tag `vX.Y.Z`.

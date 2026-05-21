@@ -1,0 +1,25 @@
+<!-- @example Plain internal link -->
+<p>See the <ce-link href="/docs">documentation</ce-link> for setup.</p>
+
+<!-- @example External link with target=_blank and trailing ↗ -->
+<p>Read the <ce-link href="https://example.com" external>spec on example.com</ce-link>.</p>
+
+<!-- @example Download link -->
+<p>
+  <ce-link href="/report-q1.pdf" download="report-q1.pdf">Download Q1 report</ce-link>
+</p>
+
+<!-- @example Subtle tone — underline appears on hover -->
+<p tone-demo>
+  In the article body, references like
+  <ce-link href="#fn-1" tone="subtle">[1]</ce-link>
+  and <ce-link href="#fn-2" tone="subtle">[2]</ce-link>
+  stay quiet until you hover them.
+</p>
+
+<!-- @example Link wrapping rich content -->
+<p>
+  <ce-link href="/article" external>
+    <strong>Featured</strong> — How we shipped streaming markdown
+  </ce-link>
+</p>

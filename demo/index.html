@@ -37,9 +37,28 @@
           >
         </div>
       </header>
+      <div slot="sidebar" class="sidebar-controls">
+        <div class="sidebar-search-row">
+          <ce-input
+            id="search"
+            type="search"
+            placeholder="Search components…"
+            aria-label="Search components"
+          ></ce-input>
+          <demo-settings-button id="settings" data-testid="settings-button"></demo-settings-button>
+        </div>
+      </div>
       <ce-nav-list slot="sidebar" id="nav" title="Components"></ce-nav-list>
+      <div slot="sidebar" id="sidebar-empty" hidden>
+        <ce-callout type="info" title="No components match">
+          Try a broader search, or clear the filters.
+        </ce-callout>
+      </div>
       <div id="main"></div>
     </ce-docs-layout>
+
+    <!-- Settings modal — lives outside the docs-layout slots at the root. -->
+    <demo-settings-modal id="settings-modal" data-testid="settings-modal"></demo-settings-modal>
 
     <!-- Registers every tag in the library. -->
     <script type="module" src="/src/auto.ts"></script>

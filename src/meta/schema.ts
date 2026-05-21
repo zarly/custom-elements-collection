@@ -92,6 +92,17 @@ export const ComponentMetaSchema = z.object({
   deprecatedIn: z.string().optional(),
   replacedBy: z.string().optional(),
 
+  // SCRIPT-MANAGED dates — see ADR-011, ADR-012.
+  // `created` is the ISO-8601 date the meta first landed; `updated` is the
+  // last date the component's `<stem>.ts` source bytes changed. Both are
+  // maintained by `scripts/sync-meta-dates.ts` via the pre-commit hook.
+  created: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "must be ISO date YYYY-MM-DD"),
+  updated: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "must be ISO date YYYY-MM-DD"),
+
   props: z.array(PropMetaSchema),
   events: z.array(EventMetaSchema),
   methods: z.array(MethodMetaSchema).optional(),
@@ -118,6 +129,12 @@ export const ComponentMetaSchema = z.object({
     .optional(),
 
   additional: z.record(z.unknown()).optional(),
-}) satisfies z.ZodType<ComponentMeta>;
+})
+  // `updated` must not predate `created`. Lexicographic compare is correct
+  // for the `YYYY-MM-DD` regex enforced above.
+  .refine((m) => m.updated >= m.created, {
+    message: "updated must be on or after created",
+    path: ["updated"],
+  }) satisfies z.ZodType<ComponentMeta>;
 
 export type { ComponentMeta };

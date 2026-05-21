@@ -6,13 +6,15 @@
   "goal": "Render a code block with optional language label, filename, and copy-to-clipboard button.",
   "description": "Code block component. Header row shows an optional filename (left) and language label (right) plus a copy button when copy=true. Body is a <pre><code> with the slotted code text. The copy button uses navigator.clipboard with a hidden-textarea fallback and emits ce-code-copy on success.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "lang",
       "type": "string",
       "required": false,
       "default": "\"\"",
-      "description": "Language label shown top-right (e.g. 'ts', 'html', 'bash')."
+      "description": "Language label shown top-right. Any string renders. When paired with @generative-dom/plugin-highlight (authoritative list lives in that package's BUILTIN_LANGS), the built-in tokenisers cover: js/javascript, ts/typescript, json, html, css, bash/sh/shell/zsh, c, cpp/c++, yaml/yml, markdown/md, diff/patch, julia/jl, zig."
     },
     {
       "name": "filename",

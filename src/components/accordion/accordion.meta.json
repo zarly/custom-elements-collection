@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-accordion",
+  "name": "Accordion",
+  "className": "CeAccordion",
+  "goal": "Render a grouped list of disclosure rows where any (or in single mode, exactly one) row may be open at a time.",
+  "description": "Multi-disclosure companion to ce-details. Accepts JSON items ({summary, body?, count?, open?, id?}) or slotted <details> / <ce-details> children (CDR-005). Static-by-default — items render with their initial open state and toggle via native <details>; the component tracks open state internally for ergonomic event payloads. When `single` is set, opening one row closes all others (radio-style FAQ pattern). Emits ce-accordion-change with the array of currently-open ids.",
+  "stability": "stable",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "items",
+      "type": "AccordionItem[]",
+      "required": false,
+      "default": "[]",
+      "description": "JSON array of disclosure rows ({id?, summary, body?, count?, open?}). When empty, slotted children are used."
+    },
+    {
+      "name": "single",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Only one row may be open at a time; opening another closes the rest."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-accordion-change",
+      "detail": "{ openIds: string[] }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired whenever an item opens or closes. Detail.openIds is the full set of currently-open ids (or array indices when items have no id)."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Slotted <details> / <ce-details> children for the slot-mode authoring path."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Accordion background."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Count chip background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Row separators + count chip border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Container corner radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Count chip rounding."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Summary + body text."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Chevron + count text."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Summary hover background."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Summary gap + count chip horizontal inset."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Summary vertical + body bottom padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Summary + body horizontal padding."
+    },
+    {
+      "name": "--ce-inset-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip vertical inset."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Body + chevron font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Count chip font size."
+    },
+    {
+      "name": "--ce-line-normal",
+      "kind": "other",
+      "source": "token",
+      "description": "Body line-height."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Chevron rotation."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Summary focus ring."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-details",
+    "ce-tabs",
+    "ce-checklist"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "disclosure",
+    "accordion",
+    "faq"
+  ],
+  "a11y": {
+    "notes": "Each row is a native <details>/<summary> pair so disclosure semantics, keyboard, and screen-reader support come from the browser. Summary picks up focus-visible ring for keyboard navigation."
+  }
+}

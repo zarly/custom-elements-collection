@@ -6,6 +6,8 @@
   "goal": "Render one chat message with role-driven coloring, avatar placement, header metadata (author/model/timestamp), and a tokens-aware footer.",
   "description": "Single LLM-chat message bubble. The role attribute drives color tinting (assistant=blue, user=purple, system=neutral, tool=amber) and avatar placement (user-aligned right; everyone else left). Header surfaces author + model + timestamp; footer surfaces a slotted footer + an optional tokens count. Pure presentation; emits no events.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "role",
@@ -42,6 +44,15 @@
       "required": false,
       "default": "null",
       "description": "Optional token count; renders as a footer chip when set."
+    },
+    {
+      "name": "followUp",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "follow-up",
+      "reflect": true,
+      "description": "Opt-in flag set externally (typically by ce-message-group) to mark this bubble as a follow-up in a same-role cluster. Hides the avatar column, suppresses the head row, and tightens the outer top margin."
     }
   ],
   "events": [],

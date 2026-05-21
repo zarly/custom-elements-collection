@@ -6,6 +6,8 @@
   "goal": "Provide a labelled text input with help, error, prefix, and suffix slots and consistent themed styling.",
   "description": "Token-driven labelled input. Wraps a native <input> so type, required, pattern, and other validation attributes work natively. Renders a label, optional help text, and an error region; aria-invalid + aria-describedby are kept in sync. ce-input fires per keystroke; ce-change fires on blur/Enter.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",
@@ -206,7 +208,10 @@
   "dependencies": [],
   "related": [
     "ce-textarea",
-    "ce-button"
+    "ce-button",
+    "ce-select",
+    "ce-date-picker",
+    "ce-file-upload"
   ],
   "category": "ui",
   "tier": "widget",

@@ -6,6 +6,8 @@
   "goal": "Render a single key-value row with a short label and composable slotted value content.",
   "description": "Single key-value row brick. The `key` attribute is the short label; the default slot carries the value and accepts any HTML content: plain text, `<a>`, `<time>`, `<code>`, `<ce-chip>`, or future typed renderers. Follows CDR-002: values stay in children so typed renderers can compose in later.",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "key",
@@ -56,9 +58,14 @@
   ],
   "globalDependencies": [],
   "sideEffects": [],
-  "dependents": ["ce-key-value", "ce-persona"],
+  "dependents": [
+    "ce-key-value",
+    "ce-persona"
+  ],
   "dependencies": [],
-  "related": ["ce-key-value"],
+  "related": [
+    "ce-key-value"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [

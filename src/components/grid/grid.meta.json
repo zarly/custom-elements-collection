@@ -6,6 +6,8 @@
   "goal": "Lay out child elements in a responsive grid with either a fixed column count or auto-fit minmax sizing.",
   "description": "Responsive grid container. Either uses a fixed column count (cols=2/3/4) or repeat(auto-fit, minmax(min, 1fr)) when auto is set. Below 640px the grid collapses to a single column.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "cols",

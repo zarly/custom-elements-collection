@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-divider",
+  "name": "Divider",
+  "className": "CeDivider",
+  "goal": "Render a themed 1px separator, optionally with a centered inline label, in either horizontal or vertical orientation.",
+  "description": "Lightweight separator primitive. With no slotted content the rule is a continuous 1px line; with a slotted label the rule splits into two equal segments framing the label. Vertical orientation switches to a 1px inline column suitable for separating inline groups. The inset attribute pulls the rule away from container edges (none / sm / md / lg). Reads as role=separator to assistive tech.",
+  "stability": "stable",
+  "created": "2026-05-21",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "orientation",
+      "type": "\"horizontal\" | \"vertical\"",
+      "required": false,
+      "default": "\"horizontal\"",
+      "reflect": true,
+      "description": "Rule direction."
+    },
+    {
+      "name": "inset",
+      "type": "\"none\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"none\"",
+      "reflect": true,
+      "description": "Horizontal padding applied to the rule so it pulls away from container edges."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional inline label centered between the two line segments."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Rule color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between line and label."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default vertical spacing around the rule + inset=sm horizontal padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "inset=md horizontal padding."
+    },
+    {
+      "name": "--ce-space-7",
+      "kind": "size",
+      "source": "token",
+      "description": "inset=lg horizontal padding."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-section",
+    "ce-callout"
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Layout & primitives",
+    "separator",
+    "primitive"
+  ]
+}

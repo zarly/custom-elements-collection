@@ -6,6 +6,8 @@
   "goal": "End-of-section key-points card that closes a lesson section with the main takeaways.",
   "description": "Renders an amber-bordered card with a title and either a JSON-driven checklist (items prop) or slotted content. Each item gets a green checkmark prefix. Default title is 'Key Takeaways'. When items is empty the default slot renders instead.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "title",
@@ -31,23 +33,80 @@
     }
   ],
   "cssVariables": [
-    { "name": "--ce-surface", "kind": "color", "source": "token", "description": "Card background." },
-    { "name": "--ce-color-amber", "kind": "color", "source": "token", "description": "Border color and title color." },
-    { "name": "--ce-radius", "kind": "radius", "source": "token", "description": "Card border radius." },
-    { "name": "--ce-space-5", "kind": "size", "source": "token", "description": "Card padding." },
-    { "name": "--ce-space-3", "kind": "size", "source": "token", "description": "Title bottom margin + item icon gap." },
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Item gap." },
-    { "name": "--ce-text-md", "kind": "size", "source": "token", "description": "Title font size." },
-    { "name": "--ce-text-base", "kind": "size", "source": "token", "description": "Item font size." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Item text color." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Checkmark color." }
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Card background."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "Border color and title color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Card border radius."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Card padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Title bottom margin + item icon gap."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Item gap."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Item font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Item text color."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Checkmark color."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-frame", "lesson-rule"],
+  "related": [
+    "lesson-frame",
+    "lesson-rule"
+  ],
   "category": "lesson",
   "tier": "brick",
-  "tags": ["Education", "summary", "takeaway"]
+  "tags": [
+    "Education",
+    "summary",
+    "takeaway"
+  ]
 }

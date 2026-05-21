@@ -1,0 +1,23 @@
+<!-- @example Basic composer -->
+<ce-chat-input placeholder="Type a message…"></ce-chat-input>
+
+<!-- @example With attach button and busy state -->
+<div style="display:flex;flex-direction:column;gap:12px">
+  <ce-chat-input allow-attach placeholder="Attach a file or type a message…"></ce-chat-input>
+  <ce-chat-input busy placeholder="Generating…"></ce-chat-input>
+</div>
+
+<!-- @example With prefix and suffix slots -->
+<ce-chat-input placeholder="Ask Claude…">
+  <div slot="prefix" style="display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ce-muted)">
+    <span style="background:var(--ce-color-blue-bg);color:var(--ce-color-blue);border:1px solid var(--ce-color-blue-border);border-radius:var(--ce-radius-sm);padding:2px 8px">claude-opus-4</span>
+    <span>·</span>
+    <span>Context: 24k / 200k</span>
+  </div>
+  <div slot="suffix" style="font-size:11px;color:var(--ce-dim);text-align:right">
+    0 / 4000
+  </div>
+</ce-chat-input>
+
+<!-- @example Multi-row composer (rows=3) -->
+<ce-chat-input rows="3" max-rows="6" placeholder="Paste or type a long prompt…"></ce-chat-input>

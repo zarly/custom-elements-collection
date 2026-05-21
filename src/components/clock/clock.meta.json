@@ -6,6 +6,8 @@
   "goal": "Show a live time-of-day clock or relative-time display, optionally for a specific IANA time zone.",
   "description": "Live clock with absolute, relative ('5 minutes ago'), or combined display. Time-zone aware via the IANA `tz` attribute and Intl.DateTimeFormat; relative-time uses Intl.RelativeTimeFormat seeded from the `since` ISO timestamp. The internal interval can be disabled by setting tick-ms to 0 for snapshot-style use.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "tz",

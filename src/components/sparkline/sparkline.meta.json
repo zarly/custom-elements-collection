@@ -6,6 +6,8 @@
   "goal": "Render a small inline trend chart (line, area, or bar) for a numeric series.",
   "description": "Compact inline SVG chart for trend visualisation in a row, table cell, or KPI tile. Supports line (default), filled area, and bar shapes; auto-scales to the value range. Values can be supplied either as a JSON-encoded `values` attribute or via the JS property.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "values",

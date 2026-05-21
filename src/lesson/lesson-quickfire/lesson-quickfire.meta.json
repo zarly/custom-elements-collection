@@ -6,6 +6,8 @@
   "goal": "Run a timed sequence of short multiple-choice rounds with optional score tracking, per-round timer, and a final summary. Mixes scored quiz rounds and unscored poll/opinion rounds in any combination.",
   "description": "Timed practice round. Cycles through QuickfireRound entries; each round shows the prompt, options, and a thin timer bar that empties over `timer` seconds. If a round has `correct`, picks flash green/red and count toward the score; if `correct` is omitted (poll/opinion round), the picked option flashes neutral and the round is excluded from the score. After the last round emits lesson-quickfire-done; reset() restarts. Final screen shows `score / scoredRoundCount`, or just `Done!` when no round was scored.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "rounds",

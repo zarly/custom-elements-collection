@@ -6,6 +6,8 @@
   "goal": "Render a semantic blockquote with optional author and source attribution in three visual treatments: card, pull, and inline.",
   "description": "Blockquote component used in research, customer development, B2B reports, and persona documents. Wraps a native <blockquote> and <cite> for correct ARIA semantics. Attribution accepts plain text via attributes (author, source) or rich markup via named slots — links, time elements, chips. Three variants cover the most common corpus patterns: card (purple left-border block), pull (oversized centered pull-quote), and inline (indented prose blockquote).",
   "stability": "stable",
+  "created": "2026-05-18",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "author",

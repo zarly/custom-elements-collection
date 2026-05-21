@@ -1,0 +1,46 @@
+<!-- @example Impact / Effort default labels -->
+<ce-matrix items='[
+  {"label":"Improve onboarding copy","quadrant":0,"hint":"1 sprint"},
+  {"label":"New billing system","quadrant":1,"hint":"3 months"},
+  {"label":"Add Webhook export","quadrant":2,"hint":"2 sprints"},
+  {"label":"Native mobile rewrite","quadrant":3,"hint":"H2 plan"}
+]'></ce-matrix>
+
+<!-- @example Eisenhower (Urgency × Importance) -->
+<ce-matrix
+  x-label="Urgency"
+  y-label="Importance"
+  q-labels='["Do","Decide","Delegate","Delete"]'
+  items='[
+    {"label":"Customer escalation","quadrant":0},
+    {"label":"Q3 roadmap","quadrant":1},
+    {"label":"Inbox triage","quadrant":2},
+    {"label":"Social-media glance","quadrant":3}
+  ]'
+></ce-matrix>
+
+<!-- @example Cost vs Reach -->
+<ce-matrix
+  x-label="Cost"
+  y-label="Reach"
+  x-low="Cheap"
+  x-high="Pricey"
+  y-low="Niche"
+  y-high="Mass"
+  q-labels='["Win-win","Brand bets","Long-tail","Avoid"]'
+  items='[
+    {"label":"Newsletter sponsorship","quadrant":0},
+    {"label":"TV ad","quadrant":1},
+    {"label":"Niche subreddit","quadrant":2},
+    {"label":"Full-page WSJ","quadrant":3}
+  ]'
+></ce-matrix>
+
+<!-- @example Slot mode — data-quadrant routes children to cells -->
+<ce-matrix>
+  <div data-quadrant="0"><strong>Feature flag rollout</strong></div>
+  <div data-quadrant="0"><strong>Migrate to new logger</strong></div>
+  <div data-quadrant="1"><strong>SOC-2 compliance</strong></div>
+  <div data-quadrant="2"><strong>Tidy README badges</strong></div>
+  <div data-quadrant="3"><strong>Multi-region failover</strong></div>
+</ce-matrix>

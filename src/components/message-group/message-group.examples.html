@@ -1,0 +1,50 @@
+<!-- @example Three-bubble assistant cluster -->
+<ce-message-group role="assistant" author="Claude" timestamp="2026-05-20T10:00">
+  <span slot="avatar">C</span>
+  <ce-chat-bubble role="assistant">
+    <p>Sure, I can help with that. Let me think through the problem.</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="assistant">
+    <p>The core issue is that your array mutation is happening outside the render cycle.</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="assistant">
+    <p>Try wrapping the state update in a <code>requestAnimationFrame</code> call and see if that resolves the flicker.</p>
+  </ce-chat-bubble>
+</ce-message-group>
+
+<!-- @example User cluster, right-aligned -->
+<ce-message-group role="user" author="Alex">
+  <ce-chat-bubble role="user">
+    <p>Can you explain how shadow DOM slots work?</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="user">
+    <p>Specifically, I'm confused about how named slots differ from the default slot.</p>
+  </ce-chat-bubble>
+</ce-message-group>
+
+<!-- @example With group avatar slot -->
+<ce-message-group role="assistant" author="Claude" timestamp="10:05">
+  <svg slot="avatar" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" fill="#58a6ff" opacity="0.2"/>
+    <text x="12" y="16" text-anchor="middle" font-size="10" fill="#58a6ff">C</text>
+  </svg>
+  <ce-chat-bubble role="assistant">
+    <p>A named slot accepts only elements with a matching <code>slot</code> attribute.</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="assistant">
+    <p>The default slot catches everything else — any child without a <code>slot</code> attribute lands there.</p>
+  </ce-chat-bubble>
+</ce-message-group>
+
+<!-- @example Compact + tool cluster -->
+<ce-message-group role="tool" author="search_tool" compact>
+  <ce-chat-bubble role="tool">
+    <p>Querying knowledge base for: shadow DOM slots</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="tool">
+    <p>Found 12 relevant documents. Top result: MDN Web Docs — Using templates and slots.</p>
+  </ce-chat-bubble>
+  <ce-chat-bubble role="tool">
+    <p>Returning top 3 results to the assistant.</p>
+  </ce-chat-bubble>
+</ce-message-group>

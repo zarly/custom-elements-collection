@@ -6,6 +6,8 @@
   "goal": "One numbered step in a procedural sequence, with optional completion status.",
   "description": "Renders a circular badge with the step number (or checkmark when done), alongside a title and slotted body. Status drives badge color: pending=muted, active=blue, done=green. Done status strikes through the title.",
   "stability": "stable",
+  "created": "2026-05-07",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "number",
@@ -39,24 +41,86 @@
     }
   ],
   "cssVariables": [
-    { "name": "--ce-space-2", "kind": "size", "source": "token", "description": "Outer vertical margin." },
-    { "name": "--ce-space-4", "kind": "size", "source": "token", "description": "Row gap between badge and content." },
-    { "name": "--ce-space-1", "kind": "size", "source": "token", "description": "Title bottom margin." },
-    { "name": "--ce-text-sm", "kind": "size", "source": "token", "description": "Badge font size." },
-    { "name": "--ce-muted", "kind": "color", "source": "token", "description": "Pending badge background + done title color." },
-    { "name": "--ce-text-inverse", "kind": "color", "source": "token", "description": "Badge text color." },
-    { "name": "--ce-color-blue", "kind": "color", "source": "token", "description": "Active badge background." },
-    { "name": "--ce-color-green", "kind": "color", "source": "token", "description": "Done badge background." },
-    { "name": "--ce-text-md", "kind": "size", "source": "token", "description": "Title font size." },
-    { "name": "--ce-text", "kind": "color", "source": "token", "description": "Title and body text color." },
-    { "name": "--ce-text-base", "kind": "size", "source": "token", "description": "Body font size." }
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Row gap between badge and content."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Title bottom margin."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Badge font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Pending badge background + done title color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Badge text color."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Active badge background."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Done badge background."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Title font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title and body text color."
+    },
+    {
+      "name": "--ce-text-base",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size."
+    }
   ],
   "globalDependencies": [],
   "sideEffects": [],
   "dependents": [],
   "dependencies": [],
-  "related": ["lesson-rule", "lesson-frame"],
+  "related": [
+    "lesson-rule",
+    "lesson-frame"
+  ],
   "category": "lesson",
   "tier": "brick",
-  "tags": ["Education", "step", "procedure"]
+  "tags": [
+    "Education",
+    "step",
+    "procedure"
+  ]
 }

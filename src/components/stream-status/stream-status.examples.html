@@ -1,0 +1,15 @@
+<!-- @example All states -->
+<ce-stream-status state="idle"></ce-stream-status>
+<ce-stream-status state="connecting"></ce-stream-status>
+<ce-stream-status state="streaming"></ce-stream-status>
+<ce-stream-status state="done"></ce-stream-status>
+<ce-stream-status state="error"></ce-stream-status>
+
+<!-- @example Streaming with tokens and tps -->
+<ce-stream-status state="streaming" tokens="1240" tps="42"></ce-stream-status>
+
+<!-- @example Done with token usage -->
+<ce-stream-status state="done" tokens="3812"></ce-stream-status>
+
+<!-- @example Slotted custom content -->
+<ce-stream-status state="streaming"><strong>Live</strong> · generating…</ce-stream-status>

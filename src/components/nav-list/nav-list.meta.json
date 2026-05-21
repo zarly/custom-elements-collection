@@ -4,15 +4,17 @@
   "name": "NavList",
   "className": "CeNavList",
   "goal": "Render a grouped anchor list for documentation sidebars with active-item highlighting and a select event.",
-  "description": "Grouped sidebar nav. Items group themselves by their group field; the entry whose href matches value is marked aria-current=page and tinted blue. Each click dispatches ce-nav-select with the href before native navigation runs.",
+  "description": "Grouped sidebar nav. Items group themselves by their group field; the entry whose href matches value is marked aria-current=page and tinted blue. Each click dispatches ce-nav-select with the href before native navigation runs. Each item may carry an optional `meta` HTML string rendered as a right-aligned secondary block on the row — intended for trust-controlled badges like <ce-clock> or <ce-chip>.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "items",
       "type": "NavItem[]",
       "required": false,
       "default": "[]",
-      "description": "Array of { label, href, group?, tag? }."
+      "description": "Array of { label, href, group?, tag?, meta? }. The optional `meta` field is an HTML string rendered right-aligned on the row; consumer is responsible for its safety (do not pass user input)."
     },
     {
       "name": "value",
@@ -131,7 +133,8 @@
   "dependencies": [],
   "related": [
     "ce-docs-layout",
-    "ce-toc"
+    "ce-toc",
+    "ce-breadcrumbs"
   ],
   "category": "internal",
   "tier": "layout",

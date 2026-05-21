@@ -6,6 +6,8 @@
   "goal": "Decorate an icon or label with a small count or status pip.",
   "description": "Notification-style count badge that anchors to slotted content. Clamps to a configurable max with a '+' suffix, supports a dot variant for unread state, and uses semantic color variants.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "count",

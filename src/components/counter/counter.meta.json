@@ -6,6 +6,8 @@
   "goal": "Animate a numeric value from a start to a target with optional prefix, suffix, decimals, and trend indicator.",
   "description": "Display a number that smoothly animates to a target value when set, with optional prefix/suffix decorations and a trend caret. Uses requestAnimationFrame with ease-out-cubic; setting duration-ms to 0 disables animation. Distinct from <ce-kpi>: counter focuses on motion + numeric updates, while kpi focuses on labelled metric layout.",
   "stability": "stable",
+  "created": "2026-05-05",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "value",

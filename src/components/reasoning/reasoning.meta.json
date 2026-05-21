@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "tag": "ce-reasoning",
+  "name": "Reasoning",
+  "className": "CeReasoning",
+  "goal": "Collapsible chain-of-thought reasoning trace from a reasoning-capable LLM — distinct from ce-thinking's pre-token spinner — with optional token count and duration.",
+  "description": "Disclosure widget for displaying chain-of-thought traces produced by reasoning-capable models (e.g. Claude thinking blocks, o1-style reasoning). The header shows a chevron, a configurable label, an optional streaming pulse dot, optional token count, and optional humanised duration. The body panel holds slotted reasoning content styled muted and italic to visually separate it from the main response. Implements disclosure semantics with a real button carrying aria-expanded and aria-controls; does not wrap native <details> so the max-height CSS transition is consistent across browsers.",
+  "stability": "beta",
+  "created": "2026-05-20",
+  "updated": "2026-05-21",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disclosure state. Reflected so consumers can style :host([open]) and query the collapsed state."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Reasoning\"",
+      "description": "Header label text shown next to the chevron."
+    },
+    {
+      "name": "tokens",
+      "type": "number | null",
+      "required": false,
+      "default": "null",
+      "description": "Optional token count rendered in the header when set. Omitted when null."
+    },
+    {
+      "name": "durationMs",
+      "type": "number",
+      "required": false,
+      "default": "NaN",
+      "attribute": "duration-ms",
+      "description": "Optional wall-clock duration in milliseconds; humanised as '123 ms' or '1.2 s'. Omitted when not finite."
+    },
+    {
+      "name": "streaming",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true, renders a pulsing purple dot next to the label to indicate reasoning tokens are still being received."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-reasoning-toggle",
+      "detail": "{ open: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the user clicks the header button; detail carries the new open state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Reasoning content — treated as opaque text and presented in a muted, italic style to visually distinguish it from the main model response."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer block background."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border and header/body separator."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer block border-radius."
+    },
+    {
+      "name": "--ce-radius-pill",
+      "kind": "radius",
+      "source": "token",
+      "description": "Streaming pulse dot border-radius."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Header text, chevron, meta values, and body content colour."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Header hover overlay."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Header focus-visible ring."
+    },
+    {
+      "name": "--ce-color-purple",
+      "kind": "color",
+      "source": "token",
+      "description": "Streaming pulse dot colour."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Header label and chevron font-size; body content font-size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Token count and duration font-size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer margin and header/meta gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Header padding x and body panel padding."
+    },
+    {
+      "name": "--ce-line-relaxed",
+      "kind": "font",
+      "source": "token",
+      "description": "Body content line-height."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Panel max-height animation."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Chevron rotation transition."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-thinking",
+    "ce-tool-call"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Chat surfaces",
+    "reasoning",
+    "disclosure"
+  ],
+  "a11y": {
+    "notes": "Header is a <button type='button'> with aria-expanded reflecting the open state and aria-controls pointing at the body panel id. The streaming pulse dot is aria-hidden."
+  }
+}

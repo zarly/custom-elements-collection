@@ -6,6 +6,8 @@
   "goal": "Render a blinking caret indicator beside streaming LLM-generated text.",
   "description": "A purely visual blinking caret used by chat surfaces while assistant tokens are arriving. Three shapes (bar, block, underline) and a configurable blink interval; no slots, no events, no state.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "shape",

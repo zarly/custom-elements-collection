@@ -6,6 +6,8 @@
   "goal": "Render a page-opening header block with a kicker, title, lede, and an optional inline stats row.",
   "description": "Page header with eyebrow kicker, gradient-clipped title, lede paragraph, and a stats slot for inline KPIs. Provides a radial-gradient background by default; flat attribute suppresses it.",
   "stability": "stable",
+  "created": "2026-04-29",
+  "updated": "2026-05-21",
   "props": [
     {
       "name": "kicker",
