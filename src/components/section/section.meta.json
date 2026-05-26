@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-section",
   "name": "Section",
   "className": "CeSection",
@@ -7,7 +7,7 @@
   "description": "Titled content section. Renders a header row containing an optional circular number badge, a heading, and an optional count chip on the right; underneath the row sits an optional lede paragraph and the default body slot. Used to break long pages into numbered chapters.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "title",
@@ -168,11 +168,22 @@
     "ce-shell",
     "ce-hero"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
-    "Layout & primitives",
-    "section",
-    "heading"
-  ]
+    "Layout & primitives"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

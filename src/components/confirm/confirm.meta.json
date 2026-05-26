@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-confirm",
   "name": "Confirm",
   "className": "CeConfirm",
@@ -7,7 +7,7 @@
   "description": "Lightweight confirmation row used in place of an OS-level confirm dialog. Two buttons with semantic primary/secondary styling; danger variant tints the surface and primary button. Emits ce-confirm or ce-cancel; the host has role=alertdialog with the prompt as aria-label.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "prompt",
@@ -168,6 +168,13 @@
   "related": [
     "ce-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -178,5 +185,11 @@
   "a11y": {
     "role": "alertdialog",
     "notes": "The container element carries role=alertdialog with the prompt text as aria-label so assistive tech treats it as a focused decision."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

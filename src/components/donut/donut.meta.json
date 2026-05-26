@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-donut",
   "name": "Donut",
   "className": "CeDonut",
@@ -7,7 +7,7 @@
   "description": "Inline SVG donut/pie. Provide a JSON array of segment values, optional colors and labels, and an optional center label or `center` slot to fill the hole. Setting thickness=0 turns it into a pie. Best for 3-6 segments; for ranked breakdowns prefer ce-bar-chart.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "values",
@@ -165,6 +165,15 @@
     "ce-bar-chart",
     "ce-gauge"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    { "tag": "ce-bar-chart", "scope": "proportional-comparison" }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -174,5 +183,11 @@
   "a11y": {
     "role": "img",
     "notes": "SVG carries role=img and an aria-label that lists each segment with its label and percentage."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "flush"
   }
 }

@@ -1,0 +1,46 @@
+<!-- @example Row action menu — edit, duplicate, and delete with danger tone -->
+<ce-dropdown-menu>
+  <ce-button slot="trigger" variant="ghost">More actions</ce-button>
+  <ce-menu-item value="edit" icon="pencil" shortcut="E">Edit</ce-menu-item>
+  <ce-menu-item value="duplicate" icon="copy">Duplicate</ce-menu-item>
+  <ce-menu-item value="move" icon="folder">Move to…</ce-menu-item>
+  <ce-menu-separator></ce-menu-separator>
+  <ce-menu-item value="delete" icon="trash" tone="danger">Delete</ce-menu-item>
+</ce-dropdown-menu>
+
+<!-- @example Grouped sort-by menu — placement bottom-end, two labelled groups -->
+<ce-dropdown-menu placement="bottom-end">
+  <ce-button slot="trigger">Sort by</ce-button>
+  <ce-menu-group label="Date">
+    <ce-menu-item value="newest">Newest first</ce-menu-item>
+    <ce-menu-item value="oldest">Oldest first</ce-menu-item>
+  </ce-menu-group>
+  <ce-menu-separator></ce-menu-separator>
+  <ce-menu-group label="Name">
+    <ce-menu-item value="az">A → Z</ce-menu-item>
+    <ce-menu-item value="za">Z → A</ce-menu-item>
+  </ce-menu-group>
+</ce-dropdown-menu>
+
+<!-- @example Profile / account menu — top-end placement, sign-out danger -->
+<ce-dropdown-menu placement="top-end">
+  <ce-button slot="trigger" variant="ghost">Account</ce-button>
+  <ce-menu-item value="profile" icon="user">My profile</ce-menu-item>
+  <ce-menu-item value="settings" icon="gear" shortcut="⌘,">Settings</ce-menu-item>
+  <ce-menu-item value="help" icon="question">Help &amp; docs</ce-menu-item>
+  <ce-menu-separator></ce-menu-separator>
+  <ce-menu-item value="signout" icon="logout" tone="danger">Sign out</ce-menu-item>
+</ce-dropdown-menu>
+
+<!-- @example Export menu — grouped by format, disabled option for locked plan -->
+<ce-dropdown-menu placement="bottom-start">
+  <ce-button slot="trigger">Export</ce-button>
+  <ce-menu-group label="Spreadsheet">
+    <ce-menu-item value="csv">CSV (.csv)</ce-menu-item>
+    <ce-menu-item value="xlsx">Excel (.xlsx)</ce-menu-item>
+  </ce-menu-group>
+  <ce-menu-group label="Document">
+    <ce-menu-item value="pdf">PDF (.pdf)</ce-menu-item>
+    <ce-menu-item value="docx" disabled>Word (.docx) — Pro only</ce-menu-item>
+  </ce-menu-group>
+</ce-dropdown-menu>

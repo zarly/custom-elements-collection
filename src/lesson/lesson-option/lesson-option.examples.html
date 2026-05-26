@@ -1,0 +1,20 @@
+<!-- @example Static option (default — read-only display) -->
+<lesson-option>typeof x === 'string'</lesson-option>
+<lesson-option>x instanceof String</lesson-option>
+<lesson-option>x as string</lesson-option>
+
+<!-- @example Static option with the correct answer revealed -->
+<lesson-option correct revealed>typeof x === 'string'</lesson-option>
+<lesson-option revealed>x instanceof String</lesson-option>
+<lesson-option revealed>x as string</lesson-option>
+
+<!-- @example Interactive option (clickable; emits lesson-option-pick) -->
+<lesson-option interactive correct value="opt-a">
+  <code>typeof x === 'string'</code>
+</lesson-option>
+<lesson-option interactive value="opt-b">
+  <code>x instanceof String</code>
+</lesson-option>
+<lesson-option interactive value="opt-c">
+  <code>x as string</code>
+</lesson-option>

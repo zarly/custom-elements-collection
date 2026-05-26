@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-list",
+  "name": "List",
+  "className": "CeList",
+  "goal": "Render N homogeneous items in a vertical sequence with consistent spacing and optional dividers.",
+  "description": "Generic flat list container with configurable dividers, density, and optional interactive hover states. Suitable for notifications, search results, settings rows, and audit logs.",
+  "limitations": "::slotted(*) only reaches direct children; wrapping items in an extra element will prevent divider and density styles from applying. No semantic list role is applied — consumers who need role=list must add it themselves and ensure children carry role=listitem. Data-driven declarative rendering (data attribute) is deferred to v2; v1 is slot-only.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "dividers",
+      "type": "\"none\" | \"hair\" | \"line\"",
+      "required": false,
+      "default": "\"hair\"",
+      "reflect": true,
+      "description": "Controls the divider between items. hair = 1px soft border; line = 1px strong border; none = gap-only spacing."
+    },
+    {
+      "name": "density",
+      "type": "\"comfortable\" | \"cozy\" | \"compact\"",
+      "required": false,
+      "default": "\"comfortable\"",
+      "reflect": true,
+      "description": "Controls padding-block on each slotted item. comfortable > cozy > compact."
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Adds hover background and focus-visible outline to slotted items. Visual hint only — consumers provide real interactivity via anchors or buttons inside items."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The list items — any element is accepted. Items must be direct children for divider and density styles to apply."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "padding-block for compact density."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "padding-block for cozy density."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "padding-block for comfortable density (default)."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Divider color for dividers=hair."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Divider color for dividers=line."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background on slotted items when interactive is set. Falls back to --ce-surface-2."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Fallback hover background when --ce-state-hover is not defined."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus-visible outline color when interactive is set."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for hover background animation when interactive."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-nav-list",
+    "ce-checklist",
+    "ce-grid"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Content",
+    "layout",
+    "list"
+  ],
+  "a11y": {
+    "notes": "No role is applied to the host. role=list would require every direct child to be a listitem, but ce-list accepts unrestricted slot content. Consumers who know their content is a semantic list should add role=list to the ce-list element and role=listitem to each child. The interactive attribute adds visual hover/focus styles but does not imply clickability — real interactivity (anchors, buttons) must be provided by consumers inside each item."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

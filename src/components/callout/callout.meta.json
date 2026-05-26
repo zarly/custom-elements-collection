@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-callout",
   "name": "Callout",
   "className": "CeCallout",
@@ -7,7 +7,7 @@
   "description": "Tinted left-border admonition box. Replaces drift between callout / admonition / alert / note / risk markup. Five semantic types color-code the border and background; an optional title overrides via attribute or named slot.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -141,11 +141,28 @@
   "related": [
     "ce-verdict"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-verdict",
+      "scope": "summary-tone"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "callout",
-    "admonition"
-  ]
+    "callout"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

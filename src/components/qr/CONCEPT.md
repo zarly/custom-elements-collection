@@ -62,7 +62,15 @@ Until these are decided, the API surface is `experimental`. Consumers should be 
 - **Dot-style modules / rounded corners.** Would require switching from horizontal-run merging to per-module rendering. If a consumer needs it, they can read the matrix off `result.modules` once we expose that API.
 - **Reading / decoding.** This is encode-only. Decoding is a different problem (image processing, perspective correction, error recovery) with libraries an order of magnitude larger.
 
-## Bug fix log
+## Lint carve-out (2026-05-23)
+
+This file disables three ESLint size-budget rules at file scope: `max-lines`, `max-lines-per-function`, and `max-depth`. Rationale:
+
+- The encoder is **one algorithm**, not a coordination layer. Splitting `encodeQR` into matrix-build / mask-select / data-encode phases would push private state through helper signatures, hide the spec-driven step sequence from the reader, and make it harder to verify against ISO/IEC 18004 §7 figure-by-figure.
+- The "bug fix log" entry above (format-info row/col swap) is the canonical example of a silent encoder bug — they survive internal-consistency tests; the only durable defense is keeping the code shape close to the spec for visual diffing.
+- The data-placement zig-zag (lines ~352–366) legitimately nests `if` inside `for` inside `for` because that's the geometry it describes; flattening it would require synthesizing iterator helpers that obscure the matrix walk.
+
+Reviewed against `docs/decisions/eslint.md` `complexity` row, which already documents this exact carve-out for "QR encoder, parser, scheduler" class algorithms.
 
 ### 2026-05-08 — un-scannable codes due to format info row/col swap
 

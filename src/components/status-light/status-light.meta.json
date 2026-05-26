@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-status-light",
   "name": "Status Light",
   "className": "CeStatusLight",
@@ -7,7 +7,7 @@
   "description": "Compact status indicator for dashboards, lists, and report rows. Five states (ok/warn/bad/neutral/pending) map to semantic color tokens, an optional pulse animation highlights live activity, and the label is provided either via the label attribute or the default slot. Use `ce-status-light` when `pulse` animation is needed (live dashboards); use `<ce-chip dot>` for static state in documents (overlap is intentional but the cases split on whether motion is desired).",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "state",
@@ -106,6 +106,19 @@
     "ce-chip",
     "ce-verdict"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-chip",
+      "scope": "state-label",
+      "when": "no pulse animation is needed (use <ce-chip dot> for static state in documents)"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -116,5 +129,11 @@
   "a11y": {
     "role": "status",
     "notes": "The label region carries role=status so screen readers announce state changes when label or slot content updates."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

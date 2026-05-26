@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { defineOnce } from "./register.js";
@@ -37,15 +37,12 @@ describe("jsonProp()", () => {
     el.remove();
   });
 
-  it("falls back on malformed JSON and warns", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back on malformed JSON", async () => {
     const el = document.createElement("test-json-prop") as TestBed;
     el.setAttribute("rows", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.rows).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 

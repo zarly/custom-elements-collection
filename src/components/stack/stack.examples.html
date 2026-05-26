@@ -1,0 +1,65 @@
+<!-- @example Vertical stack with default spacing (no attrs required) -->
+<ce-stack>
+  <h2>Section heading</h2>
+  <p>Opening paragraph that introduces the content below.</p>
+  <p>A second paragraph following at a consistent rhythm.</p>
+</ce-stack>
+
+<!-- @example Horizontal tag row with small gap -->
+<ce-stack direction="horizontal" space="s">
+  <ce-badge>design</ce-badge>
+  <ce-badge>layout</ce-badge>
+  <ce-badge>primitives</ce-badge>
+</ce-stack>
+
+<!-- @example Split-after: push footer to the bottom of a fixed-height container -->
+<ce-stack space="m" split-after="2" style="block-size: 320px;">
+  <h2>Card heading</h2>
+  <p>Card body text that stays near the top.</p>
+  <small>This footer is pushed to the very bottom via margin-block-start: auto.</small>
+</ce-stack>
+
+<!-- @example Large vertical spacing between cards -->
+<ce-stack space="l">
+  <ce-card>
+    <h3 slot="title">First card</h3>
+    <p>Content inside the first card.</p>
+  </ce-card>
+  <ce-card>
+    <h3 slot="title">Second card</h3>
+    <p>Content inside the second card.</p>
+  </ce-card>
+  <ce-card>
+    <h3 slot="title">Third card</h3>
+    <p>Content inside the third card.</p>
+  </ce-card>
+</ce-stack>
+
+<!-- @example Nested stacks: outer vertical, inner horizontal toolbar -->
+<ce-stack space="m">
+  <h2>Panel title</h2>
+  <ce-stack direction="horizontal" space="xs">
+    <ce-button>Save</ce-button>
+    <ce-button>Cancel</ce-button>
+  </ce-stack>
+  <p>Panel body content follows after the toolbar.</p>
+</ce-stack>
+
+<!-- @example Tag cloud (former ce-cluster) — horizontal + wrap + baseline-aligned -->
+<ce-stack direction="horizontal" wrap space="s" align="baseline">
+  <ce-tag>vue</ce-tag>
+  <ce-tag>lit</ce-tag>
+  <ce-tag>react</ce-tag>
+  <ce-tag>svelte</ce-tag>
+  <ce-tag>angular</ce-tag>
+  <ce-button>+ Add</ce-button>
+</ce-stack>
+
+<!-- @example Toolbar with spread layout — horizontal + justify=between -->
+<ce-stack direction="horizontal" space="m" justify="between" align="center">
+  <strong>Section heading</strong>
+  <ce-stack direction="horizontal" space="xs">
+    <ce-button>Cancel</ce-button>
+    <ce-button>Apply</ce-button>
+  </ce-stack>
+</ce-stack>

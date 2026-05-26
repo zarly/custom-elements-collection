@@ -1,0 +1,67 @@
+<!-- @example File-system tree (slot children, depth-1 expanded by default) -->
+<ce-tree default-expanded="depth-1">
+  <ce-tree-node label="src">
+    <ce-tree-node label="components">
+      <ce-tree-node label="button"></ce-tree-node>
+      <ce-tree-node label="card"></ce-tree-node>
+      <ce-tree-node label="tree"></ce-tree-node>
+    </ce-tree-node>
+    <ce-tree-node label="core">
+      <ce-tree-node label="base.ts"></ce-tree-node>
+      <ce-tree-node label="json-prop.ts"></ce-tree-node>
+    </ce-tree-node>
+    <ce-tree-node label="meta">
+      <ce-tree-node label="schema.ts"></ce-tree-node>
+    </ce-tree-node>
+  </ce-tree-node>
+  <ce-tree-node label="docs">
+    <ce-tree-node label="adr"></ce-tree-node>
+    <ce-tree-node label="cdr"></ce-tree-node>
+  </ce-tree-node>
+  <ce-tree-node label="dist"></ce-tree-node>
+  <ce-tree-node label="package.json"></ce-tree-node>
+</ce-tree>
+
+<!-- @example JSON data tree with connector lines -->
+<ce-tree
+  lines
+  default-expanded="all"
+  data='[{"label":"Root","children":[{"label":"Child A","children":[{"label":"Leaf 1"},{"label":"Leaf 2"}]},{"label":"Child B","children":[{"label":"Leaf 3"}]},{"label":"Child C"}]}]'
+></ce-tree>
+
+<!-- @example Org chart with connector lines and dense layout -->
+<ce-tree lines dense default-expanded="depth-2">
+  <ce-tree-node label="Engineering">
+    <ce-tree-node label="Platform">
+      <ce-tree-node label="Infrastructure"></ce-tree-node>
+      <ce-tree-node label="Developer Experience"></ce-tree-node>
+    </ce-tree-node>
+    <ce-tree-node label="Product">
+      <ce-tree-node label="Frontend"></ce-tree-node>
+      <ce-tree-node label="Backend"></ce-tree-node>
+    </ce-tree-node>
+  </ce-tree-node>
+  <ce-tree-node label="Design">
+    <ce-tree-node label="UX Research"></ce-tree-node>
+    <ce-tree-node label="Visual Design"></ce-tree-node>
+  </ce-tree-node>
+  <ce-tree-node label="Product Management">
+    <ce-tree-node label="Core Product"></ce-tree-node>
+    <ce-tree-node label="Growth"></ce-tree-node>
+  </ce-tree-node>
+</ce-tree>
+
+<!-- @example Taxonomy / sitemap with all nodes expanded -->
+<ce-tree default-expanded="all">
+  <ce-tree-node label="Generative UI">
+    <ce-tree-node label="Bricks">
+      <ce-tree-node label="Typography"></ce-tree-node>
+      <ce-tree-node label="Color"></ce-tree-node>
+    </ce-tree-node>
+    <ce-tree-node label="Widgets">
+      <ce-tree-node label="Data display"></ce-tree-node>
+      <ce-tree-node label="Navigation"></ce-tree-node>
+    </ce-tree-node>
+    <ce-tree-node label="Layouts"></ce-tree-node>
+  </ce-tree-node>
+</ce-tree>

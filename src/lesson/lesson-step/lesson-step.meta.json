@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-step",
   "name": "LessonStep",
   "className": "LessonStep",
@@ -7,7 +7,7 @@
   "description": "Renders a circular badge with the step number (or checkmark when done), alongside a title and slotted body. Status drives badge color: pending=muted, active=blue, done=green. Done status strikes through the title.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "number",
@@ -116,11 +116,23 @@
     "lesson-rule",
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "brick",
   "tags": [
     "Education",
-    "step",
-    "procedure"
-  ]
+    "step"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-frame",
   "name": "LessonFrame",
   "className": "LessonFrame",
@@ -7,7 +7,7 @@
   "description": "Top-level lesson shell. Renders a fixed 4px progress bar at the top of the viewport (driven by the progress prop), a centered title + meta row, and a content column with a max-width of 880px. Used as the outermost element on a lesson page.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "progress",
@@ -127,15 +127,27 @@
     "lesson-quickfire",
     "lesson-audio"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "layout",
   "tags": [
     "Education",
-    "lesson",
-    "frame"
+    "lesson"
   ],
   "a11y": {
     "role": "progressbar (progress bar element)",
     "notes": "Top progress bar exposes role=progressbar with aria-valuemin=0 / aria-valuemax=100 / aria-valuenow."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

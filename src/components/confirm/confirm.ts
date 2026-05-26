@@ -49,6 +49,7 @@ export class CeConfirm extends CecElement {
     }
     button.primary {
       background: var(--ce-color-blue);
+      /* stylelint-disable-next-line color-no-hex -- on-accent text on saturated primary action */
       color: #fff;
     }
     :host([variant="danger"]) button.primary {

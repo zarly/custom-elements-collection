@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeFlow } from "./flow.js";
 import { CeFlowStep } from "../flow-step/flow-step.js";
@@ -7,6 +7,9 @@ beforeAll(() => {
   defineOnce("ce-flow", CeFlow);
   defineOnce("ce-flow-step", CeFlowStep);
 });
+
+const colorClassFrom = (el: Element): string =>
+  [...el.classList].find((c) => c.startsWith("c-")) ?? "";
 
 // ---------------------------------------------------------------------------
 // JSON mode (existing behaviour preserved per CDR-008)
@@ -96,15 +99,12 @@ describe("<ce-flow> — JSON mode", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when `steps` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when `steps` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-flow") as CeFlow;
     el.setAttribute("steps", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.steps).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });
@@ -237,7 +237,7 @@ describe("<ce-flow> — snapshot parity (CDR-005)", () => {
     ).map((t) => t.textContent?.trim());
     const jsonColors = Array.from(
       jsonEl.shadowRoot!.querySelectorAll(".ce-flow-step")
-    ).map((s) => [...s.classList].find((c) => c.startsWith("c-")) ?? "");
+    ).map(colorClassFrom);
     jsonEl.remove();
 
     // Slot mode
@@ -257,7 +257,7 @@ describe("<ce-flow> — snapshot parity (CDR-005)", () => {
     ).map((t) => t.textContent?.trim());
     const slotColors = Array.from(
       slotEl.shadowRoot!.querySelectorAll(".ce-flow-step")
-    ).map((s) => [...s.classList].find((c) => c.startsWith("c-")) ?? "");
+    ).map(colorClassFrom);
     slotEl.remove();
 
     expect(slotSteps).toBe(jsonSteps);

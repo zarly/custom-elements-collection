@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-match",
   "name": "LessonMatch",
   "className": "LessonMatch",
@@ -7,7 +7,7 @@
   "description": "Renders two columns of buttons. Learner clicks one item on the left, then one on the right; correct pairs lock in green and disable, wrong pairs flash red and clear the selection. The right column is shuffled deterministically so the order does not encode the answer. After every pair is matched, the host gets the submitted attribute and lesson-match-complete fires once with the attempt count. lesson-match-pair fires on every click-pair attempt with { left, right, correct }. Accepts pairs as a JSON [{ left, right }, ...] attribute or property.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "pairs",
@@ -190,11 +190,24 @@
     "lesson-gap",
     "lesson-vocab"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
     "Education",
-    "match",
-    "retrieval"
-  ]
+    "exercise"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -150,7 +150,7 @@ export class CeCode extends CecElement {
       this.dispatchEvent(
         new CustomEvent("ce-code-copy", { bubbles: true, composed: true, detail: { text } })
       );
-    } catch (err) {
+    } catch (_err) {
       btn.textContent = "error";
     }
   }

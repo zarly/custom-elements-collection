@@ -1,0 +1,90 @@
+<!-- @example Marketing / stacked page — single-column layout with header, main content, and footer -->
+<ce-page>
+  <header slot="header" style="background:var(--ce-surface);border-bottom:1px solid var(--ce-border);padding:var(--ce-space-3) var(--ce-space-5);display:flex;align-items:center;gap:var(--ce-space-4)">
+    <strong style="color:var(--ce-text);font-size:var(--ce-text-lg)">Acme Corp</strong>
+    <nav style="display:flex;gap:var(--ce-space-4);margin-left:auto">
+      <a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Product</a>
+      <a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Pricing</a>
+      <a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Docs</a>
+    </nav>
+  </header>
+
+  <main style="max-width:720px;margin:0 auto;padding:var(--ce-space-8) var(--ce-space-5)">
+    <h1 style="color:var(--ce-text);font-size:var(--ce-text-2xl);margin-bottom:var(--ce-space-4)">Build faster with generative UI</h1>
+    <p style="color:var(--ce-muted);font-size:var(--ce-text-md);line-height:1.6;margin-bottom:var(--ce-space-6)">
+      Ship polished interfaces without writing a single line of CSS. Drop in
+      <code style="color:var(--ce-color-blue);background:var(--ce-surface);padding:2px 6px;border-radius:4px">ce-*</code>
+      components and let the design system do the rest.
+    </p>
+    <ce-card accent="blue">
+      <h3 slot="title">Getting started</h3>
+      <p>Install the package, add the token stylesheet, and you are ready to go.</p>
+    </ce-card>
+  </main>
+
+  <footer slot="footer" style="border-top:1px solid var(--ce-border);padding:var(--ce-space-4) var(--ce-space-5);text-align:center;color:var(--ce-muted);font-size:var(--ce-text-sm)">
+    © 2026 Acme Corp — all rights reserved
+  </footer>
+</ce-page>
+
+<!-- @example App shell — sidebar-left with sticky header and nav rail -->
+<ce-page layout="sidebar-left" sticky-header style="height:600px">
+  <header slot="header" style="background:var(--ce-surface);border-bottom:1px solid var(--ce-border);padding:var(--ce-space-3) var(--ce-space-5);display:flex;align-items:center;gap:var(--ce-space-3)">
+    <strong style="color:var(--ce-text)">My App</strong>
+    <span style="flex:1"></span>
+    <ce-badge>v2.0</ce-badge>
+  </header>
+
+  <nav slot="nav" style="background:var(--ce-surface);border-right:1px solid var(--ce-border);padding:var(--ce-space-4);height:100%;overflow-y:auto">
+    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--ce-space-2)">
+      <li><a href="#" style="color:var(--ce-text);text-decoration:none;font-size:var(--ce-text-sm);display:block;padding:var(--ce-space-2) var(--ce-space-3);border-radius:var(--ce-radius);background:var(--ce-bg)">Dashboard</a></li>
+      <li><a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm);display:block;padding:var(--ce-space-2) var(--ce-space-3)">Analytics</a></li>
+      <li><a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm);display:block;padding:var(--ce-space-2) var(--ce-space-3)">Settings</a></li>
+    </ul>
+  </nav>
+
+  <main style="padding:var(--ce-space-5) var(--ce-space-6);overflow-y:auto">
+    <h2 style="color:var(--ce-text);margin-bottom:var(--ce-space-4)">Dashboard</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--ce-space-4)">
+      <ce-kpi value="12,450" label="Monthly users" accent="green"></ce-kpi>
+      <ce-kpi value="98.4%" label="Uptime" accent="blue"></ce-kpi>
+      <ce-kpi value="3.2s" label="Avg response" accent="amber"></ce-kpi>
+    </div>
+  </main>
+
+  <footer slot="footer" style="background:var(--ce-surface);border-top:1px solid var(--ce-border);padding:var(--ce-space-3) var(--ce-space-5);color:var(--ce-muted);font-size:var(--ce-text-xs)">
+    Last synced: just now
+  </footer>
+</ce-page>
+
+<!-- @example Documentation layout — sidebar-right with wider rail for a table-of-contents -->
+<ce-page layout="sidebar-right" rail-width="20rem" style="height:600px">
+  <header slot="header" style="background:var(--ce-surface);border-bottom:1px solid var(--ce-border);padding:var(--ce-space-3) var(--ce-space-5);display:flex;align-items:center;gap:var(--ce-space-4)">
+    <strong style="color:var(--ce-text)">Docs</strong>
+    <span style="flex:1"></span>
+    <a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">GitHub</a>
+  </header>
+
+  <article style="padding:var(--ce-space-6);overflow-y:auto;max-width:680px">
+    <h1 style="color:var(--ce-text);font-size:var(--ce-text-xl);margin-bottom:var(--ce-space-3)">Introduction</h1>
+    <p style="color:var(--ce-muted);line-height:1.7;margin-bottom:var(--ce-space-4)">
+      This documentation covers every component in the library. Each entry
+      includes usage examples, attribute reference, and accessibility notes.
+    </p>
+    <h2 style="color:var(--ce-text);font-size:var(--ce-text-lg);margin-bottom:var(--ce-space-3)">Quick start</h2>
+    <p style="color:var(--ce-muted);line-height:1.7">
+      Install via npm, import the token stylesheet, and start using
+      <code style="color:var(--ce-color-blue)">ce-*</code> tags in your HTML.
+    </p>
+  </article>
+
+  <aside slot="nav" style="border-left:1px solid var(--ce-border);padding:var(--ce-space-5);overflow-y:auto">
+    <p style="color:var(--ce-muted);font-size:var(--ce-text-xs);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--ce-space-3)">On this page</p>
+    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--ce-space-2)">
+      <li><a href="#" style="color:var(--ce-text);text-decoration:none;font-size:var(--ce-text-sm)">Introduction</a></li>
+      <li><a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Quick start</a></li>
+      <li><a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Configuration</a></li>
+      <li><a href="#" style="color:var(--ce-muted);text-decoration:none;font-size:var(--ce-text-sm)">Theming</a></li>
+    </ul>
+  </aside>
+</ce-page>

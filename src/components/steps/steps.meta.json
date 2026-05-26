@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-steps",
   "name": "Steps",
   "className": "CeSteps",
@@ -7,7 +7,7 @@
   "description": "Layout container for process / roadmap steps implementing CDR-005 dual-mode: JSON array via the data attribute takes priority; slot children are used otherwise; empty state rendered when neither is present. When auto-number is enabled (default), sequential numbers are assigned to ce-step children that have no n attribute. Non-ce-step slot children are passed through without interference (CDR-006). Direction (vertical|horizontal) controls the flex axis. In JSON mode the container creates ce-step elements inline from the data array, producing visually identical output to the equivalent slot markup.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "data",
@@ -92,14 +92,28 @@
     "ce-flow",
     "ce-checklist"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-step"
+  ],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Comparison & narrative",
-    "steps",
     "process"
   ],
   "a11y": {
     "notes": "The container itself carries no ARIA role; each ce-step child manages its own aria-current and visually-hidden state text. Empty state uses role='status' for live-region announcement."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

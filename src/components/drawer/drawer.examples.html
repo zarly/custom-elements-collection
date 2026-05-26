@@ -1,0 +1,61 @@
+<!-- @example Inspector drawer (side=end, modal, medium) — settings or property inspector panel sliding in from the right -->
+<ce-drawer side="end" size="md">
+  <ce-button slot="trigger">Open inspector</ce-button>
+  <h2 slot="header">Component properties</h2>
+  <ce-field label="Label">
+    <ce-input value="My component"></ce-input>
+  </ce-field>
+  <ce-field label="Variant">
+    <ce-select>
+      <option value="primary">Primary</option>
+      <option value="ghost">Ghost</option>
+      <option value="danger">Danger</option>
+    </ce-select>
+  </ce-field>
+  <ce-field label="Disabled">
+    <ce-toggle></ce-toggle>
+  </ce-field>
+  <ce-button slot="footer" variant="ghost">Reset</ce-button>
+  <ce-button slot="footer" variant="primary">Apply</ce-button>
+</ce-drawer>
+
+<!-- @example Bottom sheet (side=bottom, modal, large) — template picker or action sheet pattern -->
+<ce-drawer side="bottom" size="lg" modal>
+  <ce-button slot="trigger">Choose template</ce-button>
+  <h2 slot="header">Select a starting template</h2>
+  <ce-list>
+    <a href="#blank">Blank canvas</a>
+    <a href="#default">Default layout</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#landing">Landing page</a>
+    <a href="#form">Data entry form</a>
+  </ce-list>
+  <ce-button slot="footer" variant="ghost">Cancel</ce-button>
+</ce-drawer>
+
+<!-- @example Navigation drawer (side=start, full) — primary sidebar navigation -->
+<ce-drawer side="start" size="full">
+  <ce-button slot="trigger">Menu</ce-button>
+  <nav slot="header">
+    <strong>My App</strong>
+  </nav>
+  <ce-nav-list>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/projects">Projects</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/settings">Settings</a>
+  </ce-nav-list>
+</ce-drawer>
+
+<!-- @example Non-dismissible locked drawer (dismissible=false) — wizard or guided step that requires an explicit action to proceed -->
+<ce-drawer side="end" size="md" dismissible="false">
+  <ce-button slot="trigger">Start setup</ce-button>
+  <h2 slot="header">Initial setup required</h2>
+  <p>Please complete all steps before continuing. This panel cannot be dismissed until setup is finished.</p>
+  <ce-steps>
+    <ce-step label="Connect account" status="complete"></ce-step>
+    <ce-step label="Configure workspace" status="current"></ce-step>
+    <ce-step label="Invite teammates" status="upcoming"></ce-step>
+  </ce-steps>
+  <ce-button slot="footer" variant="primary">Continue</ce-button>
+</ce-drawer>

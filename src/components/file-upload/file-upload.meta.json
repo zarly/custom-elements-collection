@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-file-upload",
   "name": "File upload",
   "className": "CeFileUpload",
@@ -7,7 +7,7 @@
   "description": "Static-by-default dropzone with click-to-browse + drag-over highlight + drop handling. The component itself never uploads anything — it only collects a File[] from the native <input type=file> or a DragEvent and emits ce-files. The parent owns transport. Default state is an idle, idiomatic zone with a sensible label and hint (CDR-007); attributes accept, multiple, name, label, hint, disabled are all optional. Multimodal chat composers, profile-photo pickers, and report attach surfaces are the primary use cases.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "accept",
@@ -194,16 +194,26 @@
     "ce-file-card",
     "ce-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
-    "Forms",
-    "file",
-    "upload",
-    "dropzone"
+    "Forms"
   ],
   "a11y": {
     "role": "button",
     "notes": "Zone has role=button and is keyboard-activatable via Enter/Space. aria-labelledby points to the visible label, aria-disabled mirrors the disabled prop, and the native <input type=file> remains in the DOM (visually hidden) so screen readers still see a file control."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

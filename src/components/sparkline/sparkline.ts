@@ -1,12 +1,20 @@
 import { html, css, svg } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { CecElement, type CecColor, jsonProp } from "../../core/index.js";
 
 /**
  * `<ce-sparkline>` — inline mini-chart (line / area / bar) drawn as inline SVG.
  *
+ * Three input shapes (CDR-2 / CDR-5). Resolution order:
+ *   1. `values` attribute / JS property (when non-empty) — wins.
+ *   2. `<ce-data>` child with JSON payload — parses `.values` (or accepts a
+ *      bare numeric array). Useful when the payload is too big or
+ *      escaping-heavy for an attribute, or carries auxiliary fields.
+ *   3. Text-content child — whitespace- or comma-separated numbers in the
+ *      element's own text content (e.g. `<ce-sparkline>1 2 3</ce-sparkline>`).
+ *
  * Attributes:
- *   values  — JSON array of numbers. Required.
+ *   values  — JSON array of numbers. Optional when text-content data is provided.
  *   color   — semantic color token. Default "blue".
  *   shape   — "line" | "area" | "bar". Default "line".
  *   width   — chart width in CSS px (default 80).
@@ -55,8 +63,69 @@ export class CeSparkline extends CecElement {
   @property({ type: Number }) height = 24;
   @property({ type: Number }) stroke = 1.5;
 
+  @state() private _childValues: number[] = [];
+  #mo: MutationObserver | null = null;
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._childValues = this.#parseChildValues();
+    this.#mo = new MutationObserver(() => {
+      const next = this.#parseChildValues();
+      if (next.length !== this._childValues.length ||
+          next.some((n, i) => n !== this._childValues[i])) {
+        this._childValues = next;
+      }
+    });
+    this.#mo.observe(this, { childList: true, characterData: true, subtree: true });
+  }
+
+  override disconnectedCallback(): void {
+    this.#mo?.disconnect();
+    this.#mo = null;
+    super.disconnectedCallback();
+  }
+
+  #parseChildValues(): number[] {
+    // Priority 1: a <ce-data> child carrying JSON payload.
+    const dataEl = this.querySelector(":scope > ce-data");
+    if (dataEl) {
+      const text = (dataEl.textContent ?? "").trim();
+      if (text) {
+        try {
+          const parsed = JSON.parse(text);
+          const arr = Array.isArray(parsed)
+            ? parsed
+            : Array.isArray((parsed as { values?: unknown })?.values)
+              ? (parsed as { values: unknown[] }).values
+              : null;
+          if (arr) {
+            return arr.map((n) => Number(n)).filter((n) => Number.isFinite(n));
+          }
+        } catch {
+          // Fall through to text-content parsing.
+        }
+      }
+    }
+    // Priority 2: whitespace/comma-separated numbers in the host's own text.
+    // Skip any text that belongs to a <ce-data> child (handled above) by
+    // looking at direct text nodes only.
+    const parts: string[] = [];
+    for (const node of this.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        parts.push((node.nodeValue ?? "").trim());
+      }
+    }
+    const text = parts.join(" ").trim();
+    if (!text) return [];
+    return text
+      .split(/[\s,]+/)
+      .map((s) => Number(s))
+      .filter((n) => Number.isFinite(n));
+  }
+
   override render() {
-    const v = Array.isArray(this.values) ? this.values : [];
+    const fromAttr = Array.isArray(this.values) ? this.values : [];
+    const v = fromAttr.length > 0 ? fromAttr : this._childValues;
     if (v.length === 0) {
       return html`<svg
         width=${this.width}

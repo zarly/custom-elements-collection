@@ -270,8 +270,12 @@ export class CeThemeSwitcher extends CecElement {
     const groups = new Map<string, ThemeSwitcherOption[]>();
     for (const opt of this.options) {
       const key = opt.group ?? "";
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(opt);
+      let bucket = groups.get(key);
+      if (!bucket) {
+        bucket = [];
+        groups.set(key, bucket);
+      }
+      bucket.push(opt);
     }
 
     return html`

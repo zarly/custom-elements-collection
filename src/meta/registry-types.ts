@@ -107,6 +107,21 @@ export interface RegistryComponent {
   events: RegistryEvent[];
   slots: RegistrySlot[];
   cssVariables: RegistryCssVar[];
+
+  // ─── v2 additions (ADR-015) ─────────────────────────────────────
+  // Projected verbatim from meta. Optional in v2 schema.
+  contentModel?: "block" | "inline" | "void";
+  role?: "transparent-wrapper" | "container" | "leaf";
+  deterministic?: boolean;
+  streamSafe?: boolean;
+  childPolicy?: "none" | "any" | "constrained";
+  requiredParent?: string[];
+  tagDependencies?: string[];
+  codeDependencies?: string[];
+  injects?: string[];
+  interchangeableWith?: Array<{ tag: string; scope?: string; when?: string }>;
+  slotCompatible?: boolean;
+  preferredSlotIn?: string[];
 }
 
 /**
@@ -121,9 +136,20 @@ export type RegistryFilter =
   | { axis: "category"; value: ComponentCategory }
   | { axis: "tag"; value: string };
 
+/**
+ * v2 (ADR-015 + 0022.07) — exported compliance-tier map. Consumers can
+ * write generic validators without hardcoding which fields are MUST.
+ */
+export interface RegistrySchemaBlock {
+  /** Meta-schema version used in source manifests. */
+  metaSchemaVersion: 1 | 2;
+  /** Maps tier label → list of field paths in that tier. */
+  compliance: Record<"MUST" | "SHOULD" | "MAY" | "INTERNAL", readonly string[]>;
+}
+
 export interface Registry {
-  /** Registry-document schema version. Currently always 1. */
-  schemaVersion: 1;
+  /** Registry-document schema version. Bumped to 2 in v0.7 (adds $schema block). */
+  schemaVersion: 1 | 2;
   /** Always "custom-elements-collection". */
   library: string;
   /** Library version (matches package.json). */
@@ -134,6 +160,11 @@ export interface Registry {
   filter: RegistryFilter;
   /** Sorted by category (ui → lesson → internal) then tag. */
   components: RegistryComponent[];
+  /**
+   * v2 (ADR-015): meta-schema info + compliance tiers (MUST/SHOULD/MAY/INTERNAL).
+   * Optional on v1 registries; required from v0.8.
+   */
+  $schema?: RegistrySchemaBlock;
 }
 
 export type { Tier } from "./tiers.js";

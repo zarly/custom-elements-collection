@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-card",
   "name": "Card",
   "className": "CeCard",
@@ -7,7 +7,7 @@
   "description": "Generic content card with title, body, and footer slots. Supports a colored left-border accent, hover-elevation, compact padding, and a clickable mode that adds role=button + Enter/Space activation and emits ce-card-activate.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "accent",
@@ -206,15 +206,27 @@
   "related": [
     "ce-grid"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "surface",
     "container"
   ],
   "a11y": {
     "role": "button (when clickable)",
     "notes": "When clickable=true the host gets role=\"button\" and tabindex=\"0\"; Enter and Space both emit ce-card-activate. When toggled off, role/tabindex are removed."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-vocab",
   "name": "LessonVocab",
   "className": "LessonVocab",
@@ -7,7 +7,7 @@
   "description": "Fully prop-driven vocabulary card. Shows the term in large bold text, optional phonetic in monospace, optional pos badge (amber), optional level badge (muted). Definition and example sentence below. Suitable for language learning and technical terminology. No slots — all content is prop-driven for LLM-friendly markup.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "term",
@@ -167,11 +167,22 @@
     "lesson-reveal",
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "brick",
   "tags": [
-    "Education",
-    "vocabulary",
-    "definition"
-  ]
+    "Education"
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

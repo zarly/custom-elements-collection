@@ -53,21 +53,21 @@ describe("niceTicks", () => {
 
 describe("linearScale", () => {
   it("projects the midpoint", () => {
-    expect(linearScale(50, 0, 100, 0, 200)).toBe(100);
+    expect(linearScale(50, [0, 100], [0, 200])).toBe(100);
   });
 
   it("projects the endpoints", () => {
-    expect(linearScale(0, 0, 100, 10, 20)).toBe(10);
-    expect(linearScale(100, 0, 100, 10, 20)).toBe(20);
+    expect(linearScale(0, [0, 100], [10, 20])).toBe(10);
+    expect(linearScale(100, [0, 100], [10, 20])).toBe(20);
   });
 
   it("returns rangeMin on a zero-extent domain", () => {
-    expect(linearScale(5, 7, 7, 0, 100)).toBe(0);
+    expect(linearScale(5, [7, 7], [0, 100])).toBe(0);
   });
 
   it("supports inverted ranges (e.g. SVG y-axis)", () => {
-    expect(linearScale(0, 0, 100, 200, 0)).toBe(200);
-    expect(linearScale(100, 0, 100, 200, 0)).toBe(0);
-    expect(linearScale(50, 0, 100, 200, 0)).toBe(100);
+    expect(linearScale(0, [0, 100], [200, 0])).toBe(200);
+    expect(linearScale(100, [0, 100], [200, 0])).toBe(0);
+    expect(linearScale(50, [0, 100], [200, 0])).toBe(100);
   });
 });

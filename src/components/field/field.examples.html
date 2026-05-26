@@ -1,0 +1,32 @@
+<!-- @example Email field with help text -->
+<ce-field label="Email address" help="We never share your email with anyone.">
+  <ce-input name="email" type="email" placeholder="you@example.com"></ce-input>
+</ce-field>
+
+<!-- @example Password field with error state -->
+<ce-field label="Password" error="Must be at least 8 characters." required>
+  <ce-input name="password" type="password" placeholder="Enter password"></ce-input>
+</ce-field>
+
+<!-- @example Custom label and help via named slots -->
+<ce-field>
+  <span slot="label">Username <em>(public)</em></span>
+  <span slot="help">Letters and numbers only. Max 32 characters.</span>
+  <ce-input name="username" placeholder="cooluser42"></ce-input>
+</ce-field>
+
+<!-- @example Required field with no error — shows required asterisk -->
+<ce-field label="Full name" required>
+  <ce-input name="fullname" placeholder="Ada Lovelace"></ce-input>
+</ce-field>
+
+<!-- @example Rich error via slot — error includes a link -->
+<ce-field label="Invite code">
+  <span slot="error">Invalid code. <a href="/request-code">Request a new one</a>.</span>
+  <ce-input name="invite" placeholder="XXXX-XXXX"></ce-input>
+</ce-field>
+
+<!-- @example Explicit for binding — field wraps a control that already has an id -->
+<ce-field label="City" for="city-input" help="Where are you located?">
+  <ce-input id="city-input" name="city" placeholder="London"></ce-input>
+</ce-field>

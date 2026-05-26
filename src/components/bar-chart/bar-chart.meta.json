@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-bar-chart",
   "name": "BarChart",
   "className": "CeBarChart",
@@ -8,7 +8,7 @@
   "limitations": "Single-series only. For multi-series trends or line/area charts, use ce-plot (planned in phases 7–9). Tooltip is positioned above the bar and may clip in tight overflow:hidden parents — render the chart in a container with adequate top padding when needed.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "data",
@@ -123,7 +123,8 @@
   "slots": [
     {
       "name": "",
-      "description": "Accept <ce-bar-row> children for slot mode (CDR-005). Non-ce-bar-row children pass through to light DOM and are not used as data rows (CDR-006)."
+      "description": "Accept <ce-bar-row> children for slot mode (CDR-005). Non-ce-bar-row children pass through to light DOM and are not used as data rows (CDR-006).",
+      "acceptTags": ["ce-bar-row"]
     }
   ],
   "cssVariables": [
@@ -310,6 +311,15 @@
     "ce-bar-chart",
     "ce-chart"
   ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-bar-row"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -321,5 +331,11 @@
   "a11y": {
     "role": "progressbar (per row)",
     "notes": "Each row is focusable (tabindex=0) with a visible focus ring; the track exposes role=progressbar with aria-valuemin/max/now and an aria-label of the row label. Hover, focus, click, and Enter/Space all dispatch the shared ce-chart-* family events. The CSS tooltip uses role=tooltip and is hidden via opacity (so screen readers still see the underlying aria-label). prefers-reduced-motion disables every transition."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "flush"
   }
 }

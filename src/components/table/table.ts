@@ -33,11 +33,11 @@ export class CeTable extends CecElement {
       font-size: var(--ce-text-sm);
     }
     /* Note: descendant selectors within ::slotted are not supported by most
-       browsers — authors apply ambient CSS in their document, or we rely on
-       native cascade since we're in shadow but slot contents are in light tree.
-       Shadow ::slotted only styles the root of the assigned node, so we scope
-       header/cell rules via the exported :part() or via inheritance. For the
-       table itself we only style the root element here. */
+     browsers — authors apply ambient CSS in their document, or we rely on
+     native cascade since we're in shadow but slot contents are in light tree.
+     Shadow ::slotted only styles the root of the assigned node, so we scope
+     header/cell rules via the exported :part() or via inheritance. For the
+     table itself we only style the root element here. */
   `;
 
   protected override createRenderRoot(): ShadowRoot {

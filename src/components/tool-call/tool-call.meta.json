@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-tool-call",
   "name": "Tool call",
   "className": "CeToolCall",
@@ -7,7 +7,7 @@
   "description": "Disclosure widget purpose-built for function-calling and MCP-call visibility. The header shows a status dot (running pulses; ok/error are static), the tool name in monospace, and a humanized duration. Clicking toggles a body panel that always renders args, plus result (status=ok) or error (status=error). Implements the disclosure semantics manually (header has aria-expanded + aria-controls) rather than wrapping native <details>, so styling is consistent across browsers.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -195,6 +195,18 @@
     "ce-chat-bubble",
     "ce-tool-result"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-tool-result",
+      "scope": "tool-trace"
+    }
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -205,5 +217,11 @@
   ],
   "a11y": {
     "notes": "Header is a button with aria-expanded reflecting open state and aria-controls pointing at the body panel id."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

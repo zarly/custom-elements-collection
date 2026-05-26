@@ -3,6 +3,17 @@ import { property } from "lit/decorators.js";
 import { createRef, ref, type Ref } from "lit/directives/ref.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 
+// Minimal local types for the CDN-loaded Chart.js — only the surface we use.
+interface ChartJsInstance {
+  destroy(): void;
+}
+interface ChartJsConstructor {
+  new (
+    canvas: HTMLCanvasElement,
+    config: { type: string; data: unknown; options: unknown },
+  ): ChartJsInstance;
+}
+
 /**
  * `<ce-chart>` — thin wrapper around Chart.js for radar/line/donut/bar
  * variants the corpus uses rarely. Lazy-loads Chart.js from a CDN to keep
@@ -42,7 +53,7 @@ export class CeChart extends CecElement {
   @property(jsonProp<unknown>({ labels: [], datasets: [] })) data: unknown = { labels: [], datasets: [] };
   @property(jsonProp<unknown>({})) options: unknown = {};
 
-  #chart: any = null;
+  #chart: ChartJsInstance | null = null;
   #canvasRef: Ref<HTMLCanvasElement> = createRef();
   #error = "";
 
@@ -86,7 +97,7 @@ export class CeChart extends CecElement {
   }
 
   #mount(): void {
-    const w = window as unknown as { Chart?: any };
+    const w = window as unknown as { Chart?: ChartJsConstructor };
     const canvas = this.#canvasRef.value;
     if (!w.Chart || !canvas) return;
     this.#chart = new w.Chart(canvas, {

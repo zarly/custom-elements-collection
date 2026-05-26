@@ -1,0 +1,22 @@
+<!-- @example Icon info tooltip (top, default placement) -->
+<ce-icon name="info" id="kpi-info" aria-label="About this metric"></ce-icon>
+<ce-tooltip for="kpi-info" text="Net new active users in the last 7 days"></ce-tooltip>
+
+<!-- @example Button explainer (bottom placement) -->
+<button id="save-btn" type="button">Save</button>
+<ce-tooltip for="save-btn" placement="bottom">
+  Saves your changes and closes the dialog.
+</ce-tooltip>
+
+<!-- @example Link tooltip with custom delay (right placement) -->
+<a id="learn-more" href="/docs">Learn more</a>
+<ce-tooltip for="learn-more" placement="right" delay="500">
+  Opens the documentation in a new tab.
+</ce-tooltip>
+
+<!-- @example Chart point readout (left placement, short delay) -->
+<ce-kpi value="94%" label="Uptime" id="uptime-kpi"></ce-kpi>
+<ce-tooltip for="uptime-kpi" placement="left" delay="150">
+  Measured over the last 30 days across all regions.
+  Target SLA is 99.9%.
+</ce-tooltip>

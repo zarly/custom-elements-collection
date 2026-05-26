@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-rank-list",
   "name": "Rank list",
   "className": "CeRankList",
@@ -7,7 +7,7 @@
   "description": "Static-by-default ranking primitive for leaderboards, top-N reports, and ordered priorities. Position numbers are computed from list order (#1, #2, …) so authors don't renumber on reorder; an offset start attribute lets the list begin at any rank. Optional score column right-aligns numeric or string values; optional delta column shows ▲ / ▼ / — movement coloured by direction. By default the top three items are accented with medal colours (gold / silver / bronze); pass `flat` to disable. Accepts JSON items or slotted <li> children (CDR-005); in slot mode the rank is rendered as a counter prefix.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -194,14 +194,25 @@
     "ce-progress-list",
     "ce-checklist"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
-    "Comparison & narrative",
-    "ranking",
-    "leaderboard"
+    "Comparison & narrative"
   ],
   "a11y": {
     "notes": "Uses a native <ol> so position semantics are preserved for assistive tech regardless of CSS counters. Each rank pill carries an aria-label so screen readers announce 'Rank N' independent of the visual '#N' label."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

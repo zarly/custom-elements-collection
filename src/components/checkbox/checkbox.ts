@@ -44,6 +44,7 @@ export class CeCheckbox extends CecElement {
       border-color: var(--ce-color-blue);
     }
     .check, .dash {
+      /* stylelint-disable-next-line color-no-hex -- on-accent stroke; checkmark must contrast against saturated blue fill in every theme */
       stroke: #fff;
       stroke-width: 2.5;
       fill: none;

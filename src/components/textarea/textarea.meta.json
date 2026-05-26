@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-textarea",
   "name": "Textarea",
   "className": "CeTextarea",
@@ -7,7 +7,7 @@
   "description": "Themed multi-line input. Auto-grows up to max-rows on input, then becomes scrollable. Renders an optional label, help text, or error message; aria-invalid and aria-describedby stay in sync. ce-input fires per keystroke; ce-change fires on blur/commit.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -202,11 +202,24 @@
     "ce-input",
     "ce-comment"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Forms",
     "interactive",
     "control"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

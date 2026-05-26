@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-rating",
   "name": "Rating",
   "className": "CeRating",
@@ -7,7 +7,7 @@
   "description": "Two-mode feedback control. **Supports static read-only display via `readonly` — the first example demonstrates this canonical vis-document usage (CDR-004).** In thumbs mode, two side-by-side buttons toggle between up/down/null with aria-pressed. In stars mode, max buttons form a radiogroup with optional half-star precision via pointermove offset, click-to-clear, and arrow-key navigation. Form-associated via ElementInternals so the resolved value participates in surrounding <form> submissions when name is set. Emits ce-rating-change with a uniform detail shape when interactive.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "mode",
@@ -160,6 +160,13 @@
     "ce-retry-button",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -171,6 +178,13 @@
   "a11y": {
     "role": "radiogroup (stars) | group (thumbs)",
     "notes": "Thumbs are aria-pressed buttons; stars are role=radio with aria-checked. Arrow keys cycle values; Escape clears. readonly is announced via aria-disabled."
+  },
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   },
   "additional": {
     "formAssociated": true

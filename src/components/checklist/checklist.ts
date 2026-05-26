@@ -112,6 +112,7 @@ export class CeChecklist extends CecElement {
     .add button {
       padding: var(--ce-inset-lg) var(--ce-space-3);
       background: var(--ce-color-blue);
+      /* stylelint-disable-next-line color-no-hex -- on-accent text on saturated blue add-button */
       color: #fff;
       border: 0;
       border-radius: var(--ce-radius-sm);
@@ -292,8 +293,12 @@ export class CeChecklist extends CecElement {
     const groups = new Map<string, CeChecklistItem[]>();
     for (const it of items) {
       const key = it.category ?? "";
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(it);
+      let bucket = groups.get(key);
+      if (!bucket) {
+        bucket = [];
+        groups.set(key, bucket);
+      }
+      bucket.push(it);
     }
 
     const parts: unknown[] = [];

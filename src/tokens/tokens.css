@@ -122,7 +122,7 @@ html[data-ce-theme="dark"] {
 }
 
 html[data-ce-theme="light"] {
-  --ce-bg: #ffffff;
+  --ce-bg: #fff;
   --ce-surface: #f6f8fa;
   --ce-surface-2: #eaeef2;
   --ce-surface-3: #d0d7de;
@@ -133,7 +133,7 @@ html[data-ce-theme="light"] {
   --ce-text: #0f172a;
   --ce-muted: #57606a;
   --ce-dim: #6e7781;
-  --ce-text-inverse: #ffffff;
+  --ce-text-inverse: #fff;
 
   --ce-color-green: #1f883d;
   --ce-color-red: #cf222e;
@@ -164,7 +164,7 @@ html[data-ce-theme="light"] {
 
 html[data-ce-theme="swiss"] {
   --ce-bg:            #0a0a0a;
-  --ce-surface:       #111111;
+  --ce-surface:       #111;
   --ce-surface-2:     #181818;
   --ce-surface-3:     #1f1f1f;
   --ce-border:        #2a2a2a;
@@ -172,12 +172,12 @@ html[data-ce-theme="swiss"] {
   --ce-border-strong: #3d3d3d;
 
   --ce-text:         #f0f0f0;
-  --ce-muted:        #888888;
-  --ce-dim:          #555555;
+  --ce-muted:        #888;
+  --ce-dim:          #555;
   --ce-text-inverse: #f0f0f0;
 
   --ce-color-green:  #4caf6e;
-  --ce-color-red:    #dd2222;
+  --ce-color-red:    #d22;
   --ce-color-amber:  #c8922a;
   --ce-color-blue:   #4a90d9;
   --ce-color-purple: #9b72cf;
@@ -328,25 +328,25 @@ html[data-ce-theme="muji"] {
 /* ---------- Neo-brutalism (light) ---------- */
 
 html[data-ce-theme="neo-brutal"] {
-  --ce-bg:            #ffffff;
+  --ce-bg:            #fff;
   --ce-surface:       #f5f5f5;
   --ce-surface-2:     #ebebeb;
   --ce-surface-3:     #e0e0e0;
-  --ce-border:        #000000;
-  --ce-border-soft:   #333333;
-  --ce-border-strong: #000000;
+  --ce-border:        #000;
+  --ce-border-soft:   #333;
+  --ce-border-strong: #000;
 
-  --ce-text:         #000000;
-  --ce-muted:        #444444;
-  --ce-dim:          #666666;
-  --ce-text-inverse: #ffffff;
+  --ce-text:         #000;
+  --ce-muted:        #444;
+  --ce-dim:          #666;
+  --ce-text-inverse: #fff;
 
-  --ce-color-green:  #00cc44;
-  --ce-color-red:    #ff2244;
-  --ce-color-amber:  #ffcc00;
-  --ce-color-blue:   #0044ff;
-  --ce-color-purple: #cc00ff;
-  --ce-color-cyan:   #00ccff;
+  --ce-color-green:  #0c4;
+  --ce-color-red:    #f24;
+  --ce-color-amber:  #fc0;
+  --ce-color-blue:   #04f;
+  --ce-color-purple: #c0f;
+  --ce-color-cyan:   #0cf;
 
   --ce-color-green-bg:  rgba(0,   204,  68, 0.12);
   --ce-color-red-bg:    rgba(255,  34,  68, 0.12);
@@ -373,11 +373,11 @@ html[data-ce-theme="neo-brutal"] {
   --ce-transition:      0.15s ease;
   --ce-transition-slow: 0.25s ease;
 
-  --ce-shadow-sm: 2px 2px 0 #000000;
-  --ce-shadow:    4px 4px 0 #000000;
-  --ce-shadow-lg: 6px 6px 0 #000000;
+  --ce-shadow-sm: 2px 2px 0 #000;
+  --ce-shadow:    4px 4px 0 #000;
+  --ce-shadow-lg: 6px 6px 0 #000;
 
-  --ce-focus-ring: 0 0 0 3px #000000;
+  --ce-focus-ring: 0 0 0 3px #000;
 }
 
 /* ---------- Solarized (dark) — Ethan Schoonover 2011 ---------- */
@@ -498,21 +498,21 @@ html[data-ce-theme="memphis"] {
   --ce-surface:       #f2f2f2;
   --ce-surface-2:     #ebebeb;
   --ce-surface-3:     #e2e2e2;
-  --ce-border:        #cccccc;
+  --ce-border:        #ccc;
   --ce-border-soft:   #dedede;
-  --ce-border-strong: #aaaaaa;
+  --ce-border-strong: #aaa;
 
-  --ce-text:         #111111;
-  --ce-muted:        #555555;
-  --ce-dim:          #888888;
+  --ce-text:         #111;
+  --ce-muted:        #555;
+  --ce-dim:          #888;
   --ce-text-inverse: #fafafa;
 
-  --ce-color-green:  #00cc66;
-  --ce-color-red:    #ff3366;
-  --ce-color-amber:  #ffcc00;
-  --ce-color-blue:   #3355ff;
-  --ce-color-purple: #cc33ff;
-  --ce-color-cyan:   #00ddee;
+  --ce-color-green:  #0c6;
+  --ce-color-red:    #f36;
+  --ce-color-amber:  #fc0;
+  --ce-color-blue:   #35f;
+  --ce-color-purple: #c3f;
+  --ce-color-cyan:   #0de;
 
   --ce-color-green-bg:  rgba(0,   204, 102, 0.13);
   --ce-color-red-bg:    rgba(255,  51, 102, 0.13);
@@ -543,7 +543,7 @@ html[data-ce-theme="memphis"] {
   --ce-shadow:    4px 4px 0 rgba(204,  51, 255, 0.20);
   --ce-shadow-lg: 6px 6px 0 rgba(255,  51, 102, 0.20);
 
-  --ce-focus-ring: 0 0 0 3px #3355ff;
+  --ce-focus-ring: 0 0 0 3px #35f;
 }
 
 /* ---------- Gruvbox — Terminal Artisan (dark) ---------- */

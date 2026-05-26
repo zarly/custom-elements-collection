@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-clock",
   "name": "Clock",
   "className": "CeClock",
@@ -7,7 +7,7 @@
   "description": "Live clock with absolute, relative ('5 minutes ago'), or combined display. Time-zone aware via the IANA `tz` attribute and Intl.DateTimeFormat; relative-time uses Intl.RelativeTimeFormat seeded from the `since` ISO timestamp. The internal interval can be disabled by setting tick-ms to 0 for snapshot-style use.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "tz",
@@ -109,11 +109,30 @@
   "dependents": [],
   "dependencies": [],
   "related": [],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-relative-time",
+      "scope": "relative-time-display",
+      "when": "format=\"relative\" with a `since` ISO timestamp"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Dashboard",
-    "dashboard",
-    "live"
-  ]
+    "dashboard"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "reads Date.now() on connect and on every setInterval tick (tick-ms cadence); innerHTML reflects wall-clock time so it differs across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

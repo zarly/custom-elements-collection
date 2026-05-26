@@ -209,7 +209,7 @@ describe("buildRegistry — end-to-end", () => {
       expect(props.variant?.type).toBe("string");
       expect(props.variant?.enum).toContain("primary");
       expect(props.variant?.enum).toContain("destructive");
-      expect(props.size?.enum).toEqual(["sm", "md", "lg"]);
+      expect(props.size?.enum).toEqual(["sm", "md", "lg", "icon"]);
       expect(props.disabled?.type).toBe("boolean");
     } finally {
       await fs.rm(dist, { recursive: true, force: true });

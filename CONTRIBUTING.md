@@ -53,7 +53,7 @@ Depth lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Consumer-side pat
 | `pnpm validate-meta`   | Runs `scripts/validate-meta.ts` — every component must have a sibling `*.meta.json` that passes the schema. |
 | `pnpm gen-exports`     | Regenerates `src/index.ts`, `src/auto.ts`, `src/entries/*`, `src/manifest.ts`, and `package.json` exports. Runs automatically as `prebuild`. |
 | `pnpm gen-registry`    | Regenerates the LLM-tool-use-shaped registry under `dist/registry*.json`. Runs automatically inside `pnpm build` via the `copyRegistry()` Vite plugin (see [ADR-007](docs/adr/adr-007-component-registry.md)). |
-| `pnpm gen-skill`       | Regenerates the catalog block in `skill/SKILL.md` and the full `skill/references/index.md` from the meta files. |
+| `pnpm gen-skill`       | Regenerates `skills/cec-consumer/references/catalog.md` and `skills/cec-consumer/references/index.md` from the meta files. |
 | `pnpm gen-skill:check` | Drift check used by `pnpm check` — fails when the skill is out of sync with the meta files.                 |
 | `pnpm build`           | Vite library build + emits `.d.ts` into `dist/`.                                                            |
 | `pnpm check`           | typecheck + validate-meta + gen-skill:check + test + build. **Must pass before you open a PR.**             |
@@ -231,44 +231,34 @@ CDRs are the **system-wide design conventions** that implement ADR-009 at the da
 - [CDR-007 — Sensible defaults; zero-attribute usage works for the common case](docs/cdr/cdr-007-sensible-defaults.md)
 - [CDR-008 — Additive changes only; deprecate via stability + ADR](docs/cdr/cdr-008-additive-changes-only.md)
 
-## 10. Keeping the AI skill up to date
+## 10. Keeping the AI skills up to date
 
-The file [`skill/SKILL.md`](skill/SKILL.md) is a machine-readable reference used by AI coding assistants. It contains the full component API surface: props, slots, events, CSS tokens, and composition examples. It **must stay in sync with the source**.
+The repo ships five audience-specific skills under [`skills/`](skills/) — `cec-consumer`, `cec-component-author`, `cec-core-maintenance`, `cec-theming`, `cec-publishing` — plus auto-generated catalog data the skills read from.
 
-**When to update it:**
+**Auto-generated — never hand-edit:**
 
-| Change | Required update |
+| File | Source of truth |
 | --- | --- |
-| Add a new component | Add a new `#### <ce-tag>` section with all props, slots, events, and a usage example |
-| Delete a component | Remove its section entirely |
-| Add / remove / rename a prop | Update the prop table in the component's section |
-| Add / remove a slot | Update the Slots table |
-| Add / remove an event | Update the Events table |
-| Change a prop's type or default | Update the table row |
-| Add a new design token (`--ce-*`) | Add it to the relevant token table |
-| Remove or rename a token | Remove / rename in the token tables |
+| `skills/cec-consumer/references/catalog.md` | every `*.meta.json` — written by `pnpm gen-skill` |
+| `skills/cec-consumer/references/index.md` | every `*.meta.json` — written by `pnpm gen-skill` |
 
-**How to update:**
+The `pnpm gen-skill:check` gate in `pnpm check` fails if either file drifted. Run `pnpm gen-skill` after any meta edit; commit the regenerated outputs alongside the meta + source change.
 
-Edit `skill/SKILL.md` directly. The format is plain Markdown — no build step needed. Keep the structure consistent with existing sections:
+**Hand-authored — edit when the relevant surface changes:**
 
-```
-#### `<ce-tag-name>`
+| File | Update when… |
+| --- | --- |
+| `skills/cec-consumer/SKILL.md` | install / theming / picking guidance changes; new common pitfall surfaces |
+| `skills/cec-consumer/references/picking.md` | a new "which tag for X?" decision case appears |
+| `skills/cec-consumer/references/recipes.md` | adding a canonical composition pattern |
+| `skills/cec-consumer/references/setup.md` | bundler / framework integration changes; SSR caveat appears |
+| `skills/cec-theming/SKILL.md` | theming workflow changes |
+| `skills/cec-theming/references/tokens.md` | adding / removing / renaming a `--ce-*` token or shipping a new theme bundle |
+| `skills/cec-component-author/SKILL.md` | CDR pre-flight or authoring philosophy changes |
+| `skills/cec-core-maintenance/SKILL.md` | schema / generator / build-pipeline conventions change |
+| `skills/cec-publishing/SKILL.md` | semver discipline or release flow changes |
 
-One-line description.
-
-| Prop | Type | Default | Notes |
-|---|---|---|---|
-| `name` | `type` | `default` | … |
-
-**Slots:** …
-
-**Events:** …
-
-Usage example (code block)
-```
-
-Include the `skill/SKILL.md` change in the **same commit** as your component change. A PR that adds/modifies a component but does not update the skill will be flagged in review.
+Per-component API (props, events, slots, CSS variables) lives in the `*.meta.json` next to each source file. That is the canonical surface; the skills point at it, never duplicate it. Include the hand-authored skill update in the same commit as the change that motivates it; a PR that adds a new theme bundle without updating `skills/cec-theming/references/tokens.md` will be flagged.
 
 ---
 

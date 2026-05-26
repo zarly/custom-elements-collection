@@ -59,6 +59,7 @@ export class CeInput extends CecElement {
       color: var(--ce-muted);
       font-size: var(--ce-text-sm);
     }
+    .prefix[hidden], .suffix[hidden] { display: none; }
     .help { font-size: var(--ce-text-xs); color: var(--ce-muted); }
     .err  { font-size: var(--ce-text-xs); color: var(--ce-color-red); }
     :host([invalid]) .field {
@@ -87,6 +88,18 @@ export class CeInput extends CecElement {
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   @state() private _id = `ci${Math.random().toString(36).slice(2, 8)}`;
+  @state() private _hasPrefix = false;
+  @state() private _hasSuffix = false;
+
+  #onPrefixSlotChange = (e: Event): void => {
+    const slot = e.target as HTMLSlotElement;
+    this._hasPrefix = slot.assignedNodes({ flatten: true }).length > 0;
+  };
+
+  #onSuffixSlotChange = (e: Event): void => {
+    const slot = e.target as HTMLSlotElement;
+    this._hasSuffix = slot.assignedNodes({ flatten: true }).length > 0;
+  };
 
   #onInput(e: InputEvent): void {
     this.value = (e.target as HTMLInputElement).value;
@@ -118,7 +131,9 @@ export class CeInput extends CecElement {
           ? html`<label for=${this._id}>${this.label}${this.required ? html`<span aria-hidden="true"> *</span>` : ""}</label>`
           : ""}
         <div class="field">
-          <span class="prefix"><slot name="prefix"></slot></span>
+          <span class="prefix" ?hidden=${!this._hasPrefix}>
+            <slot name="prefix" @slotchange=${this.#onPrefixSlotChange}></slot>
+          </span>
           <input
             id=${this._id}
             type=${this.type}
@@ -133,7 +148,9 @@ export class CeInput extends CecElement {
             @input=${this.#onInput}
             @change=${this.#onChange}
           />
-          <span class="suffix"><slot name="suffix"></slot></span>
+          <span class="suffix" ?hidden=${!this._hasSuffix}>
+            <slot name="suffix" @slotchange=${this.#onSuffixSlotChange}></slot>
+          </span>
         </div>
         ${showErr
           ? html`<div id=${this._id + "-err"} class="err">${this.error}</div>`

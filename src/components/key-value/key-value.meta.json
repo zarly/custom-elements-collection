@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-key-value",
   "name": "Key Value",
   "className": "CeKeyValue",
@@ -7,7 +7,7 @@
   "description": "Two authoring modes. Mode A (dt/dd): wraps slotted `<dt>/<dd>` pairs in a CSS-grid `<dl>` so keys align in a column — supports 1-3 column-pairs side-by-side. Mode B (ce-kv): when direct children include `<ce-kv>` elements, stacks them in a flex column — values in each row accept any HTML content per CDR-002. If any `<ce-kv>` children are present Mode B is used; otherwise Mode A.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "columns",
@@ -30,7 +30,8 @@
   "slots": [
     {
       "name": "",
-      "description": "Mode A: alternating `<dt>`/`<dd>` pairs. Mode B: `<ce-kv>` children — detected automatically; values in each `<ce-kv>` accept any HTML content including `<a>`, `<time>`, `<ce-chip>`, or typed renderers (CDR-002)."
+      "description": "Mode A: alternating `<dt>`/`<dd>` pairs. Mode B: `<ce-kv>` children — detected automatically; values in each `<ce-kv>` accept any HTML content including `<a>`, `<time>`, `<ce-chip>`, or typed renderers (CDR-002).",
+      "acceptShapes": ["child-tag:ce-kv", "semantic-html:dt,dd"]
     }
   ],
   "cssVariables": [
@@ -81,11 +82,26 @@
     "ce-table",
     "ce-kv"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-kv"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Content",
     "metadata",
     "layout"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

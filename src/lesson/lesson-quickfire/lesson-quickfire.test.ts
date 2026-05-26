@@ -76,16 +76,13 @@ describe("<lesson-quickfire>", () => {
     el.remove();
   });
 
-  it("falls back + warns when the rounds attribute is malformed JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back when the rounds attribute is malformed JSON", async () => {
     const el = document.createElement("lesson-quickfire") as LessonQuickfire;
     el.setAttribute("rounds", "not json");
     el.timer = 99;
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.rounds).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-feedback-export",
   "name": "Feedback export",
   "className": "CeFeedbackExport",
@@ -7,7 +7,7 @@
   "description": "Renders one button per requested format and dispatches a bubbling ce-feedback-export-request event the ancestor ce-feedback-sink handles. Listens to ce-feedback-persisted and ce-feedback-failed events from the sink to flash a transient status line (~1500ms) inside its UI. Layout can be row (default), menu (column), or floating (sticky to viewport bottom).",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "subject",
@@ -199,16 +199,31 @@
   "related": [
     "ce-feedback-summary"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-feedback-sink"
+  ],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Feedback",
     "feedback",
-    "export",
     "action",
     "widget"
   ],
   "a11y": {
     "notes": "Each button gets aria-label matching its action. Status line uses role=status + aria-live=polite for screen-reader announcement of recent persistence."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

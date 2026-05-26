@@ -23,6 +23,28 @@ export interface BarRow {
 
 const GRID_STOPS = [0, 0.25, 0.5, 0.75, 1] as const;
 
+function slottedText(el: HTMLElement, slot: string): string {
+  const node = el.querySelector<HTMLElement>(`[slot='${slot}']`);
+  return node?.textContent?.trim() ?? "";
+}
+
+function rowFromBarRowElement(
+  el: HTMLElement & { value?: number; color?: string },
+  fallbackColor: string,
+): BarRow {
+  const value = Number(el.getAttribute("value") ?? el.value ?? 0);
+  const color = el.getAttribute("color") ?? el.color ?? fallbackColor;
+  const labelFromSlot = slottedText(el, "label");
+  const label = labelFromSlot || (el.textContent?.trim() ?? "");
+  const meta = slottedText(el, "meta") || undefined;
+  return {
+    label,
+    value,
+    color: color || undefined,
+    meta,
+  };
+}
+
 /**
  * Build a BarRow[] from `<ce-bar-row>` slot-children of the given parent.
  * Non-ce-bar-row children are gracefully ignored per CDR-006.
@@ -31,21 +53,7 @@ function rowsFromSlotChildren(parent: HTMLElement, fallbackColor: string): BarRo
   const result: BarRow[] = [];
   for (const child of Array.from(parent.children)) {
     if (child.tagName.toLowerCase() !== "ce-bar-row") continue;
-    const el = child as HTMLElement & { value?: number; color?: string };
-    const value = Number(el.getAttribute("value") ?? el.value ?? 0);
-    const color = el.getAttribute("color") ?? el.color ?? fallbackColor;
-    // Read label slot: first element with slot="label", else text content of label slot
-    const labelEl = el.querySelector<HTMLElement>("[slot='label']");
-    const label = labelEl ? (labelEl.textContent?.trim() ?? "") : el.textContent?.trim() ?? "";
-    // Read meta slot
-    const metaEl = el.querySelector<HTMLElement>("[slot='meta']");
-    const meta = metaEl ? (metaEl.textContent?.trim() ?? "") : undefined;
-    result.push({
-      label,
-      value,
-      color: color || undefined,
-      meta: meta || undefined,
-    });
+    result.push(rowFromBarRowElement(child as HTMLElement & { value?: number; color?: string }, fallbackColor));
   }
   return result;
 }
@@ -78,14 +86,14 @@ export class CeBarChart extends CecElement {
       --ce-bar-grid-fg: var(--ce-muted);
     }
     :host([compact]) { --ce-bar-track-h: 12px; }
-    :host([sparkline]) { --ce-bar-track-h: 10px; }
+    /* :host([sparkline]) track-h + layout live together in the sparkline-mode block below. */
 
     .ce-rows {
       list-style: none;
       margin: 0;
       padding: 0;
       /* Shared grid so every row's label column has the same width — bars
-         line up at the same x regardless of label length. */
+       line up at the same x regardless of label length. */
       display: grid;
       grid-template-columns: var(--ce-bar-label-width, auto) 1fr auto;
       column-gap: var(--ce-space-3);
@@ -106,7 +114,7 @@ export class CeBarChart extends CecElement {
       background: var(--ce-bar-hover-tint);
     }
     .ce-row:focus-visible {
-      box-shadow: 0 0 0 2px var(--ce-color-blue, #4ea3ff);
+      box-shadow: 0 0 0 2px var(--ce-color-blue);
       border-radius: var(--ce-bar-radius);
     }
 
@@ -183,7 +191,7 @@ export class CeBarChart extends CecElement {
     }
 
     /* gridlines + ticks: rendered as a separate strip after the rows so the
-       layout column geometry matches the .ce-row track column. */
+     layout column geometry matches the .ce-row track column. */
     .ce-grid {
       display: grid;
       grid-template-columns: var(--ce-bar-label-width, auto) 1fr auto;
@@ -219,6 +227,7 @@ export class CeBarChart extends CecElement {
 
     /* sparkline mode collapses the grid down to a single bar strip */
     :host([sparkline]) {
+      --ce-bar-track-h: 10px;
       display: inline-block;
       vertical-align: middle;
     }

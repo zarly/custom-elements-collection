@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-decision-tree",
   "name": "DecisionTree",
   "className": "CeDecisionTree",
@@ -8,7 +8,7 @@
   "limitations": "Single-level only. Branches do not nest. For multi-level decision flows use a chained sequence of `<ce-decision-tree>` elements (one per level) or plain `<ul>/<li>`.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "question",
@@ -139,11 +139,24 @@
     "ce-flow",
     "ce-matrix"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Comparison & narrative",
     "decision",
-    "branching"
-  ]
+    "branch"
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

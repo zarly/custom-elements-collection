@@ -54,6 +54,7 @@ export class CeToggle extends CecElement {
     }
     :host([checked]) .knob {
       transform: translateX(16px);
+      /* stylelint-disable-next-line color-no-hex -- on-accent knob; always contrasts against saturated blue track */
       background: #fff;
     }
     :host(:focus-visible) .track {

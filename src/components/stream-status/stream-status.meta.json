@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-stream-status",
   "name": "Stream status",
   "className": "CeStreamStatus",
@@ -7,7 +7,7 @@
   "description": "Compact inline pill that communicates LLM streaming connection state via a color-coded background, border, and animated dot. Optionally renders a formatted token count and a tokens-per-second readout alongside the state label. Sets role=status + aria-live=polite so assistive technology announces state changes.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "state",
@@ -209,15 +209,33 @@
     "ce-thinking",
     "ce-cursor"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-spinner",
+      "scope": "loading"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Chat surfaces",
     "status",
-    "stream"
+    "streaming"
   ],
   "a11y": {
     "role": "status",
     "notes": "On connectedCallback the host receives role='status' and aria-live='polite' (unless already set by the page). This causes assistive technology to announce state transitions politely without interrupting the current reading flow."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

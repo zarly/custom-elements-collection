@@ -1,0 +1,28 @@
+<!-- @example 16:9 hero image (default ratio, cover crop) -->
+<ce-frame ratio="16:9">
+  <img src="https://picsum.photos/seed/hero/800/450" alt="Hero landscape">
+</ce-frame>
+
+<!-- @example 1:1 logo with letterbox (contain keeps full image visible) -->
+<ce-frame ratio="1:1" fit="contain">
+  <img src="https://picsum.photos/seed/logo/200/200" alt="Square logo">
+</ce-frame>
+
+<!-- @example 3:4 portrait video (cover fills tall frame) -->
+<ce-frame ratio="3:4">
+  <video src="portrait.mp4" muted autoplay loop playsinline></video>
+</ce-frame>
+
+<!-- @example Golden ratio — cinematic banner image -->
+<ce-frame ratio="golden">
+  <img src="https://picsum.photos/seed/cinema/1618/1000" alt="Cinematic banner">
+</ce-frame>
+
+<!-- @example 21:9 ultra-wide iframe embed -->
+<ce-frame ratio="21:9">
+  <iframe
+    src="https://www.openstreetmap.org/export/embed.html?bbox=37.4,55.6,37.9,55.9&layer=mapnik"
+    title="Map embed"
+    loading="lazy"
+  ></iframe>
+</ce-frame>

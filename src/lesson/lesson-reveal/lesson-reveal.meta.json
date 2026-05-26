@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-reveal",
   "name": "LessonReveal",
   "className": "LessonReveal",
@@ -7,7 +7,7 @@
   "description": "Single-card flashcard widget. Displays front-label + front text with a 'Click to reveal' hint. On click, flips to show back-label (green) + back text + reset hint. Fires lesson-reveal-flip on each flip. reset() returns to front state. Entire card is clickable.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "front",
@@ -150,11 +150,30 @@
     "lesson-gap",
     "lesson-myth"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "lesson-hint",
+      "scope": "progressive-disclosure",
+      "when": "single-step front/back reveal can map to a one-entry hints[] sequence"
+    }
+  ],
   "category": "lesson",
   "tier": "widget",
   "tags": [
     "Education",
-    "flashcard",
-    "reveal"
-  ]
+    "exercise"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

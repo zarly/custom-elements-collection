@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-tree",
+  "name": "Tree",
+  "className": "CeTree",
+  "goal": "Render a recursive expand/collapse outline for file systems, org charts, taxonomies, JSON inspection, sitemaps, and comment threads.",
+  "description": "Generic interactive tree with keyboard navigation (ARIA tree pattern) and roving tabindex. Accepts either slot-children (<ce-tree-node> recursively) or a JSON data array. The sibling element <ce-tree-node> provides the per-node rendering with chevron, label slot, and nested children group.",
+  "limitations": "Animation is not included in v1; expand/collapse is instant. The :host-context CSS for connector lines requires that ce-tree and ce-tree-node share the same shadow boundary chain.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "data",
+      "type": "TreeNodeData[]",
+      "required": false,
+      "default": "[]",
+      "attribute": "data",
+      "reflect": false,
+      "description": "JSON array of {label, children?:[…]} objects. When non-empty the tree renders virtual nodes in shadow DOM; slot children are ignored."
+    },
+    {
+      "name": "defaultExpanded",
+      "type": "\"all\"|\"root\"|\"none\"|\"depth-1\"|\"depth-2\"|\"depth-3\"",
+      "required": false,
+      "default": "\"none\"",
+      "attribute": "default-expanded",
+      "reflect": true,
+      "description": "Startup expansion directive applied once at firstUpdated. Values: all=every node open, root=direct children of tree open, none=all collapsed, depth-1/2/3=nodes at that depth or shallower expanded."
+    },
+    {
+      "name": "lines",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Renders vertical connector lines between a parent node and its children."
+    },
+    {
+      "name": "dense",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Tighter row height and smaller font size for compact contexts."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-tree-node-toggle",
+      "detail": "{ expanded: boolean, node: CeTreeNode }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires whenever a node's expanded state changes (click or keyboard). Bubbles from the node through the tree."
+    }
+  ],
+  "methods": [
+    {
+      "name": "setAriaPosition (on CeTreeNode)",
+      "signature": "setAriaPosition(level: number, setsize: number, posinset: number, hasChildren: boolean): void",
+      "description": "Called by the parent ce-tree to set aria-level, aria-setsize, aria-posinset, and aria-expanded on the node. Not intended for direct consumer use."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Nested ce-tree-node elements (slot mode). Ignored when the data attribute is non-empty.",
+      "acceptTags": [
+        "ce-tree-node"
+      ]
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-font-sans",
+      "kind": "font",
+      "source": "token",
+      "description": "Tree font family."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Node label text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Chevron icon color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default node font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Dense mode font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Node row vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between chevron and label."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Children indent width."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Row and chevron border radius."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Row hover and focus background."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus-visible ring on the focused node row."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Connector line color when lines attribute is set."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "subTags": [
+    "ce-tree-node"
+  ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-tree-node"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "related": [
+    "ce-details",
+    "ce-conversation-tree",
+    "ce-decision-tree",
+    "ce-accordion"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Content",
+    "navigation"
+  ],
+  "a11y": {
+    "role": "tree",
+    "notes": "Root has role=tree. Each ce-tree-node has role=treeitem, aria-expanded (parent nodes only), aria-level (1-indexed depth), aria-setsize (sibling count), aria-posinset (1-indexed position). Roving tabindex: only the focused node holds tabindex=0; all others hold tabindex=-1. Keyboard: ArrowDown/Up traverse visible nodes, ArrowRight expands or descends, ArrowLeft collapses or ascends to parent, Home/End jump to first/last visible node."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  },
+  "additional": {
+    "subTag": "ce-tree-node",
+    "subTagClassName": "CeTreeNode",
+    "subTagDescription": "Recursive tree item. Attributes: label (string), expanded (boolean, reflected), disabled (boolean, reflected). Slots: label (custom label markup), default (nested ce-tree-node children). Emits ce-tree-node-toggle on expand/collapse."
+  }
+}

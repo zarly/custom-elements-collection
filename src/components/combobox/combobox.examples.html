@@ -1,0 +1,71 @@
+<!-- @example Country picker — slotted ce-option children (CDR-005 slot mode) -->
+<ce-combobox name="country" placeholder="Select country">
+  <ce-option value="us" label="United States"></ce-option>
+  <ce-option value="gb" label="United Kingdom"></ce-option>
+  <ce-option value="de" label="Germany"></ce-option>
+  <ce-option value="fr" label="France"></ce-option>
+  <ce-option value="jp" label="Japan"></ce-option>
+  <ce-option value="br" label="Brazil"></ce-option>
+  <ce-option value="in" label="India"></ce-option>
+  <ce-option value="au" label="Australia"></ce-option>
+</ce-combobox>
+
+<!-- @example Currency picker — data array attribute (CDR-005 data mode) -->
+<ce-combobox
+  name="currency"
+  placeholder="Select currency"
+  data='[
+    {"value":"USD","label":"US Dollar","group":"Americas"},
+    {"value":"CAD","label":"Canadian Dollar","group":"Americas"},
+    {"value":"BRL","label":"Brazilian Real","group":"Americas"},
+    {"value":"EUR","label":"Euro","group":"Europe"},
+    {"value":"GBP","label":"British Pound","group":"Europe"},
+    {"value":"CHF","label":"Swiss Franc","group":"Europe"},
+    {"value":"JPY","label":"Japanese Yen","group":"Asia"},
+    {"value":"CNY","label":"Chinese Yuan","group":"Asia"},
+    {"value":"INR","label":"Indian Rupee","group":"Asia"}
+  ]'
+></ce-combobox>
+
+<!-- @example Allow-custom topic selector — type or pick -->
+<ce-combobox name="topic" allow-custom placeholder="Pick or type a topic">
+  <ce-option value="bug" label="Bug report"></ce-option>
+  <ce-option value="feat" label="Feature request"></ce-option>
+  <ce-option value="docs" label="Documentation"></ce-option>
+  <ce-option value="perf" label="Performance"></ce-option>
+  <ce-option value="security" label="Security"></ce-option>
+</ce-combobox>
+
+<!-- @example Assignee picker — pre-selected value -->
+<ce-combobox
+  name="assignee"
+  value="alice"
+  placeholder="Assign to…"
+  data='[
+    {"value":"alice","label":"Alice Chen"},
+    {"value":"bob","label":"Bob Martinez"},
+    {"value":"carol","label":"Carol Singh"},
+    {"value":"dave","label":"Dave Kim"},
+    {"value":"eve","label":"Eve Nakamura"}
+  ]'
+></ce-combobox>
+
+<!-- @example Disabled combobox -->
+<ce-combobox
+  name="locale"
+  value="en-US"
+  disabled
+  data='[
+    {"value":"en-US","label":"English (US)"},
+    {"value":"en-GB","label":"English (UK)"},
+    {"value":"de-DE","label":"German (Germany)"},
+    {"value":"fr-FR","label":"French (France)"}
+  ]'
+></ce-combobox>
+
+<!-- @example Loading state -->
+<ce-combobox
+  name="user"
+  loading
+  placeholder="Loading users…"
+></ce-combobox>

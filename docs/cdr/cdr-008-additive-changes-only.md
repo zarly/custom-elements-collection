@@ -41,7 +41,7 @@ Breaking changes silently break the LLM consumer in ways that are invisible unti
 ## Goal / Definition of success
 
 - Zero in-place breaking changes between minor versions.
-- Every deprecation has a clear migration recipe in `skill/SKILL.md` and the component's meta description.
+- Every deprecation has a clear migration recipe in `skills/cec-consumer/SKILL.md` and the component's meta description.
 - Old LLM-emitted markup keeps rendering correctly for at least one quarter after a deprecation lands.
 
 ## When to apply
@@ -75,7 +75,7 @@ Breaking changes silently break the LLM consumer in ways that are invisible unti
 ```
 
 ```html
-<!-- Migration recipe in skill/SKILL.md and meta description -->
+<!-- Migration recipe in skills/cec-consumer/SKILL.md and meta description -->
 <!-- Old (still works): -->
 <ce-stat-group columns="3"><ce-kpi/><ce-kpi/></ce-stat-group>
 

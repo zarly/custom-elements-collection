@@ -10,11 +10,11 @@ custom-elements-collection/
 │   ├── core/           Lit base class (CecElement) + registration helper (defineOnce)
 │   ├── meta/           Zod schema + TS interfaces for *.meta.json (ADR-005)
 │   ├── tokens/         Design tokens as plain CSS (tokens.css + 10 theme bundles)
-│   ├── components/     113 ce-* UI components (110 published + 3 internal layout) —
+│   ├── components/     133 ce-* UI components (129 published + 4 internal layout) —
 │   │                   one subfolder per tag with <stem>.{ts, test.ts, meta.json,
 │   │                   examples.html, optional CONCEPT.md}
-│   ├── lesson/         16 lesson-* widgets — same per-tag subfolder layout
-│   ├── entries/        GENERATED — 129 per-tag side-effect wrappers
+│   ├── lesson/         18 lesson-* widgets — same per-tag subfolder layout
+│   ├── entries/        GENERATED — 147 per-tag side-effect wrappers
 │   ├── index.ts        GENERATED — named exports of every component class
 │   ├── auto.ts         GENERATED — registers every tag at once
 │   ├── manifest.ts     GENERATED — machine-readable catalog (COMPONENTS) + loadOnDemand()
@@ -22,14 +22,20 @@ custom-elements-collection/
 ├── scripts/
 │   ├── validate-meta.ts            Zod-validate every *.meta.json
 │   ├── generate-exports.ts         Regenerates index/auto/entries/manifest + package.json exports
-│   ├── generate-skill.ts           Regenerates skill catalog + references/index.md
+│   ├── generate-skill.ts           Regenerates skills/cec-consumer/references/{catalog,index}.md
+│   ├── components.mjs              Zero-deps CLI over per-component meta (filter / project / format)
 │   ├── build-publish-manifest.ts   Apply-and-restore swap for `prepublishOnly`
 │   └── bundle-stats.ts             Per-tag gzip size record (writes to internal/)
 ├── dist/                      Build output (JS + .d.ts + CSS + meta JSON)
 │   └── meta/                  Per-component <tag>.json + index.json bundle
 ├── docs/                      Public documentation (this folder, including ADRs)
 ├── demo/                      Demo site — vanilla JS catalog + feedback showcase
-├── skill/                     Agent-facing reference (SKILL.md + references/ + scripts/)
+├── skills/                    Agent-facing reference — 5 audience skills
+│   ├── cec-consumer/             SKILL.md + references/{catalog,index,picking,recipes,setup}.md
+│   ├── cec-component-author/     SKILL.md (authoring philosophy + CDR pre-flight)
+│   ├── cec-core-maintenance/     SKILL.md (schema / generator / build plumbing)
+│   ├── cec-theming/              SKILL.md + references/tokens.md
+│   └── cec-publishing/           SKILL.md (release flow + semver discipline)
 └── package.json               Single-package npm manifest
 ```
 
@@ -152,7 +158,7 @@ pnpm build   →   pnpm gen-exports          (prebuild hook)
 
 Three entry styles supported simultaneously:
 
-1. **Auto-register everything.** One side-effect import registers every shipped tag (126 published + 3 internal at the time of writing):
+1. **Auto-register everything.** One side-effect import registers every shipped tag (147 published + 4 internal at the time of writing):
    ```ts
    import "custom-elements-collection/auto";
    ```

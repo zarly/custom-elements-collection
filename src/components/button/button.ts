@@ -37,7 +37,7 @@ export class CeButton extends CecElement {
       border-radius: var(--ce-radius-sm);
       border: 1px solid transparent;
       background: var(--ce-color-blue);
-      color: #fff;
+      color: #fff; /* stylelint-disable-line color-no-hex -- on-accent text; --ce-text-inverse flips per theme and would lose contrast on saturated buttons */
       cursor: pointer;
       transition: background var(--ce-transition), border-color var(--ce-transition),
         box-shadow var(--ce-transition), opacity var(--ce-transition);
@@ -70,11 +70,18 @@ export class CeButton extends CecElement {
     }
     :host([variant="destructive"]) button {
       background: var(--ce-color-red);
+      /* stylelint-disable-next-line color-no-hex -- on-accent text; saturated red always needs light contrast */
       color: #fff;
     }
 
     :host([size="sm"]) button { padding: 4px 10px; font-size: var(--ce-text-xs); }
     :host([size="lg"]) button { padding: 12px 20px; font-size: var(--ce-text-md); }
+    /* Square icon button — symmetric padding + 1:1 aspect ratio. Sized for a
+       16×16 glyph; consumers pass the icon via the default slot or icon slot. */
+    :host([size="icon"]) button {
+      padding: var(--ce-inset-md);
+      aspect-ratio: 1;
+    }
 
     .spin {
       width: 14px;
@@ -106,7 +113,7 @@ export class CeButton extends CecElement {
   variant: "primary" | "secondary" | "ghost" | "destructive" = "primary";
 
   @property({ type: String, reflect: true })
-  size: "sm" | "md" | "lg" = "md";
+  size: "sm" | "md" | "lg" | "icon" = "md";
 
   @property({ type: Boolean, reflect: true })
   disabled = false;

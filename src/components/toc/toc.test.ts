@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeToc } from "./toc.js";
 
@@ -85,15 +85,12 @@ describe("<ce-toc>", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when entries attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when entries attribute is invalid JSON", async () => {
     const el = document.createElement("ce-toc") as CeToc;
     el.setAttribute("entries", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.entries).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });

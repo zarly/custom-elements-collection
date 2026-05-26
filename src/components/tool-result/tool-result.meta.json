@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-tool-result",
   "name": "Tool result",
   "className": "CeToolResult",
@@ -7,7 +7,7 @@
   "description": "Pure-presentation brick for showing an agent tool return value without the collapsible call header. A coloured left border keys off status: green for ok, red for error, neutral border for empty. When name or duration-ms are provided, a compact monospace header row appears above the content. The default slot holds the result payload; when status='error' the payload area is replaced by the named 'error' slot. A meta slot adds an optional footer row (e.g. a cached/streamed chip). When status='empty' and the default slot has no assigned content, a muted '(no result)' placeholder renders. The compact boolean tightens padding for inline-trace contexts.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -143,14 +143,27 @@
   "related": [
     "ce-tool-call"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Chat surfaces",
-    "tool",
-    "agent"
+    "tool-use",
+    "agentic"
   ],
   "a11y": {
     "notes": "Block is pure presentation. The status is conveyed through the left-border accent color and optionally through the name text. Consumers needing programmatic status announcements should manage aria-live externally."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

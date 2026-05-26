@@ -8,7 +8,9 @@ import type { PropertyDeclaration } from "lit";
  * Behaviour:
  *   - Attribute absent / empty → `fallback` is used.
  *   - Attribute present & parseable JSON → parsed value.
- *   - Attribute present & malformed JSON → `fallback` + `console.warn`.
+ *   - Attribute present & malformed JSON → `fallback` (ADR-013: silent;
+ *     consumers can surface the error via `data-ce-error="json-parse"` on
+ *     their own host element if they need to flag it).
  *
  * JS assignment (`el.rows = [...]`) continues to work exactly as before.
  *
@@ -38,11 +40,7 @@ export function jsonProp<T>(
         if (value == null || value === "") return fallback;
         try {
           return JSON.parse(value) as T;
-        } catch (err) {
-          console.warn(
-            "[custom-elements-collection] could not parse JSON attribute; using fallback.",
-            { raw: value, error: err },
-          );
+        } catch {
           return fallback;
         }
       },

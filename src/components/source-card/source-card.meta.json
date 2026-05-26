@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-source-card",
   "name": "Source card",
   "className": "CeSourceCard",
@@ -7,7 +7,7 @@
   "description": "Panel companion to ce-citation. While ce-citation lives inline inside prose, ce-source-card is the list / sidebar artefact answering 'what did the model retrieve'. Wraps the title in <a target=_blank> when url is set, derives the site label from the URL host when site is omitted, and renders a relevance score normalising both 0..1 and 0..100 inputs to a percent display. Snippet text goes in the default slot; an optional [n] index threads into inline citations.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "url",
@@ -232,16 +232,25 @@
     "ce-card",
     "ce-file-card"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
-    "Chat surfaces",
-    "rag",
-    "source",
-    "card",
-    "citation"
+    "Chat surfaces"
   ],
   "a11y": {
     "notes": "When url is set the title becomes a focusable anchor opening in a new tab with rel=noreferrer noopener. The score pill carries aria-label='Relevance score'. The card itself is not interactive; structural only."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

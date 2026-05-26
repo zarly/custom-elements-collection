@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-feedback-sink",
   "name": "Feedback sink",
   "className": "CeFeedbackSink",
@@ -7,7 +7,7 @@
   "description": "Invisible (display: contents) wrapper that listens for ce-rating-change, ce-bookmark-change, ce-dismiss-change, ce-comment-change, ce-feedback-clear, and ce-feedback-export-request events bubbling through the subtree. Every change is normalized to a FeedbackEvent (schema, subject, item, label, action, value, ts) and pushed into a pending batch flushed per batch-ms. Five transports are supported: localstorage (default), http (with optional localstorage offline-fallback), file (showSaveFilePicker with anchor-download fallback), console, and custom (via the .transportImpl JS-only property). Dispatches ce-feedback-persisted and ce-feedback-failed after each flush, and ce-feedback-state with the freshly aggregated SubjectState. Hydrates from localStorage on connect when the local-storage transport is selected. Implements export-request actions for markdown (clipboard), json (anchor-download), submit (HTTP POST), and clear.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "subject",
@@ -163,17 +163,32 @@
     "ce-feedback-export",
     "ce-feedback-heatmap"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-feedback-bar"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Feedback",
     "feedback",
-    "sink",
     "wrapper",
     "widget"
   ],
   "a11y": {
     "notes": "Invisible host (display: contents) — contributes no layout and no ARIA. Accessibility responsibility lives with descendants."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "network, timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   },
   "additional": {
     "schemaVersion": "1"

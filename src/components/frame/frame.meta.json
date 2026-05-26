@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-frame",
+  "name": "Frame",
+  "className": "CeFrame",
+  "goal": "Lock any child media element to a fixed aspect ratio and crop or letterbox it to fill the frame.",
+  "description": "Locked aspect-ratio container that constrains img, video, iframe, canvas, and picture children. Supports six standard ratios (1:1, 4:3, 16:9, 21:9, 3:4, golden) and two fill modes (cover crops to fill; contain letterboxes to fit). Pure CSS — no JavaScript required.",
+  "limitations": "::slotted(img) only matches direct slot children; wrapping the img in another element prevents object-fit from reaching it. iframes do not honour object-fit and always fill 100%×100% regardless of the fit attribute — letterboxing iframes requires the iframe's own viewport settings.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "ratio",
+      "type": "\"1:1\" | \"4:3\" | \"16:9\" | \"21:9\" | \"3:4\" | \"golden\"",
+      "required": false,
+      "default": "\"16:9\"",
+      "reflect": true,
+      "description": "Aspect ratio of the frame. golden maps to 1.618:1."
+    },
+    {
+      "name": "fit",
+      "type": "\"cover\" | \"contain\"",
+      "required": false,
+      "default": "\"cover\"",
+      "reflect": true,
+      "description": "How img/video/picture fill the frame. cover crops to fill; contain letterboxes."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The media element to constrain: img, video, iframe, canvas, or picture."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Frame background color shown in letterbox bars or before media loads. Defaults to transparent when token is absent."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-image",
+    "ce-grid"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "media",
+    "container"
+  ],
+  "a11y": {
+    "notes": "ce-frame has no inherent ARIA role; it is a presentational container. Accessible names and roles belong on the slotted media element (alt text on img, track elements on video, title on iframe)."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

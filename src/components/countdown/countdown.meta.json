@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-countdown",
   "name": "Countdown",
   "className": "CeCountdown",
@@ -7,7 +7,7 @@
   "description": "Live countdown timer. Renders the remaining time as colon-separated segments (days, hours, minutes, seconds) sized to format: 'dhms' auto-trims a leading 0-day, 'hms' rolls days into hours, 'ms' rolls hours into minutes, and 's' renders a pure seconds count. Optional inline labels under each segment for marketing-style countdowns. Fires ce-countdown-end exactly once when the remaining time hits zero and stops its internal timer.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "target",
@@ -98,11 +98,25 @@
     "ce-relative-time",
     "ce-duration"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
     "time",
     "primitive"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-page",
+  "name": "Page",
+  "className": "CePage",
+  "goal": "Provide outer page chrome with header, main, nav rail, and footer areas via CSS grid template-areas.",
+  "description": "Layout primitive that wraps an entire page in a CSS grid with named areas: header (top), nav (sidebar rail, position depends on layout), main (default slot), and footer (bottom). Supports three layouts: stacked (single-column default), sidebar-left, and sidebar-right. Sidebar layouts collapse to stacked below 48rem. Sticky header and sticky footer are opt-in boolean flags. Rail width is configurable via the rail-width attribute.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "layout",
+      "type": "\"stacked\" | \"sidebar-left\" | \"sidebar-right\"",
+      "required": false,
+      "default": "\"stacked\"",
+      "reflect": true,
+      "description": "Page layout variant. stacked is single-column; sidebar-left puts the nav rail on the left; sidebar-right puts the nav rail on the right."
+    },
+    {
+      "name": "stickyHeader",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "sticky-header",
+      "reflect": true,
+      "description": "When set, the header area becomes position:sticky at top:0."
+    },
+    {
+      "name": "stickyFooter",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "sticky-footer",
+      "reflect": true,
+      "description": "When set, the footer area becomes position:sticky at bottom:0."
+    },
+    {
+      "name": "railWidth",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "attribute": "rail-width",
+      "reflect": true,
+      "description": "CSS length for the nav rail column width (e.g. '16rem', '260px'). Falls back to 16rem when unset."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "header",
+      "description": "Top chrome — spans full width in all layout variants."
+    },
+    {
+      "name": "nav",
+      "description": "Sidebar or rail content — placed left or right of main depending on layout."
+    },
+    {
+      "name": "",
+      "description": "Main page content area."
+    },
+    {
+      "name": "footer",
+      "description": "Bottom chrome — spans full width in all layout variants."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-page-collapse",
+      "kind": "size",
+      "source": "local",
+      "description": "Breakpoint at which sidebar layouts collapse to stacked. Documented for theme authors; the hardcoded CSS breakpoint is 48rem (CSS custom properties cannot be used in @media queries)."
+    },
+    {
+      "name": "--ce-page-rail-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Width of the nav/sidebar column. Set as an inline custom property when rail-width attribute is provided; fallback is 16rem."
+    },
+    {
+      "name": "--ce-page-header-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index for the header area wrapper. Default 10."
+    },
+    {
+      "name": "--ce-page-footer-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index for the footer area wrapper. Default 10."
+    },
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Page background (applied by consumer or theme to the host if desired)."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Page text color (applied by consumer or theme to the host if desired)."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-shell",
+    "ce-docs-layout"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "page"
+  ],
+  "a11y": {
+    "notes": "Uses semantic HTML landmark wrappers inside shadow DOM (div with grid-area). Consumer is expected to supply actual landmark elements (<header>, <nav>, <main>, <footer>) as slot content. This component does not impose landmark semantics on the slotted content."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

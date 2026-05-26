@@ -6,6 +6,137 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.7.0] — 2026-05-26
+
+This release ships the **Meta schema v2** opt-in cycle — backward-compatible
+during v0.7/v0.8 (both `schemaVersion: 1` and `2` validate), narrowing to v2
+at v0.9. All 151 components are now at v2 with a complete per-component
+manual review pass against ADR-015 (parent/child contracts, semantic role,
+content model, determinism). Each component also carries a sibling
+`<name>.conformance.json` receipt per ADR-016, populated with mechanically-
+derivable verdicts across the 16 ADRs, 15 CDRs, and 15 selected requirement
+IDs that are per-component meaningful.
+
+### Added — Per-component manual review for meta v2 (ADR-015)
+
+The codemod ran in v0.6 with safe defaults; v0.7 finishes the human-judgment
+pass split across 10 component groups (Layout & primitives, Chat surfaces,
+Metrics & charts, Feedback, Forms, Dashboard, Comparison & narrative,
+Content, Docs, Education). Outcomes:
+
+- **4 explicit `requiredParent` contracts:** `ce-bar-row → ce-bar-chart`,
+  `ce-check-item → ce-checklist`, `ce-heat-cell → ce-heat-row`,
+  `ce-heat-row → ce-heatmap`.
+- **`childPolicy: "constrained"` + `slots[].acceptTags`** on chart parents
+  (`ce-bar-chart`, `ce-heatmap`, `ce-heat-row`), checklist (`ce-checklist`),
+  radio-group (`ce-radio-group`), and `ce-feedback-bar`.
+- **Roles audit** — codemod default `"leaf"` corrected to `"transparent-wrapper"`
+  (14 components) and `"container"` (58 components). 79 components remain
+  true `"leaf"` atomic primitives.
+- **27 `interchangeableWith` pairs** declared one-side; symmetric closure
+  auto-computed in `dist/relations.json`.
+- **`contentModel: "inline"`** applied to inline-flow primitives (`ce-abbr`,
+  `ce-avatar`, `ce-badge`, `ce-chip`, `ce-citation`, `ce-bookmark`,
+  `ce-dismiss`, `ce-link`).
+- **`streamingLifecycle.finalizesAt: "flush"`** for chart parents that
+  re-balance when more children arrive (`ce-bar-chart`, `ce-heatmap`,
+  `ce-plot`, `ce-chart`, `ce-donut`).
+- Backlog of unresolved per-component questions captured in
+  `.meta-v2-review/FOLLOWUP-BACKLOG.md` (P0 schema decisions, P1 mechanical
+  follow-ups, P2 documentation suggestions).
+
+### Added — Conformance receipts populated (ADR-016)
+
+`scripts/seed-conformance.ts` expanded from a 12-key universal stub to a
+46-verdict per-component analyzer that reads each `meta.json`, sibling
+source, and examples. Verdict values per ADR-016: `true | false | string`
+(string = partial-pass with operator comment).
+
+- **Scope documentation:** `dist/conformance.json` now carries a top-level
+  `scope` block listing the 46 in-scope criterion IDs and the 115 deliberately-
+  omitted IDs (stack-level, needs-measurement, needs-external-tooling)
+  with reasons. Consumers can distinguish "absent = not in scope" from
+  "absent = unmeasured."
+- **Aggregator artifact:** `dist/conformance.json` covers all 151 components,
+  46 unique criteria, with `byKey.pass / fail / partial` buckets per
+  criterion.
+
+### Added — Meta schema v2 (ADR-015 + CDR-012/013/014/015)
+
+Backward-compatible expansion of `*.meta.json` with 15 new optional
+fields, four new auto-computed reverse-index fields in
+`dist/relations.json`, and a per-component sibling `<name>.conformance.json`
+audit file. Reviewed and accepted in studio jobs `0022-cec-meta-v2-initiatives`
+and `0023-cec-meta-v2-batch-2` on 2026-05-25.
+
+**MUST-tier fields (validator refuses on violation):**
+
+- `requiredParent: string[]` — tags this component requires as a parent.
+- `childPolicy: "none" | "any" | "constrained"` — explicit policy. Default `"any"`.
+- `slots[].acceptTags: string[]` — per-slot tag allowlist.
+- `contentModel: "block" | "inline" | "void"` — drives generative-dom + studio.
+- `tagDependencies: string[]` — runtime tag children (splits from v1 `dependencies`).
+- `deterministic: boolean` + conditional `nondeterministicReason: string` — CDR-009 receipt.
+
+**SHOULD-tier fields (validator warns):**
+
+- `role: "transparent-wrapper" | "container" | "leaf"` — for benchmark canonicalization.
+- `interchangeableWith: Array<{tag, scope?, when?}>` — semantic equivalents.
+- `codeDependencies: string[]` — TS-import deps (splits from v1 `dependencies`).
+- `injects: string[]` — programmatically-created children (e.g. popover).
+- `streamSafe: boolean` + `streamingLifecycle.finalizesAt` — UX-1..3 receipt.
+- `props[].semanticType` — closed enum (~40 values) beyond TypeScript `type`.
+
+**MAY-tier fields (informational):**
+
+- `props[].aliases`, `props[].semanticGroup`.
+- `slots[].acceptShapes`.
+- `slotCompatible`, `preferredSlotIn`.
+
+**Auto-computed (in `dist/relations.json`):**
+
+- `tagDependents`, `codeDependents`, `injectsInto`, `childOf`,
+  `interchangeableSymmetric`.
+
+**New artifacts:**
+
+- `dist/relations.json` — reverse-index graph + interchangeable closure.
+- `dist/conformance.json` — aggregated `<name>.conformance.json` per-component.
+- `dist/meta-fields-registry.json` — machine-readable mirror of the field
+  registry (companion to `<meta-repo>/docs/cec/meta-fields-registry.md`).
+- 151 new sibling files: `src/{components,lesson}/<name>/<name>.conformance.json`.
+
+**New exports:** `./relations`, `./conformance`, `./meta-fields-registry`.
+
+**Schema-version policy:** `schemaVersion` accepts `1 | 2` during v0.7/v0.8.
+v0.9 will narrow to `2` and remove v1 fields `dependencies[]` / `dependents[]`
+(replaced by the structured split + auto-computed reverse indexes).
+
+**Tooling:**
+
+- `scripts/migrate-v1-to-v2.ts` — codemod that rewrites all 151 manifests
+  to v2 with safe defaults inferred from `tier`, `slots[]`, `sideEffects[]`.
+- `scripts/seed-conformance.ts` — creates the per-component conformance file.
+- `scripts/gen-relations.ts` — emits `dist/relations.json`.
+- `scripts/gen-conformance.ts` — emits `dist/conformance.json`.
+- `scripts/gen-meta-fields-registry.ts` — emits `dist/meta-fields-registry.json`.
+- `scripts/lint-meta-conformance-keys.ts` — validates conformance keys
+  against the ADR / CDR / requirements universe; new gate in `pnpm check`.
+
+### Documentation
+
+- **New:** `docs/adr/adr-015-meta-schema-v2.md` (the decision record).
+- **New:** `docs/adr/adr-016-conformance-file.md` (per-component conformance shape).
+- **Promoted:** `docs/cdr/candidates/cdr-candidate-llm-equivalence-fields.md`
+  → `docs/cdr/cdr-012-llm-equivalence-fields.md`.
+- **New:** `docs/cdr/cdr-013-structured-relations.md`.
+- **New:** `docs/cdr/cdr-014-content-model.md`.
+- **New:** `docs/cdr/cdr-015-determinism-streaming.md`.
+- **Companion:** `<meta-repo>/docs/cec/meta-fields-registry.md` — field-level
+  reference for the v2 schema.
+- **Companion:** `<meta-repo>/docs/concepts/cec-genui-stack/meta-v2-implementation-plan.md`
+  — full 5-phase rollout plan.
+
 ## [0.6.0] — 2026-05-21
 
 This release closes the user-scenario gap-analysis backlog opened on 2026-05-20.

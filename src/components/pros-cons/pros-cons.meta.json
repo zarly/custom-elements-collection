@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-pros-cons",
   "name": "Pros & cons",
   "className": "CeProsCons",
@@ -7,7 +7,7 @@
   "description": "Decision-analysis primitive that replaces the ad-hoc 'ce-compare for pros/cons' workaround surfaced in audit. Two columns: left=pros (green accent, ✓ markers), right=cons (red accent, ✗ markers). Each side accepts either a JSON array of strings (CDR-005 JSON mode) or slotted <li> / arbitrary children (slot mode), and the two modes may be mixed (JSON pros + slotted cons). Headers default to 'Pros' / 'Cons' and accept attribute overrides for localised or domain-specific phrasing ('Benefits' / 'Risks', 'Plusy' / 'Minusy', etc.). Stacks to a single column below ~540 px.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "pros",
@@ -158,14 +158,26 @@
     "ce-recommendation",
     "ce-verdict"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Comparison & narrative",
-    "decision",
-    "pros-cons"
+    "decision"
   ],
   "a11y": {
     "notes": "Each column is a <section> with a visible <header>. Icons are aria-hidden because the column header text and item markers already convey the meaning. Stacks to a single column on narrow viewports via a CSS media query — no script needed."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

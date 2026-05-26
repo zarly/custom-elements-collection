@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-hint",
   "name": "LessonHint",
   "className": "LessonHint",
@@ -7,7 +7,7 @@
   "description": "Shows a 'Show hint N of M' button. Each click reveals the next hint in a stacked list. The most recently revealed hint has a blue highlight. After all hints are shown the button changes to 'All hints shown' and disables. Fires lesson-hint-show with {index, hint} on each reveal. Accepts hints as a JSON string[] attribute.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "hints",
@@ -123,11 +123,23 @@
     "lesson-gap",
     "lesson-note"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
-    "Education",
-    "hint",
-    "scaffold"
-  ]
+    "Education"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

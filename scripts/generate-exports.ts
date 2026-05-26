@@ -346,6 +346,12 @@ async function syncPackageExports(stems: ReadonlyArray<string>): Promise<boolean
   exportsMap["./registry"] = "./dist/registry.json";
   exportsMap["./registry/*.json"] = "./dist/registry/*.json";
 
+  // v2 (ADR-015) — relations graph, conformance audit, and the
+  // machine-readable mirror of meta-fields-registry.md.
+  exportsMap["./relations"] = "./dist/relations.json";
+  exportsMap["./conformance"] = "./dist/conformance.json";
+  exportsMap["./meta-fields-registry"] = "./dist/meta-fields-registry.json";
+
   // Sort exports for deterministic diffs: ".", "./auto", "./manifest" first;
   // tokens (./*.css) next; meta subpaths next; per-component subpaths last.
   const ordered: Record<string, unknown> = {};
@@ -357,6 +363,9 @@ async function syncPackageExports(stems: ReadonlyArray<string>): Promise<boolean
     "./meta/*.json",
     "./registry",
     "./registry/*.json",
+    "./relations",
+    "./conformance",
+    "./meta-fields-registry",
   ]);
   for (const key of [".", "./auto", "./manifest"]) {
     if (key in exportsMap) ordered[key] = exportsMap[key];
@@ -370,6 +379,9 @@ async function syncPackageExports(stems: ReadonlyArray<string>): Promise<boolean
     "./meta/*.json",
     "./registry",
     "./registry/*.json",
+    "./relations",
+    "./conformance",
+    "./meta-fields-registry",
   ]) {
     if (key in exportsMap) ordered[key] = exportsMap[key];
   }

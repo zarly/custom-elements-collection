@@ -24,7 +24,7 @@ ADR-009 is the **philosophy**. CDR-001..008 are the **daily-design instructions*
 
 Without CDRs, every contributor (human or agent) re-derives these principles from scratch on every component. With CDRs, the philosophy has operational teeth.
 
-## The 8 accepted CDRs
+## The 11 accepted CDRs
 
 | ID | Title | Compliance | Triggered by | Validator hook |
 |---|---|---|---|---|
@@ -36,6 +36,11 @@ Without CDRs, every contributor (human or agent) re-derives these principles fro
 | [CDR-006](cdr-006-components-compose.md) | Components compose; no hard wrappers | SHOULD | Composability gap | Manual review |
 | [CDR-007](cdr-007-sensible-defaults.md) | Sensible defaults; zero-attribute usage works for the common case | SHOULD | Ergonomics | `rule_min_attrs_in_first_example` |
 | [CDR-008](cdr-008-additive-changes-only.md) | Additive changes only; deprecate via stability + ADR | SHOULD | Migration discipline | Meta-prop removal CI gate |
+| [CDR-009](cdr-009-deterministic-dom.md) | Deterministic DOM for static-tier components | SHOULD | 2026-05-22 audit · benchmark scoring | `tests/determinism/` + lint grep |
+| [CDR-010](cdr-010-same-data-multiple-views.md) | Same data, multiple views — siblings over variants | SHOULD | 2026-05-22 audit · customization goal | `rule_no_renderer_swap_enum` · `rule_no_sort_attribute` |
+| [CDR-011](cdr-011-llm-failure-mode-tolerance.md) | LLM failure-mode tolerance catalogue (6 cases, per-mode fixtures) | SHOULD | 2026-05-22 audit · ADR-009 operationalization | `tests/llm-failure-modes/` |
+
+> **Earlier draft, dropped.** CDR-012 ("Strict schema, tolerant runtime") was filed 2026-05-22 and dropped the same day after review. The substance (`additionalProperties: false`, exhaustive `required[]` for strict-mode tool calling) is a ~5-line transform downstream consumers do at their adapter layer; ADR-007 already commits to keeping vendor-specific projections out of this package. The 2026-05-22 audit (`vis/cec-rules-audit-2026-05-22.html`) is the historical record of the consideration.
 
 ## When to consult a CDR
 

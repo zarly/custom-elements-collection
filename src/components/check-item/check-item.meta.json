@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-check-item",
   "name": "CheckItem",
   "className": "CeCheckItem",
@@ -7,7 +7,7 @@
   "description": "Carries id, checked, and category attributes. Default slot accepts rich content — links, chips, code, dates — per CDR-002. When nested inside ce-checklist the parent reads attributes via DOM and renders the slot HTML; the item itself renders nothing (display:contents). Standalone renders a single checkbox + label row.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "id",
@@ -97,16 +97,30 @@
   "related": [
     "ce-checklist"
   ],
+  "requiredParent": [
+    "ce-checklist"
+  ],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Forms",
-    "checkbox",
     "task",
     "form"
   ],
   "a11y": {
     "role": "checkbox (standalone mode only)",
     "notes": "In standalone mode renders a native checkbox with aria-checked reflecting the checked state. The default slot carries the accessible label. When nested inside ce-checklist the parent handles all ARIA — the item renders nothing."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

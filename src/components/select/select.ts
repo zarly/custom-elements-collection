@@ -64,6 +64,7 @@ export class CeSelect extends CecElement {
       flex: 1;
       min-width: 0;
       appearance: none;
+      /* stylelint-disable-next-line property-no-vendor-prefix -- Safari/iOS require -webkit-appearance: none on native <select> to remove default chrome */
       -webkit-appearance: none;
       background: transparent;
       border: 0;
@@ -102,7 +103,7 @@ export class CeSelect extends CecElement {
       pointer-events: none;
     }
     /* Slot-mode authoring path: hide user-supplied <option>/<optgroup> from light DOM
-       because we materialise them inside our shadow <select>. */
+     because we materialise them inside our shadow <select>. */
     ::slotted(option),
     ::slotted(optgroup) {
       display: none;

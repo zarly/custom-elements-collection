@@ -111,12 +111,12 @@ export class CeMessageGroup extends CecElement {
     }
 
     /*
-     * Tighten margin on follow-up bubbles slotted directly.
-     * ce-chat-bubble sets margin: var(--ce-space-3) 0 on :host; reduce it for
-     * non-first children so the group gap alone controls spacing. The internal
-     * avatar/head suppression is handled by setting ce-chat-bubble[follow-up]
-     * imperatively on slot change (see #syncFollowUp).
-     */
+   * Tighten margin on follow-up bubbles slotted directly.
+   * ce-chat-bubble sets margin: var(--ce-space-3) 0 on :host; reduce it for
+   * non-first children so the group gap alone controls spacing. The internal
+   * avatar/head suppression is handled by setting ce-chat-bubble[follow-up]
+   * imperatively on slot change (see #syncFollowUp).
+   */
     ::slotted(ce-chat-bubble + ce-chat-bubble) {
       margin-top: 0;
     }

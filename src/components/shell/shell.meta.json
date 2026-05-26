@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-shell",
   "name": "Shell",
   "className": "CeShell",
@@ -7,7 +7,7 @@
   "description": "Page-level wrapper. Clamps content width (narrow / default / wide / full), applies the project's outer padding, and propagates the active theme to the document root via data-ce-theme so token CSS resolves correctly. Should be used at most once per page.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "theme",
@@ -66,6 +66,13 @@
     "ce-hero",
     "ce-section"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
@@ -73,5 +80,11 @@
     "shell",
     "wrapper",
     "theme"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

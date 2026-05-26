@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-data",
+  "name": "Data",
+  "className": "CeData",
+  "goal": "Carry JSON data as a hidden child of a consuming widget — the CDR-5 advanced shape when data is too big or escaping-heavy for an attribute.",
+  "description": "Hidden primitive whose textContent is parsed as JSON and exposed via the .data getter. The element renders nothing (display:none) and acts purely as a data carrier — consumers read `:scope > ce-data` and parse its content. Use this when (a) the payload is too big or contains characters hostile to HTML attributes (quotes, newlines, angle brackets), (b) multiple structured fields are needed (values + labels + baselines), or (c) the producing pipeline naturally emits JSON inline. Invalid JSON returns null and emits a console.warn — no exceptions thrown. Consuming widgets that support this shape include ce-sparkline (parses .values from the payload).",
+  "stability": "stable",
+  "created": "2026-05-22",
+  "updated": "2026-05-26",
+  "props": [],
+  "events": [],
+  "methods": [
+    {
+      "name": "data",
+      "signature": "get data(): unknown",
+      "description": "Parses the element's textContent as JSON and returns the result. Returns null (with a console.warn) on invalid JSON. Reparses on every access — cheap for small payloads; cache externally if you parse hot in a loop."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "JSON text content. The element does not render its children; the text is read and parsed by the consuming widget (or by the .data getter).",
+      "acceptShapes": ["string", "json"]
+    }
+  ],
+  "cssVariables": [],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets inline style.display = 'none' on the element during render setup.",
+      "reason": "Guarantees the data carrier is invisible regardless of the host page's stylesheet — critical because the element appears in light DOM."
+    }
+  ],
+  "dependents": [
+    "ce-sparkline"
+  ],
+  "dependencies": [],
+  "related": [
+    "ce-sparkline"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "internal",
+  "tier": "brick",
+  "tags": [
+    "Content",
+    "data",
+    "primitive"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

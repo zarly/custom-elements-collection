@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-heatmap",
   "name": "Heatmap",
   "className": "CeHeatmap",
@@ -7,7 +7,7 @@
   "description": "2D heatmap. Accepts data via two modes (CDR-005): (1) JSON mode — rows/cols/data arrays as JS properties or JSON attributes; (2) slot mode — <ce-heat-row> children each containing <ce-heat-cell> children. Resolution order: data non-empty → JSON mode; else iterate <ce-heat-row> slot children; else empty state. Both modes produce visually identical output for equivalent data. In JSON mode each cell may be a plain number (original API, CDR-008 additive) or a CellInput object { value?, tone?, title? } where tone (1-5) overrides the palette-derived alpha and title becomes the cell tooltip. Palette colors each cell by interpolating the palette token between min and max (auto-detected when max is 0). Cell hover surfaces a focus outline.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "rows",
@@ -57,7 +57,8 @@
   "slots": [
     {
       "name": "",
-      "description": "Default slot for <ce-heat-row> children (slot mode per CDR-005). Each row carries a label attr and <ce-heat-cell> children. Non-ce-heat-row elements are passed through to light DOM and ignored by the data-resolution path."
+      "description": "Default slot for <ce-heat-row> children (slot mode per CDR-005). Each row carries a label attr and <ce-heat-cell> children. Non-ce-heat-row elements are passed through to light DOM and ignored by the data-resolution path.",
+      "acceptTags": ["ce-heat-row"]
     }
   ],
   "cssVariables": [
@@ -136,6 +137,16 @@
     "ce-chart",
     "ce-matrix"
   ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-heat-row",
+    "ce-heat-cell"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -143,5 +154,11 @@
     "heatmap",
     "matrix",
     "data-viz"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "flush"
+  }
 }

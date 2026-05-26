@@ -40,7 +40,15 @@ export function activeFilterCount(f) {
   return n;
 }
 
-/** AND across axes, OR within a multi-select; recency cuts on record.created/updated. */
+/**
+ * AND across axes. Per-axis semantics:
+ *   - stab / tier / cat: OR within the multi-select (record's single value
+ *     must be in the set).
+ *   - has: AND — every picked capability must be present on the record.
+ *   - tags: AND — every picked tag must be present on the record (tags[0],
+ *     the canonical group, is skipped because that axis is filtered separately).
+ *   - created / updated: integer day cutoff on record.created / record.updated.
+ */
 export function passesFilters(record, f) {
   if (f.stab.size && !f.stab.has(record.stability)) return false;
   if (f.tier.size && !f.tier.has(record.tier)) return false;
@@ -54,11 +62,9 @@ export function passesFilters(record, f) {
   if (f.tags.size) {
     // Skip tags[0] (canonical group, already covered by the group filter axis).
     const free = record.tags.slice(1);
-    let ok = false;
     for (const t of f.tags) {
-      if (free.includes(t)) { ok = true; break; }
+      if (!free.includes(t)) return false;
     }
-    if (!ok) return false;
   }
   if (f.created > 0) {
     const days = daysSinceIso(record.created);

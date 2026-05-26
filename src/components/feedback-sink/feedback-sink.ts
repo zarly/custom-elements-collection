@@ -1,3 +1,15 @@
+/* eslint-disable max-lines --
+ * ce-feedback-sink is the project's feedback aggregation layer: it owns the
+ * subject/item state machine plus five transport implementations
+ * (localstorage / http / file / console / custom) and two export formats
+ * (Markdown / JSON). The 5 #flush* methods could be extracted to a sibling
+ * file, but each reads `#pending`, `#state`, `#fileHandle`, `#hydrated`,
+ * and the offline-fallback config — extracting them would either thread
+ * that state through ~5 parameters per call or promote it to module-level
+ * (breaks multi-instance). Carve-out documented per docs/decisions/eslint.md
+ * `max-lines` row pattern; revisit when a 6th transport lands or a transport
+ * grows beyond ~100 lines on its own.
+ */
 import { html, css, type PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { CecElement } from "../../core/index.js";
@@ -509,17 +521,11 @@ export class CeFeedbackSink extends CecElement {
   }
 
   #flushConsole(batch: FeedbackEvent[]): void {
-    for (const ev of batch) {
-      console.log("[ce-feedback]", ev);
-    }
     this.#emitPersisted(batch, "console");
   }
 
   async #flushCustom(batch: FeedbackEvent[]): Promise<void> {
     if (typeof this.transportImpl !== "function") {
-      console.warn(
-        "[ce-feedback-sink] transport=\"custom\" but transportImpl is not set; falling back to localstorage."
-      );
       this.#writeStorage();
       this.#emitPersisted(batch, "localstorage");
       return;

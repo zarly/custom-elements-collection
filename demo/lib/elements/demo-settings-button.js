@@ -1,11 +1,14 @@
 /**
- * <demo-settings-button> — icon button (sliders glyph) with an optional
+ * <demo-settings-button> — square icon button (sliders glyph) with an optional
  * count chip overlay. Emits `demo-settings-open` (bubbles + composed) on click.
  *
  * Attributes:
  *   count  — integer ≥ 1; when present and > 0, shows a ce-chip overlay.
  *
- * Uses <ce-button> for visual consistency with the library.
+ * Uses <ce-button size="icon" variant="ghost"> for visual consistency with
+ * the library. The "icon" size is a symmetric, 1:1 button sized for a 16–24px
+ * glyph — added to ce-button specifically because settings-style icon buttons
+ * shouldn't have to bypass the library to look right.
  */
 
 const SLIDERS_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -50,10 +53,10 @@ class DemoSettingsButton extends HTMLElement {
 
   _render() {
     const n = this.count;
-    this.innerHTML = `<ce-button variant="ghost" aria-label="Settings${n > 0 ? ` (${n} active)` : ""}" title="Settings" style="position:relative;padding:6px 10px">
+    const aria = `Settings${n > 0 ? ` (${n} active)` : ""}`;
+    this.innerHTML = `<ce-button size="icon" variant="ghost" aria-label="${aria}" title="Settings" style="position:relative">
       ${SLIDERS_SVG}${n > 0 ? `<ce-chip type="blue" size="sm" style="position:absolute;top:-4px;right:-4px;min-width:18px;pointer-events:none">${n}</ce-chip>` : ""}
     </ce-button>`;
-    // Re-wire click after innerHTML.
     const btn = this.querySelector("ce-button");
     if (btn && btn !== this._btn) {
       this._btn?.removeEventListener("click", this._onClick);

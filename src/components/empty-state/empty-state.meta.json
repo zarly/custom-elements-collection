@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-empty-state",
+  "name": "Empty State",
+  "className": "CeEmptyState",
+  "goal": "Standardised centred-panel for empty regions, completion outcomes, and error states — icon, title, body, actions, and optional collapsible details. Covers empty-inbox, no-results, onboarding, success, error, info, and warning surfaces.",
+  "description": "Centred column layout. Renders an optional circular icon badge (or a caller-supplied illustration), a title slot (caller controls heading level), a body description slot, an actions slot for CTA buttons, and an optional collapsible details slot for technical detail (e.g., error codes). Three size variants (sm/md/lg) scale spacing. The severity attribute (none/success/error/info/warning) adds a tinted panel and auto-derived icon glyph — covering the former ce-result use cases. Host carries role=status for live-region accessibility.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "icon",
+      "type": "string | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Short text or emoji rendered in a circular icon badge. Ignored when the illustration slot is filled."
+    },
+    {
+      "name": "size",
+      "type": "EmptyStateSize",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Size variant — sm (compact) | md (default) | lg (larger padding and illustration area)."
+    },
+    {
+      "name": "severity",
+      "type": "EmptyStateSeverity",
+      "required": false,
+      "default": "\"none\"",
+      "reflect": true,
+      "description": "Severity tint — none (default, empty-state look) | success | error | info | warning. When set to anything other than 'none', adds a tinted background, colors the icon and title, and auto-derives a default icon glyph if `icon` is unset. Absorbs former ce-result use cases."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "illustration",
+      "description": "Custom illustration or graphic (SVG, img, ce-icon with slotted SVG). When filled, suppresses the icon badge."
+    },
+    {
+      "name": "title",
+      "description": "Heading content. Caller is responsible for providing the correct heading element (h2, h3, etc.) — the component does not impose a heading level."
+    },
+    {
+      "name": "",
+      "description": "Description body text shown below the title."
+    },
+    {
+      "name": "actions",
+      "description": "Call-to-action area. Accepts ce-button, ce-link, or any interactive element."
+    },
+    {
+      "name": "details",
+      "description": "Optional collapsible technical detail rendered inside a native <details> below the actions row. Primarily used with severity='error' for error codes / stack traces."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between items in sm size."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Default gap between items and sm padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Default horizontal padding and sm vertical padding."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Fallback icon badge background."
+    },
+    {
+      "name": "--ce-surface-raised",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon badge background (elevated surface)."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Fallback icon badge border."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon badge border."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Title text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Body text and icon badge foreground color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Body font size in sm variant."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default body font size."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Default title font size and lg body font size."
+    },
+    {
+      "name": "--ce-text-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "lg title font size and md icon badge font size."
+    },
+    {
+      "name": "--ce-text-xl",
+      "kind": "size",
+      "source": "token",
+      "description": "lg icon badge font size."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=success icon and title color."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=success panel background tint."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=error icon and title color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=error panel background tint."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=info icon and title color."
+    },
+    {
+      "name": "--ce-color-blue-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=info panel background tint."
+    },
+    {
+      "name": "--ce-color-amber",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=warning icon and title color."
+    },
+    {
+      "name": "--ce-color-amber-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "severity=warning panel background tint."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Border radius for the tinted severity panel."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets role='status' on the host element in connectedCallback if not already present.",
+      "reason": "Allows screen readers to announce the empty state when it appears dynamically (e.g., after a search returns no results).",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-card",
+    "ce-callout",
+    "ce-icon"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Feedback"
+  ],
+  "a11y": {
+    "role": "status",
+    "notes": "Host carries role='status' (set in connectedCallback, not in markup, so pre-rendered HTML keeps whatever role is authored). The title slot should receive a heading element from the caller — the component intentionally does not impose a heading level (e.g., h2 vs h3 depends on page context)."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-example",
   "name": "Example",
   "className": "CeExample",
@@ -7,7 +7,7 @@
   "description": "Color-coded example block. type=good tints green and labels 'Good'; type=bad tints red and labels 'Wrong'; type=neutral uses a neutral border and labels 'Example'. Consumers can override the label text via the label attribute.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -131,11 +131,29 @@
   "related": [
     "ce-compare"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-callout",
+      "scope": "framed-content",
+      "when": "type ∈ {good→success, bad→danger, neutral→info}"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Comparison & narrative",
-    "example",
-    "good-bad"
-  ]
+    "compare"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

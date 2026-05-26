@@ -259,7 +259,6 @@ export class CeAttachmentStrip extends CecElement {
   }
 
   #renderTile(item: CeAttachment) {
-    const showThumb = item.kind === "image" && !!item.thumb;
     const sizeLabel = item.size != null ? formatBytes(item.size) : "";
 
     return html`
@@ -268,10 +267,10 @@ export class CeAttachmentStrip extends CecElement {
         role="group"
         aria-label=${item.name}
       >
-        ${showThumb
+        ${item.kind === "image" && item.thumb
           ? html`<img
               class="ce-tile-thumb"
-              src=${item.thumb!}
+              src=${item.thumb}
               alt=""
               loading="lazy"
             />`

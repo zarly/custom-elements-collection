@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-icon",
   "name": "Icon",
   "className": "CeIcon",
@@ -7,7 +7,7 @@
   "description": "Themed icon slot. The library deliberately does not ship an icon set; authors drop their preferred SVG, emoji, or icon-font glyph into the default slot and ce-icon normalizes sizing and color inheritance. Slotted <svg> elements have their fill and stroke pinned to currentColor so they tint with the surrounding text. Three discrete sizes (sm/md/lg). Decorative by default; setting label promotes it to role=img with an accessible name.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "size",
@@ -47,11 +47,23 @@
     "ce-badge",
     "ce-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "icon",
     "primitive"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

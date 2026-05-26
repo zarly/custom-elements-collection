@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-summary",
   "name": "LessonSummary",
   "className": "LessonSummary",
@@ -7,7 +7,7 @@
   "description": "Renders an amber-bordered card with a title and either a JSON-driven checklist (items prop) or slotted content. Each item gets a green checkmark prefix. Default title is 'Key Takeaways'. When items is empty the default slot renders instead.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "title",
@@ -102,11 +102,22 @@
     "lesson-frame",
     "lesson-rule"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "brick",
   "tags": [
-    "Education",
-    "summary",
-    "takeaway"
-  ]
+    "Education"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

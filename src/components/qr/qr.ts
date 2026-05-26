@@ -1,3 +1,15 @@
+/* eslint-disable max-lines, max-lines-per-function, max-depth, complexity --
+ * QR encoder (ISO/IEC 18004:2015) is one tightly-coupled algorithm: GF(256)
+ * tables → version/ECC selection → bit stream → Reed-Solomon → matrix layout
+ * → mask penalty → format/version info. Splitting these phases across files
+ * would obscure spec correctness, and silent encoder bugs (one off-by-one in
+ * the data-placement zig-zag) are hard to catch from tests alone. The carve-
+ * out is documented in docs/decisions/eslint.md `complexity` row and applies
+ * the same reasoning here. The `complexity` rule fires on encodeQR (cc=52,
+ * the spec-driven phase sequence), the data-placement zig-zag arrow (cc=19,
+ * geometric matrix walk), and `penalty` (cc=25, ISO §7.8.3 four-rule mask
+ * scorer — each rule is a separate spec clause). See CONCEPT.md.
+ */
 import { html, css } from "lit";
 import { property } from "lit/decorators.js";
 import { CecElement } from "../../core/index.js";

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-date-picker",
   "name": "Date picker",
   "className": "CeDatePicker",
@@ -7,7 +7,7 @@
   "description": "Form primitive that delegates date / time parsing, keyboard handling, and the calendar popup to the browser's native input. Mirrors ce-input's label / help / error / prefix / suffix layout for consistency across the forms group. The `type` attribute switches between date (default), time, datetime-local, month, and week. min, max, step are forwarded as-is. Emits ce-input per keystroke and ce-change on commit.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -225,16 +225,27 @@
     "ce-input",
     "ce-select"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Forms",
     "form",
-    "date",
-    "time",
-    "picker"
+    "time"
   ],
   "a11y": {
     "notes": "Delegates to the native input so keyboard navigation, the calendar popup, OS locale, and screen-reader semantics come from the browser. Label is associated via label[for]=input.id. aria-invalid follows the invalid prop / error message."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

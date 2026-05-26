@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-progress",
   "name": "Progress",
   "className": "CeProgress",
@@ -7,7 +7,7 @@
   "description": "Linear progress bar bound by value/max. Supports an optional left label, a numeric percent value on the right (show-value), an indeterminate shimmer, and five color tokens for the fill. Exposes ARIA progressbar semantics with valuemin / valuemax / valuenow / busy.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -144,6 +144,15 @@
   ],
   "dependencies": [],
   "related": [],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    { "tag": "ce-score", "scope": "numeric-summary" }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -154,5 +163,11 @@
   "a11y": {
     "role": "progressbar",
     "notes": "Sets aria-valuemin/valuemax/valuenow and aria-busy when indeterminate."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

@@ -26,10 +26,10 @@ import {
 } from "../src/meta/schema.js";
 import { GROUPS } from "../src/meta/groups.js";
 import { TIERS } from "../src/meta/tiers.js";
+import { COMPLIANCE_MAP } from "../src/meta/compliance-tiers.js";
 import type {
   Registry,
   RegistryComponent,
-  RegistryFilter,
   JsonSchemaObject,
   JsonSchemaProperty,
 } from "../src/meta/registry-types.js";
@@ -319,6 +319,30 @@ export function projectComponent(item: LoadedMeta): RegistryComponent {
       description: c.description,
       ...(c.fallback !== undefined ? { fallback: c.fallback } : {}),
     })),
+
+    // — v2 (ADR-015) — projected verbatim from meta if present —
+    ...(meta.contentModel !== undefined ? { contentModel: meta.contentModel } : {}),
+    ...(meta.role !== undefined ? { role: meta.role } : {}),
+    ...(meta.deterministic !== undefined ? { deterministic: meta.deterministic } : {}),
+    ...(meta.streamSafe !== undefined ? { streamSafe: meta.streamSafe } : {}),
+    ...(meta.childPolicy !== undefined ? { childPolicy: meta.childPolicy } : {}),
+    ...(meta.requiredParent && meta.requiredParent.length > 0
+      ? { requiredParent: meta.requiredParent }
+      : {}),
+    ...(meta.tagDependencies && meta.tagDependencies.length > 0
+      ? { tagDependencies: meta.tagDependencies }
+      : {}),
+    ...(meta.codeDependencies && meta.codeDependencies.length > 0
+      ? { codeDependencies: meta.codeDependencies }
+      : {}),
+    ...(meta.injects && meta.injects.length > 0 ? { injects: meta.injects } : {}),
+    ...(meta.interchangeableWith && meta.interchangeableWith.length > 0
+      ? { interchangeableWith: meta.interchangeableWith }
+      : {}),
+    ...(meta.slotCompatible === false ? { slotCompatible: false } : {}),
+    ...(meta.preferredSlotIn && meta.preferredSlotIn.length > 0
+      ? { preferredSlotIn: meta.preferredSlotIn }
+      : {}),
   };
 }
 
@@ -371,6 +395,11 @@ export async function buildRegistry(
     generatedAt,
     filter: null,
     components: allComponents,
+    // v2 (ADR-015 + studio job 0022.07)
+    $schema: {
+      metaSchemaVersion: 2,
+      compliance: COMPLIANCE_MAP,
+    },
   };
 
   await fs.mkdir(distRegistryDir, { recursive: true });

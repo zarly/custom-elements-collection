@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-compare",
   "name": "Compare",
   "className": "CeCompare",
@@ -7,7 +7,7 @@
   "description": "Side-by-side comparison panel. Left column gets a red tint (Before), right column a green tint (After), and a center column shows a configurable arrow (default → ). Below 640px the layout collapses to a single column and the arrow hides.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "beforeLabel",
@@ -150,11 +150,24 @@
     "ce-example",
     "ce-pros-cons"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Comparison & narrative",
     "compare",
     "before-after"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

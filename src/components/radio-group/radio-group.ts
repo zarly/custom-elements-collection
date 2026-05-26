@@ -152,7 +152,7 @@ export class CeRadioGroup extends CecElement {
     }
     .opt-seg[aria-checked="true"] {
       background: var(--ce-color-blue);
-      color: var(--ce-text-inverse, #fff);
+      color: var(--ce-text-inverse);
     }
 
     /* ---- card ---- */

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-mark",
   "name": "Mark",
   "className": "CeMark",
@@ -7,7 +7,7 @@
   "description": "Inline highlight primitive used for search-result hits, AI-mentioned entities, or 'this changed' emphasis. Seven CecColor tints (amber default), two emphasis weights (subtle uses a tinted background, strong uses a saturated fill with inverted text). Uses box-decoration-break:clone so the highlight wraps cleanly across line breaks.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "color",
@@ -151,11 +151,23 @@
     "ce-chip",
     "ce-callout"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "highlight",
     "primitive"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

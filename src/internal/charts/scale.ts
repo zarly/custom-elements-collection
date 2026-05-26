@@ -83,11 +83,11 @@ export function niceTicks(
  */
 export function linearScale(
   value: number,
-  domainMin: number,
-  domainMax: number,
-  rangeMin: number,
-  rangeMax: number
+  domain: readonly [number, number],
+  range: readonly [number, number]
 ): number {
+  const [domainMin, domainMax] = domain;
+  const [rangeMin, rangeMax] = range;
   const span = domainMax - domainMin;
   if (span === 0) return rangeMin;
   const t = (value - domainMin) / span;

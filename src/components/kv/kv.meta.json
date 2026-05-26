@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-kv",
   "name": "KV",
   "className": "CeKv",
@@ -7,7 +7,7 @@
   "description": "Single key-value row brick. The `key` attribute is the short label; the default slot carries the value and accepts any HTML content: plain text, `<a>`, `<time>`, `<code>`, `<ce-chip>`, or future typed renderers. Follows CDR-002: values stay in children so typed renderers can compose in later.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "key",
@@ -66,11 +66,26 @@
   "related": [
     "ce-key-value"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "preferredSlotIn": [
+    "ce-key-value"
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Content",
-    "metadata",
-    "key-value"
-  ]
+    "metadata"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

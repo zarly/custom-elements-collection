@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-feed",
+  "name": "Feed",
+  "className": "CeFeed",
+  "goal": "Render a reverse-chronological stream of homogeneous entries with optional time-bucket grouping for activity logs, social feeds, audit trails, release notes, and notifications.",
+  "description": "Container element that sorts and groups ce-feed-entry children (or a data array) into a vertical chronological list. Supports day, week, and month bucket grouping with sticky group headers, newest-first or oldest-first ordering, and a dense spacing mode. Re-groups on every slotchange so streaming entry appends are handled without manual refresh. Two-element pair: ce-feed (container) + ce-feed-entry (item). Accepts both slot children and a data array (CDR-005). Satisfies the ARIA 1.1 feed pattern with role=feed on the container and role=article on each entry.",
+  "limitations": "No virtualization — renders all entries directly. For feeds exceeding ~1000 entries consider a ce-virtual-scroller wrapper (v2 path). The 'Today' / 'Yesterday' labels are computed relative to the client's local time at render; they are not updated reactively as the clock passes midnight.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "groupBy",
+      "type": "\"none\" | \"day\" | \"week\" | \"month\"",
+      "required": false,
+      "default": "\"none\"",
+      "attribute": "group-by",
+      "reflect": true,
+      "description": "Bucket grouping mode. 'none' renders entries in a flat list with no group headers. 'day', 'week', 'month' insert sticky group headers above each bucket."
+    },
+    {
+      "name": "order",
+      "type": "\"newest\" | \"oldest\"",
+      "required": false,
+      "default": "\"newest\"",
+      "reflect": true,
+      "description": "Sort direction. 'newest' shows the most recent entry first. 'oldest' shows the earliest entry first."
+    },
+    {
+      "name": "dense",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Reduces vertical padding between entries for compact feeds."
+    },
+    {
+      "name": "data",
+      "type": "FeedEntryData[]",
+      "required": false,
+      "default": "[]",
+      "attribute": "data",
+      "description": "Data array path (CDR-005). Array of { time, content? } objects. When non-empty, slot children are ignored. Accepts JSON string on the attribute or a JS array on the property."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "ce-feed-entry children. Ignored when the data property is non-empty (CDR-005).",
+      "acceptTags": [
+        "ce-feed-entry"
+      ]
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Sticky group header background (inherits the page surface so headers occlude entries on scroll)."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Group header bottom border."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Group header label color and entry dot color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Entry body text color."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "font",
+      "source": "token",
+      "description": "Group header font size."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "font",
+      "source": "token",
+      "description": "Entry body font size."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Dense mode entry vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Default entry vertical padding and group header bottom margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between entry dot and entry content; group header top padding."
+    },
+    {
+      "name": "--ce-border-strong",
+      "kind": "color",
+      "source": "token",
+      "description": "Entry timeline dot fill."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "Intl.DateTimeFormat",
+      "purpose": "Locale-friendly group header labels (month names, date formatting).",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Sets role='feed' on the host element on connectedCallback if the attribute is not already present.",
+      "reason": "ARIA 1.1 feed pattern requires role=feed on the container.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [
+    "ce-feed-entry"
+  ],
+  "subTags": [
+    "ce-feed-entry"
+  ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-feed-entry"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-list",
+      "scope": "vertical-sequence",
+      "when": "homogeneous items without time-bucket grouping; ce-feed adds chronological grouping"
+    }
+  ],
+  "related": [
+    "ce-timeline",
+    "ce-relative-time",
+    "ce-message-group"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Content",
+    "streaming"
+  ],
+  "a11y": {
+    "role": "feed",
+    "notes": "Host has role='feed' (ARIA 1.1). Each ce-feed-entry sets role='article' on connectedCallback. Group headers have role='presentation' — they are visual-only separators. The .ce-feed__list wrapper has aria-live='polite' so screen readers announce newly appended entries."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "Reads wall-clock time during render to compute 'Today' / 'Yesterday' / 'This week' group labels relative to the current date (see #computeGroups in feed.ts; documented in limitations).",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

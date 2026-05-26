@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-suggestion-chip",
   "name": "Suggestion chip",
   "className": "CeSuggestionChip",
@@ -7,7 +7,7 @@
   "description": "Interactive pill-shaped chip designed for chat surfaces. Emits a ce-suggestion-select event carrying the prompt value when clicked or activated via keyboard. Distinct from ce-chip (non-interactive status display): suggestion-chip is an intent primitive — it initiates user action. Supports disabled and selected states, an optional leading icon attribute, and a named icon slot for richer overrides.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -173,6 +173,13 @@
     "ce-chip",
     "ce-retry-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -183,5 +190,11 @@
   "a11y": {
     "role": "button",
     "notes": "Host receives role=button and tabindex=0 on connect. When disabled, aria-disabled=true is set and tabindex is removed. Enter and Space activate the chip."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

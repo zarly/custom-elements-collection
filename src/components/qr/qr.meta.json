@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-qr",
   "name": "Qr",
   "className": "CeQr",
@@ -8,7 +8,7 @@
   "limitations": "Byte mode only — no numeric or alphanumeric optimization (URLs/text are fine; pure-numeric strings encode at the same density). Maximum capacity is v40 ECC L (~2953 bytes); larger inputs emit ce-qr-error. Render is synchronous (~1-2 ms for a v40 grid in modern engines) — not suitable for streaming live data.",
   "stability": "experimental",
   "created": "2026-05-08",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -132,15 +132,26 @@
   "related": [
     "ce-image"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
-    "Content",
-    "qr",
-    "encode"
+    "Content"
   ],
   "a11y": {
     "role": "img",
     "notes": "SVG has role=img and aria-label set to the encoded value. The error fallback uses role=alert."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-grid",
   "name": "Grid",
   "className": "CeGrid",
@@ -7,7 +7,7 @@
   "description": "Responsive grid container. Either uses a fixed column count (cols=2/3/4) or repeat(auto-fit, minmax(min, 1fr)) when auto is set. Below 640px the grid collapses to a single column.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "cols",
@@ -82,11 +82,22 @@
   "related": [
     "ce-card"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
-    "Layout & primitives",
-    "grid",
-    "responsive"
-  ]
+    "Layout & primitives"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

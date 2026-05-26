@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-toggle",
   "name": "Toggle",
   "className": "CeToggle",
@@ -7,7 +7,7 @@
   "description": "Switch-style boolean control. Click, Enter, or Space toggles state. The host carries role=switch and aria-checked, so screen readers announce changes correctly. Pairs nicely as the right edge of a labelled row.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "checked",
@@ -114,6 +114,13 @@
     "ce-button",
     "ce-select"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -124,5 +131,11 @@
   "a11y": {
     "role": "switch",
     "notes": "Host carries role=switch + aria-checked; both Space and Enter activate."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

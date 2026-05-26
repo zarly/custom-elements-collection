@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-audio",
   "name": "LessonAudio",
   "className": "LessonAudio",
@@ -7,7 +7,7 @@
   "description": "Pronunciation / audio-clip button. Renders a play button (label is configurable, default '🔊 Play') plus an optional monospace phonetic string. First click instantiates a single HTMLAudioElement and plays it; subsequent plays reuse the same element. Error states show inline.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "src",
@@ -145,11 +145,23 @@
   "related": [
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
-    "Education",
-    "audio",
-    "pronunciation"
-  ]
+    "Education"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

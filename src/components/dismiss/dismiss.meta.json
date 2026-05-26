@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-dismiss",
   "name": "Dismiss",
   "className": "CeDismiss",
@@ -7,7 +7,7 @@
   "description": "Switch-semantic toggle for hide/drop semantics — the visual sibling to ce-bookmark with reversed defaults. When active, also sets data-ce-dismissed=true on the nearest ce-feedback-bar ancestor so consumers can dim the entire row via a CSS rule. Tolerates absence of an ancestor bar.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "active",
@@ -191,6 +191,15 @@
   "related": [
     "ce-bookmark"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "slotCompatible": true,
+  "preferredSlotIn": ["ce-feedback-bar"],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -202,5 +211,11 @@
   "a11y": {
     "role": "switch",
     "notes": "aria-checked mirrors active; aria-label comes from the label attribute. Enter/Space toggle."
+  },
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

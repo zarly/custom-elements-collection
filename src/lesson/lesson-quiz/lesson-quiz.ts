@@ -1,18 +1,24 @@
-import { html, css } from "lit";
+import { html, css, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { CecElement, jsonProp } from "../../core/index.js";
 
 /**
- * `<lesson-quiz>` — multiple-choice question with instant feedback.
+ * `<lesson-quiz>` — multiple-choice quiz.
  *
- * Provide:
- *   question — the question text
- *   options  — string[]
- *   correct  — index of the correct option
- *   explanation — shown after user picks
+ * Two shapes:
+ *
+ * 1. **Single-question (attribute) shape** — set the `question`, `options`,
+ *    `correct`, and `explanation` attributes. The quiz renders one question
+ *    inline and fires `lesson-quiz-answer` on pick.
+ *
+ * 2. **Multi-question (slotted) shape** — leave `question` empty and slot
+ *    one or more `<lesson-question>` children. Each question manages its
+ *    own answer state. Setting `interactive` on the quiz cascades to all
+ *    `<lesson-question>` descendants so authors can opt the whole batch
+ *    in (CDR-004).
  *
  * Events:
- *   lesson-quiz-answer — { index, correct }
+ *   lesson-quiz-answer — { index, correct } (single-question shape only)
  */
 export class LessonQuiz extends CecElement {
   static override styles = css`
@@ -23,6 +29,14 @@ export class LessonQuiz extends CecElement {
       border-radius: var(--ce-radius);
       padding: var(--ce-space-4) var(--ce-space-5);
       margin: var(--ce-space-3) 0;
+    }
+    :host([container]) {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--ce-space-3);
     }
     .lq-q {
       font-weight: 700;
@@ -74,12 +88,42 @@ export class LessonQuiz extends CecElement {
   @property(jsonProp<string[]>([], "options")) options: string[] = [];
   @property({ type: Number }) correct = 0;
   @property({ type: String }) explanation = "";
+  @property({ type: Boolean, reflect: true }) interactive = false;
+  @property({ type: Boolean, reflect: true }) container = false;
 
   @state() private _picked: number | null = null;
+
+  override updated(changed: Map<string, unknown>): void {
+    if (changed.has("question")) {
+      this.container = !this.question;
+    }
+    if (changed.has("interactive")) {
+      this.#cascadeInteractive();
+    }
+  }
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this.container = !this.question;
+  }
 
   reset(): void {
     this._picked = null;
   }
+
+  #cascadeInteractive(): void {
+    for (const q of this.querySelectorAll(":scope > lesson-question")) {
+      if (this.interactive) {
+        q.setAttribute("interactive", "");
+      } else {
+        q.removeAttribute("interactive");
+      }
+    }
+  }
+
+  #onSlotChange = (): void => {
+    this.#cascadeInteractive();
+  };
 
   #pick(i: number): void {
     if (this._picked !== null) return;
@@ -94,6 +138,11 @@ export class LessonQuiz extends CecElement {
   }
 
   override render() {
+    // Container shape — no question attribute set, render slotted children
+    // (lesson-question, narrative HTML, etc.) per CDR-006 composition.
+    if (!this.question) {
+      return html`<slot @slotchange=${this.#onSlotChange}></slot>`;
+    }
     return html`
       <div class="lq-q">${this.question}</div>
       <div class="lq-opts">
@@ -113,7 +162,7 @@ export class LessonQuiz extends CecElement {
       </div>
       ${this._picked !== null && this.explanation
         ? html`<div class="lq-explain">${this.explanation}</div>`
-        : ""}
+        : nothing}
     `;
   }
 }

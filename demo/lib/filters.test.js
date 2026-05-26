@@ -87,11 +87,35 @@ describe("passesFilters", () => {
     expect(passesFilters(rec({ hasEvents: true, hasSlots: false }), f)).toBe(false);
   });
 
-  it("free-form tags axis ORs across the selected tags (skipping tags[0])", () => {
+  it("free-form tags axis ANDs across the selected tags (skipping tags[0])", () => {
     const f = emptyFilters();
     f.tags.add("primitive");
     expect(passesFilters(rec({ tags: ["Layout & primitives", "primitive"] }), f)).toBe(true);
     expect(passesFilters(rec({ tags: ["Layout & primitives", "other"] }), f)).toBe(false);
+  });
+
+  it("requires every selected tag (AND, not OR)", () => {
+    const f = emptyFilters();
+    f.tags.add("primitive");
+    f.tags.add("form");
+    expect(
+      passesFilters(rec({ tags: ["Group", "primitive", "form"] }), f),
+    ).toBe(true);
+    expect(
+      passesFilters(rec({ tags: ["Group", "primitive"] }), f),
+    ).toBe(false);
+    expect(
+      passesFilters(rec({ tags: ["Group", "form"] }), f),
+    ).toBe(false);
+  });
+
+  it("ignores tags[0] (the canonical group) when matching tags axis", () => {
+    const f = emptyFilters();
+    f.tags.add("Layout & primitives");
+    // Canonical group sits at tags[0] and is excluded from the free-tag axis.
+    expect(
+      passesFilters(rec({ tags: ["Layout & primitives", "primitive"] }), f),
+    ).toBe(false);
   });
 
   it("created-in-last filters by integer day count", () => {

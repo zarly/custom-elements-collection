@@ -1,20 +1,20 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-sparkline",
   "name": "Sparkline",
   "className": "CeSparkline",
   "goal": "Render a small inline trend chart (line, area, or bar) for a numeric series.",
-  "description": "Compact inline SVG chart for trend visualisation in a row, table cell, or KPI tile. Supports line (default), filled area, and bar shapes; auto-scales to the value range. Values can be supplied either as a JSON-encoded `values` attribute or via the JS property.",
+  "description": "Compact inline SVG chart for trend visualisation in a row, table cell, or KPI tile. Supports line (default), filled area, and bar shapes; auto-scales to the value range. Values can be supplied four ways (resolution order): (1) JSON-encoded `values` attribute, (2) JS property, (3) a <ce-data> child carrying a {values:[…]} or bare-array JSON payload (CDR-5 advanced shape — useful when the payload is too big or escaping-heavy for an attribute), (4) whitespace- or comma-separated numbers in the element's own text content. The earliest source with data wins. Child-content streaming is supported via MutationObserver, so values appended after upgrade re-render.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "values",
       "type": "number[]",
-      "required": true,
+      "required": false,
       "default": "[]",
-      "description": "Numeric series. Can be supplied via JSON attribute or JS property."
+      "description": "Numeric series. Can be supplied via JSON attribute, JS property, or as whitespace/comma-separated numbers in the element's text content (text-content fallback). Required only when no text-content values are provided."
     },
     {
       "name": "color",
@@ -55,7 +55,14 @@
     }
   ],
   "events": [],
-  "slots": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Data slot. Accepts either (a) whitespace- or comma-separated numbers as plain text content, or (b) a <ce-data> child carrying a {values:[…]} or bare-array JSON payload (preferred for large or escaping-heavy data). The slot content is not displayed visually — it acts purely as a data carrier (CDR-2/CDR-5).",
+      "acceptTags": ["ce-data"],
+      "acceptShapes": ["number-sequence-text", "ce-data-json-payload"]
+    }
+  ],
   "cssVariables": [
     {
       "name": "--ce-color-blue",
@@ -95,12 +102,36 @@
     }
   ],
   "globalDependencies": [],
-  "sideEffects": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Installs a MutationObserver on its own subtree to watch for text-content changes when the values attribute is omitted.",
+      "reason": "Supports streaming data appended to the element after upgrade (CDR-2/CDR-5 text-content fallback). Disconnected on disconnectedCallback."
+    }
+  ],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": [
+    "ce-data"
+  ],
   "related": [
     "ce-bar-chart",
-    "ce-chart"
+    "ce-chart",
+    "ce-data"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-data"
+  ],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-bar-chart",
+      "scope": "inline-trend-chart",
+      "when": "shape=\"bar\" and a labelled, full-size bar chart is acceptable"
+    }
   ],
   "category": "ui",
   "tier": "brick",
@@ -112,5 +143,11 @@
   "a11y": {
     "role": "img",
     "notes": "The SVG carries role=img and an aria-label that summarises the value range and count."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

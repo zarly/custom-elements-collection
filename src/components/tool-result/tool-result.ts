@@ -131,7 +131,7 @@ export class CeToolResult extends CecElement {
     const assigned = slot.assignedNodes({ flatten: true });
     // Count non-empty text nodes and elements
     this._hasDefaultContent = assigned.some(
-      (n) => n.nodeType === Node.ELEMENT_NODE || (n.nodeType === Node.TEXT_NODE && n.textContent!.trim() !== "")
+      (n) => n.nodeType === Node.ELEMENT_NODE || (n.nodeType === Node.TEXT_NODE && (n.textContent ?? "").trim() !== "")
     );
   };
 

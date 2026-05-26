@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-input",
   "name": "Input",
   "className": "CeInput",
@@ -7,7 +7,7 @@
   "description": "Token-driven labelled input. Wraps a native <input> so type, required, pattern, and other validation attributes work natively. Renders a label, optional help text, and an error region; aria-invalid + aria-describedby are kept in sync. ce-input fires per keystroke; ce-change fires on blur/Enter.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -219,5 +219,24 @@
     "Forms",
     "interactive",
     "control"
-  ]
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-textarea",
+      "scope": "text-entry",
+      "when": "free-form text where multi-line input is acceptable"
+    }
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

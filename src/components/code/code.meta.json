@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-code",
   "name": "Code",
   "className": "CeCode",
@@ -7,7 +7,7 @@
   "description": "Code block component. Header row shows an optional filename (left) and language label (right) plus a copy button when copy=true. Body is a <pre><code> with the slotted code text. The copy button uses navigator.clipboard with a hidden-textarea fallback and emits ce-code-copy on success.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "lang",
@@ -196,11 +196,23 @@
   "dependents": [],
   "dependencies": [],
   "related": [],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Comparison & narrative",
-    "code",
-    "snippet"
-  ]
+    "code"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

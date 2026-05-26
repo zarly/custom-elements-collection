@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-combobox",
+  "name": "Combobox",
+  "className": "CeCombobox",
+  "goal": "Provide a filterable text input bound to a popup listbox for single-value selection with keyboard navigation.",
+  "description": "Form-associated combobox combining a text input with a filterable popup listbox. Accepts options via a JSON data attribute or slotted ce-option children (CDR-005). Supports keyboard navigation, allow-custom mode for free-text entry, loading state, and full ARIA combobox pattern. Emits ce-change on selection.",
+  "limitations": "Groups are visual only — no nested ARIA grouprole. allow-custom mode commits the raw typed string as both value and label. Listbox is positioned with fixed JS math; CSS anchor-positioning deferred to v2.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name submitted with the form."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Currently selected option value; synced to ElementInternals for form submission."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Placeholder text shown in the input when nothing is selected."
+    },
+    {
+      "name": "data",
+      "type": "ComboboxOption[]",
+      "required": false,
+      "default": "[]",
+      "attribute": "data",
+      "description": "JSON array of options ({value, label?, disabled?, group?}). When empty, slotted ce-option children are used instead (CDR-005 dual mode)."
+    },
+    {
+      "name": "allowCustom",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "attribute": "allow-custom",
+      "reflect": true,
+      "description": "When true, pressing Enter with text that does not match any option commits the typed string as the new value."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Replaces the toggle chevron with a spinner and prevents interaction."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables the control."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Controls the listbox visibility; reflected for CSS host selectors."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ value: string, label: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired when the user selects an option (click or Enter) or commits a custom value. detail.value is the option value; detail.label is the human-readable label."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "ce-option children for the slot-mode authoring path (CDR-005). The combobox reads value/label/disabled/group attributes from each child."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Input field background."
+    },
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Listbox panel background."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Hovered/selected option background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Field and listbox border color."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Corner radius for field shell and listbox."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus border and selected check mark color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Invalid border color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Input and option text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Placeholder, toggle chevron, spinner, and group header color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Input and option font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Group header font size."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Input field padding."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Listbox vertical padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Option vertical padding and check mark margin."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Option horizontal padding and toggle chevron padding."
+    },
+    {
+      "name": "--ce-shadow-lg",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Listbox panel drop shadow."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring applied to the field shell when the input is focused."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Border, background, and listbox entrance animation transition."
+    },
+    {
+      "name": "--ce-popover-z",
+      "kind": "other",
+      "source": "local",
+      "fallback": "1000",
+      "description": "z-index for the listbox panel. Override to stack above modals."
+    },
+    {
+      "name": "--ce-combobox-listbox-max-height",
+      "kind": "size",
+      "source": "local",
+      "fallback": "260px",
+      "description": "Maximum height of the listbox panel before it scrolls."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "Popover API (HTMLElement.showPopover / hidePopover)",
+      "purpose": "Renders the listbox in the top layer so it escapes overflow:hidden containers.",
+      "writes": false
+    },
+    {
+      "api": "ElementInternals (attachInternals / setFormValue)",
+      "purpose": "Form-association: propagates the selected value to the surrounding form without a hidden input.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Adds a 'click' listener on document to implement click-outside close.",
+      "reason": "The listbox renders in the top layer (fixed position); the host element's own events don't capture outside clicks.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Adds resize and scroll listeners on window and scroll ancestors while the listbox is open.",
+      "reason": "Keeps listbox position aligned with the field when the page scrolls or the viewport resizes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "subTags": [
+    "ce-option"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-select",
+      "scope": "single-pick",
+      "when": "no free-text typing / autocomplete needed"
+    }
+  ],
+  "related": [
+    "ce-select",
+    "ce-input",
+    "ce-field",
+    "ce-popover"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "form",
+    "select",
+    "dropdown",
+    "filter"
+  ],
+  "a11y": {
+    "role": "combobox (on internal input)",
+    "notes": "Follows the ARIA combobox pattern: input has role=combobox, aria-expanded, aria-controls (listbox id), aria-autocomplete=list, and aria-activedescendant pointing at the highlighted option. The listbox div has role=listbox. Each option div has role=option, aria-selected, and aria-disabled. Keyboard: ArrowDown/Up navigate options; Enter selects; Escape closes. Tab closes without selecting. The toggle chevron and spinner are aria-hidden because the input provides the accessible name."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  },
+  "additional": {
+    "siblings": [
+      {
+        "tag": "ce-option",
+        "className": "CeOption",
+        "description": "Lightweight option child element for the slot-mode authoring path. Attributes: value (string), label (string), disabled (boolean), group (string). The combobox reads these at slot-change time and builds its internal option model."
+      }
+    ],
+    "cdrCompliance": {
+      "CDR-001": "No vocabulary enum on combobox itself. group is a free-text string on ce-option.",
+      "CDR-002": "value is a string scalar. Options carry value+label scalars. Compliant.",
+      "CDR-004": "loading/disabled/open are opt-in boolean attributes.",
+      "CDR-005": "Dual-form: data JSON attribute OR ce-option slot children. Both modes tested.",
+      "CDR-006": "Composes: consumer wraps in ce-field for label/help/error.",
+      "CDR-007": "Works zero-config with just name + slot children."
+    }
+  }
+}

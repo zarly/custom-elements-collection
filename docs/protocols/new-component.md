@@ -27,7 +27,7 @@ Everything else is part of the normal authoring loop.
 
 ### 0 — CDR pre-flight self-review (mandatory)
 
-Before sketching the public API, walk the [8 Component Design Records](../cdr/) and answer each question for your component. Each `no` is either a design fix or a documented deviation in the upcoming `CONCEPT.md`.
+Before sketching the public API, walk the [11 Component Design Records](../cdr/) and answer each question for your component. Each `no` is either a design fix or a documented deviation in the upcoming `CONCEPT.md`.
 
 | CDR | Question to answer | Default expectation |
 |---|---|---|
@@ -39,6 +39,9 @@ Before sketching the public API, walk the [8 Component Design Records](../cdr/) 
 | [CDR-006](../cdr/cdr-006-components-compose.md) | Does the component refuse or silently drop arbitrary HTML children? | No — composition is open unless ARIA mandates otherwise. |
 | [CDR-007](../cdr/cdr-007-sensible-defaults.md) | Can a useful rendering be produced from the tag with ≤ 2 attributes? | Yes — first `@example` block must demonstrate that minimal shape. |
 | [CDR-008](../cdr/cdr-008-additive-changes-only.md) | Does this component remove or narrow any existing API? | No — additive only. Narrowing needs an ADR override. |
+| [CDR-009](../cdr/cdr-009-deterministic-dom.md) | For static-tier (`interactive: false`) components — does any rendered DOM contain `Math.random`, `Date.now`, `crypto.randomUUID`, or resize-observer-derived values? | No — static-tier renders byte-identical output for identical input. Exceptions go through `// cec-allow-nondeterministic: <reason>`. |
+| [CDR-010](../cdr/cdr-010-same-data-multiple-views.md) | Does any attribute switch the renderer (`view=` / `as=` / `kind=` / `variant=`) to something a sibling tag does or could? Does any attribute re-order / filter / group the collection? | No — ship sibling tags for renderer swaps; sort/filter/group is the consumer's job (CSS var or wrapping component). |
+| [CDR-011](../cdr/cdr-011-llm-failure-mode-tolerance.md) | Does the component handle the six LLM failure modes (FM-1..FM-6) with documented degrade paths? Does `meta.failureModes[]` declare which modes apply? | Yes — each applicable FM has a per-mode test under `tests/llm-failure-modes/`. |
 
 Any `no` that you intentionally keep: jot the reason in a one-line note that becomes the seed for the `CONCEPT.md` at step 8.
 
@@ -199,7 +202,7 @@ Reference: [`src/components/card/card.meta.json`](../../src/components/card/card
 
 ```bash
 pnpm gen-exports   # → src/index.ts, src/auto.ts, src/entries/<name>.ts, src/manifest.ts, package.json#exports
-pnpm gen-skill     # → skill/SKILL.md catalog block + skill/references/index.md
+pnpm gen-skill     # → skills/cec-consumer/references/catalog.md + skills/cec-consumer/references/index.md
 ```
 
 Never hand-edit the generator outputs. If a generator output looks wrong, fix the meta or the generator — not the output.
@@ -210,7 +213,7 @@ Never hand-edit the generator outputs. If a generator output looks wrong, fix th
 git status --short | grep -E "^\?\? src/entries/<name>\.ts"   # → new entry exists
 grep -c '"./<name>"' package.json                              # → 1
 grep -c '"ce-<name>"' src/auto.ts                              # → ≥1
-grep -c "<ce-<name>>" skill/SKILL.md                           # → ≥1
+grep -c "ce-<name>" skills/cec-consumer/references/catalog.md  # → ≥1
 ```
 
 ### 6 — Examples

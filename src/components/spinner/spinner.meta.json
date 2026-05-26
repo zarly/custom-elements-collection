@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-spinner",
+  "name": "Spinner",
+  "className": "CeSpinner",
+  "goal": "Render an animated spinning indicator atom for inline loading affordance.",
+  "description": "Pure CSS spinning ring used as an inline loading atom below ce-skeleton and ce-loading-state. Supports four sizes, three tones, and reduced-motion fallback (slow fade pulse). Carries role=status and aria-label for screen reader announcements.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "size",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Visual size of the spinner ring: xs=12px, sm=16px, md=20px, lg=28px."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"Loading\"",
+      "reflect": true,
+      "description": "Accessible name for the status region; maps to aria-label on the host."
+    },
+    {
+      "name": "tone",
+      "type": "\"default\" | \"muted\" | \"accent\"",
+      "required": false,
+      "default": "\"default\"",
+      "reflect": true,
+      "description": "Color tone: default inherits currentColor from parent, muted uses --ce-muted, accent uses --ce-color-blue."
+    }
+  ],
+  "events": [],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Spinner color when tone=muted."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Spinner color when tone=accent."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-skeleton",
+    "ce-status-light"
+  ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    { "tag": "ce-skeleton", "scope": "loading-affordance" }
+  ],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Feedback",
+    "loading",
+    "animation"
+  ],
+  "a11y": {
+    "role": "status",
+    "notes": "The host element always carries role=\"status\" and aria-label (driven by the label prop, default \"Loading\"). The inner decorative ring has aria-hidden=\"true\". When the spinner is paired with adjacent visible text (e.g. \"Saving…\"), the label default is sufficient — the visible text provides the broader context for sighted users while the status role announces to screen readers."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
+}

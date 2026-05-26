@@ -61,12 +61,12 @@ Renaming a meta field is a Type-2 (reversible) decision: a single PR can swing i
 ### Negative
 
 - **One-time migration cost.** 72 meta files updated, the skill CLI flag renamed, the generated catalog table re-rendered.
-- **Skill catalog header changes.** `Scale` column becomes `Tier`. Anyone reading the regenerated `skill/SKILL.md` should be aware.
+- **Skill catalog header changes.** `Scale` column becomes `Tier`. Anyone reading the regenerated `skills/cec-consumer/references/catalog.md` should be aware.
 - **No backward-compat shim.** A meta still using `"scale"` will fail validation; not preserving an alias keeps the schema honest at the cost of a hard cutover.
 
 ### Neutral
 
-- The `scale` column in old generated catalogs (e.g. an out-of-date `skill/references/index.md` snapshot) is the only place a stale name persists; `pnpm gen-skill` rewrites both files on the migration commit.
+- The `scale` column in old generated catalogs (e.g. an out-of-date `skills/cec-consumer/references/index.md` snapshot) is the only place a stale name persists; `pnpm gen-skill` rewrites both files on the migration commit.
 
 ## Alternatives considered
 

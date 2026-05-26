@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-tag",
   "name": "Tag",
   "className": "CeTag",
@@ -7,7 +7,7 @@
   "description": "Distinct from ce-chip (which is a status pip): ce-tag is a content-categorisation token used for tag clouds, multi-select filter facets, and topical labels. Leads with a faded # glyph for visual recognition. Seven CecColor tints (neutral default), and an optional × button that emits ce-tag-remove with the optional value identifier in the event detail. The label itself is slotted (vocabulary lives in children per CDR-001).",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "color",
@@ -226,11 +226,23 @@
     "ce-chip",
     "ce-filter-bar"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "tag",
     "label"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

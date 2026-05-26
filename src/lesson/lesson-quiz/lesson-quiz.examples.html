@@ -1,4 +1,4 @@
-<!-- @example Quiz -->
+<!-- @example Single-question shape (attribute-driven) -->
 <lesson-quiz
   question="Which tag wraps the whole page?"
   options='["ce-shell","ce-card","ce-grid"]'
@@ -6,3 +6,37 @@
   explanation="ce-shell is the page-level wrapper."
 ></lesson-quiz>
 
+<!-- @example Container shape — static batch of lesson-question children (default; reveals correct answers) -->
+<lesson-quiz>
+  <lesson-question prompt="Which check narrows `unknown` to `string`?">
+    <lesson-option correct><code>typeof x === 'string'</code></lesson-option>
+    <lesson-option><code>x instanceof String</code></lesson-option>
+    <lesson-option><code>x as string</code></lesson-option>
+  </lesson-question>
+  <lesson-question prompt="Which discriminator narrows a tagged union most efficiently?">
+    <lesson-option><code>typeof v.kind === 'string'</code></lesson-option>
+    <lesson-option correct><code>v.kind === 'circle'</code></lesson-option>
+    <lesson-option><code>v as Circle</code></lesson-option>
+  </lesson-question>
+</lesson-quiz>
+
+<!-- @example Container shape — interactive batch (CDR-004 opt-in cascades to every <lesson-question>) -->
+<lesson-quiz interactive>
+  <lesson-question prompt="Which check narrows `unknown` to `string`?">
+    <lesson-option correct><code>typeof x === 'string'</code></lesson-option>
+    <lesson-option><code>x instanceof String</code></lesson-option>
+    <lesson-option><code>x as string</code></lesson-option>
+    <lesson-note type="hint"><code>instanceof</code> narrows class instances, not primitives.</lesson-note>
+  </lesson-question>
+  <lesson-question prompt="Which discriminator narrows a tagged union most efficiently?">
+    <lesson-option><code>typeof v.kind === 'string'</code></lesson-option>
+    <lesson-option correct><code>v.kind === 'circle'</code></lesson-option>
+    <lesson-option><code>v as Circle</code></lesson-option>
+    <lesson-note type="hint">Equality on a literal tag is the canonical narrowing.</lesson-note>
+  </lesson-question>
+  <lesson-question prompt="When does the `in` operator narrowing fire?">
+    <lesson-option correct>when the property name is a string literal</lesson-option>
+    <lesson-option>when the property exists in the prototype chain</lesson-option>
+    <lesson-option>only on a union of object types</lesson-option>
+  </lesson-question>
+</lesson-quiz>

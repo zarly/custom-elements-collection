@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-kpi",
   "name": "Kpi",
   "className": "CeKpi",
@@ -7,7 +7,7 @@
   "description": "Single-stat KPI block — large value, small uppercase label, and optional inline trend (e.g. '+12%') that auto-colors based on its leading sign (+ green, - red, otherwise neutral). Used inside <ce-hero slot=\"stats\"> or in any grid row.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -164,11 +164,28 @@
   "related": [
     "ce-hero"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-score",
+      "scope": "numeric-summary"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Metrics & charts",
-    "kpi",
-    "stat"
-  ]
+    "metrics"
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

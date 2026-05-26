@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-attachment-strip",
   "name": "Attachment strip",
   "className": "CeAttachmentStrip",
@@ -7,7 +7,7 @@
   "description": "Horizontal scrolling row of attachment tiles placed above a chat input. Each tile shows a thumbnail (for images) or a kind icon (file, audio, video, other), the filename, and an optional size label. A ✕ button on each tile fires `ce-attachment-remove`; the host updates its source-of-truth. Accepts data as a JSON `items` attribute (CDR-005 JSON mode) or as slotted custom tiles when `items` is empty (CDR-005 slot mode).",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -172,15 +172,27 @@
   "related": [
     "ce-file-card"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Chat surfaces",
-    "attachments",
-    "preview"
+    "attachments"
   ],
   "a11y": {
     "role": "list",
     "notes": "The strip container carries role=list. Each JSON-mode tile has role=group with an aria-label from the filename. The remove button has an aria-label of 'Remove <filename>'. Focus ring is visible on the remove button via :focus-visible."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

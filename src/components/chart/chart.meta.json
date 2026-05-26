@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-chart",
   "name": "Chart",
   "className": "CeChart",
@@ -7,7 +7,7 @@
   "description": "Lazy-loaded Chart.js wrapper. On first update injects a <script src=…> for Chart.js if window.Chart is not already present, then mounts a chart on a managed canvas. Honors live updates to type / data / options by destroying and re-mounting. Renders an inline error block if the script fails to load.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -101,12 +101,25 @@
   "related": [
     "ce-bar-chart"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Metrics & charts",
     "chart",
-    "chart.js",
     "data-viz"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "network side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-pagination",
   "name": "Pagination",
   "className": "CePagination",
@@ -7,7 +7,7 @@
   "description": "Static-by-default page navigation: renders the current state from page + total, emits ce-pagechange on activation, and only mutates page itself when manage='self' is set (CDR-004 stateful opt-in). The numbered range collapses with ellipses when there are gaps, controlled by the sibling count. A compact mode swaps the number buttons for a 'n / total' info line for tight surfaces.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "page",
@@ -163,15 +163,27 @@
     "ce-nav-list",
     "ce-breadcrumbs"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
-    "navigation",
-    "pagination"
+    "navigation"
   ],
   "a11y": {
     "role": "navigation",
     "notes": "Wrapped in <nav aria-label='Pagination'>. Each numbered button carries an aria-label, the current page is marked with aria-current='page'. Compact info uses aria-live='polite' so screen readers announce page changes."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

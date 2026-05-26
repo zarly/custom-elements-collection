@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeBarChart } from "./bar-chart.js";
 import { CeBarRow } from "../bar-row/bar-row.js";
@@ -124,7 +124,6 @@ describe("<ce-bar-chart>", () => {
   });
 
   it("parses `data` from a JSON attribute and falls back on invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const ok = document.createElement("ce-bar-chart") as CeBarChart;
     ok.setAttribute(
       "data",
@@ -143,8 +142,6 @@ describe("<ce-bar-chart>", () => {
     document.body.appendChild(bad);
     await bad.updateComplete;
     expect(bad.data).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     bad.remove();
   });
 

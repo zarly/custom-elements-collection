@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-stop-button",
   "name": "Stop button",
   "className": "CeStopButton",
@@ -7,7 +7,7 @@
   "description": "Compact button rendered in three styled variants (primary/secondary/ghost). Default content is a stop-square SVG plus the label, both replaceable via the default slot. Emits a bubbling, composed ce-chat-stop CustomEvent on click or Enter/Space — no event fired when disabled.",
   "stability": "beta",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "label",
@@ -136,15 +136,27 @@
     "ce-retry-button",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Chat surfaces",
-    "button",
     "intent"
   ],
   "a11y": {
     "role": "button",
     "notes": "Native <button> element; the SVG is aria-hidden so the label text drives the accessible name. Keyboard activation (Enter/Space) is handled on the inner button's keydown event."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

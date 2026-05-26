@@ -89,8 +89,8 @@ export class CeCard extends CecElement {
     }
 
     /* Hide slot wrappers if their slot is empty. Implemented via :has()
-       (Baseline 2023). Graceful fallback: the wrapper remains but is empty,
-       contributing only a tiny margin. */
+     (Baseline 2023). Graceful fallback: the wrapper remains but is empty,
+     contributing only a tiny margin. */
     .ce-card__title:not(:has(::slotted(*))) {
       display: none;
     }

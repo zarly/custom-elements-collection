@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-thinking",
   "name": "Thinking",
   "className": "CeThinking",
@@ -7,7 +7,7 @@
   "description": "Compact typing indicator with three animation variants (dots, wave, spinner) and a configurable label. The host element is role=status with aria-live=polite so assistive tech announces appearance and disappearance.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "label",
@@ -72,6 +72,13 @@
     "ce-cursor",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -83,5 +90,11 @@
   "a11y": {
     "role": "status",
     "notes": "aria-live=polite so screen readers announce state changes; provide a meaningful label."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

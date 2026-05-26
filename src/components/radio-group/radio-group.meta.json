@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-radio-group",
   "name": "RadioGroup",
   "className": "CeRadioGroup",
@@ -7,7 +7,7 @@
   "description": "Radio-group with three visual treatments: 'classic' (traditional radio circles), 'segmented' (joined-button group), and 'card' (option-as-card with optional hint line). Roving tabindex; arrow keys + Home/End move selection; Space/Enter activate. Options provided as a JSON array; per-option disabled state honored. Emits ce-change with { name, value }.",
   "stability": "experimental",
   "created": "2026-05-08",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -197,6 +197,24 @@
     "ce-filter-bar",
     "ce-select"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-select",
+      "scope": "single-pick",
+      "when": "option count is large or vertical space is constrained"
+    },
+    {
+      "tag": "ce-segmented",
+      "scope": "single-pick",
+      "when": "3–5 short labels suitable for an inline button row"
+    }
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -207,5 +225,11 @@
   "a11y": {
     "role": "radiogroup",
     "notes": "Roving tabindex (only the current option is tabbable). Arrow keys / Home / End move selection + focus; Space / Enter explicitly activate. aria-checked reflects the selection."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

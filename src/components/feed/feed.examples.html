@@ -1,0 +1,85 @@
+<!-- @example Deploy activity log — day grouping, newest-first (default) -->
+<ce-feed group-by="day">
+  <ce-feed-entry time="2026-05-23T10:32:00Z">
+    <strong>Deploy succeeded</strong> — <ce-relative-time datetime="2026-05-23T10:32:00Z"></ce-relative-time>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:28:00Z">
+    Health checks passed (3/3)
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:25:00Z">
+    Build completed in 47 s
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:24:00Z">
+    Deploy started by <a href="#">alex</a>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-22T18:42:00Z">
+    PR #143 merged — "feat: add ce-feed component"
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-22T14:00:00Z">
+    <strong>Deploy failed</strong> — rollback triggered
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-21T09:00:00Z">
+    Scheduled maintenance window opened
+  </ce-feed-entry>
+</ce-feed>
+
+<!-- @example Monthly release timeline — oldest-first, month grouping -->
+<ce-feed group-by="month" order="oldest">
+  <ce-feed-entry time="2026-01-15T12:00:00Z">
+    <strong>v1.0.0</strong> — initial public release
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-02-10T09:00:00Z">
+    <strong>v1.1.0</strong> — added ce-sparkline + ce-kpi
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-03-05T11:00:00Z">
+    <strong>v1.2.0</strong> — dark-theme token pass
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-04-20T16:00:00Z">
+    <strong>v1.3.0</strong> — ce-timeline + ce-message-group
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:00:00Z">
+    <strong>v1.4.0</strong> — ce-feed (experimental)
+  </ce-feed-entry>
+</ce-feed>
+
+<!-- @example Dense notification feed — no grouping, compact display -->
+<ce-feed dense>
+  <ce-feed-entry time="2026-05-23T11:00:00Z">
+    <ce-avatar src="/avatars/ana.jpg"></ce-avatar>
+    Ana commented on <a href="#">issue #88</a>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:55:00Z">
+    <ce-avatar src="/avatars/bot.jpg"></ce-avatar>
+    CI passed on branch <code>feat/ce-feed</code>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:48:00Z">
+    <ce-avatar src="/avatars/alex.jpg"></ce-avatar>
+    Alex pushed 3 commits to <a href="#">main</a>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T10:30:00Z">
+    Scheduled job <strong>nightly-backup</strong> succeeded
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-23T09:15:00Z">
+    New sign-up: <strong>kapil@example.com</strong>
+  </ce-feed-entry>
+</ce-feed>
+
+<!-- @example Audit log — week grouping with rich entry content -->
+<ce-feed group-by="week" order="newest">
+  <ce-feed-entry time="2026-05-23T08:00:00Z">
+    <ce-badge color="green">GRANTED</ce-badge>
+    Role <strong>admin</strong> assigned to user <em>u/42</em>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-22T14:30:00Z">
+    <ce-badge color="red">REVOKED</ce-badge>
+    API key <code>sk_live_…ab3c</code> revoked
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-20T09:00:00Z">
+    <ce-badge color="amber">CHANGED</ce-badge>
+    Password updated for <em>u/7</em>
+  </ce-feed-entry>
+  <ce-feed-entry time="2026-05-14T16:00:00Z">
+    <ce-badge color="blue">EXPORTED</ce-badge>
+    Data export requested by <em>u/1</em> (GDPR)
+  </ce-feed-entry>
+</ce-feed>

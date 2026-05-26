@@ -1,3 +1,11 @@
+<!-- @example Text-content data — whitespace-separated numbers (CDR-2/CDR-5) -->
+<ce-sparkline>3 5 4 7 6 9 8 12 11 15</ce-sparkline>
+
+<!-- @example <ce-data> JSON-payload child (CDR-5 advanced — for big or escaping-heavy data) -->
+<ce-sparkline>
+  <ce-data>{"values":[3,5,4,7,6,9,8,12,11,15]}</ce-data>
+</ce-sparkline>
+
 <!-- @example Inline trend line beside a KPI value -->
 <p style="display:flex;align-items:center;gap:var(--ce-space-3)">
   <strong>$12,480</strong>

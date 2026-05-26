@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-chat-bubble",
   "name": "Chat bubble",
   "className": "CeChatBubble",
@@ -7,7 +7,7 @@
   "description": "Single LLM-chat message bubble. The role attribute drives color tinting (assistant=blue, user=purple, system=neutral, tool=amber) and avatar placement (user-aligned right; everyone else left). Header surfaces author + model + timestamp; footer surfaces a slotted footer + an optional tokens count. Pure presentation; emits no events.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "role",
@@ -217,15 +217,26 @@
     "ce-copy-button",
     "ce-retry-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Chat surfaces",
-    "message",
-    "conversation",
     "component"
   ],
   "a11y": {
     "notes": "aria-label is set from the author attribute when present; aria-roledescription=message identifies the bubble to assistive tech without requiring a literal ARIA role (the role attribute is taken by the chat-role API)."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

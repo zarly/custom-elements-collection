@@ -65,6 +65,7 @@ tmp/
 /internal/bundle-visualizer-sunburst.html
 /internal/bundle-visualizer-network.html
 vis/
+.meta-v2-review/
 
 # ───── AI / assistant tooling artifacts ─────
 .claude/

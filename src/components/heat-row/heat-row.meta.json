@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-heat-row",
   "name": "HeatRow",
   "className": "CeHeatRow",
@@ -7,7 +7,7 @@
   "description": "Carries a label attribute (Y-axis header) and a default slot for <ce-heat-cell> children. When nested inside ce-heatmap the parent reads label as an attribute and iterates ce-heat-cell children via querySelectorAll — the row itself renders nothing (display:contents). When used standalone it renders a labeled flex row of cells. Non-ce-heat-cell slot children are passed through to light DOM and ignored by the parent's data-resolution path.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "label",
@@ -22,7 +22,8 @@
   "slots": [
     {
       "name": "",
-      "description": "Default slot for <ce-heat-cell> children. Non-ce-heat-cell elements are passed through to light DOM and ignored by the parent ce-heatmap data path."
+      "description": "Default slot for <ce-heat-cell> children. Non-ce-heat-cell elements are passed through to light DOM and ignored by the parent ce-heatmap data path.",
+      "acceptTags": ["ce-heat-cell"]
     }
   ],
   "cssVariables": [
@@ -63,6 +64,17 @@
     "ce-heatmap",
     "ce-heat-cell"
   ],
+  "requiredParent": [
+    "ce-heatmap"
+  ],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-heat-cell"
+  ],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -74,5 +86,11 @@
   "a11y": {
     "role": "none (standalone flex row)",
     "notes": "In standalone mode renders a visible labeled row. When nested inside ce-heatmap the parent provides table-row semantics via <tr>/<th>/<td>. The label attribute is always plain text per HTML."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

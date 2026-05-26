@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-drawer",
+  "name": "Drawer",
+  "className": "CeDrawer",
+  "goal": "Edge-attached panel that slides in from top, right, bottom, or left for filter panels, settings, inspectors, carts, and navigation.",
+  "description": "A sliding panel anchored to one of the four viewport edges. In modal mode wraps a native <dialog> with showModal() for automatic focus trap, scrim, and Escape handling. In non-modal mode uses a positioned div. Supports four sides, four sizes, an optional scrim dismiss guard, trigger slot, header/body/footer slots, and programmatic show/hide/toggle methods.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true the drawer is visible; setting to false closes it."
+    },
+    {
+      "name": "side",
+      "type": "\"start\" | \"end\" | \"top\" | \"bottom\"",
+      "required": false,
+      "default": "\"end\"",
+      "reflect": true,
+      "description": "Which viewport edge the drawer attaches to. start = inline-start (left in LTR), end = inline-end (right in LTR), top, bottom."
+    },
+    {
+      "name": "modal",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When true (default) uses <dialog showModal()> for focus trap, scrim, and native Escape. When false uses a positioned div."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Controls the drawer's cross-axis dimension. sm=24rem, md=32rem, lg=48rem, full=100% of the relevant viewport dimension."
+    },
+    {
+      "name": "dismissible",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When true (default), Escape and scrim/backdrop click close the drawer. When false, only programmatic hide() works."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-drawer-open",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the drawer becomes visible."
+    },
+    {
+      "name": "ce-drawer-close",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires after the drawer closes."
+    }
+  ],
+  "methods": [
+    {
+      "name": "show",
+      "signature": "show(): void",
+      "description": "Opens the drawer (equivalent to setting open=true)."
+    },
+    {
+      "name": "hide",
+      "signature": "hide(): void",
+      "description": "Closes the drawer (equivalent to removing the open attribute)."
+    },
+    {
+      "name": "toggle",
+      "signature": "toggle(): void",
+      "description": "Flips the current open state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "Element that opens the drawer on click. Receives aria-haspopup and aria-expanded."
+    },
+    {
+      "name": "header",
+      "description": "Header area: title, logo, branding. Used as the dialog's accessible label via aria-labelledby."
+    },
+    {
+      "name": "",
+      "description": "Drawer body content. Scrollable if content overflows."
+    },
+    {
+      "name": "footer",
+      "description": "Action area: buttons, status. Hidden when the slot is empty."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Drawer panel background."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Drawer body text color."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Header and footer separator lines."
+    },
+    {
+      "name": "--ce-shadow-lg",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Drawer panel elevation shadow."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Close button corner radius."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Close button icon color."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Close button hover overlay."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring on close button."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing used for the close button hover state."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Close button icon font size."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Footer button gap."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Footer vertical padding."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Header and body vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Header, body, and footer horizontal padding."
+    },
+    {
+      "name": "--ce-drawer-duration",
+      "kind": "other",
+      "source": "local",
+      "description": "Slide animation duration. Default 260ms.",
+      "fallback": "260ms"
+    },
+    {
+      "name": "--ce-drawer-easing",
+      "kind": "other",
+      "source": "local",
+      "description": "Slide animation easing function. Default ease.",
+      "fallback": "ease"
+    },
+    {
+      "name": "--ce-drawer-scrim",
+      "kind": "color",
+      "source": "local",
+      "description": "Backdrop scrim color in modal mode. Default rgba(0,0,0,0.45).",
+      "fallback": "rgba(0, 0, 0, 0.45)"
+    },
+    {
+      "name": "--ce-drawer-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index for non-modal positioned panel. Default 400.",
+      "fallback": "400"
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLDialogElement.showModal",
+      "purpose": "Opens the dialog in the top-layer with a built-in focus trap and backdrop.",
+      "writes": false
+    },
+    {
+      "api": "HTMLDialogElement.close",
+      "purpose": "Removes the dialog from the top-layer.",
+      "writes": false
+    },
+    {
+      "api": "document.activeElement",
+      "purpose": "Caches the previously-focused element so focus can be restored on close.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Calls dialog.showModal() and dialog.close() to manage the native top-layer in modal mode.",
+      "reason": "Required to leverage the browser's built-in top-layer, focus-trap, backdrop, and Escape handling.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Returns focus to document.activeElement captured at open time.",
+      "reason": "WCAG 2.1 SC 2.4.3: focus must return to the trigger element after a dialog closes.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "In non-modal mode, attaches a document keydown listener to handle Escape when dismissible=true.",
+      "reason": "Non-modal panels are not in the top-layer so the browser does not fire cancel for them.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-modal",
+    "ce-popover",
+    "ce-button"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    { "tag": "ce-modal", "scope": "dismissible-overlay" }
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "overlay",
+    "navigation",
+    "interactive"
+  ],
+  "a11y": {
+    "role": "dialog",
+    "notes": "Modal mode: native <dialog showModal()> supplies role=dialog, focus trap, and Escape handling automatically. aria-modal=true and aria-labelledby pointing to the header slot wrapper are added to the dialog element. Non-modal mode: the panel div carries role=dialog, aria-modal=false, and the same aria-labelledby. The close button has aria-label='Close'. The slotted trigger receives aria-haspopup=dialog and aria-expanded. Focus returns to the trigger element on close."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

@@ -1,13 +1,13 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-quiz",
   "name": "LessonQuiz",
   "className": "LessonQuiz",
-  "goal": "Run a single-question multiple-choice quiz with instant feedback, an explanation reveal, and a reset() method.",
-  "description": "Single-question multiple-choice quiz. Renders a question and a vertical list of options; clicking an option marks it green if correct or red if wrong (and outlines the correct one), shows the explanation below, and disables the rest. lesson-quiz-answer fires once per question.",
+  "goal": "Run a multiple-choice quiz — either a single attribute-driven question with instant feedback, or a slotted batch of <lesson-question> children with one CDR-004 interactive opt-in.",
+  "description": "Two-shape multiple-choice quiz. In the single-question shape, set question/options/correct/explanation; clicking an option marks it green if correct or red if wrong (and outlines the correct one), shows the explanation, and disables the rest. lesson-quiz-answer fires once. In the container shape, leave question empty and slot one or more <lesson-question> children; each manages its own answer state via lesson-question-answer. Setting interactive on the quiz cascades the attribute to every direct <lesson-question> child so a whole batch can be opted in with one attribute (CDR-004). The container attribute auto-reflects when question is empty and drops the panel chrome so the questions provide their own framing.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "question",
@@ -35,7 +35,23 @@
       "type": "string",
       "required": false,
       "default": "\"\"",
-      "description": "Shown after the user picks."
+      "description": "Shown after the user picks (single-question shape only)."
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Container-shape CDR-004 opt-in: cascades the interactive attribute to every direct <lesson-question> child. Has no effect in single-question shape (the attribute-driven quiz is always clickable by definition)."
+    },
+    {
+      "name": "container",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Auto-reflected when question is empty. Drops the outer panel chrome so slotted <lesson-question> children provide their own framing. Authors do not usually set this directly."
     }
   ],
   "events": [
@@ -54,7 +70,14 @@
       "description": "Clears the picked state so the quiz can be retaken."
     }
   ],
-  "slots": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Container-shape only. Slot <lesson-question> children (and any inline narrative HTML) when question is empty. The single-question shape renders its own UI and ignores slotted content.",
+      "acceptTags": ["lesson-question"],
+      "acceptShapes": ["child-tag:lesson-question"]
+    }
+  ],
   "cssVariables": [
     {
       "name": "--ce-surface",
@@ -186,10 +209,29 @@
     }
   ],
   "dependents": [],
-  "dependencies": [],
+  "dependencies": [
+    "lesson-question"
+  ],
   "related": [
+    "lesson-question",
+    "lesson-option",
     "lesson-frame",
     "lesson-gap"
+  ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "lesson-question"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "lesson-quickfire",
+      "scope": "multi-choice-batch",
+      "when": "single-question or container shape with rounds/questions that share the same prompt+options+correct shape"
+    }
   ],
   "category": "lesson",
   "tier": "widget",
@@ -197,5 +239,12 @@
     "Education",
     "quiz",
     "multiple-choice"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-affix",
+  "name": "Affix",
+  "className": "CeAffix",
+  "goal": "Wrap content in a position:sticky region pinned to a viewport edge with configurable offset and z-index.",
+  "description": "Pure-CSS sticky wrapper for toolbar headers, bottom docks, and side-rail TOCs. Accepts any CSS length for the offset and uses logical inset properties (inset-inline-start/end) for RTL-safe start/end edges.",
+  "limitations": "position:sticky requires the nearest scrolling ancestor to have overflow other than visible. The affix must be shorter than the scroll container to produce a visible sticking effect. The 'until' feature (unstick past a sentinel element) is deferred to v2 — it requires IntersectionObserver and was excluded from the pure-CSS v1 scope.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "edge",
+      "type": "\"top\" | \"bottom\" | \"start\" | \"end\"",
+      "required": false,
+      "default": "\"top\"",
+      "reflect": true,
+      "description": "Viewport edge to stick against. start/end use logical inset properties for RTL support."
+    },
+    {
+      "name": "offset",
+      "type": "string",
+      "required": false,
+      "default": "\"0\"",
+      "reflect": true,
+      "description": "Distance from the sticky edge. A bare number is treated as pixels (64 → 64px); any CSS length string passes through unchanged."
+    },
+    {
+      "name": "z",
+      "type": "string",
+      "required": false,
+      "default": "\"10\"",
+      "reflect": true,
+      "description": "z-index applied to the sticky element."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Content to affix — typically a toolbar, filter bar, header, or CTA."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--_offset",
+      "kind": "size",
+      "source": "local",
+      "description": "Resolved offset value set by the component from the offset attribute. Consumed by :host([edge]) rules.",
+      "fallback": "0"
+    },
+    {
+      "name": "--_z",
+      "kind": "other",
+      "source": "local",
+      "description": "Resolved z-index value set by the component from the z attribute.",
+      "fallback": "10"
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-grid",
+    "ce-toc"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives"
+  ],
+  "a11y": {
+    "notes": "No ARIA role is added; the element is transparent to the accessibility tree. Screen readers see the slotted content as if the wrapper were not present."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

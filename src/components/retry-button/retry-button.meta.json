@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-retry-button",
   "name": "Retry button",
   "className": "CeRetryButton",
@@ -7,7 +7,7 @@
   "description": "Compact button rendered in three styled variants (primary/secondary/ghost). Default content is a circular-arrow SVG plus the label, both replaceable via the default slot. Emits a bubbling, composed ce-retry CustomEvent on click — no detail payload.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "label",
@@ -128,6 +128,13 @@
     "ce-chat-bubble",
     "ce-rating"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -139,5 +146,11 @@
   "a11y": {
     "role": "button",
     "notes": "Native <button>; the SVG is aria-hidden so the label drives the accessible name."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

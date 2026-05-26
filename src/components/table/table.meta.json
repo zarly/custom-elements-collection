@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-table",
   "name": "Table",
   "className": "CeTable",
@@ -7,7 +7,7 @@
   "description": "Light-DOM-aware wrapper around a slotted <table>. Adds surface border, radius, horizontal scroll container, and ambient styles for headers, cells, hover, and special td classes (.num, .center, .mono). Sticky and compact attributes are honored via the ambient stylesheet.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "sticky",
@@ -138,11 +138,23 @@
   "related": [
     "ce-pagination"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Layout & primitives",
-    "table",
     "data"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

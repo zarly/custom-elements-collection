@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-avatar",
   "name": "Avatar",
   "className": "CeAvatar",
@@ -7,7 +7,7 @@
   "description": "Compact identity primitive. Renders an <img> when src is provided; otherwise derives monogram initials from name (up to two tokens). Falls back to an empty neutral disc when neither is given. Three sizes (sm/md/lg) and two shapes (circle/square). The initials fallback accepts an optional CecColor tint for category-coded teams or roles.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "src",
@@ -135,11 +135,24 @@
     "ce-persona",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
     "identity",
     "avatar"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

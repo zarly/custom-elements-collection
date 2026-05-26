@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-checklist",
   "name": "Checklist",
   "className": "CeChecklist",
@@ -7,7 +7,7 @@
   "description": "Markdown-style task list rendered as native checkboxes. Without persist-key, this is a static read-only display — no localStorage writes happen and no mutation events fire. Items may be supplied as a JSON attribute (items prop) or as <ce-check-item> slot children per CDR-005 (resolution order: JSON prop non-empty → slot children → empty state). Setting persist-key mirrors state to localStorage so progress survives reloads. With allow-edit, a small input appears so users can append new items inline. With group-by=\"category\", items are rendered under <h4> section headers.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -60,7 +60,8 @@
   "slots": [
     {
       "name": "",
-      "description": "<ce-check-item> children. When no items JSON is provided, the checklist reads id/checked/category attributes and inner HTML from each <ce-check-item> child per CDR-005."
+      "description": "<ce-check-item> children. When no items JSON is provided, the checklist reads id/checked/category attributes and inner HTML from each <ce-check-item> child per CDR-005.",
+      "acceptTags": ["ce-check-item"]
     }
   ],
   "cssVariables": [
@@ -166,11 +167,27 @@
     "ce-toc",
     "ce-check-item"
   ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-check-item"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Forms",
     "task",
     "form"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "reads localStorage on connect when persist-key is set; restored items change innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

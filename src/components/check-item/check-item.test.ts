@@ -18,8 +18,6 @@ describe("<ce-check-item>", () => {
     document.body.appendChild(el);
     await ready(el);
     // Should be in standalone mode (not nested in ce-checklist)
-    const cb = el.querySelector("input[type=checkbox]") as HTMLInputElement | null;
-    // Lit renders into light DOM; look in the element itself
     await ready(el);
     // The element renders into light DOM — check for standalone attribute
     expect(el.hasAttribute("data-standalone")).toBe(true);

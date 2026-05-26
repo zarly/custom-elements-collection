@@ -72,7 +72,7 @@ These never destroy hand-written content; they regenerate machine outputs from `
 
 ```bash
 pnpm gen-exports                                   # → src/{index,auto,manifest}.ts, src/entries/*, package.json exports
-pnpm gen-skill                                     # → skill/SKILL.md catalog block + skill/references/index.md
+pnpm gen-skill                                     # → skills/cec-consumer/references/catalog.md + skills/cec-consumer/references/index.md
 pnpm exec tsx scripts/build-publish-manifest.ts    # → src/manifest.publish.ts (no --apply)
 ```
 

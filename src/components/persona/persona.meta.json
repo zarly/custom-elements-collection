@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-persona",
   "name": "Persona",
   "className": "CePersona",
@@ -7,7 +7,7 @@
   "description": "Persona / role card. Top row shows an emoji-or-character avatar plus name + role; optional `rank` and `score` attributes render as small pills beside the name. Below the head sits a `tags` slot for chips, a `detail` slot for a rich description paragraph, a `meta` slot for `<ce-kv>` metadata rows, and a default slot for arbitrary body content. Six color tints set the top border and avatar/pill tint.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -65,7 +65,10 @@
     },
     {
       "name": "meta",
-      "description": "Free-form metadata rows. Typically contains `<ce-kv slot=\"meta\" key=\"...\">value</ce-kv>` items."
+      "description": "Free-form metadata rows. Typically contains `<ce-kv slot=\"meta\" key=\"...\">value</ce-kv>` items.",
+      "acceptTags": [
+        "ce-kv"
+      ]
     },
     {
       "name": "",
@@ -293,11 +296,24 @@
   "related": [
     "ce-kv"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-kv"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
-    "Comparison & narrative",
-    "persona",
-    "user-research"
-  ]
+    "Comparison & narrative"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

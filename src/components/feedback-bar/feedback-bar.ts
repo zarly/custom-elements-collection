@@ -72,11 +72,6 @@ export class CeFeedbackBar extends CecElement {
     super.connectedCallback();
     if (!this.hasAttribute("role")) this.setAttribute("role", "group");
     this.#syncAria();
-    if (!this.item && typeof console !== "undefined") {
-      console.warn(
-        "[ce-feedback-bar] missing required `item` attribute — events will not have an item id."
-      );
-    }
     // Initial inheritance pass on next tick (children may upgrade after us).
     queueMicrotask(() => this.#propagateAttrs());
     this.addEventListener("ce-rating-change", this.#onRating as EventListener);

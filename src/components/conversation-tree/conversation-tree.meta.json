@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-conversation-tree",
   "name": "Conversation tree",
   "className": "CeConversationTree",
@@ -7,7 +7,7 @@
   "description": "Inline pill control rendering a prev arrow, an index/total counter, and a next arrow. Used to switch among forked or regenerated responses in chat surfaces. Emits ce-branch-prev / ce-branch-next on directional clicks plus a unified ce-branch-select on every change. Supports ArrowLeft / ArrowRight keyboard navigation when focused.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "index",
@@ -173,6 +173,13 @@
     "ce-retry-button",
     "ce-tabs"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -183,5 +190,11 @@
   "a11y": {
     "role": "(none — host is a generic focusable container)",
     "notes": "The host receives tabindex=\"0\" on connect and listens for ArrowLeft / ArrowRight. Each inner button has an aria-label (\"Previous branch\" / \"Next branch\"). The counter span uses aria-live=\"polite\" so screen readers announce index changes."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-bar-row",
   "name": "BarRow",
   "className": "CeBarRow",
@@ -8,7 +8,7 @@
   "limitations": "Standalone rendering always scales fill as value/max — there is no auto-scale across sibling rows. Use ce-bar-chart for a multi-row auto-scaling chart. When nested inside ce-bar-chart, the max attribute on ce-bar-row is ignored; the parent chart's own max/auto-scale governs fill width.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -145,6 +145,15 @@
   "related": [
     "ce-bar-chart"
   ],
+  "requiredParent": [
+    "ce-bar-chart"
+  ],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -156,5 +165,11 @@
   "a11y": {
     "role": "progressbar (standalone mode only)",
     "notes": "In standalone mode exposes role=progressbar with aria-valuemin=0, aria-valuemax=max, aria-valuenow=value, and aria-label derived from slot text, then label attribute, then formatted value. When nested inside ce-bar-chart the parent handles all ARIA — the row renders nothing. The label slot can carry any semantic HTML."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

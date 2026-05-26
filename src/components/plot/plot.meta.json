@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-plot",
   "name": "Plot",
   "className": "CePlot",
@@ -8,7 +8,7 @@
   "limitations": "Bar charts require a category x scale: `type=bar` with linear or time x renders an in-svg fallback notice rather than misleading geometry. Stacked mode is supported for `type=bar` only (vertical orientation, category x). Stacked area is deferred. Negative-value stacking treats positives and negatives independently from the zero baseline. Hover crosshair + click-to-select are wired for `type=line | area` only; bars rely on their own geometry for hit-testing and emit no marker events in this version. The fade-in animation is a single keyframe on the data layer rather than a per-attribute path tween — sufficient for a noticeable transition without a virtual-DOM tween engine.",
   "stability": "experimental",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -327,19 +327,29 @@
     "ce-bar-chart",
     "ce-sparkline"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Metrics & charts",
     "chart",
-    "svg",
-    "line",
-    "area",
-    "bar",
+    "bars",
     "data-viz"
   ],
   "a11y": {
     "role": "img (svg)",
     "notes": "The SVG carries role=img and a generated aria-label summarising series count, names, and y-range. The legend is a role=list ul of role=listitem li > <button aria-pressed> chips with visible focus rings — keyboard users can tab to a chip and toggle via Enter/Space (native button behavior). The hover crosshair + tooltip card are aria-hidden; the chart's overall semantics are conveyed through the role=img label rather than through live updates. prefers-reduced-motion disables both the data-layer fade-in animation and the crosshair / tooltip transitions via @media inside the component styles."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "flush"
   }
 }

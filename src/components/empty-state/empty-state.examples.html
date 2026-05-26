@@ -1,0 +1,58 @@
+<!-- @example Zero-results with icon badge and action button -->
+<ce-empty-state icon="📭" size="md">
+  <span slot="title">No messages</span>
+  You're all caught up. New messages will appear here.
+  <ce-button slot="actions" variant="primary">Compose</ce-button>
+</ce-empty-state>
+
+<!-- @example Fresh onboarding with custom illustration slot -->
+<ce-empty-state size="lg">
+  <svg slot="illustration" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+    <circle cx="32" cy="32" r="24" fill="currentColor" opacity="0.1"/>
+    <rect x="20" y="26" width="24" height="16" rx="2" fill="currentColor" opacity="0.3"/>
+    <line x1="20" y1="30" x2="44" y2="30" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+  </svg>
+  <h2 slot="title">No projects yet</h2>
+  Create your first project to get started. Projects let you organise work and collaborate with your team.
+  <ce-button slot="actions" variant="primary">New project</ce-button>
+  <ce-button slot="actions" variant="ghost">Learn more</ce-button>
+</ce-empty-state>
+
+<!-- @example Small inline no-results variant (no icon, no actions) -->
+<ce-empty-state size="sm">
+  <span slot="title">No results</span>
+  Try adjusting your filters or search terms.
+</ce-empty-state>
+
+<!-- @example No-data state with emoji icon badge -->
+<ce-empty-state icon="📊" size="md">
+  <h3 slot="title">No data available</h3>
+  Data for this period hasn't been collected yet. Check back after your first activity.
+  <ce-button slot="actions" variant="secondary">Refresh</ce-button>
+</ce-empty-state>
+
+<!-- @example Success outcome (former ce-result) — order placed -->
+<ce-empty-state severity="success">
+  <h2 slot="title">Order placed</h2>
+  Confirmation sent to your email.
+  <ce-button slot="actions" variant="primary">View order</ce-button>
+  <ce-link slot="actions">Back to shop</ce-link>
+</ce-empty-state>
+
+<!-- @example Error outcome with collapsible technical details -->
+<ce-empty-state severity="error" icon="cloud-off">
+  <h2 slot="title">Service unavailable</h2>
+  We couldn't reach the payment service. Your card was not charged.
+  <ce-button slot="actions">Try again</ce-button>
+  <pre slot="details">503 — gateway timeout after 30s
+upstream: payments-gw-eu-west-1
+trace-id: 7b3a1f2e</pre>
+</ce-empty-state>
+
+<!-- @example Warning result — trial expiring -->
+<ce-empty-state severity="warning">
+  <h2 slot="title">Trial expires in 3 days</h2>
+  Upgrade now to keep your projects active after the trial ends.
+  <ce-button slot="actions" variant="primary">Upgrade</ce-button>
+  <ce-link slot="actions">Compare plans</ce-link>
+</ce-empty-state>

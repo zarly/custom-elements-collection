@@ -1,0 +1,22 @@
+<!-- @example Static question (default — correct option revealed for read-only display) -->
+<lesson-question prompt="Which check narrows `unknown` to `string`?">
+  <lesson-option correct><code>typeof x === 'string'</code></lesson-option>
+  <lesson-option><code>x instanceof String</code></lesson-option>
+  <lesson-option><code>x as string</code></lesson-option>
+  <lesson-note type="hint"><code>instanceof</code> narrows class instances, not primitives.</lesson-note>
+</lesson-question>
+
+<!-- @example Interactive question (clickable; emits lesson-question-answer) -->
+<lesson-question prompt="Which discriminator narrows a tagged union most efficiently?" interactive>
+  <lesson-option value="typeof"><code>typeof v.kind === 'string'</code></lesson-option>
+  <lesson-option value="literal" correct><code>v.kind === 'circle'</code></lesson-option>
+  <lesson-option value="assert"><code>v as Circle</code></lesson-option>
+  <lesson-note type="hint">Equality on a literal tag is the canonical narrowing.</lesson-note>
+</lesson-question>
+
+<!-- @example Prompt-only / no hint -->
+<lesson-question prompt="When does the `in` operator narrowing fire?" interactive>
+  <lesson-option correct>when the property name is a string literal</lesson-option>
+  <lesson-option>when the property exists in the prototype chain</lesson-option>
+  <lesson-option>only on a union of object types</lesson-option>
+</lesson-question>

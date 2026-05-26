@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-skeleton",
   "name": "Skeleton",
   "className": "CeSkeleton",
@@ -7,7 +7,7 @@
   "description": "Loading placeholder with text-line, rectangle, and circle shapes. The text variant supports multiple lines with the last line shortened to mimic real prose. Decoration is hidden from assistive technology via aria-hidden.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "shape",
@@ -80,14 +80,27 @@
   "related": [
     "ce-progress"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "placeholder",
+    "loading",
     "shell"
   ],
   "a11y": {
     "notes": "All decorative elements carry aria-hidden so screen readers ignore the placeholder."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

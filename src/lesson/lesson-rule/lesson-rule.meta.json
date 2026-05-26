@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-rule",
   "name": "LessonRule",
   "className": "LessonRule",
@@ -7,7 +7,7 @@
   "description": "Rule card for educational content. Top row shows a circular blue badge (number / glyph / ★) plus a title; below sits a slotted body. golden=true switches to amber styling for emphasized, top-of-lesson rules.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "number",
@@ -132,11 +132,23 @@
   "related": [
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "brick",
   "tags": [
     "Education",
-    "rule",
     "lesson"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

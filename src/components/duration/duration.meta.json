@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-duration",
   "name": "Duration",
   "className": "CeDuration",
@@ -7,7 +7,7 @@
   "description": "Pure formatter for a fixed elapsed time — e.g. 'this task took 3725 seconds → 1h 2m'. Auto-picks the most significant units (days, hours, minutes, seconds) up to a cap (default 2). The compact format renders '1h 2m 5s'; the long format renders '1 hour 2 minutes 5 seconds' with correct plural agreement. Sub-second durations supplied via the ms attribute are formatted as a millisecond string. No live ticking — for a counting timer see ce-countdown, for relative age see ce-relative-time.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "seconds",
@@ -58,11 +58,24 @@
     "ce-relative-time",
     "ce-clock"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
     "time",
     "primitive"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

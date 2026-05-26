@@ -66,6 +66,7 @@ export class CeFeedbackExport extends CecElement {
     }
     .ce-export__btn--primary {
       background: var(--ce-accent, var(--ce-color-purple));
+      /* stylelint-disable-next-line color-no-hex -- on-accent text on saturated accent background */
       color: #fff;
       border-color: var(--ce-accent, var(--ce-color-purple));
     }

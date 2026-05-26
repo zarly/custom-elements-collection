@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-confidence",
   "name": "LessonConfidence",
   "className": "LessonConfidence",
@@ -7,7 +7,7 @@
   "description": "Metacognitive rating widget with 5 circular buttons. The label prop sets the prompt. Clicking a button sets rating, marks the card submitted (attribute reflects), disables all other buttons, and fires lesson-confidence-rate. reset() clears state. Supports Bjork's desirable-difficulty framework.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "label",
@@ -155,11 +155,23 @@
     "lesson-reveal",
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
-    "Education",
-    "confidence",
-    "metacognition"
-  ]
+    "Education"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

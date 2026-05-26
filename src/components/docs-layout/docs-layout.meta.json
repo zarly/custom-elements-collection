@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-docs-layout",
   "name": "DocsLayout",
   "className": "CeDocsLayout",
@@ -7,7 +7,7 @@
   "description": "Internal composition primitive for documentation pages. Three slots: header (full-width sticky bar), sidebar (left sticky column, typically <ce-nav-list>), and default (main scrollable area). The sidebar collapses below 760px. sidebar-width attribute sets the column width.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "sidebarWidth",
@@ -79,11 +79,24 @@
   "related": [
     "ce-nav-list"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "internal",
   "tier": "layout",
   "tags": [
     "Docs",
     "layout",
     "internal"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

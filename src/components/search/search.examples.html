@@ -1,0 +1,41 @@
+<!-- @example Search with slash shortcut -->
+<ce-search
+  name="q"
+  placeholder="Search docs"
+  shortcut="/"
+></ce-search>
+
+<!-- @example Compact filter with fast debounce -->
+<ce-search
+  name="filter"
+  placeholder="Filter by name"
+  debounce="100"
+></ce-search>
+
+<!-- @example Loading state while results are fetching -->
+<ce-search
+  name="files"
+  placeholder="Search files…"
+  loading
+></ce-search>
+
+<!-- @example Pre-filled value showing clear button -->
+<ce-search
+  name="q"
+  value="frontend components"
+  placeholder="Search"
+></ce-search>
+
+<!-- @example Global command-palette shortcut (cmd+k / ctrl+k) -->
+<ce-search
+  name="cmd"
+  placeholder="Search everything…"
+  shortcut="cmd+k"
+></ce-search>
+
+<!-- @example Disabled search input -->
+<ce-search
+  name="locked"
+  placeholder="Search unavailable"
+  disabled
+></ce-search>

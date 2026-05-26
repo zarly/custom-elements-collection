@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-tooltip",
+  "name": "Tooltip",
+  "className": "CeTooltip",
+  "goal": "Surface a tiny non-interactive tip on hover or focus of a target element for icon labels, truncation hints, and chart-point readouts.",
+  "description": "A non-interactive tooltip anchored to an external target element by id. Uses the native Popover API (popover=manual) for top-layer rendering. Shows after a configurable delay on mouseenter or focusin; hides immediately on mouseleave or focusout. Positions itself via JS getBoundingClientRect across four placements (top, bottom, left, right). Wires aria-describedby on the target when visible.",
+  "limitations": "Viewport overflow-flip (automatic flip when the tooltip would clip the edge) is deferred. CSS anchor-positioning is deferred. The tooltip is non-interactive — if the pointer needs to enter the tip, use ce-hover-card instead. Only a single target per tooltip instance.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "for",
+      "attribute": "for",
+      "type": "string",
+      "required": true,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Id of the target element this tooltip anchors to. Resolved via document.getElementById on connect."
+    },
+    {
+      "name": "placement",
+      "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+      "required": false,
+      "default": "\"top\"",
+      "reflect": true,
+      "description": "Preferred placement of the tooltip bubble relative to the target element."
+    },
+    {
+      "name": "delay",
+      "type": "number",
+      "required": false,
+      "default": "300",
+      "reflect": true,
+      "description": "Milliseconds to wait after mouseenter or focusin before showing the tooltip. Hide is always immediate."
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Plain-text tooltip content. Prefer the default slot for rich content. If both text and slot children are present, both are rendered."
+    }
+  ],
+  "events": [],
+  "methods": [
+    {
+      "name": "show",
+      "signature": "show(): void",
+      "description": "Shows the tooltip bubble immediately, bypassing the delay."
+    },
+    {
+      "name": "hide",
+      "signature": "hide(): void",
+      "description": "Hides the tooltip bubble immediately."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Tooltip content. Preferred over the text attribute for rich content (formatted text, icons). Rendered inside the tooltip bubble."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Tooltip bubble background (via --ce-surface-raised fallback)."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Tooltip bubble border color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Tooltip bubble corner radius (via --ce-radius-sm fallback)."
+    },
+    {
+      "name": "--ce-shadow",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Tooltip bubble elevation shadow."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Tooltip bubble text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Tooltip bubble font size (via --ce-text-xs fallback)."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for the show/hide fade + scale animation."
+    },
+    {
+      "name": "--ce-tooltip-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index override for the tooltip bubble. Default 1100.",
+      "fallback": "1100"
+    },
+    {
+      "name": "--ce-tooltip-max-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Maximum width of the tooltip bubble. Default 240px.",
+      "fallback": "240px"
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLElement.showPopover",
+      "purpose": "Opens the bubble in the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.hidePopover",
+      "purpose": "Removes the bubble from the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.getBoundingClientRect",
+      "purpose": "Reads target and bubble geometry for JS positioning.",
+      "writes": false
+    },
+    {
+      "api": "document.getElementById",
+      "purpose": "Resolves the for= id to a live DOM element.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Calls showPopover() / hidePopover() on the internal bubble element.",
+      "reason": "Required to enter/exit the browser top-layer for correct stacking without z-index battles.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Attaches mouseenter, mouseleave, focusin, focusout listeners to the external target element.",
+      "reason": "The tooltip anchors to an external element — listening on the target is the only way to intercept hover and focus.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Sets and removes aria-describedby on the target element.",
+      "reason": "WCAG 2.1 SC 1.3.1: screen-reader users must hear the tooltip text when focusing the target.",
+      "guarded": true
+    },
+    {
+      "kind": "timer",
+      "description": "Uses setTimeout for the show delay; cleared on mouseleave/focusout and on disconnectedCallback.",
+      "reason": "Prevents flickering when the pointer passes through the target briefly.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Attaches window scroll and resize listeners while the tooltip is visible.",
+      "reason": "Keeps the bubble aligned to the target when the page scrolls or the viewport resizes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-popover",
+    "ce-badge",
+    "ce-status-light"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "brick",
+  "tags": [
+    "Feedback",
+    "overlay",
+    "a11y"
+  ],
+  "a11y": {
+    "role": "tooltip",
+    "notes": "The host element carries role=tooltip and an auto-generated id (ce-tooltip-<n>). When the bubble becomes visible, aria-describedby is set on the target element pointing at that id; it is removed when the bubble hides. The bubble itself is not focusable (pointer-events: none; not in tab order). The target element must already be keyboard-reachable — ce-tooltip wires focusin/focusout so keyboard users trigger the tip naturally."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

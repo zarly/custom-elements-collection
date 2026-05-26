@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-link",
   "name": "Link",
   "className": "CeLink",
@@ -7,7 +7,7 @@
   "description": "Light wrapper around <a> that owns the underline/hover/focus treatment for the library. Setting external opens the link in a new tab, appends rel=noopener noreferrer for safety, and shows a small ↗ glyph; setting download forwards the attribute to the underlying <a>. The tone attribute switches between the default underlined link and a subtle in-flow link that only shows its underline on hover.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "href",
@@ -88,11 +88,23 @@
   "related": [
     "ce-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "link",
     "primitive"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -1,0 +1,42 @@
+<!-- @example Filter menu popover (bottom-start, arrow) -->
+<ce-popover placement="bottom-start" arrow>
+  <ce-button slot="trigger">Filters</ce-button>
+  <div style="min-width:200px">
+    <h4 style="margin:0 0 var(--ce-space-3)">Filter by</h4>
+    <ce-checkbox>Active</ce-checkbox>
+    <ce-checkbox>Archived</ce-checkbox>
+    <ce-checkbox>Draft</ce-checkbox>
+  </div>
+</ce-popover>
+
+<!-- @example Inline help popover anchored to the right -->
+<ce-popover placement="right" offset="12">
+  <ce-button slot="trigger" variant="ghost" aria-label="Help">?</ce-button>
+  <p style="margin:0;max-width:220px">
+    This score is calculated from the last 30 days of activity.
+    Higher is better. Scores above 80 qualify for the priority queue.
+  </p>
+</ce-popover>
+
+<!-- @example Manual-dismiss popover with explicit close button -->
+<ce-popover placement="bottom" id="manual-pop">
+  <ce-button slot="trigger">More info</ce-button>
+  <div style="min-width:240px">
+    <p style="margin:0 0 var(--ce-space-3)">
+      Click outside or press Escape to dismiss this panel.
+    </p>
+    <ce-button variant="ghost" onclick="document.getElementById('manual-pop').hide()">
+      Close
+    </ce-button>
+  </div>
+</ce-popover>
+
+<!-- @example Top-end placement with arrow -->
+<ce-popover placement="top-end" arrow offset="6">
+  <ce-button slot="trigger" variant="secondary">Actions</ce-button>
+  <div style="min-width:160px">
+    <ce-button variant="ghost" style="display:block;width:100%">Edit</ce-button>
+    <ce-button variant="ghost" style="display:block;width:100%">Duplicate</ce-button>
+    <ce-button variant="ghost" style="display:block;width:100%;color:var(--ce-color-red)">Delete</ce-button>
+  </div>
+</ce-popover>

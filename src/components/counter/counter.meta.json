@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-counter",
   "name": "Counter",
   "className": "CeCounter",
@@ -7,7 +7,7 @@
   "description": "Display a number that smoothly animates to a target value when set, with optional prefix/suffix decorations and a trend caret. Uses requestAnimationFrame with ease-out-cubic; setting duration-ms to 0 disables animation. Distinct from <ce-kpi>: counter focuses on motion + numeric updates, while kpi focuses on labelled metric layout.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -140,11 +140,31 @@
     "ce-kpi",
     "ce-progress"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-kpi",
+      "scope": "metric-display",
+      "when": "no animation needed (set duration-ms=0) and a labelled layout is preferred"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Dashboard",
     "metrics",
     "animation"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "requestAnimationFrame loop interpolates from-to-target over duration-ms; the rendered number depends on wall-clock timing of each rAF tick, so innerHTML differs mid-animation across runs (becomes byte-stable only after the animation settles, or with duration-ms=0)",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

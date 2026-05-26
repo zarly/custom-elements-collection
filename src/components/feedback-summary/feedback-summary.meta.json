@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-feedback-summary",
   "name": "Feedback summary",
   "className": "CeFeedbackSummary",
@@ -7,7 +7,7 @@
   "description": "Read-only dashboard panel. On connect, walks up to find the nearest ce-feedback-sink, pulls its current state, and (when live) listens to ce-feedback-state events to re-render. Sections are selected via the show attribute (any of: counts, avg, top-liked, top-disliked, distribution). top-n caps the top-N lists; live=false freezes after the initial render. Plain HTML output keyed off --ce-* tokens — does not depend on ce-kpi or any other internal component, keeping the feedback set zero-internal-dep.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "subject",
@@ -160,15 +160,29 @@
     "ce-feedback-bar",
     "ce-feedback-export"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-feedback-sink"
+  ],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Feedback",
     "feedback",
-    "aggregation",
     "widget"
   ],
   "a11y": {
     "notes": "Read-only stat panel; titles + labels carry semantic text. No interactive controls."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

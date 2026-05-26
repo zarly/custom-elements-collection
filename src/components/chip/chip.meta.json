@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-chip",
   "name": "Chip",
   "className": "CeChip",
@@ -7,7 +7,7 @@
   "description": "Small inline status indicator. Replaces ad-hoc badge / pill / tag / label markup with one canonical element. Seven color types (neutral / green / red / amber / blue / purple / cyan), optional leading dot, and an outlined treatment for low-emphasis use.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -210,11 +210,24 @@
   "dependents": [],
   "dependencies": [],
   "related": [],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
     "status",
     "label"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

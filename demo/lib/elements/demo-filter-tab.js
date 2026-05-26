@@ -8,12 +8,24 @@
  * Call `.setIndex(INDEX)` to populate the tag chips.
  */
 
+import { passesFilters } from "../filters.js";
+import { valueCounts, valueCountsOnRemove, pickCandidates } from "../facets.js";
+
 function esc(s) {
   return String(s)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+// Show every free-form tag, not just the top-N. The cluster scrolls when the
+// list gets long and a small search input narrows it in place.
+const TAG_CHIP_LIMIT = Infinity;
+
+/** Read the free-form tag list of a record (skips tags[0], the canonical group). */
+function freeTagsOf(record) {
+  return record.tags.slice(1);
 }
 
 const STAB_VALUES = ["stable", "beta", "experimental", "deprecated"];
@@ -40,6 +52,7 @@ class DemoFilterTab extends HTMLElement {
     this._form = null;
     this._index = null;
     this._unbinds = [];
+    this._tagSearch = ""; // local presentation filter for the tag-chip cluster
   }
 
   set form(f) {
@@ -77,6 +90,7 @@ class DemoFilterTab extends HTMLElement {
       </fieldset>
       <fieldset class="filter-group filter-group--wide">
         <legend>Tags</legend>
+        <input type="search" class="filter-tags__search" data-filter-tags-search placeholder="Filter tags…" aria-label="Filter tags" />
         <div class="filter-tags" data-filter-tags></div>
       </fieldset>
       <fieldset class="filter-group filter-group--wide">
@@ -186,6 +200,62 @@ class DemoFilterTab extends HTMLElement {
     }
 
     this._renderTagChips();
+    // Re-render chip counts whenever any filter (or tag selection) changes.
+    // Reads the current form snapshot inside _renderTagChips, so all axes
+    // contribute to the count (created/updated/stab/tier/cat/has/tags).
+    const syncChips = () => this._renderTagChips();
+    const unsubChips = f.subscribe(syncChips);
+    this._unbinds.push(unsubChips);
+
+    // Wire the chip-search input. The search is presentation-only — it hides
+    // non-matching chips locally without touching form state. Stored on the
+    // instance so re-renders re-apply it.
+    const searchInput = this.querySelector("[data-filter-tags-search]");
+    if (searchInput) {
+      // Restore prior query into the visible input after _render rebuilt DOM.
+      searchInput.value = this._tagSearch ?? "";
+      const handler = () => {
+        this._tagSearch = (searchInput.value ?? "").trim().toLowerCase();
+        this._applyTagSearch();
+      };
+      searchInput.addEventListener("input", handler);
+      this._unbinds.push(() => searchInput.removeEventListener("input", handler));
+      this._applyTagSearch();
+    }
+  }
+
+  /** Hide chips whose tag doesn't include the current search query. */
+  _applyTagSearch() {
+    const host = this.querySelector("[data-filter-tags]");
+    if (!host) return;
+    const q = this._tagSearch ?? "";
+    for (const chip of host.querySelectorAll("ce-chip")) {
+      const tag = (chip.dataset.tag ?? "").toLowerCase();
+      chip.hidden = q !== "" && !tag.includes(q);
+    }
+  }
+
+  /**
+   * Build the current filter snapshot the way `passesFilters` expects.
+   * Pulled out so the count predicate stays in sync with the live form state.
+   */
+  _filtersSnapshot() {
+    if (!this._form) {
+      return {
+        stab: new Set(), tier: new Set(), cat: new Set(),
+        has: new Set(), tags: new Set(),
+        created: 0, updated: 0,
+      };
+    }
+    return {
+      stab:    this._form.get("stab"),
+      tier:    this._form.get("tier"),
+      cat:     this._form.get("cat"),
+      has:     this._form.get("has"),
+      tags:    this._form.get("tags"),
+      created: this._form.get("created"),
+      updated: this._form.get("updated"),
+    };
   }
 
   _renderTagChips() {
@@ -193,19 +263,37 @@ class DemoFilterTab extends HTMLElement {
     if (!host) return;
     if (!this._index) { host.innerHTML = ""; return; }
 
-    const counts = new Map();
-    for (const r of this._index) {
-      for (const t of r.tags.slice(1)) {
-        counts.set(t, (counts.get(t) ?? 0) + 1);
-      }
-    }
-    const choices = [...counts.entries()]
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .slice(0, 12);
+    const filters = this._filtersSnapshot();
+    const selected = filters.tags;
+    // Candidate set: top-N by population, plus any currently-selected tag
+    // (so a selected chip never disappears when it falls below the cutoff).
+    const candidates = pickCandidates(
+      this._index, freeTagsOf, selected, TAG_CHIP_LIMIT,
+    );
+    // Two count maps, both keyed on tag, for symmetric "what happens if I
+    // click this chip" semantics:
+    //   - addCounts: what the result becomes if an unselected chip is picked.
+    //   - removeCounts: what the result becomes if a selected chip is dropped.
+    const addCounts = valueCounts(
+      this._index, filters, passesFilters, freeTagsOf, candidates,
+    );
+    const removeCounts = valueCountsOnRemove(
+      this._index, filters, "tags", passesFilters, selected,
+    );
 
-    const current = this._form ? this._form.get("tags") : new Set();
-    host.innerHTML = choices
-      .map(([t, n]) => `<ce-chip outlined data-tag="${esc(t)}"${current.has(t) ? " data-selected" : ""} title="${n} component(s)" style="cursor:pointer;user-select:none">${esc(t)}</ce-chip>`)
+    // Hide unselected chips whose count is 0 — they can't contribute to the
+    // current result set, so showing them is noise. Selected chips always stay
+    // visible: the user needs the chip to deselect and recover results.
+    host.innerHTML = candidates
+      .filter((t) => selected.has(t) || (addCounts.get(t) ?? 0) > 0)
+      .map((t) => {
+        const isSel = selected.has(t);
+        const n = isSel ? (removeCounts.get(t) ?? 0) : (addCounts.get(t) ?? 0);
+        const title = isSel
+          ? `${n} component${n === 1 ? "" : "s"} if you remove this tag`
+          : `${n} component${n === 1 ? "" : "s"} match`;
+        return `<ce-chip outlined data-tag="${esc(t)}"${isSel ? " data-selected" : ""} class="filter-tags__chip" title="${esc(title)}" style="cursor:pointer;user-select:none">${esc(t)} <span class="filter-tags__count">${n}</span></ce-chip>`;
+      })
       .join("");
 
     for (const chip of host.querySelectorAll("ce-chip")) {
@@ -215,22 +303,14 @@ class DemoFilterTab extends HTMLElement {
         const tags = this._form.get("tags");
         if (tags.has(t)) tags.delete(t);
         else tags.add(t);
+        // The subscriber will re-render chip counts; we don't toggle the
+        // attribute manually because the re-render replaces the DOM anyway.
         this._form.set("tags", tags);
-        chip.toggleAttribute("data-selected");
       });
     }
 
-    // Keep chips in sync on form changes (e.g. reset).
-    if (this._form) {
-      const syncTags = () => {
-        const current = this._form.get("tags");
-        for (const chip of host.querySelectorAll("ce-chip")) {
-          chip.toggleAttribute("data-selected", current.has(chip.dataset.tag));
-        }
-      };
-      const unsub = this._form.subscribe(syncTags);
-      this._unbinds.push(unsub);
-    }
+    // Re-apply the local search filter — DOM was just rebuilt.
+    this._applyTagSearch();
   }
 }
 

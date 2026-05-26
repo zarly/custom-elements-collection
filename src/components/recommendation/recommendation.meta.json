@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-recommendation",
   "name": "Recommendation",
   "className": "CeRecommendation",
@@ -7,7 +7,7 @@
   "description": "Card-like block that encodes a single actionable recommendation. A four-value priority enum (p0–p3) drives the left-border color and the visible priority badge. Title and impact accept both plain string attributes and rich slot overrides (CDR-002). Body accepts arbitrary children. An optional actions slot holds call-to-action buttons or links.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "priority",
@@ -180,15 +180,26 @@
     "ce-card",
     "ce-chip"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
-    "Comparison & narrative",
-    "recommendation",
-    "advice"
+    "Comparison & narrative"
   ],
   "a11y": {
     "role": "article",
     "notes": "The inner <article> element provides implicit landmark semantics. The priority badge carries aria-label='Priority: P{n}' so screen readers announce the tier without relying on color alone."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

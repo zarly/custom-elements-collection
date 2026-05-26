@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-json",
   "name": "JSON Viewer",
   "className": "CeJson",
@@ -7,7 +7,7 @@
   "description": "Lightweight inline JSON viewer for chat surfaces and dashboards. Accepts a JSON string via the `src` attribute or the default slot, formats it with configurable indent, supports max-length truncation, and shows a summary toggle (Object{n} / Array(n)). Malformed input renders a styled error and emits ce-json-parse-error.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "src",
@@ -52,7 +52,8 @@
   "slots": [
     {
       "name": "",
-      "description": "Fallback JSON source when src is empty."
+      "description": "Fallback JSON source when src is empty.",
+      "acceptShapes": ["string", "json"]
     }
   ],
   "cssVariables": [
@@ -154,11 +155,24 @@
   "related": [
     "ce-code"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Content",
     "code",
     "data"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

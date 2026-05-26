@@ -28,6 +28,7 @@ export class CeMark extends CecElement {
       background: var(--ce-color-amber-bg);
       color: var(--ce-text);
       box-decoration-break: clone;
+      /* stylelint-disable-next-line property-no-vendor-prefix -- Safari requires -webkit- prefix for box-decoration-break */
       -webkit-box-decoration-break: clone;
     }
     :host([color="green"])  { background: var(--ce-color-green-bg);  }

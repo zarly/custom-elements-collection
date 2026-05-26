@@ -66,7 +66,7 @@ export class CeRating extends CecElement {
       transition: fill var(--ce-transition-fast);
     }
     .ce-rating__star[data-fill="full"] path { fill: var(--ce-color-amber); }
-    .ce-rating__star[data-fill="half"] path { fill: url(#ce-rating-half-grad); }
+    .ce-rating__star[data-fill="half"] path { fill: url("#ce-rating-half-grad"); }
   `;
 
   protected override createRenderRoot(): ShadowRoot {
@@ -275,23 +275,20 @@ export class CeRating extends CecElement {
     this._hover = null;
   }
 
-  #onKeydown = (e: KeyboardEvent): void => {
-    if (this.readonly) return;
-    const k = e.key;
-    if (this.mode === "thumbs") {
-      if (k === "ArrowLeft" || k === "ArrowDown") {
-        e.preventDefault();
-        this.#cycleThumbs(-1);
-      } else if (k === "ArrowRight" || k === "ArrowUp") {
-        e.preventDefault();
-        this.#cycleThumbs(+1);
-      } else if (k === "Escape") {
-        e.preventDefault();
-        this._setValue(null, true);
-      }
-      return;
+  #onThumbsKey(e: KeyboardEvent, k: string): void {
+    if (k === "ArrowLeft" || k === "ArrowDown") {
+      e.preventDefault();
+      this.#cycleThumbs(-1);
+    } else if (k === "ArrowRight" || k === "ArrowUp") {
+      e.preventDefault();
+      this.#cycleThumbs(+1);
+    } else if (k === "Escape") {
+      e.preventDefault();
+      this._setValue(null, true);
     }
-    // stars
+  }
+
+  #onStarsKey(e: KeyboardEvent, k: string): void {
     const step = this.allowHalf ? 0.5 : 1;
     const cur = typeof this._value === "number" ? this._value : 0;
     if (k === "ArrowLeft" || k === "ArrowDown") {
@@ -310,6 +307,12 @@ export class CeRating extends CecElement {
       e.preventDefault();
       this._setValue(0, true);
     }
+  }
+
+  #onKeydown = (e: KeyboardEvent): void => {
+    if (this.readonly) return;
+    if (this.mode === "thumbs") this.#onThumbsKey(e, e.key);
+    else this.#onStarsKey(e, e.key);
   };
 
   #cycleThumbs(direction: 1 | -1): void {

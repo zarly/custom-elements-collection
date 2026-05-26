@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-field",
+  "name": "Field",
+  "className": "CeField",
+  "goal": "Semantic wrapper that binds a label, help text, error text, and any form control into one a11y-correct unit.",
+  "description": "Gateway form-field wrapper. Renders a <label> wired to the slotted control, optional help text (aria-describedby), and error text (aria-invalid + aria-describedby). Auto-generates control ids when absent. Required reflects to native required or aria-required. Does not participate in form submission itself.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Label text. Overridden by slot=\"label\" for rich content."
+    },
+    {
+      "name": "help",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Help text shown below the control when no error is present. Overridden by slot=\"help\"."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Error text shown below the control. When set, aria-invalid=true is applied to the control. Overridden by slot=\"error\"."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Reflects the required constraint onto the bound control (native required attribute or aria-required for custom elements)."
+    },
+    {
+      "name": "controlId",
+      "attribute": "for",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Explicit id of the control to bind. If absent the first non-named-slot child element is auto-discovered and assigned a generated id."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "The form control (ce-input, native input, or any interactive element)."
+    },
+    {
+      "name": "label",
+      "description": "Rich label override; replaces the label attribute."
+    },
+    {
+      "name": "help",
+      "description": "Rich help text override; replaces the help attribute."
+    },
+    {
+      "name": "error",
+      "description": "Rich error text override; replaces the error attribute."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Label font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Help and error font size."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Label text color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Help text color."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Error text color and required asterisk color."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between label/control and control/help-or-error."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Mutates slotted control: sets id, aria-describedby, aria-invalid, required/aria-required.",
+      "reason": "a11y wiring requires the label and description associations to be present on the actual control element, not the wrapper.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-button",
+    "ce-select",
+    "ce-textarea"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "a11y",
+    "wrapper"
+  ],
+  "a11y": {
+    "role": "none (the wrapper is presentational; the control inside carries its own role)",
+    "notes": "ce-field wires label[for], aria-describedby, aria-invalid, and required/aria-required onto the bound control. The label element is rendered in shadow DOM. Id references across the shadow boundary work correctly in all modern browsers because id-based aria references are resolved in the flat tree. The error region uses role=alert + aria-live=polite so screen readers announce errors when they appear reactively."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

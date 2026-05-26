@@ -1,0 +1,42 @@
+<!-- @example View toggle — slot children (list / grid / kanban) -->
+<ce-segmented name="view" value="list">
+  <ce-segment value="list" label="List"></ce-segment>
+  <ce-segment value="grid" label="Grid"></ce-segment>
+  <ce-segment value="kanban" label="Kanban"></ce-segment>
+</ce-segmented>
+
+<!-- @example Time-range picker — JSON data attribute -->
+<ce-segmented
+  name="period"
+  value="7d"
+  data='[{"value":"24h","label":"24h"},{"value":"7d","label":"7d"},{"value":"30d","label":"30d"},{"value":"90d","label":"90d"}]'
+></ce-segmented>
+
+<!-- @example Size variants — sm / md (default) / lg side by side -->
+<ce-segmented name="size-sm" value="m" size="sm">
+  <ce-segment value="s" label="S"></ce-segment>
+  <ce-segment value="m" label="M"></ce-segment>
+  <ce-segment value="l" label="L"></ce-segment>
+</ce-segmented>
+
+<ce-segmented name="size-md" value="m" size="md">
+  <ce-segment value="s" label="S"></ce-segment>
+  <ce-segment value="m" label="M"></ce-segment>
+  <ce-segment value="l" label="L"></ce-segment>
+</ce-segmented>
+
+<ce-segmented name="size-lg" value="m" size="lg">
+  <ce-segment value="s" label="S"></ce-segment>
+  <ce-segment value="m" label="M"></ce-segment>
+  <ce-segment value="l" label="L"></ce-segment>
+</ce-segmented>
+
+<!-- @example Disabled control — entire group non-interactive -->
+<ce-segmented name="disabled-demo" value="week" disabled
+  data='[{"value":"day","label":"Day"},{"value":"week","label":"Week"},{"value":"month","label":"Month"}]'
+></ce-segmented>
+
+<!-- @example No initial selection — first segment is focusable but none are checked -->
+<ce-segmented name="unit"
+  data='[{"value":"px","label":"px"},{"value":"rem","label":"rem"},{"value":"%","label":"%"}]'
+></ce-segmented>

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-diff",
   "name": "Diff",
   "className": "CeDiff",
@@ -7,7 +7,7 @@
   "description": "Compact LCS-based diff viewer for code review surfaces and PR comments. Choose unified (single column with +/−/ space markers) or split (two columns side-by-side). Header surfaces the language label and the add/delete summary. The LCS algorithm runs in O(n × m) so it's intended for short-to-medium diffs (a few hundred lines).",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "beforeText",
@@ -45,11 +45,17 @@
   "slots": [
     {
       "name": "before",
-      "description": "Original text source (alt to before attribute)."
+      "description": "Original text source (alt to before attribute).",
+      "acceptShapes": [
+        "string"
+      ]
     },
     {
       "name": "after",
-      "description": "Changed text source (alt to after attribute)."
+      "description": "Changed text source (alt to after attribute).",
+      "acceptShapes": [
+        "string"
+      ]
     }
   ],
   "cssVariables": [
@@ -170,11 +176,23 @@
     "ce-code",
     "ce-compare"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Content",
-    "code",
-    "review"
-  ]
+    "code"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

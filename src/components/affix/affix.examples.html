@@ -1,0 +1,19 @@
+<!-- @example Sticky toolbar below a fixed header (top edge, 64px offset) -->
+<ce-affix edge="top" offset="64">
+  <ce-filter-bar></ce-filter-bar>
+</ce-affix>
+
+<!-- @example Always-visible bottom dock (bottom edge, no offset) -->
+<ce-affix edge="bottom" offset="0">
+  <ce-card>Always-visible bottom dock</ce-card>
+</ce-affix>
+
+<!-- @example Sticky page header with elevated z-index -->
+<ce-affix edge="top" offset="0" z="20">
+  <header>Sticky page header</header>
+</ce-affix>
+
+<!-- @example Sticky side-rail table of contents (start edge) -->
+<ce-affix edge="start" offset="1rem">
+  <ce-toc></ce-toc>
+</ce-affix>

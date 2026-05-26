@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-badge",
   "name": "Badge",
   "className": "CeBadge",
@@ -7,7 +7,7 @@
   "description": "Notification-style count badge that anchors to slotted content. Clamps to a configurable max with a '+' suffix, supports a dot variant for unread state, and uses semantic color variants.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "count",
@@ -123,11 +123,28 @@
   "related": [
     "ce-chip"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-chip",
+      "scope": "label-tag"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "indicator",
-    "notification"
-  ]
+    "indicator"
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

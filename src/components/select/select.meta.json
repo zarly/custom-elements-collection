@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-select",
   "name": "Select",
   "className": "CeSelect",
@@ -7,7 +7,7 @@
   "description": "Form-primitive companion to ce-input wrapping a native <select> for full keyboard, screen-reader, and OS-popup behaviour. Options accept the dual-mode CDR-005 shape — a JSON-on-attribute array or slotted <option>/<optgroup> children. Mirrors ce-input's label / help / error / prefix-suffix layout so forms compose consistently. Emits ce-change on selection.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -213,6 +213,13 @@
     "ce-radio-group",
     "ce-toggle"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -224,5 +231,11 @@
   "a11y": {
     "role": "combobox (native)",
     "notes": "Delegates to a native <select> so keyboard navigation, type-ahead, screen-reader semantics, and OS-level popup behaviour all come from the browser. aria-invalid follows the invalid prop / error message; label-for/id pairing wires the label to the native element."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

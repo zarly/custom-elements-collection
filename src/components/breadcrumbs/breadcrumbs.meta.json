@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-breadcrumbs",
   "name": "Breadcrumbs",
   "className": "CeBreadcrumbs",
@@ -7,7 +7,7 @@
   "description": "Static navigation primitive. Accepts both shapes (CDR-005): a JSON items array of { label, href? } or slotted <a>/<span> children. In JSON mode the last item is rendered as the current-page text (or a link if href is present but it's still flagged aria-current=page). In slot mode the last child gets the current styling via ::slotted(:last-child); the component assigns named slot positions on slotchange and renders the configured separator between crumbs.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -96,15 +96,27 @@
     "ce-toc",
     "ce-pagination"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
-    "navigation",
-    "breadcrumbs"
+    "navigation"
   ],
   "a11y": {
     "role": "navigation",
     "notes": "Wrapped in <nav aria-label='Breadcrumb'>. The current page is marked with aria-current='page'. The host element also receives aria-label='Breadcrumb' on first connection for assistive-tech consumers that read the outer element."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

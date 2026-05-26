@@ -2,13 +2,19 @@
  * Component meta types — the canonical, machine-readable specification
  * for every component shipped from this package.
  *
- * See `docs/adr/adr-005-component-meta.md` and
- * `docs/COMPONENT_META_PLAN.md` for the rationale and full plan.
+ * See `docs/adr/adr-005-component-meta.md` (v1 shape rationale),
+ * `docs/adr/adr-015-meta-schema-v2.md` (v2 additions), and the field
+ * registry at `docs/cec/meta-fields-registry.md` (meta-repo root).
  *
  * Each component lives in its own subfolder alongside a `<name>.meta.json`
  * file that conforms to {@link ComponentMeta}. A Zod schema in
  * `src/meta/schema.ts` enforces the shape at build time.
+ *
+ * v2 additions are all `?` (optional) so v1 manifests continue to
+ * validate; the codemod `scripts/migrate-v1-to-v2.ts` rewrites every
+ * existing meta to v2 with safe defaults in one mechanical pass.
  */
+import type { SemanticType } from "./semantic-types.js";
 
 export type ComponentCategory = "ui" | "lesson" | "internal";
 /**
@@ -50,6 +56,24 @@ export interface PropMeta {
   /** syncs to/from HTML attribute */
   reflect?: boolean;
   description: string;
+  /**
+   * v2 (CDR-012): historical attribute names recognized as equivalent
+   * for benchmark scoring + docs. The runtime does NOT read aliases
+   * unless the component explicitly installs a fallback.
+   */
+  aliases?: string[];
+  /**
+   * v2 (ADR-015): semantic kind beyond TypeScript `type` — e.g.
+   * `"email"` / `"percent-0-100"` / `"hex-color"`. Drives studio
+   * submit-validation and benchmark canonicalization.
+   */
+  semanticType?: SemanticType;
+  /**
+   * v2 (ADR-015): loose grouping label for cross-component prop
+   * recognition (e.g. all `label` props in `lesson-*` could share
+   * `"lesson-step-label"`).
+   */
+  semanticGroup?: string;
 }
 
 export interface EventMeta {
@@ -75,6 +99,17 @@ export interface SlotMeta {
   name: string;
   description: string;
   required?: boolean;
+  /**
+   * v2 (CDR-013 MUST): allowlist of tag names valid in this slot.
+   * Empty / absent = unconstrained.
+   */
+  acceptTags?: string[];
+  /**
+   * v2 (CDR-012 MAY): shape descriptors of what's valid in the slot —
+   * e.g. `"child-tag:ce-bar-row"`, `"semantic-html:ul,li"`,
+   * `"semantic-html:div,p"`. For benchmark canonicalization.
+   */
+  acceptShapes?: string[];
 }
 
 export interface CssVarMeta {
@@ -106,13 +141,45 @@ export interface SideEffectMeta {
   guarded?: boolean;
 }
 
+/** v2 (CDR-013): explicit child-acceptance policy. */
+export type ChildPolicy = "none" | "any" | "constrained";
+
+/** v2 (CDR-014): content-model categorization for generative-dom + studio. */
+export type ContentModel = "block" | "inline" | "void";
+
+/** v2 (CDR-012): wrapper / container / leaf categorization. */
+export type ComponentRole = "transparent-wrapper" | "container" | "leaf";
+
+/** v2 (CDR-015): when the component DOM is considered final. */
+export type StreamingFinalizesAt =
+  | "flush"
+  | "blockEnd"
+  | "chunkBoundary"
+  | "tagEnd";
+
+/** v2 (CDR-012): semantic-equivalence declaration. */
+export interface InterchangeableEntry {
+  /** Tag name that may substitute for this component. */
+  tag: string;
+  /** Optional scope label, e.g. `"summary-tone"`, `"single-value"`. */
+  scope?: string;
+  /** Optional condition string in author-prose; advisory for scorer. */
+  when?: string;
+}
+
+/** v2 (CDR-015): streaming behavior declaration. */
+export interface StreamingLifecycleMeta {
+  finalizesAt: StreamingFinalizesAt;
+}
+
 export interface ComponentMeta {
   // — Schema ————————————————————————————————————
   /**
-   * Meta-schema version. Currently always `1`. Bumped on any non-additive
-   * change to the meta shape (rename, removal, narrowed enum). See ADR-007.
+   * Meta-schema version. v1 manifests use `1`; v2 use `2`. Both are
+   * accepted by the validator during the v0.7/v0.8 release cycle.
+   * v0.9 will refuse `1`. See ADR-015.
    */
-  schemaVersion: 1;
+  schemaVersion: 1 | 2;
 
   // — Identity ——————————————————————————————————
   /** "ce-card" */
@@ -180,6 +247,19 @@ export interface ComponentMeta {
   dependencies: string[];
   /** related by other means (not parent/child) */
   related: string[];
+  /**
+   * Sub-tags registered alongside this component (multi-tag pattern).
+   *
+   * Example: `ce-segmented` registers `ce-segment` as a co-element.
+   * `ce-tree` registers `ce-tree-node`. Sub-tags share the parent's
+   * lifecycle, are bundled together, and do NOT need their own meta
+   * file. The dependency-graph validator silently accepts sub-tags
+   * referenced in the parent's `dependencies[]`.
+   *
+   * Optional — populate only when the component registers additional
+   * `customElements.define()` calls beyond its primary tag.
+   */
+  subTags?: string[];
 
   // — Discovery —————————————————————————————————
   category: ComponentCategory;
@@ -197,4 +277,44 @@ export interface ComponentMeta {
 
   // — Extension —————————————————————————————————
   additional?: Record<string, unknown>;
+
+  // ═════════════════════════════════════════════════════════════════════
+  //   v2 additions — see ADR-015, CDR-012 / 013 / 014 / 015.
+  //   All optional; codemod `scripts/migrate-v1-to-v2.ts` fills safe
+  //   defaults. `dependents` and `dependencies` above remain valid in
+  //   v0.7+v0.8; refused at v0.9.
+  // ═════════════════════════════════════════════════════════════════════
+
+  /** v2 (CDR-013 MUST): tags this component requires as a parent. */
+  requiredParent?: string[];
+  /** v2 (CDR-013 MUST): child-acceptance policy. Default `"any"`. */
+  childPolicy?: ChildPolicy;
+  /** v2 (CDR-013 SHOULD): TS-level class imports (build-time deps). */
+  codeDependencies?: string[];
+  /** v2 (CDR-013 MUST): runtime tag children (composition deps). */
+  tagDependencies?: string[];
+  /** v2 (CDR-013 SHOULD): tags programmatically created in render(). */
+  injects?: string[];
+
+  /** v2 (CDR-012 SHOULD): semantic equivalents for benchmark scoring. */
+  interchangeableWith?: InterchangeableEntry[];
+  /** v2 (CDR-012 SHOULD): wrapper/container/leaf role. Default `"leaf"`. */
+  role?: ComponentRole;
+
+  /** v2 (CDR-013 MAY): true (default) if this tag may be placed in another's slot. */
+  slotCompatible?: boolean;
+  /** v2 (CDR-013 MAY): preferred parent tags for LLM tool-use hints. */
+  preferredSlotIn?: string[];
+
+  /** v2 (CDR-014 MUST): block / inline / void. */
+  contentModel?: ContentModel;
+
+  /** v2 (CDR-015 MUST): CDR-009 conformance declaration. */
+  deterministic?: boolean;
+  /** v2 (CDR-015 MUST when deterministic=false): escape-hatch justification. */
+  nondeterministicReason?: string;
+  /** v2 (CDR-015 SHOULD): UX-1..3 streaming-safety declaration. */
+  streamSafe?: boolean;
+  /** v2 (CDR-015 SHOULD): ADR-014 finalization point. */
+  streamingLifecycle?: StreamingLifecycleMeta;
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-kbd",
   "name": "Keyboard key",
   "className": "CeKbd",
@@ -7,7 +7,7 @@
   "description": "Inline primitive for keyboard shortcuts. The slotted text is shown inside a small bordered cap with monospace font and a 1px lower-edge shadow that suggests a physical key. The component carries no attributes by design — multi-key chords compose with regular HTML (drop multiple <ce-kbd> next to each other separated by a plus or hyphen). role=text is set by default so screen readers treat the cap as a single token rather than splitting on punctuation.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [],
   "events": [],
   "slots": [
@@ -74,11 +74,23 @@
     "ce-code",
     "ce-chip"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "keyboard",
     "primitive"
-  ]
+  ],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

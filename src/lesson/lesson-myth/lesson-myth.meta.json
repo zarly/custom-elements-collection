@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-myth",
   "name": "LessonMyth",
   "className": "LessonMyth",
@@ -7,7 +7,7 @@
   "description": "Shows a red-tinted myth card with a '✗ Myth' badge and the false belief. On click, flips to a green-tinted truth card with '✓ Truth' badge and the correct statement. Optional explanation shown below truth. Fires lesson-myth-reveal once on first reveal. reset() returns to myth view.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "myth",
@@ -155,11 +155,23 @@
     "lesson-note",
     "lesson-rule"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
-    "Education",
-    "myth",
-    "misconception"
-  ]
+    "Education"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

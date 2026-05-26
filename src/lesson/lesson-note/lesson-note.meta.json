@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-note",
   "name": "LessonNote",
   "className": "LessonNote",
@@ -7,7 +7,7 @@
   "description": "Renders a left-bordered, tinted callout block with an auto-selected icon based on type. The icon can be overridden. Five types supported: tip (blue), info (cyan), key (amber), warning (amber), danger (red).",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "type",
@@ -145,11 +145,29 @@
     "lesson-rule",
     "lesson-frame"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-callout",
+      "scope": "admonition-tone",
+      "when": "type maps via { tip -> success, info -> info, key -> info, warning -> warn, danger -> danger }"
+    }
+  ],
   "category": "lesson",
   "tier": "brick",
   "tags": [
     "Education",
-    "callout",
-    "note"
-  ]
+    "callout"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -1,0 +1,22 @@
+<!-- @example Standalone spinner — default size and tone -->
+<ce-spinner></ce-spinner>
+
+<!-- @example All four sizes side by side -->
+<div style="display: inline-flex; align-items: center; gap: 12px;">
+  <ce-spinner size="xs" label="Loading extra small"></ce-spinner>
+  <ce-spinner size="sm" label="Loading small"></ce-spinner>
+  <ce-spinner size="md" label="Loading medium"></ce-spinner>
+  <ce-spinner size="lg" label="Loading large"></ce-spinner>
+</div>
+
+<!-- @example Inline inside a button as a loading state -->
+<ce-button disabled>
+  <ce-spinner size="sm" tone="accent"></ce-spinner>
+  Saving…
+</ce-button>
+
+<!-- @example Muted tone for low-emphasis contexts -->
+<p style="color: var(--ce-muted); display: inline-flex; align-items: center; gap: 6px;">
+  <ce-spinner size="sm" tone="muted" label="Loading content"></ce-spinner>
+  Loading…
+</p>

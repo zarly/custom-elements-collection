@@ -1,0 +1,30 @@
+<!-- @example Hair dividers with key-value pairs (default) -->
+<ce-list dividers="hair">
+  <ce-key-value key="Status" value="Live"></ce-key-value>
+  <ce-key-value key="Region" value="EU"></ce-key-value>
+  <ce-key-value key="Plan" value="Pro"></ce-key-value>
+  <ce-key-value key="Version" value="2.4.1"></ce-key-value>
+</ce-list>
+
+<!-- @example Line dividers with cards at compact density -->
+<ce-list density="compact" dividers="line">
+  <ce-card>Alpha release — initial feature set.</ce-card>
+  <ce-card>Beta release — performance improvements.</ce-card>
+  <ce-card>Gamma release — stability and bug fixes.</ce-card>
+</ce-list>
+
+<!-- @example Interactive list of navigation links -->
+<ce-list interactive dividers="hair">
+  <a href="#overview">Overview</a>
+  <a href="#getting-started">Getting started</a>
+  <a href="#api-reference">API reference</a>
+  <a href="#examples">Examples</a>
+  <a href="#changelog">Changelog</a>
+</ce-list>
+
+<!-- @example No dividers, cozy density — notification-style rows -->
+<ce-list dividers="none" density="cozy">
+  <ce-callout type="info">Deployment completed successfully.</ce-callout>
+  <ce-callout type="warning">Certificate expires in 14 days.</ce-callout>
+  <ce-callout type="error">Backup job failed — manual review required.</ce-callout>
+</ce-list>

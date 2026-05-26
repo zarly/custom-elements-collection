@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-hero",
   "name": "Hero",
   "className": "CeHero",
@@ -7,7 +7,7 @@
   "description": "Page header with eyebrow kicker, gradient-clipped title, lede paragraph, and a stats slot for inline KPIs. Provides a radial-gradient background by default; flat attribute suppresses it.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "kicker",
@@ -51,7 +51,10 @@
     },
     {
       "name": "stats",
-      "description": "Inline stats row, typically <ce-kpi> elements."
+      "description": "Inline stats row, typically <ce-kpi> elements.",
+      "acceptTags": [
+        "ce-kpi"
+      ]
     }
   ],
   "cssVariables": [
@@ -190,12 +193,25 @@
     "ce-shell",
     "ce-kpi"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-kpi"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Layout & primitives",
-    "hero",
-    "header",
     "page"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

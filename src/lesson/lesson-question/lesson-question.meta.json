@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "tag": "lesson-question",
+  "name": "LessonQuestion",
+  "className": "LessonQuestion",
+  "goal": "Pose one multiple-choice question with composable lesson-option children — static by default, interactive when opted in (CDR-004).",
+  "description": "Renders a prompt followed by a default slot of <lesson-option> children (and any inline hints like <lesson-note>). In static mode the correct option is revealed on render, which suits read-only study guides and vis documents. When the interactive attribute is set, options flip to clickable; on the first lesson-option-pick the question locks all options, marks picked + correct, fires lesson-question-answer with { value, correct, index }, and reflects the answered attribute on the host. reset() clears the state. The component listens for lesson-option-pick from slotted lesson-option children and decides what to do — lesson-option is a passive renderer driven by the question.",
+  "stability": "stable",
+  "created": "2026-05-22",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "prompt",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "The question text."
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Opt-in (CDR-004): when present the options become clickable and the question listens for lesson-option-pick events. Default static rendering reveals the correct option upfront."
+    },
+    {
+      "name": "answered",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Auto-set to true after the learner picks. Disables further interaction. Cleared by reset()."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-question-answer",
+      "detail": "{ value: string; correct: boolean; index: number }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once when the learner picks an option. value is the picked option's value (or text), index is its zero-based position among lesson-option children."
+    }
+  ],
+  "methods": [
+    {
+      "name": "reset",
+      "signature": "() => void",
+      "description": "Clears answered/picked/revealed state so the question can be retaken."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "lesson-option children, optionally a lesson-note hint, and any inline narrative HTML. Children render in order via the default slot.",
+      "acceptTags": ["lesson-option", "lesson-note"],
+      "acceptShapes": ["child-tag:lesson-option", "child-tag:lesson-note"]
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Outer border radius."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical margin + prompt bottom margin."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Outer horizontal padding."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between slotted options."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Prompt text color."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Prompt font size."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [
+    {
+      "kind": "state",
+      "description": "Tracks picked/revealed flags on slotted lesson-option children.",
+      "reason": "Required to render the post-answer UI and prevent re-answering."
+    },
+    {
+      "kind": "dom",
+      "description": "Reads and writes attributes on its direct lesson-option children.",
+      "reason": "Single-source-of-truth for whether options are interactive and whether the answer is revealed."
+    }
+  ],
+  "dependents": [
+    "lesson-quiz"
+  ],
+  "dependencies": [
+    "lesson-option"
+  ],
+  "related": [
+    "lesson-quiz",
+    "lesson-option",
+    "lesson-note"
+  ],
+  "requiredParent": [],
+  "childPolicy": "constrained",
+  "codeDependencies": [
+    "lesson-option"
+  ],
+  "tagDependencies": [
+    "lesson-option"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "lesson",
+  "tier": "widget",
+  "tags": [
+    "Education",
+    "quiz",
+    "multiple-choice"
+  ],
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

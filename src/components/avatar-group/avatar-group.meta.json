@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-avatar-group",
   "name": "Avatar group",
   "className": "CeAvatarGroup",
@@ -7,7 +7,7 @@
   "description": "Container for ce-avatar (or arbitrary HTML) children that visually overlaps each child by a configurable amount and renders a +N chip in their stead once the total exceeds max. Propagates its size attribute to size-aware ce-avatar children for consistent sizing.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "max",
@@ -92,11 +92,26 @@
   "related": [
     "ce-avatar"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-avatar"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
     "identity",
     "avatar"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

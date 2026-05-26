@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-details",
   "name": "Details",
   "className": "CeDetails",
@@ -7,7 +7,7 @@
   "description": "Thin wrapper over native <details> with chevron rotation, hover state, an optional right-aligned count chip, and a custom toggle event. Reflects open to the host attribute so consumers can style or query collapsed state.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "summary",
@@ -156,11 +156,23 @@
   "related": [
     "ce-accordion"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
-    "disclosure",
-    "collapsible"
-  ]
+    "disclosure"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

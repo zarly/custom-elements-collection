@@ -62,10 +62,6 @@ async function walk(dir: string): Promise<string[]> {
   return out;
 }
 
-function relativize(p: string): string {
-  return path.relative(REPO_ROOT, p);
-}
-
 function todayIso(): string {
   // Local-date ISO YYYY-MM-DD. Date.toISOString uses UTC which can disagree
   // with the operator's local day boundary — use a manual format from the

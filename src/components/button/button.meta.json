@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-button",
   "name": "Button",
   "className": "CeButton",
@@ -7,7 +7,7 @@
   "description": "Themable action button. Wraps a native <button> so keyboard, focus, and form-submit behavior come for free; emits ce-click in addition. Loading state replaces the label with a spinner and blocks activation. Accepts an icon attribute or a named `icon` slot for arbitrary glyphs/SVG.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "variant",
@@ -19,11 +19,11 @@
     },
     {
       "name": "size",
-      "type": "\"sm\" | \"md\" | \"lg\"",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"icon\"",
       "required": false,
       "default": "\"md\"",
       "reflect": true,
-      "description": "Button size."
+      "description": "Button size. \"icon\" yields a square 1:1 button suitable for a single 16–24px glyph."
     },
     {
       "name": "disabled",
@@ -187,5 +187,18 @@
     "Forms",
     "interactive",
     "control"
-  ]
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

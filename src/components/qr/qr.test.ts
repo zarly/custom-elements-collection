@@ -282,34 +282,10 @@ describe("encodeQR — format info placement (regression for un-scannable bug)",
 });
 
 describe("encodeQR — format info round-trip (decoder-style read)", () => {
-  // Reproduce jsQR's format-info reader exactly. If our encoder writes a
-  // valid codeword, this read will recover the (ecc, mask) we configured.
-  function readFormatInfo(modules: Uint8Array, size: number): number {
-    let bits = 0;
-    // Top-left: row 8 cols 0..8 (skip col 6 = timing), then col 8 rows 7..0 (skip row 6).
-    // jsQR uses (x, y) = (col, row). pushBit puts MSB first.
-    for (let x = 0; x <= 8; x++) {
-      if (x === 6) continue;
-      bits = (bits << 1) | modules[x * size + 8]; // (col=x, row=8) — wait
-      // jsQR's matrix.get(x, 8) means col=x, row=8 → modules[8 * size + x].
-    }
-    // Reset and do it correctly per jsQR:
-    bits = 0;
-    for (let x = 0; x <= 8; x++) {
-      if (x === 6) continue;
-      bits = (bits << 1) | modules[8 * size + x]; // matrix.get(x=col, y=row=8)
-    }
-    for (let y = 7; y >= 0; y--) {
-      if (y === 6) continue;
-      bits = (bits << 1) | modules[y * size + 8]; // matrix.get(x=col=8, y=row)
-    }
-    return bits;
-  }
-
-  // Wait - jsQR's matrix.get(x, y) is bitmatrix indexed by (x, y) where x=col y=row.
-  // matrix.get(x, 8) → cell at col=x, row=8 → linear index 8*size + x.
-  // matrix.get(8, y) → cell at col=8, row=y → linear index y*size + 8.
-
+  // Reproduce jsQR's format-info reader. jsQR's matrix.get(x, y) is bitmatrix
+  // indexed by (x, y) where x=col y=row, so:
+  //   matrix.get(x, 8) → cell at col=x, row=8 → linear index 8*size + x.
+  //   matrix.get(8, y) → cell at col=8, row=y → linear index y*size + 8.
   function readFormatTopLeft(modules: Uint8Array, size: number): number {
     let bits = 0;
     for (let x = 0; x <= 8; x++) {

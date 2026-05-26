@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-segmented",
+  "name": "Segmented",
+  "className": "CeSegmented",
+  "goal": "Render a segmented control — a button row that acts as a single-choice radio group — for view toggles, time-range pickers, unit switches, and tab-flavored filters.",
+  "description": "Joined-button segmented control backed by a radiogroup ARIA role. Accepts segments either as JSON via the data attribute (data-array mode) or as ce-segment child elements (slot-child mode); slot children win when both are present. Roving tabindex: only the selected segment (or the first when none is selected) is reachable via Tab; ArrowRight/ArrowLeft move selection with wrap-around. Form-associated; sets internal form value on every selection change. Emits ce-change with { name, value }.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form-control name; echoed in ce-change detail."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "reflect": true,
+      "description": "Currently selected segment value. Empty string means no segment is selected."
+    },
+    {
+      "name": "data",
+      "type": "SegmentItem[]",
+      "required": false,
+      "default": "[]",
+      "attribute": "data",
+      "description": "Array of { value, label, icon? } objects. Used when no ce-segment children are slotted. Settable as a JS property or as a JSON-encoded attribute."
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "default": "\"md\"",
+      "reflect": true,
+      "description": "Visual size of the control. Affects height and horizontal padding."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disable the entire control. Individual segments can also be disabled via their disabled attribute in slot-child mode."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-change",
+      "detail": "{ name: string, value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the user selects a different segment."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Optional ce-segment child elements. When present, slot children take precedence over the data attribute (CDR-005)."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Background of the selected segment button."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default label color."
+    },
+    {
+      "name": "--ce-text-inverse",
+      "kind": "color",
+      "source": "token",
+      "description": "Label color on the selected (blue) segment."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Track background of the control."
+    },
+    {
+      "name": "--ce-surface-3",
+      "kind": "color",
+      "source": "token",
+      "description": "Fallback hover background on unselected segments."
+    },
+    {
+      "name": "--ce-state-hover",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background on unselected segments."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Outer border and internal dividers between segments."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Corner radius of the control."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Focus ring applied to each focused segment button."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding for size=sm."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding for size=md (default)."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding for size=lg."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Default font size (size=md)."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Font size for size=sm."
+    },
+    {
+      "name": "--ce-text-md",
+      "kind": "size",
+      "source": "token",
+      "description": "Font size for size=lg."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for background and color changes."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "subTags": [
+    "ce-segment"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-radio-group",
+      "scope": "single-pick",
+      "when": "more than 5 options or hint text required per option"
+    }
+  ],
+  "related": [
+    "ce-radio-group",
+    "ce-tabs",
+    "ce-filter-bar",
+    "ce-toggle"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ],
+  "a11y": {
+    "role": "radiogroup",
+    "notes": "Host carries role='radiogroup'. Each rendered button has role='radio' and aria-checked. Roving tabindex: only the currently selected segment (or the first segment when none is selected) has tabindex=0; others have tabindex=-1. ArrowRight / ArrowLeft move focus and selection; wrap-around at both ends. The control is form-associated and exposes its value through ElementInternals."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  },
+  "additional": {
+    "subComponents": [
+      {
+        "tag": "ce-segment",
+        "className": "CeSegment",
+        "description": "Individual segment item used in slot-child mode. Attributes: value (string), label (string), disabled (boolean). Does not render visual output; the parent reads its attributes to build the button row."
+      }
+    ],
+    "dualInputMode": "When both data and slot children are present, slot children win (CDR-005). This allows incremental migration: start with data JSON, switch to ce-segment children later without changing the parent tag.",
+    "noSelectionBehavior": "When value is empty, no segment has aria-checked=true. The first non-disabled segment receives tabindex=0 so the control is still keyboard-reachable. A selection is only recorded after the user clicks or presses Arrow keys."
+  }
+}

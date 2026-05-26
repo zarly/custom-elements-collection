@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-relative-time",
   "name": "Relative time",
   "className": "CeRelativeTime",
@@ -7,7 +7,7 @@
   "description": "Renders a semantic <time datetime='...'> element whose text content is the difference between the supplied datetime and now, formatted via Intl.RelativeTimeFormat with the largest sensible unit (seconds → minutes → hours → days → months → years). Self-rescheduling: it ticks every second while under a minute old, every 30 seconds while under an hour, then larger steps to keep CPU and battery low for older items.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "datetime",
@@ -65,11 +65,25 @@
     "ce-countdown",
     "ce-duration"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
     "time",
     "primitive"
-  ]
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

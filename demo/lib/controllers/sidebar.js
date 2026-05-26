@@ -12,12 +12,13 @@
 import { buildNavItems } from "../build-nav-items.js";
 import { esc } from "../dates.js";
 import { activeFilterCount } from "../filters.js";
-import { stateQueryString, writeHash } from "../hash.js";
+import { writeHash } from "../hash.js";
 import { STATE } from "../state.js";
 
 /** Repaint the sidebar from the current STATE. */
 export function refreshSidebar(INDEX, suppressRef) {
   const nav = document.getElementById("nav");
+  const navPages = document.getElementById("nav-pages");
   const empty = document.getElementById("sidebar-empty");
   const items = buildNavItems(INDEX, STATE);
   if (items.length === 0) {
@@ -47,15 +48,18 @@ export function refreshSidebar(INDEX, suppressRef) {
     empty.hidden = false;
   } else {
     empty.hidden = true;
-    // "Overview" link also carries current state forward so it doesn't reset.
-    const qs = stateQueryString(STATE);
-    const overviewHref = qs ? `#?${qs}` : "#";
-    nav.items = [
-      { label: "Overview", href: overviewHref, group: "" },
-      ...items,
-    ];
+    nav.items = items;
   }
-  nav.value = location.hash || "#";
+  // Highlight the active link. The Components page lives at #/components, but
+  // an empty hash also routes to the Quick start page — map it explicitly so
+  // the Docs nav picks up the right row in both cases.
+  const hash = location.hash;
+  const effectiveHash =
+    !hash || hash === "#" || hash === "#/" ? "#/quick-start" : hash;
+  nav.value = effectiveHash;
+  // The Docs nav items have no query string; compare on the path portion only
+  // so filters/group/sort on the catalog don't break the active-row highlight.
+  if (navPages) navPages.value = effectiveHash.split("?")[0];
 }
 
 /**

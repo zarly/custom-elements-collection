@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-bookmark",
   "name": "Bookmark",
   "className": "CeBookmark",
@@ -7,7 +7,7 @@
   "description": "Single boolean switch for save/shortlist/pin semantics. Reflects active to the host attribute and surfaces ARIA role=switch with aria-checked. Clicking the host or pressing Enter/Space toggles state and dispatches a bubbling ce-bookmark-change event. Slotted icon and label slots let consumers override the emoji defaults.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "active",
@@ -184,6 +184,15 @@
   "related": [
     "ce-dismiss"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "slotCompatible": true,
+  "preferredSlotIn": ["ce-feedback-bar"],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -195,5 +204,11 @@
   "a11y": {
     "role": "switch",
     "notes": "aria-checked mirrors the active attribute; aria-label comes from the label attribute. Enter/Space toggle."
+  },
+  "contentModel": "inline",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

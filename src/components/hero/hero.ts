@@ -52,6 +52,7 @@ export class CeHero extends CecElement {
       letter-spacing: -0.02em;
       margin: 0 0 var(--ce-space-3) 0;
       background: linear-gradient(135deg, var(--ce-text) 0%, var(--ce-color-purple) 55%, var(--ce-color-blue) 100%);
+      /* stylelint-disable-next-line property-no-vendor-prefix -- Safari requires -webkit- prefix for background-clip: text */
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

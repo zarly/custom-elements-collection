@@ -83,6 +83,18 @@ describe("<ce-button>", () => {
     host.remove();
   });
 
+  it("size=icon reflects and stays square via aspect-ratio", async () => {
+    const host = mount(`<ce-button size="icon" variant="ghost" aria-label="Settings">★</ce-button>`);
+    const el = host.querySelector("ce-button") as CeButton;
+    await ready(el);
+    expect(el.getAttribute("size")).toBe("icon");
+    // The aspect-ratio rule lives in the shadow stylesheet and applies via the
+    // [size="icon"] host selector; jsdom doesn't compute layout, but we can
+    // assert the selector matches the host so the rule is reachable.
+    expect(el.matches('[size="icon"]')).toBe(true);
+    host.remove();
+  });
+
   it("loading also blocks ce-click", async () => {
     const host = mount(`<ce-button loading>x</ce-button>`);
     const el = host.querySelector("ce-button") as CeButton;

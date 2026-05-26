@@ -32,7 +32,11 @@ export class CeGrid extends CecElement {
     }
 
     @media (max-width: 640px) {
-      :host { grid-template-columns: 1fr !important; }
+      /* Match the specificity of :host([cols="N"]) above so this rule wins
+         on source order without needing !important. */
+      :host([cols]),
+      :host([auto]),
+      :host { grid-template-columns: 1fr; }
     }
   `;
 

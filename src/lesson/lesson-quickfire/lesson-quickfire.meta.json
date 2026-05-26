@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-quickfire",
   "name": "LessonQuickfire",
   "className": "LessonQuickfire",
@@ -7,7 +7,7 @@
   "description": "Timed practice round. Cycles through QuickfireRound entries; each round shows the prompt, options, and a thin timer bar that empties over `timer` seconds. If a round has `correct`, picks flash green/red and count toward the score; if `correct` is omitted (poll/opinion round), the picked option flashes neutral and the round is excluded from the score. After the last round emits lesson-quickfire-done; reset() restarts. Final screen shows `score / scoredRoundCount`, or just `Done!` when no round was scored.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "rounds",
@@ -194,11 +194,24 @@
     "lesson-frame",
     "lesson-quiz"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "widget",
   "tags": [
     "Education",
-    "quickfire",
-    "timed"
-  ]
+    "exercise"
+  ],
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "timer, state side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

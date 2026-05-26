@@ -1,10 +1,49 @@
-/* Light-theme convenience wrapper. */
+/* Light-theme convenience wrapper.
+ *
+ * Loading this file alone applies the light palette without requiring
+ * data-ce-theme="light" on <html>. The token values below mirror the
+ * `html[data-ce-theme="light"]` block in `tokens.css`; both must change
+ * together when the light palette evolves.
+ */
 @import "./tokens.css";
 
 :root {
   color-scheme: light;
-}
-html {
-  /* Activate the light-theme token block in tokens.css */
-  data-ce-theme: light;
+
+  --ce-bg: #fff;
+  --ce-surface: #f6f8fa;
+  --ce-surface-2: #eaeef2;
+  --ce-surface-3: #d0d7de;
+  --ce-border: #d0d7de;
+  --ce-border-soft: #eaeef2;
+  --ce-border-strong: #afb8c1;
+
+  --ce-text: #0f172a;
+  --ce-muted: #57606a;
+  --ce-dim: #6e7781;
+  --ce-text-inverse: #fff;
+
+  --ce-color-green: #1f883d;
+  --ce-color-red: #cf222e;
+  --ce-color-amber: #9a6700;
+  --ce-color-blue: #0969da;
+  --ce-color-purple: #8250df;
+  --ce-color-cyan: #1b7c83;
+
+  --ce-color-green-bg: rgba(31, 136, 61, 0.08);
+  --ce-color-red-bg: rgba(207, 34, 46, 0.08);
+  --ce-color-amber-bg: rgba(154, 103, 0, 0.08);
+  --ce-color-blue-bg: rgba(9, 105, 218, 0.08);
+  --ce-color-purple-bg: rgba(130, 80, 223, 0.08);
+  --ce-color-cyan-bg: rgba(27, 124, 131, 0.08);
+
+  --ce-color-green-border: rgba(31, 136, 61, 0.25);
+  --ce-color-red-border: rgba(207, 34, 46, 0.25);
+  --ce-color-amber-border: rgba(154, 103, 0, 0.25);
+  --ce-color-blue-border: rgba(9, 105, 218, 0.25);
+  --ce-color-purple-border: rgba(130, 80, 223, 0.25);
+  --ce-color-cyan-border: rgba(27, 124, 131, 0.25);
+
+  --ce-state-hover:  rgba(0, 0, 0, 0.04);
+  --ce-state-active: rgba(0, 0, 0, 0.08);
 }

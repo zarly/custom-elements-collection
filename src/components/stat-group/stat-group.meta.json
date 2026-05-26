@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-stat-group",
   "name": "Stat Group",
   "className": "CeStatGroup",
@@ -9,7 +9,7 @@
   "deprecatedIn": "0.4.0",
   "replacedBy": "ce-grid + ce-kpi",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "columns",
@@ -63,11 +63,24 @@
     "ce-kpi",
     "ce-grid"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Dashboard",
     "layout",
     "metrics"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

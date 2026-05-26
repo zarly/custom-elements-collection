@@ -238,7 +238,7 @@ export class CeChatInput extends CecElement {
 
   override firstUpdated(changed: PropertyValues<this>): void {
     super.firstUpdated(changed);
-    this.#textarea = this.shadowRoot!.querySelector<HTMLTextAreaElement>(".ce-chat-input__textarea");
+    this.#textarea = this.renderRoot.querySelector<HTMLTextAreaElement>(".ce-chat-input__textarea");
     this.#syncTextarea();
   }
 

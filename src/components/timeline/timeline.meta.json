@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-timeline",
   "name": "Timeline",
   "className": "CeTimeline",
@@ -7,7 +7,7 @@
   "description": "Timeline of TimelineItem entries. Each item has a title, optional meta line (date/duration/owner), optional description, optional color for the dot, and optional icon character. Vertical (default) renders a connecting rail; horizontal renders a row of equally-sized columns.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -186,11 +186,22 @@
   "related": [
     "ce-flow"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
-    "Comparison & narrative",
-    "timeline",
-    "events"
-  ]
+    "Comparison & narrative"
+  ],
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
 }

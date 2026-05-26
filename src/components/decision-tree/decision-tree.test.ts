@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeDecisionTree } from "./decision-tree.js";
 
@@ -77,15 +77,12 @@ describe("<ce-decision-tree>", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when branches attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when branches attribute is invalid JSON", async () => {
     const el = document.createElement("ce-decision-tree") as CeDecisionTree;
     el.setAttribute("branches", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.branches).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });

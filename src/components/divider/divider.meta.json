@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-divider",
   "name": "Divider",
   "className": "CeDivider",
@@ -7,7 +7,7 @@
   "description": "Lightweight separator primitive. With no slotted content the rule is a continuous 1px line; with a slotted label the rule splits into two equal segments framing the label. Vertical orientation switches to a 1px inline column suitable for separating inline groups. The inset attribute pulls the rule away from container edges (none / sm / md / lg). Reads as role=separator to assistive tech.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "orientation",
@@ -85,11 +85,23 @@
     "ce-section",
     "ce-callout"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Layout & primitives",
-    "separator",
     "primitive"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

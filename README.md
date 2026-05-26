@@ -5,7 +5,7 @@
 
 **🌐 Live demo:** [generativeui.ru/solutions/custom-elements-collection](https://generativeui.ru/solutions/custom-elements-collection/) — Storybook-style catalog over every tag, with a live theme switcher across 10 themes.
 
-A collection of **126 framework-agnostic Web Components** built on [Lit 3](https://lit.dev) — 110 general-purpose UI building blocks (`ce-*`) covering layout primitives, navigation, metrics, comparison & decision analysis, chat / agent surfaces, human-in-the-loop feedback, form controls, dashboards, and rich-content viewers, plus 16 educational widgets (`lesson-*`). Drop them into any HTML page, any framework, any static site generator. No build step required on the consumer side.
+A collection of **147 framework-agnostic Web Components** built on [Lit 3](https://lit.dev) — 129 general-purpose UI building blocks (`ce-*`) covering layout primitives, navigation, metrics, comparison & decision analysis, chat / agent surfaces, human-in-the-loop feedback, form controls, dashboards, and rich-content viewers, plus 18 educational widgets (`lesson-*`). Drop them into any HTML page, any framework, any static site generator. No build step required on the consumer side.
 
 Every component is self-describing via a per-component `*.meta.json` file (see [ADR-005](./docs/adr/adr-005-component-meta.md)) — props, events, slots, CSS variables, dependency graph, side effects, and accessibility notes are machine-readable.
 
@@ -94,10 +94,10 @@ Dark / light overrides are shipped as separate stylesheets:
 
 ## Component catalog
 
-Full catalog with per-tag goals, recipes, and links lives in [`skill/SKILL.md`](./skill/SKILL.md) (auto-generated from each `*.meta.json`). Quick map of what's in the box:
+Full catalog with per-tag goals, recipes, and links lives in [`skills/cec-consumer/`](./skills/cec-consumer/) — `SKILL.md` (consumer orientation) + `references/catalog.md` (auto-generated full catalog), `references/index.md` (per-tag index), `references/picking.md` (decision table), `references/recipes.md` (composition examples), and `references/setup.md` (bundler / SSR / framework). Quick map of what's in the box:
 
-### Layout & primitives (29)
-`ce-abbr` · `ce-accordion` · `ce-avatar` · `ce-avatar-group` · `ce-badge` · `ce-breadcrumbs` · `ce-callout` · `ce-card` · `ce-chip` · `ce-countdown` · `ce-details` · `ce-divider` · `ce-duration` · `ce-grid` · `ce-hero` · `ce-icon` · `ce-kbd` · `ce-link` · `ce-mark` · `ce-pagination` · `ce-progress-list` · `ce-relative-time` · `ce-section` · `ce-shell` · `ce-skeleton` · `ce-table` · `ce-tabs` · `ce-tag` · `ce-toc`
+### Layout & primitives (38)
+`ce-abbr` · `ce-accordion` · `ce-affix` · `ce-avatar` · `ce-avatar-group` · `ce-badge` · `ce-breadcrumbs` · `ce-callout` · `ce-card` · `ce-center` · `ce-chip` · `ce-countdown` · `ce-details` · `ce-divider` · `ce-drawer` · `ce-dropdown-menu` · `ce-duration` · `ce-frame` · `ce-grid` · `ce-hero` · `ce-icon` · `ce-kbd` · `ce-link` · `ce-mark` · `ce-modal` · `ce-page` · `ce-pagination` · `ce-popover` · `ce-progress-list` · `ce-relative-time` · `ce-section` · `ce-shell` · `ce-skeleton` · `ce-stack` · `ce-table` · `ce-tabs` · `ce-tag` · `ce-toc`
 
 ### Metrics & charts (11)
 `ce-bar-chart` · `ce-bar-row` · `ce-chart` · `ce-donut` · `ce-heat-cell` · `ce-heatmap` · `ce-heat-row` · `ce-kpi` · `ce-plot` · `ce-progress` · `ce-score`
@@ -112,30 +112,30 @@ Decision-analysis primitives — `ce-pros-cons` (two-column pros vs cons), `ce-m
 
 LLM chat / copilot / agent UI primitives. `ce-chat-input` is a composite composer (auto-grow textarea + send/stop/attach buttons + Enter-to-submit) with `ce-attachment-strip` for previewable upload tiles above it. `ce-message-group` clusters consecutive same-role messages; `ce-conversation-tree` is the `◀ 2 / 5 ▶` branch picker for forked / regenerated responses; `ce-stream-status` is the connecting / streaming / done / error pill with optional tokens-per-second. `ce-reasoning` is a collapsible chain-of-thought trace; `ce-thinking` is the pre-token spinner. `ce-suggestion-chip` is the tappable follow-up prompt and `ce-stop-button` is the mid-stream cancel counterpart to `ce-retry-button`. `ce-rating` supports both thumbs-up/down and 0–N star modes and is form-associated. `ce-tool-call` collapses an LLM tool invocation with `args` / `result` / `error` slots; `ce-tool-result` is the panel companion for the return value. `ce-source-card` renders a retrieved-source card for RAG surfaces and pairs with inline `ce-citation` footnote markers. Compatible with [`@generative-dom/plugin-companion`](https://github.com/generative-dom/generative-dom).
 
-### Feedback (8)
-`ce-bookmark` · `ce-comment` · `ce-dismiss` · `ce-feedback-bar` · `ce-feedback-export` · `ce-feedback-heatmap` · `ce-feedback-sink` · `ce-feedback-summary`
+### Feedback (11)
+`ce-bookmark` · `ce-comment` · `ce-dismiss` · `ce-empty-state` · `ce-feedback-bar` · `ce-feedback-export` · `ce-feedback-heatmap` · `ce-feedback-sink` · `ce-feedback-summary` · `ce-spinner` · `ce-tooltip`
 
 Human-in-the-loop feedback for any HTML dashboard. Wrap content in `<ce-feedback-sink subject="…">`, drop one `<ce-feedback-bar item="…">` per item with toggles + ratings + comments inside, and the sink streams to localStorage / HTTP / file / console / custom transport. `ce-feedback-heatmap` renders a verdict-distribution sparkbar from the same state. Live demo at [`demo/feedback.html`](./demo/feedback.html).
 
-### Forms (12)
-`ce-button` · `ce-check-item` · `ce-checkbox` · `ce-checklist` · `ce-confirm` · `ce-date-picker` · `ce-file-upload` · `ce-input` · `ce-radio-group` · `ce-select` · `ce-textarea` · `ce-toggle`
+### Forms (16)
+`ce-button` · `ce-checkbox` · `ce-check-item` · `ce-checklist` · `ce-combobox` · `ce-confirm` · `ce-date-picker` · `ce-field` · `ce-file-upload` · `ce-input` · `ce-radio-group` · `ce-search` · `ce-segmented` · `ce-select` · `ce-textarea` · `ce-toggle`
 
-Themable form controls with full ARIA semantics: `ce-button` (primary/secondary/ghost/destructive + loading), `ce-toggle` (`role=switch`), `ce-checkbox` / `ce-radio-group` (with `aria-checked` semantics), `ce-input` / `ce-textarea` / `ce-select` / `ce-date-picker` (label + help/error + aria-describedby), `ce-file-upload` (drag-drop dropzone emitting `ce-files`), and `ce-confirm` (inline `role=alertdialog` yes/no).
+Themable form controls with full ARIA semantics: `ce-button` (primary/secondary/ghost/destructive + loading), `ce-toggle` (`role=switch`), `ce-checkbox` / `ce-radio-group` (with `aria-checked` semantics), `ce-input` / `ce-textarea` / `ce-select` / `ce-date-picker` / `ce-search` (label + help/error + aria-describedby), `ce-combobox` and `ce-segmented` (single-pick with portal panel / joined buttons), `ce-field` (label + control + help/error wrapper), `ce-file-upload` (drag-drop dropzone emitting `ce-files`), and `ce-confirm` (inline `role=alertdialog` yes/no).
 
 ### Dashboard (6)
 `ce-clock` · `ce-counter` · `ce-gauge` · `ce-sparkline` · `ce-stat-group` · `ce-status-light`
 
 Compact dashboard cells: live `ce-clock` (Intl / IANA), animated `ce-counter` (rAF easing), semicircle `ce-gauge` (`role=meter`), inline `ce-sparkline` (line / area / bar), traffic-light `ce-status-light`, and the `ce-stat-group` KPI-grid wrapper.
 
-### Content (7)
-`ce-diff` · `ce-file-card` · `ce-image` · `ce-json` · `ce-key-value` · `ce-kv` · `ce-qr`
+### Content (10)
+`ce-diff` · `ce-feed` · `ce-file-card` · `ce-image` · `ce-json` · `ce-key-value` · `ce-kv` · `ce-list` · `ce-qr` · `ce-tree`
 
-Rich content for chat surfaces and reports: lazy `ce-image` with caption + fallback, `ce-file-card` attachment chip with type icons, `ce-key-value` / `ce-kv` definition-list grid with typed-value children (CDR-002), `ce-json` pretty-print viewer, LCS-based `ce-diff` (unified / split), and `ce-qr` byte-mode QR encoder with no runtime dependencies.
+Rich content for chat surfaces and reports: lazy `ce-image` with caption + fallback, `ce-file-card` attachment chip with type icons, `ce-key-value` / `ce-kv` definition-list grid with typed-value children (CDR-002), `ce-json` pretty-print viewer, LCS-based `ce-diff` (unified / split), `ce-feed` (chronological list with day/week/month grouping), `ce-list` and `ce-tree` (vertical sequence / nested tree with ARIA roles), and `ce-qr` byte-mode QR encoder with no runtime dependencies.
 
-### Education — `lesson-*` (16)
-`lesson-audio` · `lesson-compare` · `lesson-confidence` · `lesson-frame` · `lesson-gap` · `lesson-hint` · `lesson-match` · `lesson-myth` · `lesson-note` · `lesson-quickfire` · `lesson-quiz` · `lesson-reveal` · `lesson-rule` · `lesson-step` · `lesson-summary` · `lesson-vocab`
+### Education — `lesson-*` (18)
+`lesson-audio` · `lesson-compare` · `lesson-confidence` · `lesson-frame` · `lesson-gap` · `lesson-hint` · `lesson-match` · `lesson-myth` · `lesson-note` · `lesson-option` · `lesson-question` · `lesson-quickfire` · `lesson-quiz` · `lesson-reveal` · `lesson-rule` · `lesson-step` · `lesson-summary` · `lesson-vocab`
 
-A machine-readable manifest of every component is exported as [`COMPONENTS`](./src/manifest.ts). Internal layout primitives (`ce-docs-layout`, `ce-nav-list`, `ce-theme-switcher`) ship with the package but are filtered out of the published manifest at publish time (see ADR-005).
+A machine-readable manifest of every component is exported as [`COMPONENTS`](./src/manifest.ts). Internal layout primitives (`ce-docs-layout`, `ce-nav-list`, `ce-theme-switcher`) and the headless data carrier (`ce-data`) ship with the package but are filtered out of the published manifest at publish time (see ADR-005).
 
 ---
 
@@ -167,7 +167,7 @@ Each sidebar row shows a relative-time stamp (`<ce-relative-time>` for ≤ 30 da
 - [Usage guide](./docs/USAGE.md) — plain HTML, bundlers, Vue / React / Svelte, theming, composition patterns, troubleshooting.
 - [Architecture](./docs/ARCHITECTURE.md) — repo layout, component anatomy, build pipeline, theming model.
 - [ADRs](./docs/adr/) — framework choice, Light DOM, theming, distribution modes, component meta files.
-- [Publishing](./PUBLISHING.md) — how this library ships to npm AND to generativeui.ru/solutions/.
+- [Publishing](./PUBLISHING.md) — npm release flow, sanity checklist, and how the hosted demo at [generativeui.ru/solutions/custom-elements-collection/](https://generativeui.ru/solutions/custom-elements-collection/) is updated.
 
 ---
 

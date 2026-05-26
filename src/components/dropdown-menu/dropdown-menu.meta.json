@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-dropdown-menu",
+  "name": "Dropdown Menu",
+  "className": "CeDropdownMenu",
+  "goal": "Provide a button-triggered action menu with keyboard navigation for row actions, toolbar overflow, profile menus, and sort options.",
+  "description": "A multi-element component: ce-dropdown-menu (parent), ce-menu-item, ce-menu-separator, and ce-menu-group. The parent uses the native Popover API (popover=auto) for top-layer rendering and built-in light-dismiss. JS positioning handles 6 placement values. Keyboard navigation follows the ARIA menu pattern: ArrowDown/Up navigate, Enter/Space activate, Escape closes, Home/End jump to first/last. Emits ce-menu-select with the activated item's value.",
+  "limitations": "Viewport overflow-flip (automatic placement flip when the panel would clip the viewport edge) is deferred to v2. Icon names in ce-menu-item are rendered as text; integrate with an icon set by replacing the icon slot content. The shortcut hint is a visual-only display; key binding itself must be wired by the consumer.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true the menu panel is visible; setting to false closes it."
+    },
+    {
+      "name": "placement",
+      "type": "\"top-start\" | \"top-end\" | \"bottom-start\" | \"bottom-end\" | \"top\" | \"bottom\"",
+      "required": false,
+      "default": "\"bottom-start\"",
+      "reflect": true,
+      "description": "Panel placement relative to the trigger. 6 values covering top and bottom axes with start, end, and center alignment."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true, the trigger click is ignored and the menu cannot be opened."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-menu-select",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when a menu item is activated by click, Enter, or Space. Detail contains the activated item's value string."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "The element that toggles the menu on click. Should be an interactive element (button). Receives aria-haspopup=menu, aria-expanded, and aria-controls automatically."
+    },
+    {
+      "name": "",
+      "description": "Menu items, separators, and groups. Accepts ce-menu-item, ce-menu-separator, and ce-menu-group elements."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Panel background color."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Panel and item border color."
+    },
+    {
+      "name": "--ce-border-soft",
+      "kind": "color",
+      "source": "token",
+      "description": "Separator line color."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Panel corner radius."
+    },
+    {
+      "name": "--ce-shadow-lg",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Panel elevation shadow."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Default item text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Item label font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Group label and shortcut hint font size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Group label, icon, and shortcut hint muted text color."
+    },
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Item hover and focus background."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Separator vertical margin."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Item vertical padding and icon gap."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Item and group label horizontal padding."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Text color for ce-menu-item with tone=danger."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Hover background for ce-menu-item with tone=danger."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for panel open/close animation."
+    },
+    {
+      "name": "--ce-dropdown-menu-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index override for the menu panel. Default 1000.",
+      "fallback": "1000"
+    },
+    {
+      "name": "--ce-dropdown-menu-min-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Minimum panel width. Default 160px.",
+      "fallback": "160px"
+    },
+    {
+      "name": "--ce-dropdown-menu-max-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Maximum panel width. Default 280px.",
+      "fallback": "280px"
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLElement.showPopover",
+      "purpose": "Opens the menu panel in the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.hidePopover",
+      "purpose": "Removes the menu panel from the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.getBoundingClientRect",
+      "purpose": "Reads trigger and panel geometry for JS positioning.",
+      "writes": false
+    },
+    {
+      "api": "document.activeElement",
+      "purpose": "Caches previously-focused element for focus-return on close.",
+      "writes": false
+    },
+    {
+      "api": "document.addEventListener",
+      "purpose": "Captures keydown events for keyboard navigation while the menu is open.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Calls showPopover() / hidePopover() on the internal panel element.",
+      "reason": "Required to enter/exit the browser top-layer for correct stacking.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Attaches window scroll and resize listeners while the menu is open.",
+      "reason": "Keeps the panel aligned to the trigger during scroll and resize.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Captures document keydown events while the menu is open for keyboard navigation.",
+      "reason": "Menu keyboard pattern (ARIA APG) requires capturing ArrowDown/Up/Home/End/Enter/Space/Escape.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Captures and restores document.activeElement on open/close.",
+      "reason": "WCAG 2.1 SC 2.4.3: focus must return to the trigger after the menu closes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "subTags": [
+    "ce-menu-item",
+    "ce-menu-separator",
+    "ce-menu-group"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [
+    "ce-popover"
+  ],
+  "role": "container",
+  "interchangeableWith": [],
+  "related": [
+    "ce-popover",
+    "ce-button",
+    "ce-kbd"
+  ],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "overlay",
+    "interactive",
+    "navigation"
+  ],
+  "a11y": {
+    "role": "menu",
+    "notes": "The menu panel carries role=menu. Each ce-menu-item carries role=menuitem and tabindex managed by roving-tabindex (first item gets tabindex=0 on open; others -1). ce-menu-separator carries role=separator. ce-menu-group carries role=group with aria-labelledby pointing to the visible group label. The slotted trigger receives aria-haspopup=menu, aria-expanded (synced with open), and aria-controls pointing at the panel id. Focus moves to the first enabled menu item on open and returns to the trigger on close. Disabled items are skipped in keyboard navigation."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  },
+  "additional": {
+    "subElements": [
+      {
+        "tag": "ce-menu-item",
+        "className": "CeMenuItem",
+        "description": "A single action row inside ce-dropdown-menu. Attributes: value (string id), icon (string), disabled (boolean), tone (default|danger), shortcut (string kbd hint)."
+      },
+      {
+        "tag": "ce-menu-separator",
+        "className": "CeMenuSeparator",
+        "description": "Horizontal divider between menu sections. role=separator."
+      },
+      {
+        "tag": "ce-menu-group",
+        "className": "CeMenuGroup",
+        "description": "Labeled section grouping related menu items. Attribute: label (string). role=group with aria-labelledby."
+      }
+    ],
+    "cdrDeviations": [
+      "CDR-001: The placement enum has 6 values encoding a closed 2D coordinate space (top/bottom × start/center/end). Not a vocabulary alias set — the same geometry as CSS Anchor Positioning and floating-ui. Deviation documented here and in CONCEPT.md."
+    ]
+  }
+}

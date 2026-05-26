@@ -50,7 +50,7 @@ export class CeProgress extends CecElement {
     :host([color="cyan"])   .ce-progress__fill { background: var(--ce-color-cyan);   }
 
     :host([indeterminate]) .ce-progress__fill {
-      width: 30% !important;
+      width: 30%;
       animation: ce-progress-shimmer 1.4s infinite ease-in-out;
     }
     @keyframes ce-progress-shimmer {
@@ -101,7 +101,7 @@ export class CeProgress extends CecElement {
       >
         ${this.label ? html`<span class="ce-progress__label">${this.label}</span>` : ""}
         <div class="ce-progress__track">
-          <div class="ce-progress__fill" style="width:${pct}%"></div>
+          <div class="ce-progress__fill" style=${this.indeterminate ? "" : `width:${pct}%`}></div>
         </div>
         ${this.showValue
           ? html`<span class="ce-progress__value">${Math.round(pct)}%</span>`

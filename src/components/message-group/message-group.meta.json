@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-message-group",
   "name": "Message group",
   "className": "CeMessageGroup",
@@ -7,7 +7,7 @@
   "description": "Layout wrapper that renders a group-level avatar and header (author + timestamp) exactly once, then stacks slotted message children with tightened inter-bubble spacing. Role-driven alignment mirrors ce-chat-bubble: user groups align right, all others left. On every slotchange, the group sets the follow-up attribute on every slotted ce-chat-bubble after the first, so each follow-up bubble hides its own avatar column and header line — collapsing repeated chrome in the cluster. Compact mode further reduces the gap. Pure presentation; emits no events.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "role",
@@ -142,6 +142,15 @@
   "related": [
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-chat-bubble"
+  ],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
@@ -151,5 +160,11 @@
   ],
   "a11y": {
     "notes": "aria-roledescription=message group identifies the cluster to assistive tech. The role attribute carries the chat role, not an ARIA role. Each child ce-chat-bubble retains its own aria-roledescription=message."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

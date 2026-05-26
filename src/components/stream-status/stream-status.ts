@@ -100,8 +100,11 @@ export class CeStreamStatus extends CecElement {
     }
 
     @media (prefers-reduced-motion: reduce) {
+      /* Match the specificity of :host([state="X"]) .ce-stream-status__dot above
+         so this rule wins on source order without !important. */
+      :host([state]) .ce-stream-status__dot,
       .ce-stream-status__dot {
-        animation: none !important;
+        animation: none;
       }
     }
 

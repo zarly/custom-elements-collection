@@ -7,14 +7,15 @@ body {
   background: var(--ce-bg);
 }
 
-/* Sidebar controls — search + settings button row above ce-nav-list. */
+/* Sidebar controls — search + settings button row above ce-nav-list.
+   Tight horizontal padding + minimal gap maximises the search field width. */
 .sidebar-controls {
-  padding: var(--ce-space-3) var(--ce-space-4) 0;
+  padding: var(--ce-space-3) var(--ce-space-3) var(--ce-space-2);
 }
 .sidebar-search-row {
   display: flex;
   align-items: center;
-  gap: var(--ce-space-2);
+  gap: var(--ce-space-1);
 }
 .sidebar-search-row ce-input {
   flex: 1 1 0;
@@ -109,15 +110,49 @@ body {
   font-size: var(--ce-text-sm);
   cursor: pointer;
 }
+.filter-tags__search {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--ce-border);
+  border-radius: var(--ce-radius-sm);
+  background: var(--ce-surface-1);
+  color: var(--ce-text);
+  font: inherit;
+  font-size: var(--ce-text-sm);
+  margin-bottom: var(--ce-space-2);
+}
+.filter-tags__search:focus {
+  outline: 2px solid var(--ce-color-blue);
+  outline-offset: 1px;
+}
 .filter-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--ce-space-1);
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: var(--ce-space-1);
 }
 .filter-tags ce-chip[data-selected] {
   background: var(--ce-color-blue-bg);
   border-color: var(--ce-color-blue);
   color: var(--ce-color-blue);
+}
+.filter-tags__count {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: var(--ce-radius-pill);
+  background: var(--ce-surface-2);
+  color: var(--ce-muted);
+  font-family: var(--ce-font-mono);
+  font-size: var(--ce-text-xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.filter-tags ce-chip[data-selected] .filter-tags__count {
+  background: var(--ce-color-blue);
+  color: var(--ce-text-inverse);
 }
 .filter-recency {
   display: flex;
@@ -310,4 +345,108 @@ ce-theme-switcher {
 }
 .dep-chips a {
   text-decoration: none;
+}
+
+/* Docs pages (Quick start, Theming) — small additions on top of ce-section. */
+.page-subhead {
+  font-size: var(--ce-text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ce-muted);
+  font-weight: 700;
+  margin: 18px 0 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.page-subhead__count {
+  font-family: var(--ce-font-mono);
+  font-size: var(--ce-text-xs);
+  color: var(--ce-muted);
+  font-weight: 600;
+}
+
+/* Theme cards — visual preview using a nested theme attribute so the swatch
+   renders in the target theme's colors regardless of the page's active theme. */
+.theme-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+.theme-card__head code {
+  font-family: var(--ce-font-mono);
+  font-size: var(--ce-text-sm);
+}
+.theme-card__label {
+  font-weight: 700;
+  margin: 4px 0 2px;
+}
+.theme-card__blurb {
+  margin: 4px 0 0;
+  font-size: var(--ce-text-sm);
+  color: var(--ce-muted);
+  line-height: var(--ce-line-snug);
+}
+.theme-swatch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 6px 10px;
+  border-radius: var(--ce-radius-sm);
+  border: 1px solid var(--ce-border);
+  background: var(--ce-bg);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.theme-swatch__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--ce-bg);
+  z-index: 0;
+}
+.theme-swatch__surface {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  height: 100%;
+  border-radius: var(--ce-radius-sm);
+  background: var(--ce-surface-2);
+  border: 1px solid var(--ce-border-soft);
+}
+.theme-swatch__dot {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.theme-swatch__dot--green  { background: var(--ce-color-green); }
+.theme-swatch__dot--blue   { background: var(--ce-color-blue); }
+.theme-swatch__dot--purple { background: var(--ce-color-purple); }
+.theme-swatch__dot--amber  { background: var(--ce-color-amber); }
+.theme-swatch__dot--red    { background: var(--ce-color-red); }
+
+/* Tokens list — value cell shows a tiny swatch when the value is color-like. */
+.token-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.token-value code {
+  font-family: var(--ce-font-mono);
+  font-size: 0.9em;
+  color: var(--ce-muted);
+}
+.token-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--ce-border);
+  flex-shrink: 0;
 }

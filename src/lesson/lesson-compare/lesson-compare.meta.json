@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "lesson-compare",
   "name": "LessonCompare",
   "className": "LessonCompare",
@@ -7,7 +7,7 @@
   "description": "Renders a two-column grid with labeled headers and named slots. Three modes: neutral (default), correct-wrong (left red, right green labels), before-after (left muted, right blue labels). Mode reflects on host for CSS selector targeting.",
   "stability": "stable",
   "created": "2026-05-07",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "left-label",
@@ -37,11 +37,13 @@
   "slots": [
     {
       "name": "left",
-      "description": "Left column content."
+      "description": "Left column content.",
+      "acceptShapes": ["semantic-html:p,ul,li,strong,em,code,br", "child-tag:lesson-note", "child-tag:lesson-rule"]
     },
     {
       "name": "right",
-      "description": "Right column content."
+      "description": "Right column content.",
+      "acceptShapes": ["semantic-html:p,ul,li,strong,em,code,br", "child-tag:lesson-note", "child-tag:lesson-rule"]
     }
   ],
   "cssVariables": [
@@ -132,11 +134,24 @@
     "lesson-rule",
     "lesson-note"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "lesson",
   "tier": "brick",
   "tags": [
     "Education",
     "compare",
     "before-after"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

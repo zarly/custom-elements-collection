@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-popover",
+  "name": "Popover",
+  "className": "CePopover",
+  "goal": "Provide a reusable anchored floating panel that opens from a trigger element and supports light-dismiss.",
+  "description": "An anchored, non-modal overlay panel built on the native Popover API. Positions itself relative to a slotted trigger element using JS-computed placement across 8 standard anchor points. Supports light-dismiss via popover=auto, manual mode via popover=manual, an optional directional arrow, and programmatic show/hide/toggle methods. Emits ce-popover-open and ce-popover-close. Returns focus to the trigger on close.",
+  "limitations": "Viewport overflow-flip (automatic placement flip when the panel would clip the viewport edge) is deferred to v2. CSS anchor-positioning (chrome-only as of 2026) is deferred to v2; JS positioning is used universally. The arrow position is centered on the trigger edge and does not account for panel overflow.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true the panel is visible; setting to false closes it."
+    },
+    {
+      "name": "placement",
+      "type": "\"top\" | \"top-start\" | \"top-end\" | \"bottom\" | \"bottom-start\" | \"bottom-end\" | \"left\" | \"right\"",
+      "required": false,
+      "default": "\"bottom-start\"",
+      "reflect": true,
+      "description": "Panel placement relative to the trigger. 8 values covering the four cardinal axes and three alignment variants (centered, start-aligned, end-aligned)."
+    },
+    {
+      "name": "offset",
+      "type": "number",
+      "required": false,
+      "default": "8",
+      "reflect": true,
+      "description": "Pixel gap between the trigger edge and the panel."
+    },
+    {
+      "name": "arrow",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true, renders a small directional arrow on the panel edge facing the trigger."
+    },
+    {
+      "name": "lightDismiss",
+      "attribute": "light-dismiss",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "reflect": true,
+      "description": "When true (default), clicking outside or pressing Escape closes the panel via popover=auto. When false, uses popover=manual and the consumer must call hide() explicitly."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-popover-open",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the panel opens."
+    },
+    {
+      "name": "ce-popover-close",
+      "detail": "void",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires when the panel closes."
+    }
+  ],
+  "methods": [
+    {
+      "name": "show",
+      "signature": "show(): void",
+      "description": "Opens the popover panel (equivalent to setting open=true)."
+    },
+    {
+      "name": "hide",
+      "signature": "hide(): void",
+      "description": "Closes the popover panel (equivalent to setting open=false)."
+    },
+    {
+      "name": "toggle",
+      "signature": "toggle(): void",
+      "description": "Flips the current open state."
+    }
+  ],
+  "slots": [
+    {
+      "name": "trigger",
+      "description": "The element that toggles the panel on click. Should be an interactive element (button, link). Receives aria-expanded, aria-haspopup, and aria-controls automatically."
+    },
+    {
+      "name": "",
+      "description": "Panel body content."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-surface",
+      "kind": "color",
+      "source": "token",
+      "description": "Panel background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Panel border and arrow border."
+    },
+    {
+      "name": "--ce-radius",
+      "kind": "radius",
+      "source": "token",
+      "description": "Panel corner radius."
+    },
+    {
+      "name": "--ce-shadow-lg",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Panel elevation shadow."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Panel text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Panel font size."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Panel vertical padding."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Panel horizontal padding."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition timing for open/close fade + scale animation."
+    },
+    {
+      "name": "--ce-popover-z",
+      "kind": "other",
+      "source": "local",
+      "description": "z-index override for the panel. Default 1000.",
+      "fallback": "1000"
+    },
+    {
+      "name": "--ce-popover-max-width",
+      "kind": "size",
+      "source": "local",
+      "description": "Maximum panel width. Default 320px.",
+      "fallback": "320px"
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "HTMLElement.showPopover",
+      "purpose": "Opens the panel in the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.hidePopover",
+      "purpose": "Removes the panel from the browser top-layer.",
+      "writes": false
+    },
+    {
+      "api": "HTMLElement.getBoundingClientRect",
+      "purpose": "Reads trigger and panel geometry for JS positioning.",
+      "writes": false
+    },
+    {
+      "api": "document.activeElement",
+      "purpose": "Caches previously-focused element for focus-return on close.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Calls showPopover() / hidePopover() on the internal panel element.",
+      "reason": "Required to enter/exit the browser top-layer for correct stacking without z-index battles.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Attaches window scroll and resize listeners while the panel is open.",
+      "reason": "Keeps the panel aligned to the trigger when the page scrolls or the viewport resizes.",
+      "guarded": true
+    },
+    {
+      "kind": "dom",
+      "description": "Captures and restores document.activeElement on open/close.",
+      "reason": "WCAG 2.1 SC 2.4.3: focus must return to the trigger after the panel closes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-modal",
+    "ce-tooltip",
+    "ce-button"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Layout & primitives",
+    "overlay",
+    "interactive"
+  ],
+  "a11y": {
+    "role": "dialog",
+    "notes": "The panel carries role=dialog and tabindex=-1. Focus moves to the panel on open and returns to the trigger on close. The slotted trigger receives aria-expanded (synced with open), aria-haspopup=true, and aria-controls pointing at the panel id. The trigger SHOULD be a native button or anchor so Enter/Space activation is provided by the browser. For non-button triggers, keyboard activation must be wired by the consumer."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

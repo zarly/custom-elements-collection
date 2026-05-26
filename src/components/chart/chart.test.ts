@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeChart } from "./chart.js";
 
@@ -53,15 +53,12 @@ describe("<ce-chart>", () => {
     el.remove();
   });
 
-  it("falls back to default `data` shape and warns when attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to default `data` shape when attribute is invalid JSON", async () => {
     const el = document.createElement("ce-chart") as CeChart;
     el.setAttribute("data", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.data).toEqual({ labels: [], datasets: [] });
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 
@@ -76,15 +73,12 @@ describe("<ce-chart>", () => {
     el.remove();
   });
 
-  it("falls back to {} and warns when `options` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to {} when `options` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-chart") as CeChart;
     el.setAttribute("options", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.options).toEqual({});
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-pricing-tier",
   "name": "PricingTier",
   "className": "CePricingTier",
@@ -7,7 +7,7 @@
   "description": "A card-shaped pricing tier: badge, tier name, sub-headline, big-number price, feature list (JSON or slot children), and an optional CTA button or link. Use highlighted for the recommended tier. Compose side-by-side via ce-grid instead of a dedicated pricing container (CDR-006).",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -287,14 +287,25 @@
     "ce-card",
     "ce-kpi"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
-    "Comparison & narrative",
-    "pricing",
-    "tier"
+    "Comparison & narrative"
   ],
   "a11y": {
     "notes": "The price wrapper carries an aria-label combining price and period for screen readers. The CTA uses native <button> or <a> so ARIA semantics are native. Feature checkmarks are aria-hidden; text labels carry the accessible meaning."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

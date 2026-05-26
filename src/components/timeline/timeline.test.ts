@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeTimeline } from "./timeline.js";
 
@@ -81,15 +81,12 @@ describe("<ce-timeline>", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when `items` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when `items` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-timeline") as CeTimeline;
     el.setAttribute("items", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.items).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });

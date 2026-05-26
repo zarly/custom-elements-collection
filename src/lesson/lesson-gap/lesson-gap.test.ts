@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { LessonGap } from "./lesson-gap.js";
 
@@ -90,8 +90,7 @@ describe("<lesson-gap>", () => {
     el.remove();
   });
 
-  it("falls back + warns when the options attribute is malformed JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back when the options attribute is malformed JSON", async () => {
     const el = document.createElement("lesson-gap") as LessonGap;
     el.prompt = "x ___ y";
     el.correct = "a";
@@ -99,8 +98,6 @@ describe("<lesson-gap>", () => {
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.options).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 

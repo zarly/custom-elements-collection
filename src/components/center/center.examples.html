@@ -1,0 +1,44 @@
+<!-- @example Prose article container (default) -->
+<!-- Wraps a readable article column at 65ch with medium gutters.
+     Zero attributes gives you the most common case immediately (CDR-007). -->
+<ce-center>
+  <h1>The Art of Readable Text</h1>
+  <p>
+    A measure of 65 characters per line — the prose default — sits at the
+    Bringhurst optimum for single-column body copy. The column self-centers
+    with margin-inline:auto; no wrapper div is needed.
+  </p>
+  <p>
+    Content at any viewport width reflows inside the max-width constraint.
+    Inline padding keeps text off the edges on narrow viewports.
+  </p>
+</ce-center>
+
+<!-- @example Wide grid container with large gutter -->
+<!-- 80ch width gives layout components more room.
+     gutter=l (24px) adds extra breathing space for dense grid interiors. -->
+<ce-center max="wide" gutter="l">
+  <ce-grid cols="3">
+    <ce-card><p>Feature A</p></ce-card>
+    <ce-card><p>Feature B</p></ce-card>
+    <ce-card><p>Feature C</p></ce-card>
+  </ce-grid>
+</ce-center>
+
+<!-- @example Narrow column with intrinsic centering -->
+<!-- intrinsic makes the container a flex column and centers its block children.
+     Useful for hero text, pull-quotes, or confirmation screens where both
+     the box and its direct children should be visually centered. -->
+<ce-center max="narrow" intrinsic>
+  <ce-badge>New</ce-badge>
+  <h2>Account created</h2>
+  <p>You are now signed in. Your dashboard is ready.</p>
+</ce-center>
+
+<!-- @example Full-width container with small gutter -->
+<!-- max=full removes the ch cap; gutter=s provides minimal edge padding.
+     Useful as a scroll-container wrapper or a full-bleed section inner. -->
+<ce-center max="full" gutter="s">
+  <ce-divider></ce-divider>
+  <p>Full-width content with minimal inline padding.</p>
+</ce-center>

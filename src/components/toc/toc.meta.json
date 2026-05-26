@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-toc",
   "name": "Toc",
   "className": "CeToc",
@@ -7,7 +7,7 @@
   "description": "Table of contents component. Accepts an entries array of { href, label } via property or JSON attribute; optionally numbers each entry and sticks to the top of its scroll parent. When entries is empty, falls back to the default slot so consumers can supply <a> children directly.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "entries",
@@ -109,14 +109,26 @@
   "related": [
     "ce-nav-list"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
-    "navigation",
-    "toc"
+    "navigation"
   ],
   "a11y": {
     "notes": "Wrapped in <nav aria-label=\"Table of contents\">."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

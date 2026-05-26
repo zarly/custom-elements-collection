@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-file-card",
   "name": "File Card",
   "className": "CeFileCard",
@@ -7,7 +7,7 @@
   "description": "Compact attachment card for use in chat surfaces or message bodies. When `href` is set the whole card becomes an anchor (target=_blank); otherwise it renders a non-interactive group. Type icon is derived from the `type` attribute or, failing that, the file extension; a `thumbnail` URL replaces the icon with an actual preview.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "name",
@@ -160,11 +160,30 @@
     "ce-image",
     "ce-card"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [
+    {
+      "tag": "ce-source-card",
+      "scope": "attachment-card",
+      "when": "rendering a single named asset (file vs URL source); ce-file-card emphasises file metadata (size, mime), ce-source-card emphasises link provenance"
+    }
+  ],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Content",
     "media",
-    "attachment"
-  ]
+    "attachments"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

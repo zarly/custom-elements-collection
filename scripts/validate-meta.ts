@@ -76,144 +76,114 @@ function relativize(p: string): string {
   return path.relative(REPO_ROOT, p);
 }
 
-async function main(): Promise<void> {
-  const metaFiles = await findMetaFiles();
-
-  if (metaFiles.length === 0) {
-    console.log(
-      "[validate-meta] No meta files yet — skipping (Stage 1 / Phase 2 not started)."
-    );
-    process.exit(0);
-  }
-
+async function validateMetaFile(
+  file: string,
+  validMetas: Map<string, ComponentMeta>
+): Promise<FileError[]> {
   const errors: FileError[] = [];
-  const warnings: FileError[] = [];
-  const validMetas = new Map<string, ComponentMeta>(); // tag -> meta
 
-  // — Step 1: parse + schema-validate each meta file ——————————————
-  for (const file of metaFiles) {
-    let raw: string;
-    try {
-      raw = await fs.readFile(file, "utf8");
-    } catch (e) {
-      errors.push({ file, message: `Cannot read file: ${(e as Error).message}` });
-      continue;
-    }
-
-    let json: unknown;
-    try {
-      json = JSON.parse(raw);
-    } catch (e) {
-      errors.push({ file, message: `Invalid JSON: ${(e as Error).message}` });
-      continue;
-    }
-
-    const result = ComponentMetaSchema.safeParse(json);
-    if (!result.success) {
-      for (const issue of result.error.issues) {
-        const where =
-          issue.path.length > 0 ? issue.path.join(".") : "(root)";
-        errors.push({
-          file,
-          message: `Schema error at ${where}: ${issue.message}`,
-        });
-      }
-      continue;
-    }
-
-    const meta = result.data;
-
-    // — Step 2: tag must match filename stem ——————————————
-    const baseName = path.basename(file, ".meta.json"); // e.g. "card"
-    const parentFolder = path.basename(path.dirname(path.dirname(file))); // .../components/card/card.meta.json -> "components"
-    let parent: "components" | "lesson" | null = null;
-    if (parentFolder === "components") parent = "components";
-    else if (parentFolder === "lesson") parent = "lesson";
-
-    if (parent === null) {
-      // Fallback: also accept flat layout under components/ or lesson/
-      const flatParent = path.basename(path.dirname(file));
-      if (flatParent === "components") parent = "components";
-      else if (flatParent === "lesson") parent = "lesson";
-    }
-
-    if (parent === null) {
-      errors.push({
-        file,
-        message: `Meta file lives outside src/components/ or src/lesson/ — cannot derive expected tag.`,
-      });
-      continue;
-    }
-
-    const expectedTag = expectedTagFromStem(baseName, parent);
-    if (meta.tag !== expectedTag) {
-      errors.push({
-        file,
-        message: `tag "${meta.tag}" does not match filename stem — expected "${expectedTag}" (from "${baseName}.meta.json" under "${parent}/").`,
-      });
-      continue;
-    }
-
-    // Duplicate tag check
-    const prev = validMetas.get(meta.tag);
-    if (prev) {
-      errors.push({
-        file,
-        message: `Duplicate tag "${meta.tag}" — already declared by another meta file.`,
-      });
-      continue;
-    }
-
-    // Canonical-group check: tags[0] must be one of GROUPS.
-    const groupTag = meta.tags?.[0];
-    if (!groupTag) {
-      errors.push({
-        file,
-        message: `tags[] is empty — first entry must be one of: ${GROUPS.join(", ")}.`,
-      });
-      continue;
-    }
-    if (!isGroup(groupTag)) {
-      errors.push({
-        file,
-        message: `tags[0] "${groupTag}" is not a canonical group. Allowed: ${GROUPS.join(", ")}. (Edit src/meta/groups.ts to add a new one.)`,
-      });
-      continue;
-    }
-
-    // Closed-enum tier check (Zod already enforces; double-check via the
-    // canonical `isTier` predicate so the source of truth stays in tiers.ts).
-    if (!isTier(meta.tier)) {
-      errors.push({
-        file,
-        message: `tier "${meta.tier}" is not a canonical tier. Allowed: ${TIERS.join(", ")}. (Edit src/meta/tiers.ts to add a new one — see ADR-006.)`,
-      });
-      continue;
-    }
-
-    validMetas.set(meta.tag, meta);
+  let raw: string;
+  try {
+    raw = await fs.readFile(file, "utf8");
+  } catch (e) {
+    errors.push({ file, message: `Cannot read file: ${(e as Error).message}` });
+    return errors;
   }
 
-  // — Step 3: cross-check that every component TS has a meta sibling ——
-  // Only enforced when at least one meta file is present.
+  let json: unknown;
+  try {
+    json = JSON.parse(raw);
+  } catch (e) {
+    errors.push({ file, message: `Invalid JSON: ${(e as Error).message}` });
+    return errors;
+  }
+
+  const result = ComponentMetaSchema.safeParse(json);
+  if (!result.success) {
+    for (const issue of result.error.issues) {
+      const where = issue.path.length > 0 ? issue.path.join(".") : "(root)";
+      errors.push({ file, message: `Schema error at ${where}: ${issue.message}` });
+    }
+    return errors;
+  }
+
+  const meta = result.data;
+  const baseName = path.basename(file, ".meta.json");
+  const parentFolder = path.basename(path.dirname(path.dirname(file)));
+  let parent: "components" | "lesson" | null = null;
+  if (parentFolder === "components") parent = "components";
+  else if (parentFolder === "lesson") parent = "lesson";
+  if (parent === null) {
+    const flatParent = path.basename(path.dirname(file));
+    if (flatParent === "components") parent = "components";
+    else if (flatParent === "lesson") parent = "lesson";
+  }
+  if (parent === null) {
+    errors.push({
+      file,
+      message: `Meta file lives outside src/components/ or src/lesson/ — cannot derive expected tag.`,
+    });
+    return errors;
+  }
+
+  const expectedTag = expectedTagFromStem(baseName, parent);
+  if (meta.tag !== expectedTag) {
+    errors.push({
+      file,
+      message: `tag "${meta.tag}" does not match filename stem — expected "${expectedTag}" (from "${baseName}.meta.json" under "${parent}/").`,
+    });
+    return errors;
+  }
+
+  if (validMetas.get(meta.tag)) {
+    errors.push({
+      file,
+      message: `Duplicate tag "${meta.tag}" — already declared by another meta file.`,
+    });
+    return errors;
+  }
+
+  const groupTag = meta.tags?.[0];
+  if (!groupTag) {
+    errors.push({
+      file,
+      message: `tags[] is empty — first entry must be one of: ${GROUPS.join(", ")}.`,
+    });
+    return errors;
+  }
+  if (!isGroup(groupTag)) {
+    errors.push({
+      file,
+      message: `tags[0] "${groupTag}" is not a canonical group. Allowed: ${GROUPS.join(", ")}. (Edit src/meta/groups.ts to add a new one.)`,
+    });
+    return errors;
+  }
+
+  if (!isTier(meta.tier)) {
+    errors.push({
+      file,
+      message: `tier "${meta.tier}" is not a canonical tier. Allowed: ${TIERS.join(", ")}. (Edit src/meta/tiers.ts to add a new one — see ADR-006.)`,
+    });
+    return errors;
+  }
+
+  validMetas.set(meta.tag, meta);
+  return errors;
+}
+
+async function crossCheckSources(errors: FileError[]): Promise<void> {
   const componentSources = await findComponentSources();
   const sourcesMissingMeta: string[] = [];
   for (const src of componentSources) {
     const stem = path.basename(src, ".ts");
     const dir = path.dirname(src);
-    // Two possible layouts during transition:
-    //  - flat: src/components/card.ts -> src/components/card.meta.json
-    //  - nested: src/components/card/card.ts -> src/components/card/card.meta.json
     const candidateA = path.join(dir, `${stem}.meta.json`);
     const exists = await fs
       .stat(candidateA)
       .then(() => true)
       .catch(() => false);
-    if (!exists) {
-      sourcesMissingMeta.push(src);
-    }
+    if (!exists) sourcesMissingMeta.push(src);
   }
-
   if (sourcesMissingMeta.length > 0) {
     console.log(
       `[validate-meta] Cross-check: ${sourcesMissingMeta.length} component source(s) missing a sibling .meta.json:`
@@ -230,12 +200,12 @@ async function main(): Promise<void> {
       `[validate-meta] Cross-check: every component source has a sibling .meta.json.`
     );
   }
+}
 
-  // — Step 3.5: event-name drift gate (ADR-011 follow-up) ————————————
-  // Every meta `events[].name` MUST appear as a string literal somewhere
-  // in the component's folder (any sibling .ts file — covers helpers and
-  // tests). Catches the exact bug class that broke v2's group-by:
-  // a meta declared an event name no source code references at all.
+async function checkEventNameDrift(
+  metaFiles: string[],
+  errors: FileError[]
+): Promise<void> {
   for (const metaFile of metaFiles) {
     const meta = await fs
       .readFile(metaFile, "utf8")
@@ -243,9 +213,6 @@ async function main(): Promise<void> {
       .catch(() => null);
     if (!meta || !Array.isArray(meta.events) || meta.events.length === 0) continue;
     const folder = path.dirname(metaFile);
-    // Concatenate every sibling .ts file PLUS the shared internal helpers
-    // (src/internal/* and src/core/*) — chart components dispatch events
-    // through a shared internal/charts/events helper, etc.
     const sharedSearchRoots = [
       folder,
       path.join(SRC_DIR, "internal"),
@@ -274,12 +241,58 @@ async function main(): Promise<void> {
       }
     }
   }
+}
+
+async function main(): Promise<void> {
+  const metaFiles = await findMetaFiles();
+
+  if (metaFiles.length === 0) {
+    console.log(
+      "[validate-meta] No meta files yet — skipping (Stage 1 / Phase 2 not started)."
+    );
+    process.exit(0);
+  }
+
+  const errors: FileError[] = [];
+  const warnings: FileError[] = [];
+  const validMetas = new Map<string, ComponentMeta>();
+
+  // — Step 1: parse + schema-validate each meta file ——————————————
+  for (const file of metaFiles) {
+    errors.push(...(await validateMetaFile(file, validMetas)));
+  }
+
+  // — Step 3: cross-check that every component TS has a meta sibling ——
+  await crossCheckSources(errors);
+
+  // — Step 3.5: event-name drift gate (ADR-011 follow-up) ————————————
+  // Every meta `events[].name` MUST appear as a string literal somewhere
+  // in the component's folder (any sibling .ts file — covers helpers and
+  // tests). Catches the exact bug class that broke v2's group-by:
+  // a meta declared an event name no source code references at all.
+  await checkEventNameDrift(metaFiles, errors);
 
   // — Step 4: dependency-graph symmetry (warnings only) ——————————————
+  //
+  // Build a set of all known sub-tags across all metas. A sub-tag is a
+  // custom element registered alongside its parent (e.g. ce-segment under
+  // ce-segmented). Sub-tags share the parent's lifecycle and intentionally
+  // do NOT carry their own meta file, so the dependency-graph validator
+  // must silently accept them when they appear in a parent's dependencies[].
+  const knownSubTags = new Set<string>();
+  for (const meta of validMetas.values()) {
+    if (meta.subTags) {
+      for (const sub of meta.subTags) knownSubTags.add(sub);
+    }
+  }
+
   for (const [tag, meta] of validMetas) {
     for (const depTag of meta.dependencies) {
       const depMeta = validMetas.get(depTag);
       if (!depMeta) {
+        // Suppress the warning for known sub-tags — they intentionally
+        // have no meta file (see knownSubTags computation above).
+        if (knownSubTags.has(depTag)) continue;
         // Can't symmetry-check a tag that doesn't exist in our universe.
         // Could be a future component or external — leave as a warning.
         warnings.push({

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-center",
+  "name": "Center",
+  "className": "CeCenter",
+  "goal": "Horizontally-centered max-width content column with intrinsic inline gutters — the article container primitive.",
+  "description": "Wraps content in a max-width block centered with margin-inline:auto and inline padding (gutter). Supports four width presets in ch units and an intrinsic mode that also centers block-direction children via flex column.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "max",
+      "type": "\"prose\" | \"narrow\" | \"wide\" | \"full\"",
+      "required": false,
+      "default": "\"prose\"",
+      "reflect": true,
+      "description": "Maximum content width. prose=65ch, narrow=42ch, wide=80ch, full=100%."
+    },
+    {
+      "name": "gutter",
+      "type": "\"s\" | \"m\" | \"l\"",
+      "required": false,
+      "default": "\"m\"",
+      "reflect": true,
+      "description": "Inline padding size. s=--ce-space-3 (12px), m=--ce-space-4 (16px), l=--ce-space-5 (24px)."
+    },
+    {
+      "name": "intrinsic",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When set, children are also centered (flex column + align-items:center). Without it, only the box is centered; children flow normally."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Content to be centered. Any HTML — headings, paragraphs, nested components."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline gutter when gutter=s (12px)."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline gutter when gutter=m (16px, default)."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Inline gutter when gutter=l (24px)."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-grid",
+    "ce-stack"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "container"
+  ],
+  "a11y": {
+    "notes": "Purely presentational layout wrapper. No semantic role added. Children retain their own semantics. Slot content is streaming-safe — the slot reads light-DOM children on each update, not only at connectedCallback."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

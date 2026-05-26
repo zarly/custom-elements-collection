@@ -25,7 +25,7 @@ Authors picked the generic grid every time. The specialized "stat group" wrapper
 
 ### Decision
 
-**Option C.** Set `stability: "deprecated"`, prefix description, soft-keep ≥ 1 quarter, then remove via follow-up ADR. Recipe in ADR-010 + migration section to land in `skill/SKILL.md` at removal time.
+**Option C.** Set `stability: "deprecated"`, prefix description, soft-keep ≥ 1 quarter, then remove via follow-up ADR. Recipe in ADR-010 + migration section to land in `skills/cec-consumer/SKILL.md` at removal time.
 
 ### Consequence
 

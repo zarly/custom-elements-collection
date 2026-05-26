@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-search",
+  "name": "Search",
+  "className": "CeSearch",
+  "goal": "Provide a search input with magnifier icon, clear button, optional keyboard shortcut hint, and a debounced change event.",
+  "description": "Form-associated search input with shadow DOM layout. Renders a flex row: magnifier icon, native search input, clear button (visible when value is non-empty), optional spinner (loading state), and optional shortcut hint chip. Fires ce-search (debounced) on value change and ce-submit immediately on Enter. Attaches a document-level keydown listener for the optional shortcut attribute, skipping the handler when focus is inside another editable element.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Form field name used when the element participates in a form."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Current search value. Synced to ElementInternals for form submission."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "\"Search\"",
+      "description": "Placeholder text shown in the input when empty."
+    },
+    {
+      "name": "shortcut",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Optional keyboard shortcut string (e.g. \"/\" or \"cmd+k\"). When pressed outside of any input/textarea, focuses the search input. Also renders a hint chip."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "When true, replaces the clear button with an inline spinner."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Disables the input and prevents interaction."
+    },
+    {
+      "name": "debounce",
+      "type": "number",
+      "required": false,
+      "default": "200",
+      "description": "Milliseconds to wait after the last keystroke before firing the ce-search event."
+    }
+  ],
+  "events": [
+    {
+      "name": "ce-search",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired after the debounce delay on input change. Also fired immediately when the user clicks the clear button or presses Enter."
+    },
+    {
+      "name": "ce-submit",
+      "detail": "{ value: string }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fired immediately when the user presses Enter inside the search input."
+    }
+  ],
+  "slots": [],
+  "cssVariables": [
+    {
+      "name": "--ce-surface-2",
+      "kind": "color",
+      "source": "token",
+      "description": "Input field background and shortcut chip background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Field and shortcut chip border."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Focus ring border color."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Icon, placeholder, clear button, spinner, and shortcut chip text color."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Input text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Input font size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Shortcut chip font size."
+    },
+    {
+      "name": "--ce-font-mono",
+      "kind": "font",
+      "source": "token",
+      "description": "Shortcut chip monospace font family."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Field and chip border radius."
+    },
+    {
+      "name": "--ce-inset-lg",
+      "kind": "size",
+      "source": "token",
+      "description": "Input inner vertical padding."
+    },
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap between action items (spinner, clear, chip)."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Horizontal padding for the actions zone and shortcut chip."
+    },
+    {
+      "name": "--ce-focus-ring",
+      "kind": "shadow",
+      "source": "token",
+      "description": "Box shadow applied to the field and clear button on focus."
+    },
+    {
+      "name": "--ce-transition",
+      "kind": "other",
+      "source": "token",
+      "description": "Transition for border, shadow, and button hover effects."
+    }
+  ],
+  "globalDependencies": [
+    {
+      "api": "document.addEventListener / removeEventListener",
+      "purpose": "Registers a keydown listener for the optional keyboard shortcut. Listener is attached on connectedCallback and removed on disconnectedCallback.",
+      "writes": false
+    }
+  ],
+  "sideEffects": [
+    {
+      "kind": "dom",
+      "description": "Attaches a document-level keydown listener for the shortcut feature.",
+      "reason": "Keyboard shortcuts must intercept events at the document level to work regardless of where focus is in the page.",
+      "guarded": true
+    },
+    {
+      "kind": "timer",
+      "description": "Uses a setTimeout for input debouncing.",
+      "reason": "Prevents excessive ce-search events on rapid keystrokes.",
+      "guarded": true
+    }
+  ],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-input",
+    "ce-kbd",
+    "ce-spinner",
+    "ce-filter-bar"
+  ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "widget",
+  "tags": [
+    "Forms",
+    "interactive",
+    "control"
+  ],
+  "a11y": {
+    "role": "searchbox",
+    "notes": "The internal <input type=\"search\"> carries the implicit ARIA searchbox role. The clear button is a real <button> element with aria-label=\"Clear search\". The shortcut hint chip is aria-hidden=\"true\" (decorative). The loading spinner carries role=\"status\" and aria-label=\"Loading\". The document-level shortcut listener does not fire when focus is inside INPUT, TEXTAREA, SELECT, or contenteditable elements."
+  },
+  "contentModel": "void",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
+  }
+}

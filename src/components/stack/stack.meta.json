@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 2,
+  "tag": "ce-stack",
+  "name": "Stack",
+  "className": "CeStack",
+  "goal": "Vertical or horizontal container that places a consistent gap between every direct child — the atomic rhythm primitive for layout composition. Absorbs the former ce-cluster (wrap-row) via direction=horizontal + wrap.",
+  "description": "Flex container that uses gap to enforce consistent spacing between direct children. Supports vertical and horizontal direction, eight space-scale steps, optional wrap (former ce-cluster behavior), cross-axis align (start/center/end/baseline/stretch), main-axis justify (start/center/end/between), a recursive propagation mode, and a split-after trick (Heydon Pickering's sticky-footer pattern) that pushes the Nth+1 child to the far end via margin-block-start: auto.",
+  "stability": "experimental",
+  "created": "2026-05-23",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "space",
+      "type": "\"3xs\" | \"2xs\" | \"xs\" | \"s\" | \"m\" | \"l\" | \"xl\" | \"2xl\"",
+      "required": false,
+      "default": "\"m\"",
+      "reflect": true,
+      "description": "Gap size: 3xs/2xs→space-1, xs→space-2, s→space-3, m→space-4, l→space-5, xl→space-6, 2xl→space-7."
+    },
+    {
+      "name": "direction",
+      "type": "\"vertical\" | \"horizontal\"",
+      "required": false,
+      "default": "\"vertical\"",
+      "reflect": true,
+      "description": "Flex direction: vertical (column) or horizontal (row)."
+    },
+    {
+      "name": "wrap",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Enable flex-wrap (former ce-cluster behavior). When set, the default cross-axis align changes to center."
+    },
+    {
+      "name": "align",
+      "type": "\"start\" | \"center\" | \"end\" | \"baseline\" | \"stretch\" | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Cross-axis alignment. Defaults: stretch (no wrap), center (with wrap). Explicit values always win."
+    },
+    {
+      "name": "justify",
+      "type": "\"start\" | \"center\" | \"end\" | \"between\" | null",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Main-axis alignment. Default start (flex default)."
+    },
+    {
+      "name": "recursive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Propagate the current space value to direct ce-stack children that have not set their own space attribute."
+    },
+    {
+      "name": "splitAfter",
+      "type": "number | null",
+      "attribute": "split-after",
+      "required": false,
+      "default": "null",
+      "reflect": true,
+      "description": "Index N (1-based): child at position N+1 receives margin-block-start: auto, pushing it and subsequent children to the end of the container."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "",
+      "description": "Direct children to space; streaming-friendly — new children are picked up by the slot without requiring a render cycle."
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-1",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=3xs and space=2xs (4px)."
+    },
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=xs (8px)."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=s (12px)."
+    },
+    {
+      "name": "--ce-space-4",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=m, the default (16px)."
+    },
+    {
+      "name": "--ce-space-5",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=l (24px)."
+    },
+    {
+      "name": "--ce-space-6",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=xl (32px)."
+    },
+    {
+      "name": "--ce-space-7",
+      "kind": "size",
+      "source": "token",
+      "description": "Gap for space=2xl (40px)."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [],
+  "dependencies": [],
+  "related": [
+    "ce-grid"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
+  "category": "ui",
+  "tier": "layout",
+  "tags": [
+    "Layout & primitives",
+    "cluster"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-progress-list",
   "name": "Progress List",
   "className": "CeProgressList",
@@ -7,7 +7,7 @@
   "description": "Flex-column layout container. Accepts ce-progress rows, narrative paragraphs, ce-callout annotations, and any other children. Gap between rows is controlled by the --ce-progress-list-gap custom property. No hard wrappers — any HTML child renders correctly (CDR-006).",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [],
   "events": [],
   "slots": [
@@ -41,11 +41,26 @@
     "ce-progress",
     "ce-grid"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-progress"
+  ],
+  "injects": [],
+  "role": "transparent-wrapper",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "layout",
   "tags": [
     "Layout & primitives",
     "progress",
     "list"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

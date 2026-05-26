@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-cursor",
   "name": "Cursor",
   "className": "CeCursor",
@@ -7,7 +7,7 @@
   "description": "A purely visual blinking caret used by chat surfaces while assistant tokens are arriving. Three shapes (bar, block, underline) and a configurable blink interval; no slots, no events, no state.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "shape",
@@ -63,15 +63,27 @@
     "ce-thinking",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
     "Chat surfaces",
     "streaming",
-    "caret",
     "brick"
   ],
   "a11y": {
     "notes": "The caret is decorative; the rendered span is aria-hidden so screen readers don't announce a blinking artifact. Respects prefers-reduced-motion."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

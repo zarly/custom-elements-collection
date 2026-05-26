@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-feedback-heatmap",
   "name": "Feedback Heatmap",
   "className": "CeFeedbackHeatmap",
@@ -7,7 +7,7 @@
   "description": "Companion to <ce-feedback-sink>. Listens for ce-feedback-state events on document and renders a horizontal cell bar per item — green (thumbs up), red (thumbs down), blue (bookmarked), amber (dismissed), purple (commented), muted (no signal). Hydrates from any ancestor sink's getState() at connect, then updates incrementally on every state event. Optional inline legend.",
   "stability": "stable",
   "created": "2026-05-05",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "subject",
@@ -144,6 +144,15 @@
   "related": [
     "ce-feedback-summary"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-feedback-sink"
+  ],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -154,5 +163,11 @@
   "a11y": {
     "role": "img",
     "notes": "SVG carries role=img and an aria-label that describes the cell count. Each cell has a <title> tooltip with item id + verdict."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

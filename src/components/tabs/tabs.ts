@@ -99,7 +99,7 @@ export class CeTabs extends CecElement {
     ::slotted(button[slot="tab"][aria-selected="true"]) {
       background: var(--ce-color-blue);
       border-color: var(--ce-color-blue);
-      color: var(--ce-text-inverse, #fff);
+      color: var(--ce-text-inverse);
     }
     .chip[disabled],
     ::slotted(button[slot="tab"][disabled]) {
@@ -131,6 +131,7 @@ export class CeTabs extends CecElement {
       display: block;
     }
     ::slotted([slot="panel"][hidden]) {
+      /* stylelint-disable-next-line declaration-no-important -- ::slotted target inherits user CSS; !important is the only reliable way to enforce hidden-panel display: none against arbitrary host page styles */
       display: none !important;
     }
   `;
@@ -217,10 +218,11 @@ export class CeTabs extends CecElement {
       t.setAttribute("aria-selected", isActive ? "true" : "false");
       t.tabIndex = isActive ? 0 : -1;
       // Hook up event handlers exactly once per element.
-      if (!(t as any)._ceTabsBound) {
-        t.addEventListener("click", () => this.#select(i));
-        t.addEventListener("keydown", (e) => this.#onKey(e as KeyboardEvent, i));
-        (t as any)._ceTabsBound = true;
+      const tb = t as HTMLButtonElement & { _ceTabsBound?: boolean };
+      if (!tb._ceTabsBound) {
+        tb.addEventListener("click", () => this.#select(i));
+        tb.addEventListener("keydown", (e) => this.#onKey(e as KeyboardEvent, i));
+        tb._ceTabsBound = true;
       }
     });
   }
@@ -263,25 +265,31 @@ export class CeTabs extends CecElement {
     );
   }
 
-  #onKey(e: KeyboardEvent, idx: number): void {
+  #arrowDirFromKey(key: string): 0 | 1 | -1 | null {
     const horiz = !this.vertical;
-    let dir: 0 | 1 | -1 = 0;
-    if ((horiz && e.key === "ArrowRight") || (!horiz && e.key === "ArrowDown")) dir = 1;
-    else if ((horiz && e.key === "ArrowLeft") || (!horiz && e.key === "ArrowUp")) dir = -1;
-    else if (e.key === "Home") dir = 0;
-    else if (e.key === "End") dir = 0;
-    else if (e.key === " " || e.key === "Enter") {
+    if ((horiz && key === "ArrowRight") || (!horiz && key === "ArrowDown")) return 1;
+    if ((horiz && key === "ArrowLeft") || (!horiz && key === "ArrowUp")) return -1;
+    if (key === "Home" || key === "End") return 0;
+    return null;
+  }
+
+  #onKey(e: KeyboardEvent, idx: number): void {
+    if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       this.#select(idx);
       return;
-    } else return;
+    }
+    const dir = this.#arrowDirFromKey(e.key);
+    if (dir === null) return;
 
     e.preventDefault();
     const n = this.#count();
-    let next: number;
-    if (e.key === "Home") next = this.#nextEnabled(-1, +1);
-    else if (e.key === "End") next = this.#nextEnabled(n, -1);
-    else next = this.#nextEnabled(idx, dir as 1 | -1);
+    const next =
+      e.key === "Home"
+        ? this.#nextEnabled(-1, +1)
+        : e.key === "End"
+          ? this.#nextEnabled(n, -1)
+          : this.#nextEnabled(idx, dir as 1 | -1);
     if (next !== idx) {
       this.#select(next);
       this.updateComplete.then(() => this.#focusTab(next));

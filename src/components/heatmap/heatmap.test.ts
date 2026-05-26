@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { CeHeatmap } from "./heatmap.js";
 import { CeHeatRow } from "../heat-row/heat-row.js";
@@ -94,15 +94,12 @@ describe("<ce-heatmap> — JSON number[][] (regression)", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when `rows` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when `rows` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-heatmap") as CeHeatmap;
     el.setAttribute("rows", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.rows).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 
@@ -117,15 +114,12 @@ describe("<ce-heatmap> — JSON number[][] (regression)", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when `cols` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when `cols` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-heatmap") as CeHeatmap;
     el.setAttribute("cols", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.cols).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 
@@ -141,15 +135,12 @@ describe("<ce-heatmap> — JSON number[][] (regression)", () => {
     el.remove();
   });
 
-  it("falls back to [] and warns when `data` attribute is invalid JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back to [] when `data` attribute is invalid JSON", async () => {
     const el = document.createElement("ce-heatmap") as CeHeatmap;
     el.setAttribute("data", "not json");
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.data).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 });

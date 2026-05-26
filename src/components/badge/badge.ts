@@ -34,14 +34,17 @@ export class CeBadge extends CecElement {
       line-height: 1;
       border-radius: var(--ce-radius-pill);
       background: var(--ce-color-red);
+      /* stylelint-disable-next-line color-no-hex -- on-accent text; --ce-text-inverse flips per theme and would lose contrast on saturated badges */
       color: #fff;
       box-shadow: 0 0 0 2px var(--ce-bg);
     }
     :host([variant="neutral"]) .ce-badge__pip { background: var(--ce-muted); }
     :host([variant="green"])   .ce-badge__pip { background: var(--ce-color-green); }
+    /* stylelint-disable-next-line color-no-hex -- dark text on bright amber accent; no on-bright token exists */
     :host([variant="amber"])   .ce-badge__pip { background: var(--ce-color-amber); color: #111; }
     :host([variant="blue"])    .ce-badge__pip { background: var(--ce-color-blue); }
     :host([variant="purple"])  .ce-badge__pip { background: var(--ce-color-purple); }
+    /* stylelint-disable-next-line color-no-hex -- dark text on bright cyan accent; no on-bright token exists */
     :host([variant="cyan"])    .ce-badge__pip { background: var(--ce-color-cyan); color: #111; }
 
     :host([dot]) .ce-badge__pip {

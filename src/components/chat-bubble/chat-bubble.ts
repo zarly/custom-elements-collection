@@ -43,7 +43,7 @@ export class CeChatBubble extends CecElement {
       grid-template-columns: 1fr auto;
     }
     :host([role="user"]) .ce-bubble__avatar { order: 2; }
-    :host([role="user"]) .ce-bubble__content { order: 1; }
+    /* :host([role="user"]) .ce-bubble__content order is set with its role-tint below. */
 
     .ce-bubble__avatar {
       flex: 0 0 auto;
@@ -76,6 +76,7 @@ export class CeChatBubble extends CecElement {
       border-color: var(--ce-color-blue-border);
     }
     :host([role="user"]) .ce-bubble__content {
+      order: 1;
       background: var(--ce-color-purple-bg);
       border-color: var(--ce-color-purple-border);
     }
@@ -111,8 +112,8 @@ export class CeChatBubble extends CecElement {
     .ce-bubble__head:empty { display: none; }
 
     /* Follow-up mode (set externally by ce-message-group on non-first
-       bubbles in a same-role cluster): hide the avatar column, drop the
-       header line, and pull the bubble up tight against the previous one. */
+     bubbles in a same-role cluster): hide the avatar column, drop the
+     header line, and pull the bubble up tight against the previous one. */
     :host([follow-up]) {
       margin-top: var(--ce-space-1);
     }

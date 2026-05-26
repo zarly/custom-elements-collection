@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-comment",
   "name": "Comment",
   "className": "CeComment",
@@ -7,7 +7,7 @@
   "description": "Compact-by-default comment input. Collapsed: a small button. Clicking expands to a textarea that auto-grows between min-rows and max-rows by computed scrollHeight. Typing emits debounced ce-comment-change events; explicit submission (per submit-on) emits ce-comment-commit. Supports submit-on blur, enter, cmd-enter, or manual. Auto-collapses on submit unless submit-on=manual; Cancel and Escape collapse without committing.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -227,6 +227,15 @@
     "ce-bookmark",
     "ce-dismiss"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "slotCompatible": true,
+  "preferredSlotIn": ["ce-feedback-bar"],
   "category": "ui",
   "tier": "brick",
   "tags": [
@@ -237,5 +246,12 @@
   ],
   "a11y": {
     "notes": "Trigger button has aria-expanded + aria-controls referencing the textarea id. Textarea has aria-label set from the placeholder and aria-live=off. Escape collapses; Enter or Cmd/Ctrl+Enter commit per submit-on rule."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

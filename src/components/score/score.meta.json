@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-score",
   "name": "Score",
   "className": "CeScore",
@@ -7,7 +7,7 @@
   "description": "Small inline pill showing a numeric score with semantic color coding: green for high, amber for med, red for low. Tier auto-computes from value/max (default max=10 matches the dominant 0–10 corpus scale). Explicit tier attribute overrides auto-computation. Global thresholds are overridable via --ce-score-breakpoints. Exposes role=meter ARIA semantics.",
   "stability": "stable",
   "created": "2026-05-18",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -145,15 +145,26 @@
     "ce-kpi",
     "ce-rating"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
-    "Metrics & charts",
-    "score",
-    "rating"
+    "Metrics & charts"
   ],
   "a11y": {
     "role": "meter",
     "notes": "The host element carries role=\"meter\", aria-valuenow (the score), aria-valuemin=\"0\", aria-valuemax (the max), and aria-valuetext (\"<value> of <max>\"). These are set in willUpdate so they stay in sync with value/max changes."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

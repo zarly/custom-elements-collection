@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-accordion",
   "name": "Accordion",
   "className": "CeAccordion",
@@ -7,7 +7,7 @@
   "description": "Multi-disclosure companion to ce-details. Accepts JSON items ({summary, body?, count?, open?, id?}) or slotted <details> / <ce-details> children (CDR-005). Static-by-default — items render with their initial open state and toggle via native <details>; the component tracks open state internally for ergonomic event payloads. When `single` is set, opening one row closes all others (radio-style FAQ pattern). Emits ce-accordion-change with the array of currently-open ids.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -159,15 +159,31 @@
     "ce-tabs",
     "ce-checklist"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [
+    {
+      "tag": "ce-tabs",
+      "scope": "disclosure-grouping"
+    }
+  ],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
-    "disclosure",
-    "accordion",
-    "faq"
+    "disclosure"
   ],
   "a11y": {
     "notes": "Each row is a native <details>/<summary> pair so disclosure semantics, keyboard, and screen-reader support come from the browser. Summary picks up focus-visible ring for keyboard navigation."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

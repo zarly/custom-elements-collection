@@ -1,3 +1,18 @@
+/* eslint-disable max-lines, max-lines-per-function, max-depth, complexity --
+ * ce-plot is the project's general-purpose chart primitive: it spans bar
+ * (vertical + horizontal + stacked), line, area, scatter, and combo modes
+ * sharing one scale / hover / legend / axis substrate. The variants are not
+ * independent — they share #visibleSeries, #computeYDomain, #snapHover, and
+ * the gridlines/axis renderer — so splitting them across files would either
+ * duplicate the substrate or push private state through helper signatures
+ * that the substrate has to import back. Until the chart-variants count
+ * grows enough to justify a separate render-pipeline package, the file-
+ * level carve-out is the safer path. `complexity` fires on #computeYDomain
+ * (cc=23, the stacked-vs-grouped vs raw value branches), #renderBarsVertical
+ * (cc=18, group offset + cap rendering + stacked totals), and #snapHover
+ * (cc=19, nearest-point geometry across category/linear/time scales and
+ * 5 chart variants). See CONCEPT.md for the option matrix.
+ */
 import { html, css, svg, nothing, type TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import { CecElement, jsonProp } from "../../core/index.js";
@@ -193,7 +208,7 @@ export class CePlot extends CecElement {
       outline: none;
     }
     .ce-plot-chip:focus-visible {
-      box-shadow: 0 0 0 2px var(--ce-color-blue, #4ea3ff);
+      box-shadow: 0 0 0 2px var(--ce-color-blue);
     }
     .ce-plot-swatch {
       width: 10px;
@@ -226,7 +241,7 @@ export class CePlot extends CecElement {
       pointer-events: none;
     }
     .ce-plot-marker {
-      stroke: var(--ce-surface, #fff);
+      stroke: var(--ce-surface);
       stroke-width: 2;
       pointer-events: auto;
       cursor: pointer;
@@ -474,10 +489,8 @@ export class CePlot extends CecElement {
     }
     return linearScale(
       rawX,
-      xd.xMin,
-      xd.xMax,
-      CHART_X,
-      CHART_X + CHART_W
+      [xd.xMin, xd.xMax],
+      [CHART_X, CHART_X + CHART_W]
     );
   }
 
@@ -485,10 +498,8 @@ export class CePlot extends CecElement {
   #yPos(y: number, yd: YDomain): number {
     return linearScale(
       y,
-      yd.niceMin,
-      yd.niceMax,
-      CHART_Y + CHART_H,
-      CHART_Y
+      [yd.niceMin, yd.niceMax],
+      [CHART_Y + CHART_H, CHART_Y]
     );
   }
 
@@ -529,7 +540,7 @@ export class CePlot extends CecElement {
           ? new Date(v).toISOString().slice(0, 10)
           : this.format(v, "x");
       return {
-        x: linearScale(v, xd.xMin, xd.xMax, CHART_X, CHART_X + CHART_W),
+        x: linearScale(v, [xd.xMin, xd.xMax], [CHART_X, CHART_X + CHART_W]),
         label,
       };
     });
@@ -703,13 +714,7 @@ export class CePlot extends CecElement {
     // For horizontal bars the value axis is x. We map p.y onto the x axis by
     // running the value through linearScale into the chart-x range.
     const valueToX = (v: number): number =>
-      linearScale(
-        v,
-        yd.niceMin,
-        yd.niceMax,
-        CHART_X,
-        CHART_X + CHART_W
-      );
+      linearScale(v, [yd.niceMin, yd.niceMax], [CHART_X, CHART_X + CHART_W]);
     const baseX = valueToX(0);
     const numSeries = Math.max(1, visible.length);
     const groupHeight = bandHeight * 0.8;
@@ -833,13 +838,7 @@ export class CePlot extends CecElement {
     const xValueTicks = niceTicks(yd.niceMin, yd.niceMax, 5).ticks;
     return svg`
       ${xValueTicks.map((v) => {
-        const px = linearScale(
-          v,
-          yd.niceMin,
-          yd.niceMax,
-          CHART_X,
-          CHART_X + CHART_W
-        );
+        const px = linearScale(v, [yd.niceMin, yd.niceMax], [CHART_X, CHART_X + CHART_W]);
         return svg`<text class="ce-plot-tick-x"
           x=${px} y=${CHART_Y + CHART_H + 8}>${this.format(v, "x")}</text>`;
       })}

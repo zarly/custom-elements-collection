@@ -22,9 +22,14 @@ import { buildIndex } from "./lib/index.js";
 import { STATE } from "./lib/state.js";
 import { parseHash, writeHash } from "./lib/hash.js";
 import { renderCatalog, renderComponent } from "./lib/render.js";
+import { PAGES, PAGE_KEYS, DEFAULT_PAGE } from "./lib/pages.js";
 import { initTheme } from "./lib/theme.js";
 import { ReactiveForm } from "./lib/reactive-form.js";
 import { refreshSidebar, refreshSettingsCount } from "./lib/controllers/sidebar.js";
+
+// Raw token CSS — parsed at render time by the Theming page to list all
+// --ce-* variables and their defaults without hand-maintaining the list.
+import tokensCss from "/src/tokens/tokens.css?raw";
 
 // Register demo-namespace custom elements.
 import "./lib/elements/demo-settings-button.js";
@@ -197,9 +202,16 @@ function route() {
   suppressRef.value = false;
 
   const main = document.getElementById("main");
-  main.innerHTML = STATE.tag
-    ? renderComponent(STATE.tag, COMPONENTS, META, EXAMPLES)
-    : renderCatalog(STATE, INDEX, COMPONENTS);
+  const activeTag = STATE.tag ?? DEFAULT_PAGE;
+  let html;
+  if (activeTag === "components") {
+    html = renderCatalog(STATE, INDEX, COMPONENTS);
+  } else if (PAGE_KEYS.has(activeTag)) {
+    html = PAGES[activeTag]({ tokensCss });
+  } else {
+    html = renderComponent(activeTag, COMPONENTS, META, EXAMPLES);
+  }
+  main.innerHTML = html;
   main.scrollTop = 0;
 
   // Wire the "clear all" link rendered inside renderActiveSummary().
@@ -239,6 +251,16 @@ function route() {
 
 function init() {
   initTheme();
+
+  // Populate the Docs nav (Quick start / Theming / Components). Static items.
+  const navPages = document.getElementById("nav-pages");
+  if (navPages) {
+    navPages.items = [
+      { label: "Quick start", href: "#/quick-start" },
+      { label: "Theming",     href: "#/theming" },
+      { label: "Components",  href: "#/components" },
+    ];
+  }
 
   // Wire search input directly (stays outside the form's DOM binding).
   const search = document.getElementById("search");

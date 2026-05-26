@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "tag": "lesson-option",
+  "name": "LessonOption",
+  "className": "LessonOption",
+  "goal": "Render a single multiple-choice answer choice as a slotted child of lesson-question — text comes from the default slot; correctness is a boolean attribute.",
+  "description": "Light-content multiple-choice option. By default renders as a static row (marker + text) so it works inside read-only study guides and vis documents. When the parent question opts in to interactive mode, lesson-option flips to a clickable <button> and emits lesson-option-pick with { value, correct } on click. The picked + revealed + correct attributes together drive the post-pick visual state (green check on correct, red ✗ on picked-but-wrong); the parent question is responsible for setting them. Text content comes from the default slot — typed renderers (<code>, <a>, <time>) compose freely (CDR-002).",
+  "stability": "stable",
+  "created": "2026-05-22",
+  "updated": "2026-05-26",
+  "props": [
+    {
+      "name": "correct",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Marks this option as the correct answer. Drives the green-check reveal state when combined with revealed."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "\"\"",
+      "description": "Opaque identifier emitted in the lesson-option-pick event detail. Falls back to the slotted text when omitted."
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Opt-in to clickable behaviour (CDR-004). Renders as a <button> and emits lesson-option-pick on click. Set by a parent lesson-question[interactive]."
+    },
+    {
+      "name": "picked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Set by the parent question after the learner selects this option. Drives the post-pick visual state."
+    },
+    {
+      "name": "revealed",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "reflect": true,
+      "description": "Set by the parent question to expose correct/wrong markers. In static mode the parent sets this on render so the answer is visible by default."
+    }
+  ],
+  "events": [
+    {
+      "name": "lesson-option-pick",
+      "detail": "{ value: string; correct: boolean }",
+      "bubbles": true,
+      "composed": true,
+      "description": "Fires once when the learner clicks an interactive option. value is the attribute when set, otherwise the trimmed slotted text."
+    }
+  ],
+  "slots": [
+    {
+      "name": "",
+      "description": "Option text. Accepts inline HTML so typed renderers (<code>, <a>, <time>) compose.",
+      "acceptShapes": ["string", "semantic-html:code,a,time,strong,em"]
+    }
+  ],
+  "cssVariables": [
+    {
+      "name": "--ce-space-2",
+      "kind": "size",
+      "source": "token",
+      "description": "Row vertical padding."
+    },
+    {
+      "name": "--ce-space-3",
+      "kind": "size",
+      "source": "token",
+      "description": "Row horizontal padding + marker gap."
+    },
+    {
+      "name": "--ce-radius-sm",
+      "kind": "radius",
+      "source": "token",
+      "description": "Row border radius."
+    },
+    {
+      "name": "--ce-text",
+      "kind": "color",
+      "source": "token",
+      "description": "Option text color."
+    },
+    {
+      "name": "--ce-text-sm",
+      "kind": "size",
+      "source": "token",
+      "description": "Option text size."
+    },
+    {
+      "name": "--ce-text-xs",
+      "kind": "size",
+      "source": "token",
+      "description": "Correct/wrong tag size."
+    },
+    {
+      "name": "--ce-muted",
+      "kind": "color",
+      "source": "token",
+      "description": "Default marker + tag color."
+    },
+    {
+      "name": "--ce-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Interactive option background."
+    },
+    {
+      "name": "--ce-border",
+      "kind": "color",
+      "source": "token",
+      "description": "Interactive option border."
+    },
+    {
+      "name": "--ce-transition-fast",
+      "kind": "other",
+      "source": "token",
+      "description": "Border-color hover transition."
+    },
+    {
+      "name": "--ce-color-blue",
+      "kind": "color",
+      "source": "token",
+      "description": "Interactive option hover border."
+    },
+    {
+      "name": "--ce-color-green",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct option border + marker + tag color when revealed."
+    },
+    {
+      "name": "--ce-color-green-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Correct option background when revealed."
+    },
+    {
+      "name": "--ce-color-red",
+      "kind": "color",
+      "source": "token",
+      "description": "Picked-but-wrong option border + marker color."
+    },
+    {
+      "name": "--ce-color-red-bg",
+      "kind": "color",
+      "source": "token",
+      "description": "Picked-but-wrong option background."
+    }
+  ],
+  "globalDependencies": [],
+  "sideEffects": [],
+  "dependents": [
+    "lesson-question"
+  ],
+  "dependencies": [],
+  "related": [
+    "lesson-question",
+    "lesson-quiz"
+  ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
+  "preferredSlotIn": ["lesson-question"],
+  "category": "lesson",
+  "tier": "brick",
+  "tags": [
+    "Education",
+    "quiz",
+    "multiple-choice"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
+}

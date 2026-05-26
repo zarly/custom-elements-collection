@@ -1,7 +1,23 @@
 import { html, css, nothing } from "lit";
 import { property } from "lit/decorators.js";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { CecElement, jsonProp } from "../../core/index.js";
+
+/**
+ * Render a trust-controlled HTML string as live DOM nodes.
+ *
+ * Replaces lit-html's `unsafeHTML` directive, which is forbidden by ADR-013.
+ * Uses `DOMParser` (explicitly permitted by ADR-013 §"Forbidden DOM mutations"
+ * as an alternative to `Range.createContextualFragment`). The trust contract
+ * is unchanged from the previous unsafeHTML implementation: the consumer is
+ * responsible for the safety of the string and MUST NOT pass user-controlled
+ * input here. The two fields that use this — NavItem.labelHtml and
+ * NavItem.meta — exist for inline highlight markup and custom-element badges
+ * authored by the documentation site, not for LLM- or user-supplied content.
+ */
+function parseTrustedHtml(s: string): Node[] {
+  const doc = new DOMParser().parseFromString(s, "text/html");
+  return Array.from(doc.body.childNodes);
+}
 
 export interface NavItem {
   /** Optional group header — consecutive items sharing the same group sit under one heading. */
@@ -133,8 +149,12 @@ export class CeNavList extends CecElement {
     const groups = new Map<string, NavItem[]>();
     for (const it of this.items) {
       const key = it.group ?? "";
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(it);
+      let bucket = groups.get(key);
+      if (!bucket) {
+        bucket = [];
+        groups.set(key, bucket);
+      }
+      bucket.push(it);
     }
     return html`
       ${this.title ? html`<div class="ce-nav__title">${this.title}</div>` : nothing}
@@ -149,9 +169,9 @@ export class CeNavList extends CecElement {
                 aria-current=${this.value === it.href ? "page" : "false"}
                 @click=${(ev: MouseEvent) => this.handleClick(it.href, ev)}
               >
-                <span>${it.labelHtml ? unsafeHTML(it.labelHtml) : it.label}</span>
+                <span>${it.labelHtml ? parseTrustedHtml(it.labelHtml) : it.label}</span>
                 ${it.tag ? html`<span class="ce-nav__tag">${it.tag}</span>` : nothing}
-                ${it.meta ? html`<span class="ce-nav__meta">${unsafeHTML(it.meta)}</span>` : nothing}
+                ${it.meta ? html`<span class="ce-nav__meta">${parseTrustedHtml(it.meta)}</span>` : nothing}
               </a>
             `,
           )}

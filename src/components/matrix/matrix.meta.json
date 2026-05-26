@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-matrix",
   "name": "Matrix",
   "className": "CeMatrix",
@@ -7,7 +7,7 @@
   "description": "Decision-analysis primitive that fills the gap between ce-heatmap (cells of values) and ce-pros-cons (two columns). Axes are configurable (defaults: x=Effort, y=Impact) with low/high markers; the four quadrants carry default captions (Quick wins / Big bets / Fill-ins / Money pits) overridable via the q-labels JSON array. Each quadrant is tinted with a different semantic colour so the placement reads at a glance. Items are placed via either a JSON `items` array with explicit quadrant 0..3 or slotted children carrying `data-quadrant=\"0..3\"` (CDR-005 dual mode). Quadrant order is reading-order: 0=TL, 1=TR, 2=BL, 3=BR.",
   "stability": "stable",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -229,17 +229,28 @@
     "ce-pros-cons",
     "ce-decision-tree"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Comparison & narrative",
     "decision",
-    "matrix",
-    "quadrant",
-    "eisenhower"
+    "matrix"
   ],
   "a11y": {
     "role": "figure",
     "notes": "Wrapped in a role=figure container with aria-label='2x2 matrix'. The axis-direction hints inside quadrant headers are aria-hidden because the parent axis labels already convey direction to assistive tech."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

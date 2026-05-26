@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-theme-switcher",
   "name": "ThemeSwitcher",
   "className": "CeThemeSwitcher",
@@ -7,7 +7,7 @@
   "description": "Compact cycler + dropdown. Layout: ‹ [ Current Label ▾ ] ›. Left/right arrows step through options; the label toggles a grouped dropdown; ArrowLeft/Right and Escape are handled inside the widget. The component is generic — it does not itself touch document themes; consumers wire the ce-change event to whatever they want updated.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "value",
@@ -162,6 +162,13 @@
   "dependents": [],
   "dependencies": [],
   "related": [],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "internal",
   "tier": "widget",
   "tags": [
@@ -172,5 +179,11 @@
   ],
   "a11y": {
     "notes": "Label button has aria-haspopup=listbox + aria-expanded; arrow buttons have aria-label; dropdown is role=listbox; options are role=option with aria-selected."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

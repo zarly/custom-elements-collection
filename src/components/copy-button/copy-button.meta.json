@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-copy-button",
   "name": "Copy button",
   "className": "CeCopyButton",
@@ -7,7 +7,7 @@
   "description": "A button paired with another element by `for=<id>` (or selector). Reads the target's textContent (or input/textarea value), writes it to the system clipboard via the Clipboard API, and falls back to a hidden textarea + execCommand path when the modern API is unavailable. The button briefly switches to the copied-label and dispatches ce-copy { text, ok }.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "for",
@@ -146,16 +146,29 @@
     "ce-code",
     "ce-chat-bubble"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Chat surfaces",
-    "clipboard",
     "action",
     "component"
   ],
   "a11y": {
     "role": "button",
     "notes": "Native <button>; aria-label mirrors the visible text and switches to the copied label briefly after success."
+  },
+  "contentModel": "block",
+  "deterministic": false,
+  "nondeterministicReason": "timer side effect prevents byte-identical innerHTML across runs",
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-nav-list",
   "name": "NavList",
   "className": "CeNavList",
@@ -7,7 +7,7 @@
   "description": "Grouped sidebar nav. Items group themselves by their group field; the entry whose href matches value is marked aria-current=page and tinted blue. Each click dispatches ce-nav-select with the href before native navigation runs. Each item may carry an optional `meta` HTML string rendered as a right-aligned secondary block on the row — intended for trust-controlled badges like <ce-clock> or <ce-chip>.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "items",
@@ -136,6 +136,13 @@
     "ce-toc",
     "ce-breadcrumbs"
   ],
+  "requiredParent": [],
+  "childPolicy": "none",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "leaf",
+  "interchangeableWith": [],
   "category": "internal",
   "tier": "layout",
   "tags": [
@@ -145,5 +152,11 @@
   ],
   "a11y": {
     "notes": "Active link sets aria-current=page; non-active links set aria-current=false."
+  },
+  "contentModel": "void",
+  "deterministic": true,
+  "streamSafe": false,
+  "streamingLifecycle": {
+    "finalizesAt": "tagEnd"
   }
 }

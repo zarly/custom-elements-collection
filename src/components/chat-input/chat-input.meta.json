@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-chat-input",
   "name": "Chat input",
   "className": "CeChatInput",
@@ -7,7 +7,7 @@
   "description": "A self-contained chat composer widget that grows the textarea as the user types (up to max-rows), emits ce-chat-submit on Enter or send-button click, switches to a stop button while busy, and optionally renders an attach button. All buttons and icons are overrideable via named slots.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "placeholder",
@@ -280,15 +280,27 @@
     "ce-retry-button",
     "ce-tool-call"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Chat surfaces",
-    "input",
-    "composer"
+    "input"
   ],
   "a11y": {
     "role": "none (host); textarea has aria-label mirroring placeholder",
     "notes": "The textarea carries aria-label equal to its placeholder. Buttons carry aria-label (Send message, Stop generation, Attach file). Focus-within on the container raises border and adds focus-ring. Escape while busy emits ce-chat-stop. prefers-reduced-motion disables transitions."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

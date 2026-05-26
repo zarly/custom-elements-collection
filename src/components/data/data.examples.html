@@ -1,0 +1,14 @@
+<!-- @example JSON array payload — values for a sparkline (Variation B / CDR-5 advanced) -->
+<ce-sparkline>
+  <ce-data>{"values":[3,5,4,7,6,9,8,12,11,15]}</ce-data>
+</ce-sparkline>
+
+<!-- @example Raw JSON array (consumer extracts the array directly) -->
+<ce-sparkline>
+  <ce-data>[2,4,1,3,5,8,6,9,7,10]</ce-data>
+</ce-sparkline>
+
+<!-- @example Multiple fields — payload carries values + a label for the consumer -->
+<ce-sparkline color="green">
+  <ce-data>{"values":[0.01,0.01,0.02,0.01,0.02],"label":"search"}</ce-data>
+</ce-sparkline>

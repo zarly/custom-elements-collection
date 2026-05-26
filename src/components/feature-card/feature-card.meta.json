@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-feature-card",
   "name": "FeatureCard",
   "className": "CeFeatureCard",
@@ -7,7 +7,7 @@
   "description": "Marketing-style feature card. Top: tinted icon disk. Middle: title + slotted body. Bottom: optional CTA — rendered as an <a> when href is set, otherwise a <button> that emits ce-feature-cta. Six color tints adjust the icon disk.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "icon",
@@ -256,11 +256,22 @@
   "related": [
     "ce-card"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "brick",
   "tags": [
-    "Comparison & narrative",
-    "feature",
-    "marketing"
-  ]
+    "Comparison & narrative"
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

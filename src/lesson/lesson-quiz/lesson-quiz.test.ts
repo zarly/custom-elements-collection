@@ -1,8 +1,14 @@
-import { describe, it, expect, beforeAll, vi } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { defineOnce } from "../../core/index.js";
 import { LessonQuiz } from "./lesson-quiz.js";
+import { LessonQuestion } from "../lesson-question/lesson-question.js";
+import { LessonOption } from "../lesson-option/lesson-option.js";
 
-beforeAll(() => defineOnce("lesson-quiz", LessonQuiz));
+beforeAll(() => {
+  defineOnce("lesson-option", LessonOption);
+  defineOnce("lesson-question", LessonQuestion);
+  defineOnce("lesson-quiz", LessonQuiz);
+});
 
 describe("<lesson-quiz>", () => {
   it("renders question and options", async () => {
@@ -76,8 +82,7 @@ describe("<lesson-quiz>", () => {
     el.remove();
   });
 
-  it("falls back + warns when the options attribute is malformed JSON", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("falls back when the options attribute is malformed JSON", async () => {
     const el = document.createElement("lesson-quiz") as LessonQuiz;
     el.question = "pick one";
     el.correct = 0;
@@ -85,8 +90,6 @@ describe("<lesson-quiz>", () => {
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.options).toEqual([]);
-    expect(warn).toHaveBeenCalled();
-    warn.mockRestore();
     el.remove();
   });
 
@@ -101,6 +104,54 @@ describe("<lesson-quiz>", () => {
     opts[0].click();
     await el.updateComplete;
     expect(opts[1].disabled).toBe(true);
+    el.remove();
+  });
+
+  it("in container shape (no question) renders the slot and reflects container", async () => {
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <lesson-quiz>
+        <lesson-question prompt="x">
+          <lesson-option correct>a</lesson-option>
+          <lesson-option>b</lesson-option>
+        </lesson-question>
+      </lesson-quiz>
+    `;
+    const el = wrap.firstElementChild as LessonQuiz;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.hasAttribute("container")).toBe(true);
+    expect(el.shadowRoot!.querySelector("slot")).not.toBeNull();
+    expect(el.shadowRoot!.querySelector(".lq-q")).toBeNull();
+    el.remove();
+  });
+
+  it("cascades the interactive attribute to direct lesson-question children", async () => {
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <lesson-quiz interactive>
+        <lesson-question prompt="x">
+          <lesson-option correct>a</lesson-option>
+          <lesson-option>b</lesson-option>
+        </lesson-question>
+        <lesson-question prompt="y">
+          <lesson-option correct>c</lesson-option>
+          <lesson-option>d</lesson-option>
+        </lesson-question>
+      </lesson-quiz>
+    `;
+    const el = wrap.firstElementChild as LessonQuiz;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const qs = el.querySelectorAll("lesson-question");
+    for (const q of qs) {
+      expect(q.hasAttribute("interactive")).toBe(true);
+    }
+    el.interactive = false;
+    await el.updateComplete;
+    for (const q of qs) {
+      expect(q.hasAttribute("interactive")).toBe(false);
+    }
     el.remove();
   });
 });

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-flow",
   "name": "Flow",
   "className": "CeFlow",
@@ -7,7 +7,7 @@
   "description": "Step-flow diagram. Boxes separated by arrows; each step can have a caption, step number (n), icon, and a color tint. Vertical attribute stacks boxes top-to-bottom and switches the default arrow from → to ↓. Accepts both JSON mode (steps prop) and slot mode (<ce-flow-step> children); JSON takes priority when non-empty (CDR-005).",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "steps",
@@ -196,12 +196,26 @@
     "ce-timeline",
     "ce-decision-tree"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [
+    "ce-flow-step"
+  ],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Comparison & narrative",
     "flow",
-    "diagram",
     "process"
-  ]
+  ],
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-flow-step",
   "name": "FlowStep",
   "className": "CeFlowStep",
@@ -7,7 +7,7 @@
   "description": "Carries a step number (n), title, optional icon, and optional color tint. Default slot accepts rich body content: paragraphs, lists, links, chips — anything HTML (CDR-002). When nested inside ce-flow the parent reads n/title/icon/color as attributes and consumes the default slot HTML via querySelectorAll — the step itself renders nothing (display:contents). When used standalone it renders a full step card.",
   "stability": "stable",
   "created": "2026-04-29",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "n",
@@ -193,6 +193,13 @@
     "ce-flow",
     "ce-timeline"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
@@ -204,5 +211,11 @@
   "a11y": {
     "role": "none (standalone: wrapper div; parent ce-flow handles list semantics)",
     "notes": "In standalone mode the icon is aria-hidden. When nested in ce-flow the parent renders the full accessible step list. The default slot can carry semantic HTML including links, time elements, and other inline semantics."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

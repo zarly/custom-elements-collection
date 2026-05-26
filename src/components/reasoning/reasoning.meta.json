@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-reasoning",
   "name": "Reasoning",
   "className": "CeReasoning",
@@ -7,7 +7,7 @@
   "description": "Disclosure widget for displaying chain-of-thought traces produced by reasoning-capable models (e.g. Claude thinking blocks, o1-style reasoning). The header shows a chevron, a configurable label, an optional streaming pulse dot, optional token count, and optional humanised duration. The body panel holds slotted reasoning content styled muted and italic to visually separate it from the main response. Implements disclosure semantics with a real button carrying aria-expanded and aria-controls; does not wrap native <details> so the max-height CSS transition is consistent across browsers.",
   "stability": "beta",
   "created": "2026-05-20",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "open",
@@ -163,14 +163,26 @@
     "ce-thinking",
     "ce-tool-call"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Chat surfaces",
-    "reasoning",
     "disclosure"
   ],
   "a11y": {
     "notes": "Header is a <button type='button'> with aria-expanded reflecting the open state and aria-controls pointing at the body panel id. The streaming pulse dot is aria-hidden."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }

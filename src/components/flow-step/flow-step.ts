@@ -61,7 +61,6 @@ export class CeFlowStep extends CecElement {
       line-height: 1;
     }
 
-    .ce-fs-main {}
     .ce-fs-title {
       font-weight: 700;
       font-size: var(--ce-text-sm);

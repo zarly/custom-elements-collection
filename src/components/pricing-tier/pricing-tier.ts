@@ -135,9 +135,9 @@ export class CePricingTier extends CecElement {
     }
 
     /* Slot-children feature styling via CSS attribute selectors (CDR-006).
-       Any direct slotted child gets a ✓ prefix via ::before.
-       Children with [not-included] get × and muted color.
-       Children with [included] get explicit ✓. */
+     Any direct slotted child gets a ✓ prefix via ::before.
+     Children with [not-included] get × and muted color.
+     Children with [included] get explicit ✓. */
     ::slotted(*) {
       display: flex;
       align-items: baseline;

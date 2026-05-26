@@ -1,7 +1,7 @@
 {
   "name": "custom-elements-collection",
-  "version": "0.6.0",
-  "description": "A collection of 126 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface, RAG/agent, feedback-UI, decision-analysis, and form primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
+  "version": "0.7.0",
+  "description": "A collection of 147 framework-agnostic Web Components (ce-* UI building blocks + lesson-* educational widgets) built on Lit, including chat-surface, RAG/agent, feedback-UI, decision-analysis, and form primitives for LLM applications. Each component is self-describing via a validated *.meta.json. Ship as a single bundle, auto-register everything, or tree-shake down to the tags you use.",
   "license": "MIT",
   "author": "Alexander Abramov <abramov231@gmail.com>",
   "homepage": "https://generativeui.ru/solutions/custom-elements-collection/",
@@ -57,6 +57,9 @@
     "./meta/*.json": "./dist/meta/*.json",
     "./registry": "./dist/registry.json",
     "./registry/*.json": "./dist/registry/*.json",
+    "./relations": "./dist/relations.json",
+    "./conformance": "./dist/conformance.json",
+    "./meta-fields-registry": "./dist/meta-fields-registry.json",
     "./abbr": {
       "types": "./dist/entries/abbr.d.ts",
       "import": "./dist/entries/abbr.js"
@@ -64,6 +67,10 @@
     "./accordion": {
       "types": "./dist/entries/accordion.d.ts",
       "import": "./dist/entries/accordion.js"
+    },
+    "./affix": {
+      "types": "./dist/entries/affix.d.ts",
+      "import": "./dist/entries/affix.js"
     },
     "./attachment-strip": {
       "types": "./dist/entries/attachment-strip.d.ts",
@@ -109,6 +116,10 @@
       "types": "./dist/entries/card.d.ts",
       "import": "./dist/entries/card.js"
     },
+    "./center": {
+      "types": "./dist/entries/center.d.ts",
+      "import": "./dist/entries/center.js"
+    },
     "./chart": {
       "types": "./dist/entries/chart.d.ts",
       "import": "./dist/entries/chart.js"
@@ -149,6 +160,10 @@
       "types": "./dist/entries/code.d.ts",
       "import": "./dist/entries/code.js"
     },
+    "./combobox": {
+      "types": "./dist/entries/combobox.d.ts",
+      "import": "./dist/entries/combobox.js"
+    },
     "./comment": {
       "types": "./dist/entries/comment.d.ts",
       "import": "./dist/entries/comment.js"
@@ -180,6 +195,10 @@
     "./cursor": {
       "types": "./dist/entries/cursor.d.ts",
       "import": "./dist/entries/cursor.js"
+    },
+    "./data": {
+      "types": "./dist/entries/data.d.ts",
+      "import": "./dist/entries/data.js"
     },
     "./date-picker": {
       "types": "./dist/entries/date-picker.d.ts",
@@ -213,9 +232,21 @@
       "types": "./dist/entries/donut.d.ts",
       "import": "./dist/entries/donut.js"
     },
+    "./drawer": {
+      "types": "./dist/entries/drawer.d.ts",
+      "import": "./dist/entries/drawer.js"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/entries/dropdown-menu.d.ts",
+      "import": "./dist/entries/dropdown-menu.js"
+    },
     "./duration": {
       "types": "./dist/entries/duration.d.ts",
       "import": "./dist/entries/duration.js"
+    },
+    "./empty-state": {
+      "types": "./dist/entries/empty-state.d.ts",
+      "import": "./dist/entries/empty-state.js"
     },
     "./example": {
       "types": "./dist/entries/example.d.ts",
@@ -224,6 +255,10 @@
     "./feature-card": {
       "types": "./dist/entries/feature-card.d.ts",
       "import": "./dist/entries/feature-card.js"
+    },
+    "./feed": {
+      "types": "./dist/entries/feed.d.ts",
+      "import": "./dist/entries/feed.js"
     },
     "./feedback-bar": {
       "types": "./dist/entries/feedback-bar.d.ts",
@@ -245,6 +280,10 @@
       "types": "./dist/entries/feedback-summary.d.ts",
       "import": "./dist/entries/feedback-summary.js"
     },
+    "./field": {
+      "types": "./dist/entries/field.d.ts",
+      "import": "./dist/entries/field.js"
+    },
     "./file-card": {
       "types": "./dist/entries/file-card.d.ts",
       "import": "./dist/entries/file-card.js"
@@ -264,6 +303,10 @@
     "./flow-step": {
       "types": "./dist/entries/flow-step.d.ts",
       "import": "./dist/entries/flow-step.js"
+    },
+    "./frame": {
+      "types": "./dist/entries/frame.d.ts",
+      "import": "./dist/entries/frame.js"
     },
     "./gauge": {
       "types": "./dist/entries/gauge.d.ts",
@@ -357,6 +400,14 @@
       "types": "./dist/entries/lesson-note.d.ts",
       "import": "./dist/entries/lesson-note.js"
     },
+    "./lesson-option": {
+      "types": "./dist/entries/lesson-option.d.ts",
+      "import": "./dist/entries/lesson-option.js"
+    },
+    "./lesson-question": {
+      "types": "./dist/entries/lesson-question.d.ts",
+      "import": "./dist/entries/lesson-question.js"
+    },
     "./lesson-quickfire": {
       "types": "./dist/entries/lesson-quickfire.d.ts",
       "import": "./dist/entries/lesson-quickfire.js"
@@ -389,6 +440,10 @@
       "types": "./dist/entries/link.d.ts",
       "import": "./dist/entries/link.js"
     },
+    "./list": {
+      "types": "./dist/entries/list.d.ts",
+      "import": "./dist/entries/list.js"
+    },
     "./mark": {
       "types": "./dist/entries/mark.d.ts",
       "import": "./dist/entries/mark.js"
@@ -409,6 +464,10 @@
       "types": "./dist/entries/nav-list.d.ts",
       "import": "./dist/entries/nav-list.js"
     },
+    "./page": {
+      "types": "./dist/entries/page.d.ts",
+      "import": "./dist/entries/page.js"
+    },
     "./pagination": {
       "types": "./dist/entries/pagination.d.ts",
       "import": "./dist/entries/pagination.js"
@@ -420,6 +479,10 @@
     "./plot": {
       "types": "./dist/entries/plot.d.ts",
       "import": "./dist/entries/plot.js"
+    },
+    "./popover": {
+      "types": "./dist/entries/popover.d.ts",
+      "import": "./dist/entries/popover.js"
     },
     "./pricing-tier": {
       "types": "./dist/entries/pricing-tier.d.ts",
@@ -477,9 +540,17 @@
       "types": "./dist/entries/score.d.ts",
       "import": "./dist/entries/score.js"
     },
+    "./search": {
+      "types": "./dist/entries/search.d.ts",
+      "import": "./dist/entries/search.js"
+    },
     "./section": {
       "types": "./dist/entries/section.d.ts",
       "import": "./dist/entries/section.js"
+    },
+    "./segmented": {
+      "types": "./dist/entries/segmented.d.ts",
+      "import": "./dist/entries/segmented.js"
     },
     "./select": {
       "types": "./dist/entries/select.d.ts",
@@ -500,6 +571,14 @@
     "./sparkline": {
       "types": "./dist/entries/sparkline.d.ts",
       "import": "./dist/entries/sparkline.js"
+    },
+    "./spinner": {
+      "types": "./dist/entries/spinner.d.ts",
+      "import": "./dist/entries/spinner.js"
+    },
+    "./stack": {
+      "types": "./dist/entries/stack.d.ts",
+      "import": "./dist/entries/stack.js"
     },
     "./stat-group": {
       "types": "./dist/entries/stat-group.d.ts",
@@ -573,6 +652,14 @@
       "types": "./dist/entries/tool-result.d.ts",
       "import": "./dist/entries/tool-result.js"
     },
+    "./tooltip": {
+      "types": "./dist/entries/tooltip.d.ts",
+      "import": "./dist/entries/tooltip.js"
+    },
+    "./tree": {
+      "types": "./dist/entries/tree.d.ts",
+      "import": "./dist/entries/tree.js"
+    },
     "./verdict": {
       "types": "./dist/entries/verdict.d.ts",
       "import": "./dist/entries/verdict.js"
@@ -586,11 +673,12 @@
   "sideEffects": [
     "./dist/auto.js",
     "./dist/entries/*.js",
+    "./demo/lib/elements/*.js",
     "**/*.css"
   ],
   "scripts": {
     "prebuild": "pnpm gen-exports",
-    "build": "vite build && tsc -p tsconfig.build.json",
+    "build": "vite build && tsc -p tsconfig.build.json && pnpm gen-relations && pnpm gen-conformance && pnpm gen-meta-fields-registry",
     "dev": "vite",
     "demo": "vite --config demo/vite.config.js",
     "demo:build": "vite build --config demo/vite.config.js",
@@ -600,20 +688,31 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:install": "playwright install chromium",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "echo '(no lint)'",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "lint": "pnpm lint:ts && pnpm lint:css",
+    "lint:fix": "pnpm lint:ts:fix && pnpm lint:css:fix",
+    "lint:ts": "eslint \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "lint:ts:fix": "eslint \"src/**/*.ts\" \"scripts/**/*.ts\" --fix",
+    "lint:css": "stylelint \"src/**/*.{ts,css}\"",
+    "lint:css:fix": "stylelint \"src/**/*.{ts,css}\" --fix",
     "validate-meta": "tsx scripts/validate-meta.ts",
     "sync-meta-dates": "tsx scripts/sync-meta-dates.ts",
     "sync-meta-dates:dry": "tsx scripts/sync-meta-dates.ts --dry-run",
     "sync-meta-dates:check": "tsx scripts/sync-meta-dates.ts --check",
     "gen-exports": "tsx scripts/generate-exports.ts",
     "gen-registry": "tsx scripts/generate-registry.ts",
+    "gen-relations": "tsx scripts/gen-relations.ts",
+    "gen-conformance": "tsx scripts/gen-conformance.ts",
+    "gen-meta-fields-registry": "tsx scripts/gen-meta-fields-registry.ts",
+    "migrate-meta-v1-to-v2": "tsx scripts/migrate-v1-to-v2.ts",
+    "seed-conformance": "tsx scripts/seed-conformance.ts",
+    "lint:conformance-keys": "tsx scripts/lint-meta-conformance-keys.ts",
     "gen-skill": "tsx scripts/generate-skill.ts",
     "gen-skill:check": "tsx scripts/generate-skill.ts --check",
     "build-publish-manifest": "tsx scripts/build-publish-manifest.ts",
     "bundle-stats": "tsx scripts/bundle-stats.ts",
     "analyze": "ANALYZE=1 vite build && tsc -p tsconfig.build.json && pnpm bundle-stats",
-    "check": "pnpm typecheck && pnpm validate-meta && pnpm gen-skill:check && pnpm test && pnpm build",
+    "check": "pnpm typecheck && pnpm validate-meta && pnpm lint:conformance-keys && pnpm gen-skill:check && pnpm lint && pnpm test && pnpm build",
     "pack:inspect": "pnpm pack --pack-destination /tmp && echo '→ tarball at /tmp/custom-elements-collection-<version>.tgz'",
     "prepublishOnly": "pnpm gen-exports && pnpm build-publish-manifest --apply",
     "prepare": "simple-git-hooks || true"
@@ -621,15 +720,32 @@
   "simple-git-hooks": {
     "pre-commit": "bash scripts/pre-commit-hook.sh"
   },
+  "postcss-lit": {
+    "babelOptions": {
+      "sourceType": "unambiguous",
+      "plugins": [
+        "typescript",
+        "decorators-legacy",
+        "jsx"
+      ],
+      "ranges": true
+    }
+  },
   "devDependencies": {
     "@playwright/test": "1.59.1",
     "@types/node": "22.8.6",
+    "eslint": "9.18.0",
+    "globals": "15.14.0",
     "jsdom": "25.0.1",
     "lit": "3.2.1",
+    "postcss-lit": "1.1.1",
     "rollup-plugin-visualizer": "7.0.1",
     "simple-git-hooks": "2.13.1",
+    "stylelint": "16.13.0",
+    "stylelint-config-standard": "36.0.1",
     "tsx": "4.19.2",
     "typescript": "5.9.3",
+    "typescript-eslint": "8.20.0",
     "vite": "5.4.10",
     "vitest": "2.1.4",
     "zod": "3.23.8"

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "tag": "ce-modal",
   "name": "Modal",
   "className": "CeModal",
@@ -7,7 +7,7 @@
   "description": "A modal dialog built on the native <dialog> element with showModal(). Provides header with title and optional dismiss button, default body slot, and right-aligned footer slot. Supports ESC and backdrop-click dismissal (guarded by dismissible attribute). Emits ce-modal-open and ce-modal-close events. Returns focus to the invoking element on close.",
   "stability": "stable",
   "created": "2026-05-21",
-  "updated": "2026-05-21",
+  "updated": "2026-05-26",
   "props": [
     {
       "name": "open",
@@ -196,16 +196,28 @@
     "ce-confirm",
     "ce-button"
   ],
+  "requiredParent": [],
+  "childPolicy": "any",
+  "codeDependencies": [],
+  "tagDependencies": [],
+  "injects": [],
+  "role": "container",
+  "interchangeableWith": [],
   "category": "ui",
   "tier": "widget",
   "tags": [
     "Layout & primitives",
     "overlay",
-    "dialog",
     "interactive"
   ],
   "a11y": {
     "role": "dialog",
     "notes": "The native <dialog> element supplies role=dialog and focus-trap automatically when opened with showModal(). aria-modal=true and aria-label are added to the dialog element. The close button has aria-label='Close'. ESC dismissal is handled via the native cancel event (when dismissible)."
+  },
+  "contentModel": "block",
+  "deterministic": true,
+  "streamSafe": true,
+  "streamingLifecycle": {
+    "finalizesAt": "blockEnd"
   }
 }
